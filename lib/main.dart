@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'services/language_service.dart';
-import 'services/league_storage_service.dart';
-import 'ui/transitions/custom_page_transitions.dart';
-import 'viewmodels/league_list_viewmodel.dart';
-import 'screens/home_screen.dart';
+import 'core/services/language_service.dart';
+import 'core/services/league_storage_service.dart';
+import 'core/presentation/transitions/custom_page_transitions.dart';
+import 'features/league/presentation/viewmodels/league_list_viewmodel.dart';
+import 'features/home/presentation/screens/home_screen.dart';
 
 void main() async {
   // Asegurar que Flutter esté inicializado
@@ -66,3 +66,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
