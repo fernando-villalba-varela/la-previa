@@ -1,4 +1,4 @@
-﻿import '../../../../core/models/question_generator.dart';
+import '../../../../core/models/question_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
@@ -11,6 +11,8 @@ import '../../../../core/models/constant_challenge_generator.dart';
 import '../../../../core/models/event.dart';
 import '../../../../core/models/event_generator.dart';
 import '../../../../core/services/language_service.dart'; // Import LanguageService
+import '../../../../core/services/consent_and_ad_service.dart';
+import '../../../../core/services/database_service_v2.dart';
 import 'package:provider/provider.dart'; // Import Provider
 import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
 import '../widgets/game/game_card_widget.dart';
@@ -21,15 +23,23 @@ import '../screens/tiebreaker_screen.dart';
 class LeagueGameScreen extends StatefulWidget {
   final List<Player> players;
   final int maxRounds;
+  final bool mixCustomQuestions; // Added flag for custom questions
   final Function(Map<int, int>) onGameEnd; // Map de playerId -> drinks
 
-  const LeagueGameScreen({super.key, required this.players, required this.maxRounds, required this.onGameEnd});
+  const LeagueGameScreen({
+    super.key, 
+    required this.players, 
+    required this.maxRounds, 
+    this.mixCustomQuestions = false,
+    required this.onGameEnd,
+  });
 
   @override
   State<LeagueGameScreen> createState() => _LeagueGameScreenState();
 }
 
 class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProviderStateMixin {
+  final _interstitial = InterstitialAdManager();
   late AnimationController _cardAnimationController;
   late AnimationController _glowAnimationController;
   late AnimationController _tapAnimationController;
@@ -50,11 +60,15 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
   int? _dualPlayerIndex;
   String _currentChallenge = '';
   String? _currentAnswer; // Respuesta a la pregunta actual si existe
+  String? _currentTemplateId;
   bool _gameStarted = false;
   final Map<int, int> _playerWeights = {};
   final Map<int, int> _playerDrinks = {}; // Contador de tragos por jugador
   // Track already used questions to avoid repeats within this league game session
   final Set<String> _usedQuestions = <String>{};
+  
+  // Custom questions loaded explicitly for mixCustomQuestions
+  List<CustomQuestion> _customQuestions = [];
 
   int _currentRound = 1;
   List<ConstantChallenge> _constantChallenges = [];
@@ -114,6 +128,8 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     ).animate(CurvedAnimation(parent: _rippleAnimationController, curve: Curves.easeOut));
 
     _glowAnimationController.repeat(reverse: true);
+    
+    _loadCustomQuestionsIfEnabled();
 
     // Initialize player weights and drinks usando playerId
     for (int i = 0; i < widget.players.length; i++) {
@@ -122,6 +138,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     }
 
     _initializeFirstChallenge();
+    _interstitial.loadAd();
   }
 
   @override
@@ -133,10 +150,35 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     _rippleAnimationController.dispose();
     _orientationFadeController.dispose();
     _toastTimer?.cancel(); // Cancelar el timer si está activo
+    _interstitial.dispose();
     super.dispose();
   }
 
+  Future<void> _loadCustomQuestionsIfEnabled() async {
+    if (widget.mixCustomQuestions) {
+      final qs = await Provider.of<DatabaseService>(context, listen: false).getPersonalizedQuestions();
+      if (mounted) {
+        setState(() {
+          _customQuestions = qs;
+        });
+      }
+    }
+  }
+
   Future<void> _generateNewChallenge() async {
+    // If mixing custom questions is enabled, slightly boost the chance of using one
+    if (widget.mixCustomQuestions && _customQuestions.isNotEmpty && Random().nextDouble() < 0.25) {
+      final CustomQuestion cq = _customQuestions[Random().nextInt(_customQuestions.length)];
+      
+      setState(() {
+        _currentChallenge = cq.text;
+        _currentAnswer = null; // Custom questions don't have hidden answers yet
+        _currentTemplateId = cq.id;
+        _currentPlayerIndex = -1; // Default generically
+      });
+      return;
+    }
+
     if (Random().nextDouble() < 0.3 && widget.players.isNotEmpty) {
       final selectedPlayerIndex = Random().nextInt(widget.players.length);
       final selectedPlayer = widget.players[selectedPlayerIndex];
@@ -153,6 +195,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
       setState(() {
         _currentChallenge = question.question;
         _currentAnswer = question.answer;
+        _currentTemplateId = question.templateId;
         _currentPlayerIndex = selectedPlayerIndex;
       });
     } else {
@@ -167,6 +210,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
       setState(() {
         _currentChallenge = question.question;
         _currentAnswer = question.answer;
+        _currentTemplateId = question.templateId;
         _currentPlayerIndex = -1;
       });
     }
@@ -216,6 +260,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
       dualPlayer1Name: dualPlayer1Name,
       dualPlayer2Name: dualPlayer2Name,
       isCurrentChallengeConstant: _isCurrentChallengeConstant,
+      currentTemplateId: _currentTemplateId,
     );
   }
 
@@ -716,6 +761,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     setState(() {
       _constantChallenges.add(constantChallenge);
       _currentChallenge = constantChallenge.description;
+      _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
       _currentAnswer = null; // Los retos constantes no tienen respuesta oculta
       _currentPlayerIndex = widget.players.indexWhere((p) => p.id == eligiblePlayer.id);
       _isCurrentChallengeConstant = true; // Marcar como reto constante
@@ -753,6 +799,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     setState(() {
       _events.add(event);
       _currentChallenge = '${event.typeIcon} ${event.title}: ${event.description}';
+      _currentTemplateId = event.metadata['templateId'] as String?;
       _currentAnswer = null; // Los eventos no tienen respuesta oculta
       _currentPlayerIndex = -1;
     });
@@ -783,6 +830,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     setState(() {
       _currentChallenge = question.question;
       _currentAnswer = question.answer;
+      _currentTemplateId = question.templateId;
       _currentPlayerIndex = player1Index;
       _dualPlayerIndex = player2Index;
 
@@ -810,6 +858,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
     setState(() {
       _constantChallenges.add(constantChallenge);
       _currentChallenge = constantChallenge.description;
+      _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
       _currentPlayerIndex = widget.players.indexOf(player1);
       _dualPlayerIndex = widget.players.indexOf(player2);
     });
@@ -1025,6 +1074,9 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
 
     if (!mounted) return;
 
+    // Mostrar interstitial ANTES de navegar:
+    await _interstitial.showIfReady();
+
     // Llamar onGameEnd - el callback se encarga de toda la navegación
     widget.onGameEnd(_playerDrinks);
     // No hacemos Navigator.pop() aquí porque el callback usa pushReplacement
@@ -1048,6 +1100,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
 
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: const BannerAdWidget(),
         body: Stack(
           children: [
             Container(

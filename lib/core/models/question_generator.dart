@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -28,12 +28,14 @@ class GeneratedQuestion {
   final String categoria;
   final Map<String, String> usedVariables;
   final String? answer; // Respuesta extraída de paréntesis si existe
+  final String? templateId; // <-- ANADIR
 
   GeneratedQuestion({
     required this.question,
     required this.categoria,
     required this.usedVariables,
     this.answer,
+    this.templateId, // <-- ANADIR
   });
 
   // Getters
@@ -304,6 +306,7 @@ class QuestionGenerator {
       categoria: template.categoria,
       usedVariables: usedVariables,
       answer: answer,
+      templateId: template.id, // <-- ANADIR
     );
   }
 

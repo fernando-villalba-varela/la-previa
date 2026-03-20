@@ -1,6 +1,9 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
+import 'core/services/database_service_v2.dart';
+import 'core/services/consent_and_ad_service.dart';
 import 'core/services/language_service.dart';
 import 'core/services/league_storage_service.dart';
 import 'core/presentation/transitions/custom_page_transitions.dart';
@@ -22,11 +25,16 @@ void main() async {
   final languageService = LanguageService();
   await languageService.loadLanguage();
 
+  // ANADIR: consentimiento GDPR + inicializacion AdMob
+  // unawaited para no bloquear el arranque de la app
+  unawaited(ConsentService().initialize());
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: leagueListVM),
         ChangeNotifierProvider.value(value: languageService),
+        Provider<DatabaseService>(create: (_) => DatabaseService()), // ANADIR
       ],
       child: const MyApp(),
     ),

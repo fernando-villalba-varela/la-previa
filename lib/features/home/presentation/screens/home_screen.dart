@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
@@ -10,6 +10,9 @@ import 'package:drinkaholic/features/league/presentation/screens/participants_sc
 import 'package:drinkaholic/features/league/presentation/screens/league_list_screen.dart';
 import '../../../../constants/button_config.dart';
 import 'dart:math';
+import 'package:drinkaholic/features/custom/presentation/screens/custom_questions_screen.dart';
+import '../../../../core/services/database_service_v2.dart';
+import '../../../../core/services/consent_and_ad_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -126,14 +129,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
 
               SafeArea(
-                child: Column(
-                  children: [
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                child: CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(height: 20.h),
+                          Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                             // Logo above title
                             Image.asset(
                               'assets/images/logo.png',
@@ -233,14 +241,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                    ),
-
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 32.w),
+                          
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 20.h),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Builder(
@@ -253,6 +258,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   gradient: config.gradient,
                                 );
                               },
+                            ),
+                            SizedBox(height: 18.h),
+
+                            ModernButton(
+                              text: "Modo Personalizado",
+                              icon: Icons.edit_note_rounded,
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF7F5AF0), Color(0xFF2D1B69)],
+                              ),
+                              onTap: () => _startAnimatedNavigation(
+                                const LinearGradient(
+                                  colors: [Color(0xFF7F5AF0), Color(0xFF2D1B69)],
+                                ),
+                                "Modo Personalizado",
+                                Icons.edit_note_rounded,
+                                () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const CustomQuestionsManagerScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                             SizedBox(height: 18.h),
 
@@ -281,8 +310,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               },
                             ),
                             SizedBox(height: 24.h),
+                            const PrivacyOptionsButton(),
                           ],
                         ),
+                      ),
+                        ],
                       ),
                     ),
                   ],

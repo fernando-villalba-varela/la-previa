@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageService extends ChangeNotifier {
@@ -36,8 +36,8 @@ class LanguageService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Simple key-value map for UI strings that are not in the JSONs
-  String translate(String key) {
+  /// Simple key-value map for UI strings that are not in the JSONs
+  String translate(String key, {Map<String, String>? args}) {
     Map<String, Map<String, String>> _localizedValues = {
       'play_quick': {
         'es': 'JUGAR',
@@ -238,10 +238,54 @@ class LanguageService extends ChangeNotifier {
       'name_hint': {'es': 'Nombre', 'en': 'Name'},
       'save_button': {'es': 'Guardar', 'en': 'Save'},
       'done_button': {'es': 'Listo', 'en': 'Done'},
+      'include_custom_questions': {'es': 'Incluir preguntas personalizadas', 'en': 'Include custom questions'},
+      
+      // Custom Mode - Manager
+      'custom_mode_title': {'es': 'Modo personalizado', 'en': 'Custom Mode'},
+      'delete_question_title': {'es': 'Eliminar pregunta', 'en': 'Delete Question'},
+      'delete_question_confirm': {'es': '¿Eliminar "{text}"?', 'en': 'Delete "{text}"?'},
+      'add_at_least_one_to_play': {'es': 'Añade al menos una pregunta para jugar', 'en': 'Add at least one question to play'},
+      'play_now_button': {'es': 'Jugar ahora', 'en': 'Play Now'},
+      'questions_count_singular': {'es': '1 pregunta', 'en': '1 question'},
+      'questions_count_plural': {'es': '{count} preguntas', 'en': '{count} questions'},
+      
+      // Custom Mode - Empty State
+      'no_questions_yet': {'es': 'Sin preguntas aún', 'en': 'No questions yet'},
+      'create_your_own_hint': {'es': 'Crea tus propias preguntas y retos\npara jugar con tu grupo.', 'en': 'Create your own questions and challenges\nto play with your group.'},
+      'add_first_question': {'es': 'Añadir primera pregunta', 'en': 'Add first question'},
+      
+      // Custom Mode - Form
+      'edit_question_title': {'es': 'Editar pregunta', 'en': 'Edit Question'},
+      'new_question_title': {'es': 'Nueva pregunta', 'en': 'New Question'},
+      'save_question_button': {'es': 'Guardar', 'en': 'Save'},
+      'question_or_challenge_label': {'es': 'Pregunta o reto', 'en': 'Question or challenge'},
+      'question_hint': {'es': 'Ej: Bebe quien más tarde se haya levantado...', 'en': 'Ex: Drink who woke up the latest...'},
+      'error_empty_question': {'es': 'Escribe el texto de la pregunta', 'en': 'Write the question text'},
+      'error_short_question': {'es': 'La pregunta es demasiado corta', 'en': 'The question is too short'},
+      'drinks_label': {'es': 'Tragos', 'en': 'Drinks'},
+      'timer_label': {'es': 'Temporizador', 'en': 'Timer'},
+      'timer_desc': {'es': 'Para retos con tiempo de ejecución', 'en': 'For challenges with a time limit'},
+      'preview_label': {'es': 'Vista previa', 'en': 'Preview'},
+      'drink_singular': {'es': 'trago', 'en': 'drink'},
+      'drink_plural': {'es': 'tragos', 'en': 'drinks'},
+      
+      // Custom Mode - Game
+      'end_of_questions_title': {'es': 'Fin de las preguntas', 'en': 'End of Questions'},
+      'all_questions_played': {'es': '¡Se han jugado las {count} preguntas!', 'en': 'All {count} questions have been played!'},
+      'back_to_menu': {'es': 'Volver al menú', 'en': 'Back to Menu'},
+      'repeat_button': {'es': 'Repetir', 'en': 'Repeat'},
+      'finish_button': {'es': 'Terminar', 'en': 'Finish'},
+      'next_button': {'es': 'Siguiente', 'en': 'Next'},
     };
 
     if (_localizedValues.containsKey(key)) {
-      return _localizedValues[key]?[_currentLocale.languageCode] ?? key;
+      String value = _localizedValues[key]?[_currentLocale.languageCode] ?? key;
+      if (args != null) {
+        args.forEach((k, v) {
+          value = value.replaceAll('{$k}', v);
+        });
+      }
+      return value;
     }
     return key;
   }

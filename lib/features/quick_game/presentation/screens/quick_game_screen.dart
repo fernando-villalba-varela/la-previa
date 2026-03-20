@@ -1,4 +1,4 @@
-﻿import '../../../../core/models/question_generator.dart';
+import '../../../../core/models/question_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
@@ -9,6 +9,8 @@ import '../../../../core/models/constant_challenge.dart';
 import '../../../../core/models/constant_challenge_generator.dart';
 import '../../../../core/models/event.dart';
 import '../../../../core/models/event_generator.dart';
+import '../../../../core/services/consent_and_ad_service.dart';
+import '../../../../core/services/database_service_v2.dart';
 import '../widgets/quick_game_widgets.dart'; // Añade este import arriba
 import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +26,7 @@ class QuickGameScreen extends StatefulWidget {
 }
 
 class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderStateMixin {
+  final _interstitial = InterstitialAdManager();
   late AnimationController _cardAnimationController;
   late AnimationController _glowAnimationController;
   late AnimationController _tapAnimationController;
@@ -44,6 +47,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
   int? _dualPlayerIndex; // Second player for dual challenges
   String _currentChallenge = '';
   String? _currentAnswer; // Respuesta a la pregunta actual si existe
+  String? _currentTemplateId; // para votacion
   bool _gameStarted = false;
   // Track how many times each player has been selected, keyed by playerId
   final Map<int, int> _playerWeights = {};
@@ -121,6 +125,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
     }
 
     _initializeFirstChallenge();
+    _interstitial.loadAd();
   }
 
   @override
@@ -132,6 +137,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
     _tapAnimationController.dispose();
     _rippleAnimationController.dispose();
     _pulseAnimationController.dispose();
+    _interstitial.dispose();
     super.dispose();
   }
 
@@ -201,6 +207,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
       setState(() {
         _currentChallenge = _appendModifierText(question.question);
         _currentAnswer = question.answer;
+        _currentTemplateId = question.templateId;
         _currentPlayerIndex = selectedPlayerIndex;
       });
     } else {
@@ -216,6 +223,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
       setState(() {
         _currentChallenge = _appendModifierText(question.question);
         _currentAnswer = question.answer;
+        _currentTemplateId = question.templateId;
         _currentPlayerIndex = -1; // Marcar que no hay jugador asignado aún
       });
     }
@@ -270,6 +278,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
       dualPlayer1Name: dualPlayer1Name,
       dualPlayer2Name: dualPlayer2Name,
       isCurrentChallengeConstant: _isCurrentChallengeConstant,
+      currentTemplateId: _currentTemplateId,
     );
   }
 
@@ -432,8 +441,11 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
       _currentEventEnd = null; // Limpiar cualquier fin de evento
       _dualPlayerIndex = null; // Limpiar jugador dual previo
       _currentAnswer = null; // Limpiar respuesta anterior
+      _currentTemplateId = null; // Limpiar template anterior
       _isCurrentChallengeConstant = false; // Limpiar flag de reto constante
     });
+
+    await _interstitial.onRoundCompleted(); // cada 5 rondas automaticamente
 
     // 0. Verificar si hemos llegado al checkpoint de Endless Mode (Ronda 100)
     await _checkEndlessModeCheckpoint();
@@ -543,6 +555,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
     setState(() {
       _constantChallenges.add(constantChallenge);
       _currentChallenge = _appendModifierText(constantChallenge.description);
+      _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
       _currentAnswer = null; // Los retos constantes no tienen respuesta oculta
       _currentPlayerIndex = _players.indexWhere((p) => p.id == eligiblePlayer.id);
       _isCurrentChallengeConstant = true; // Marcar como reto constante
@@ -582,6 +595,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
     setState(() {
       _events.add(event);
       _currentChallenge = _appendModifierText('${event.typeIcon} ${event.title}: ${event.description}');
+      _currentTemplateId = event.metadata['templateId'] as String?;
       _currentAnswer = null; // Los eventos no tienen respuesta oculta
       _currentPlayerIndex = -1; // Eventos son globales, no hay jugador específico
     });
@@ -615,6 +629,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
     setState(() {
       _currentChallenge = _appendModifierText(question.question);
       _currentAnswer = question.answer;
+      _currentTemplateId = question.templateId;
       _currentPlayerIndex = player1Index;
       _dualPlayerIndex = player2Index;
 
@@ -649,6 +664,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
     setState(() {
       _constantChallenges.add(constantChallenge);
       _currentChallenge = _appendModifierText(constantChallenge.description);
+      _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
       _currentPlayerIndex = _players.indexOf(player1);
       _dualPlayerIndex = _players.indexOf(player2);
     });
@@ -902,6 +918,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: const BannerAdWidget(),
         body: LayoutBuilder(
           builder: (context, constraints) {
             final iconSize = getResponsiveSize(

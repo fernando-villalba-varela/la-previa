@@ -1,4 +1,4 @@
-﻿import 'dart:io';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'player.dart';
 import 'constant_challenge.dart';
@@ -22,6 +22,7 @@ class GameState {
   final String? dualPlayer1Name; // Name of first player for dual challenges
   final String? dualPlayer2Name; // Name of second player for dual challenges
   final bool isCurrentChallengeConstant; // Flag para marcar si el reto actual es constante
+  final String? currentTemplateId; // <-- ANADIR
 
   const GameState({
     required this.players,
@@ -41,6 +42,7 @@ class GameState {
     this.dualPlayer1Name,
     this.dualPlayer2Name,
     this.isCurrentChallengeConstant = false,
+    this.currentTemplateId, // <-- ANADIR
   });
 
   /// Creates a copy of this GameState with the given fields replaced with new values
@@ -62,6 +64,7 @@ class GameState {
     String? dualPlayer1Name,
     String? dualPlayer2Name,
     bool? isCurrentChallengeConstant,
+    String? currentTemplateId, // <-- ANADIR
   }) {
     return GameState(
       players: players ?? this.players,
@@ -81,6 +84,7 @@ class GameState {
       dualPlayer1Name: dualPlayer1Name ?? this.dualPlayer1Name,
       dualPlayer2Name: dualPlayer2Name ?? this.dualPlayer2Name,
       isCurrentChallengeConstant: isCurrentChallengeConstant ?? this.isCurrentChallengeConstant,
+      currentTemplateId: currentTemplateId ?? this.currentTemplateId, // <-- ANADIR
     );
   }
 

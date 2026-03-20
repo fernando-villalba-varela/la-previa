@@ -1,8 +1,9 @@
-﻿import 'dart:io';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/services/language_service.dart';
+import '../../../../../core/services/database_service_v2.dart';
 import '../../../presentation/viewmodels/league_detail_viewmodel.dart';
 import '../../../../../core/models/player.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_game_screen.dart';
@@ -18,6 +19,23 @@ class PlayTab extends StatefulWidget {
 class _PlayTabState extends State<PlayTab> {
   final Set<int> _selected = {};
   bool _isProcessingGameEnd = false;
+  bool _hasCustomQuestions = false;
+  bool _mixCustomQuestions = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkCustomQuestions();
+  }
+
+  Future<void> _checkCustomQuestions() async {
+    final hasCustom = await context.read<DatabaseService>().hasPersonalizedQuestions();
+    if (mounted) {
+      setState(() {
+        _hasCustomQuestions = hasCustom;
+      });
+    }
+  }
 
   ImageProvider? _avatar(String? path) {
     if (path == null) return null;
@@ -138,16 +156,40 @@ class _PlayTabState extends State<PlayTab> {
         SafeArea(
           top: false,
           minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_hasCustomQuestions) ...[
+                SwitchListTile(
+                  title: Text(
+                    Provider.of<LanguageService>(context).translate('include_custom_questions') ?? 'Incluir preguntas personalizadas',
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: const Text(
+                    'Mezclar tus preguntas con las de la liga',
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                  value: _mixCustomQuestions,
+                  activeColor: Colors.lightBlueAccent,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _mixCustomQuestions = value;
+                    });
+                  },
+                ),
+                const SizedBox(height: 8),
+              ],
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
               icon: const Icon(Icons.local_drink),
               label: Text(
-                _selected.length >= 2
-                    ? Provider.of<LanguageService>(context).translate('god_bless_you')
-                    : players.length < 2
-                    ? Provider.of<LanguageService>(context).translate('need_at_least_2')
-                    : Provider.of<LanguageService>(context).translate('select_at_least_2'),
+                (_selected.length >= 2 && players.length >= 2)
+                    ? (Provider.of<LanguageService>(context).translate('start_playing_button'))
+                    : (players.length < 2
+                        ? Provider.of<LanguageService>(context).translate('need_at_least_2')
+                        : Provider.of<LanguageService>(context).translate('select_at_least_2')),
+                style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.1),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlueAccent,
@@ -200,6 +242,7 @@ class _PlayTabState extends State<PlayTab> {
                           builder: (context) => LeagueGameScreen(
                             players: selectedPlayers,
                             maxRounds: maxRounds,
+                            mixCustomQuestions: _mixCustomQuestions,
                             onGameEnd: (playerDrinks) {
                               // Prevenir múltiples ejecuciones
                               if (_isProcessingGameEnd) return;
@@ -245,6 +288,8 @@ class _PlayTabState extends State<PlayTab> {
                   : null,
             ),
           ),
+          ],
+        ),
         ),
       ],
     );

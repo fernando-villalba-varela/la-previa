@@ -1,8 +1,11 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../../../../../core/models/game_state.dart';
 import '../../../../../core/models/player.dart';
 import 'package:drinkaholic/features/quick_game/presentation/widgets/quick_game_widgets.dart' show buildCenterContent;
 import 'package:drinkaholic/features/shared/presentation/widgets/answer_info_button.dart';
+import 'package:provider/provider.dart';
+import '../../../../../core/services/database_service_v2.dart';
+import '../../../../../core/presentation/components/question_voting_widget.dart';
 
 double getResponsiveSize(BuildContext context, {required double small, required double medium, required double large}) {
   final width = MediaQuery.of(context).size.width;
@@ -109,6 +112,15 @@ class GameCard extends StatelessWidget {
                           ),
                         );
                       },
+                    ),
+                  // Votacion — visible solo cuando hay un template activo y el juego ha empezado
+                  if (gameState.gameStarted && gameState.currentTemplateId != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: QuestionVotingWidget(
+                        templateId: gameState.currentTemplateId!,
+                        db: context.read<DatabaseService>(),
+                      ),
                     ),
                 ],
               ),
