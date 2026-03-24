@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'dart:math';
 
 class AnimatedIconWidget extends StatelessWidget {
@@ -31,6 +31,7 @@ class AnimatedIconWidget extends StatelessWidget {
         builder: (context, child) {
           return Stack(
             alignment: Alignment.center,
+            clipBehavior: Clip.none,
             children: [
               // Rocket trail effect
               if (iconMoveAnimation.value < -50)
@@ -67,6 +68,7 @@ class AnimatedIconWidget extends StatelessWidget {
         builder: (context, child) {
           return Stack(
             alignment: Alignment.center,
+            clipBehavior: Clip.none,
             children: [
               // Glow effect
               Container(
@@ -76,7 +78,7 @@ class AnimatedIconWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(((0.6 * opacityAnimation.value) * 255).round(), 255, 235, 59),
+                      color: Colors.white.withOpacity((0.6 * opacityAnimation.value).clamp(0.0, 1.0)),
                       blurRadius: 30,
                       spreadRadius: 10,
                     ),
@@ -93,7 +95,7 @@ class AnimatedIconWidget extends StatelessWidget {
                   offset: Offset(x, y),
                   child: Opacity(
                     opacity: opacityAnimation.value,
-                    child: Icon(Icons.star, size: 12 + (8 * iconScaleAnimation.value), color: Colors.yellow),
+                    child: Icon(Icons.star, size: 12 + (8 * iconScaleAnimation.value), color: Colors.white),
                   ),
                 );
               }),
@@ -102,7 +104,7 @@ class AnimatedIconWidget extends StatelessWidget {
                 offset: Offset(0, sin(iconRotationAnimation.value * 3.14159 / 180) * 20),
                 child: Transform.scale(
                   scale: iconScaleAnimation.value,
-                  child: Icon(animatingIcon, size: 80, color: Colors.yellow),
+                  child: Icon(animatingIcon, size: 80, color: Colors.white),
                 ),
               ),
             ],

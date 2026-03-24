@@ -18,7 +18,7 @@ import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 class DatabaseService {
   static const String _dbName = 'la_previa.db';
-  static const int _dbVersion = 1;
+  static const int _dbVersion = 2;
 
   /// Numero de thumbs down a partir del cual un template se suprime
   static const int suppressThreshold = 3;
@@ -43,12 +43,13 @@ class DatabaseService {
         options: OpenDatabaseOptions(
           version: _dbVersion,
           onCreate: _onCreate,
+          onUpgrade: _onUpgrade,
         ),
       );
     } else {
       final dbPath = await getDatabasesPath();
       final path = join(dbPath, _dbName);
-      return openDatabase(path, version: _dbVersion, onCreate: _onCreate);
+      return openDatabase(path, version: _dbVersion, onCreate: _onCreate, onUpgrade: _onUpgrade);
     }
   }
 
@@ -72,6 +73,14 @@ class DatabaseService {
       )
     ''');
 
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute('ALTER TABLE personalized ADD COLUMN league_id TEXT');
+      await db.execute('ALTER TABLE personalized ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1');
+    }
+
     // Preguntas del modo personalizado
     await db.execute('''
       CREATE TABLE personalized (
@@ -79,6 +88,8 @@ class DatabaseService {
         text          TEXT NOT NULL,
         drinks        INTEGER NOT NULL DEFAULT 1,
         timer_seconds INTEGER,
+        league_id     TEXT,
+        is_active     INTEGER NOT NULL DEFAULT 1,
         created_at    TEXT NOT NULL,
         used_count    INTEGER NOT NULL DEFAULT 0
       )
@@ -215,6 +226,8 @@ class DatabaseService {
         'text':          question.text,
         'drinks':        question.drinks,
         'timer_seconds': question.timerSeconds,
+        'league_id':     question.leagueId,
+        'is_active':     question.isActive ? 1 : 0,
         'created_at':    DateTime.now().toIso8601String(),
         'used_count':    0,
       },
@@ -222,10 +235,22 @@ class DatabaseService {
     );
   }
 
-  Future<List<CustomQuestion>> getPersonalizedQuestions() async {
-    if (kIsWeb) return List.from(_memoryQuestions);
+  Future<List<CustomQuestion>> getPersonalizedQuestions(String leagueId) async {
+    if (kIsWeb) return _memoryQuestions.where((q) => q.leagueId == leagueId).toList();
     final db = await database;
     final rows = await db.query('personalized',
+        where: 'league_id = ?',
+        whereArgs: [leagueId],
+        orderBy: 'used_count ASC, created_at DESC');
+    return rows.map(CustomQuestion.fromRow).toList();
+  }
+
+  Future<List<CustomQuestion>> getActivePersonalizedQuestions(String leagueId) async {
+    if (kIsWeb) return _memoryQuestions.where((q) => q.leagueId == leagueId && q.isActive).toList();
+    final db = await database;
+    final rows = await db.query('personalized',
+        where: 'league_id = ? AND is_active = 1',
+        whereArgs: [leagueId],
         orderBy: 'used_count ASC, created_at DESC');
     return rows.map(CustomQuestion.fromRow).toList();
   }
@@ -244,6 +269,8 @@ class DatabaseService {
         'text':          question.text,
         'drinks':        question.drinks,
         'timer_seconds': question.timerSeconds,
+        'league_id':     question.leagueId,
+        'is_active':     question.isActive ? 1 : 0,
       },
       where: 'id = ?',
       whereArgs: [question.id],
@@ -266,6 +293,22 @@ class DatabaseService {
     await db.rawUpdate(
         'UPDATE personalized SET used_count = used_count + 1 WHERE id = ?',
         [id]);
+  }
+
+  Future<void> togglePersonalizedQuestionStatus(String id, bool isActive) async {
+    if (kIsWeb) {
+      final idx = _memoryQuestions.indexWhere((q) => q.id == id);
+      if (idx != -1) {
+        final old = _memoryQuestions[idx];
+        _memoryQuestions[idx] = CustomQuestion(
+          id: old.id, text: old.text, drinks: old.drinks, 
+          timerSeconds: old.timerSeconds, leagueId: old.leagueId, isActive: isActive
+        );
+      }
+      return;
+    }
+    final db = await database;
+    await db.update('personalized', {'is_active': isActive ? 1 : 0}, where: 'id = ?', whereArgs: [id]);
   }
 
   Future<bool> hasPersonalizedQuestions() async {
@@ -319,12 +362,16 @@ class CustomQuestion {
   final String text;
   final int drinks;
   final int? timerSeconds;
+  final String? leagueId;
+  final bool isActive;
 
   const CustomQuestion({
     required this.id,
     required this.text,
     required this.drinks,
     this.timerSeconds,
+    this.leagueId,
+    this.isActive = true,
   });
 
   factory CustomQuestion.fromRow(Map<String, dynamic> row) =>
@@ -333,5 +380,7 @@ class CustomQuestion {
         text:         row['text']          as String,
         drinks:       row['drinks']        as int,
         timerSeconds: row['timer_seconds'] as int?,
+        leagueId:     row['league_id']     as String?,
+        isActive:     (row['is_active']    as int? ?? 1) == 1,
       );
 }

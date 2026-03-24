@@ -852,7 +852,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
                 Text(
                   Provider.of<LanguageService>(context).translate('for_player').replaceAll('{name}', challenge.targetPlayer.nombre),
                   style: const TextStyle(
-                    color: Color(0xFF00C9FF),
+                    color: Color(0xFF00FFFF),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -893,7 +893,7 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
                 Text(
                   event.title,
                   style: const TextStyle(
-                    color: Color(0xFF92FE9D),
+                    color: Color(0xFF00FFFF),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -964,8 +964,8 @@ class _QuickGameScreenState extends State<QuickGameScreen> with TickerProviderSt
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        Color(0xFF00C9FF), // Cyan
-                        Color(0xFF92FE9D), // Green
+                        Color(0xFFFF0055), // Crimson Fiesta
+                        Color(0xFFFF5588), // Crimson gradient
                       ],
                     ),
                   ),

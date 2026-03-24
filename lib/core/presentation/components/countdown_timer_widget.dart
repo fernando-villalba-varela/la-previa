@@ -74,10 +74,9 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget>
   }
 
   Color _currentColor() {
-    final ratio = _remaining / widget.seconds;
-    if (ratio <= 0.10) return widget.dangerColor ?? Colors.red.shade600;
-    if (ratio <= 0.30) return widget.warningColor ?? Colors.orange.shade600;
-    return widget.activeColor ?? Colors.green.shade600;
+    if (_remaining <= 3) return const Color(0xFFFF0055); // Crimson Fiesta
+    // Linear transition to cyan
+    return Color.lerp(const Color(0xFFFF0055), const Color(0xFF00FFFF), _remaining / widget.seconds) ?? const Color(0xFF00FFFF);
   }
 
   String _formatTime() {
@@ -100,13 +99,19 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget>
   Widget build(BuildContext context) {
     final color = _currentColor();
     final progress = _remaining / widget.seconds;
+    final isHeartbeat = _remaining <= 3 && _remaining > 0;
+    
+    // Scale animation that pulses every second
+    final scale = isHeartbeat ? 1.0 + 0.15 * (0.5 - (_animController.value * widget.seconds % 1).abs()).abs() : 1.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
+        Transform.scale(
+          scale: scale,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
             SizedBox(
               width: 80,
               height: 80,
@@ -131,6 +136,7 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget>
             ),
           ],
         ),
+      ),
         if (_finished) ...[
           const SizedBox(height: 8),
           Text(

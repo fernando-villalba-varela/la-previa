@@ -3,14 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
 import '../viewmodels/home_viewmodel.dart';
-import '../widgets/modern_button.dart';
-import '../widgets/animated_icon_widget.dart';
+import '../../../../core/presentation/components/drinkaholic_button.dart';
 import '../widgets/floating_particle.dart';
 import 'package:drinkaholic/features/league/presentation/screens/participants_screen.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_list_screen.dart';
+import 'package:drinkaholic/features/quick_game/presentation/screens/quick_game_screen.dart';
+import '../../../../core/services/consent_and_ad_service.dart';
 import '../../../../constants/button_config.dart';
 import 'dart:math';
-import 'package:drinkaholic/features/custom/presentation/screens/custom_questions_screen.dart';
+
 import '../../../../core/services/database_service_v2.dart';
 import '../../../../core/services/consent_and_ad_service.dart';
 
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _viewModel = HomeViewModel();
-    _animationController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _animationController = AnimationController(duration: const Duration(milliseconds: 400), vsync: this);
 
     _scaleAnimation = Tween<double>(
       begin: 0.0,
@@ -89,8 +90,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     await _animationController.forward();
 
-    await Future.delayed(const Duration(milliseconds: 200));
-
     onComplete();
 
     await Future.delayed(const Duration(milliseconds: 100));
@@ -116,15 +115,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: [
               Container(
                 decoration: const BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment.topLeft,
-                    radius: 1.5,
-                    colors: [Color(0xFF2D1B69), Color(0xFF11072C), Color(0xFF0D0221)],
+                  color: Color(0xFF0B0B1A), // Deep Night
+                ),
+              ),
+              // Glow top-left
+              Positioned(
+                top: -screenHeight * 0.1,
+                left: -screenWidth * 0.3,
+                child: Container(
+                  width: screenWidth * 1.2,
+                  height: screenWidth * 1.2,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        const Color(0xFF8A2BE2).withOpacity(0.2), // Neon Violet
+                        Colors.transparent,
+                      ],
+                      stops: const [0.2, 1.0],
+                    ),
+                  ),
+                ),
+              ),
+              // Glow bottom-right
+              Positioned(
+                bottom: -screenHeight * 0.1,
+                right: -screenWidth * 0.4,
+                child: Container(
+                  width: screenWidth * 1.2,
+                  height: screenWidth * 1.2,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(
+                      colors: [
+                        const Color(0xFFFF0055).withOpacity(0.15), // Crimson Fiesta
+                        Colors.transparent,
+                      ],
+                      stops: const [0.2, 1.0],
+                    ),
                   ),
                 ),
               ),
               ...List.generate(
-                6,
+                35,
                 (index) => FloatingParticle(screenWidth: screenWidth, screenHeight: screenHeight, index: index),
               ),
 
@@ -175,9 +208,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     begin: Alignment.topLeft,
                                     end: Alignment.bottomRight,
                                     colors: [
-                                      Color(0xFF7F5AF0), // neon violet
-                                      Color(0xFF00D1FF), // cyan
+                                      Color(0xFF00FFFF), // Electric Cyan
+                                      Color(0xFFFF0055), // Crimson Fiesta
+                                      Color(0xFFFF8C00), // Fiery Orange
                                     ],
+                                    stops: [0.1, 0.5, 0.9],
                                   ).createShader(bounds),
                                   blendMode: BlendMode.srcIn,
                                   child: Text(
@@ -190,16 +225,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(
-                                          color: const Color(0xFF7F5AF0).withOpacity(0.45),
-                                          blurRadius: 30,
-                                          offset: const Offset(0, 0),
+                                          color: const Color(0xFF00FFFF).withOpacity(0.6),
+                                          blurRadius: 20,
+                                          offset: const Offset(-2, -2),
                                         ),
                                         Shadow(
-                                          color: const Color(0xFF00D1FF).withOpacity(0.35),
-                                          blurRadius: 30,
-                                          offset: const Offset(0, 0),
+                                          color: const Color(0xFFFF0055).withOpacity(0.6),
+                                          blurRadius: 25,
+                                          offset: const Offset(0, 2),
                                         ),
-                                        Shadow(color: Colors.black54, blurRadius: 8, offset: const Offset(2, 2)),
+                                        Shadow(
+                                          color: const Color(0xFFFF8C00).withOpacity(0.5),
+                                          blurRadius: 20,
+                                          offset: const Offset(2, 2),
+                                        ),
+                                        const Shadow(color: Colors.black87, blurRadius: 10, offset: Offset(2, 4)),
                                       ],
                                     ),
                                   ),
@@ -251,48 +291,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Builder(
                               builder: (context) {
                                 final config = _getQuickGameButtonConfig(context);
-                                return ModernButton(
-                                  onTap: config.onTap,
-                                  text: config.text,
+                                return DrinkaholicButton(
+                                  onPressed: config.onTap,
+                                  label: config.text,
                                   icon: config.icon,
-                                  gradient: config.gradient,
+                                  variant: DrinkaholicButtonVariant.primary,
                                 );
                               },
                             ),
                             SizedBox(height: 18.h),
 
-                            ModernButton(
-                              text: "Modo Personalizado",
-                              icon: Icons.edit_note_rounded,
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF7F5AF0), Color(0xFF2D1B69)],
-                              ),
-                              onTap: () => _startAnimatedNavigation(
-                                const LinearGradient(
-                                  colors: [Color(0xFF7F5AF0), Color(0xFF2D1B69)],
-                                ),
-                                "Modo Personalizado",
-                                Icons.edit_note_rounded,
-                                () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const CustomQuestionsManagerScreen(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 18.h),
+
 
                             Builder(
                               builder: (context) {
                                 final config = _getLeagueButtonConfig(context);
-                                return ModernButton(
-                                  onTap: config.onTap,
-                                  text: config.text,
+                                return DrinkaholicButton(
+                                  onPressed: config.onTap,
+                                  label: config.text,
                                   icon: config.icon,
-                                  gradient: config.gradient,
+                                  variant: DrinkaholicButtonVariant.secondary,
                                 );
                               },
                             ),
@@ -301,11 +319,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             Builder(
                               builder: (context) {
                                 final config = _getElixirsButtonConfig(context);
-                                return ModernButton(
-                                  onTap: config.onTap,
-                                  text: config.text,
+                                return DrinkaholicButton(
+                                  onPressed: config.onTap,
+                                  label: config.text,
                                   icon: config.icon,
-                                  gradient: config.gradient,
+                                  variant: DrinkaholicButtonVariant.outline,
                                 );
                               },
                             ),
@@ -360,61 +378,44 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
 
               if (_isAnimating && _currentGradient != null)
-                AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return Positioned.fill(
-                      child: Transform.scale(
-                        scale: _scaleAnimation.value,
-                        child: Container(
-                          decoration: BoxDecoration(gradient: _currentGradient, shape: BoxShape.circle),
-                          child: _scaleAnimation.value > 0.3
-                              ? Stack(
-                                  children: [
-                                    if (_scaleAnimation.value > 0.3)
-                                      Center(
-                                        child: AnimatedIconWidget(
-                                          animatingIcon: _animatingIcon,
-                                          animationController: _animationController,
-                                          opacityAnimation: _opacityAnimation,
-                                          iconMoveAnimation: _iconMoveAnimation,
-                                          iconScaleAnimation: _iconScaleAnimation,
-                                          iconRotationAnimation: _iconRotationAnimation,
-                                        ),
-                                      ),
-                                    if (_scaleAnimation.value > 0.8)
-                                      FadeTransition(
-                                        opacity: _opacityAnimation,
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              const SizedBox(height: 200),
-                                              const CircularProgressIndicator(
-                                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                                strokeWidth: 3,
-                                              ),
-                                              const SizedBox(height: 24),
-                                              Text(
-                                                '$_animatingButtonText...',
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 24,
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing: 1.5,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                  ],
-                                )
-                              : null,
+                Positioned.fill(
+                  child: FadeTransition(
+                    opacity: _opacityAnimation,
+                    child: Container(
+                      decoration: BoxDecoration(gradient: _currentGradient),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ScaleTransition(
+                              scale: _iconScaleAnimation,
+                              child: Icon(
+                                _animatingIcon,
+                                size: 100,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(height: 60),
+                            const CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 3,
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              '$_animatingButtonText...',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.5,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 ),
 
               if (_viewModel.hasError)

@@ -23,14 +23,14 @@ import '../screens/tiebreaker_screen.dart';
 class LeagueGameScreen extends StatefulWidget {
   final List<Player> players;
   final int maxRounds;
-  final bool mixCustomQuestions; // Added flag for custom questions
+  final String leagueId;
   final Function(Map<int, int>) onGameEnd; // Map de playerId -> drinks
 
   const LeagueGameScreen({
     super.key, 
     required this.players, 
     required this.maxRounds, 
-    this.mixCustomQuestions = false,
+    required this.leagueId,
     required this.onGameEnd,
   });
 
@@ -155,23 +155,24 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
   }
 
   Future<void> _loadCustomQuestionsIfEnabled() async {
-    if (widget.mixCustomQuestions) {
-      final qs = await Provider.of<DatabaseService>(context, listen: false).getPersonalizedQuestions();
-      if (mounted) {
-        setState(() {
-          _customQuestions = qs;
-        });
-      }
+    final qs = await Provider.of<DatabaseService>(context, listen: false).getActivePersonalizedQuestions(widget.leagueId);
+    if (mounted) {
+      setState(() {
+        _customQuestions = qs;
+      });
     }
   }
 
   Future<void> _generateNewChallenge() async {
     // If mixing custom questions is enabled, slightly boost the chance of using one
-    if (widget.mixCustomQuestions && _customQuestions.isNotEmpty && Random().nextDouble() < 0.25) {
+    if (_customQuestions.isNotEmpty && Random().nextDouble() < 0.25) {
       final CustomQuestion cq = _customQuestions[Random().nextInt(_customQuestions.length)];
+      final drinkText = cq.drinks == 1 
+          ? Provider.of<LanguageService>(context, listen: false).translate('drink_singular')
+          : Provider.of<LanguageService>(context, listen: false).translate('drink_plural');
       
       setState(() {
-        _currentChallenge = cq.text;
+        _currentChallenge = '${cq.text}\n\n[🍻 ${cq.drinks} $drinkText]';
         _currentAnswer = null; // Custom questions don't have hidden answers yet
         _currentTemplateId = cq.id;
         _currentPlayerIndex = -1; // Default generically
@@ -1108,7 +1109,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen> with TickerProvider
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFC466B), Color(0xFF3F5EFB)],
+                  colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
                 ),
               ),
             ),

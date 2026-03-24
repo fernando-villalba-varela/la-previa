@@ -1,8 +1,9 @@
-﻿import 'dart:io';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/services/language_service.dart';
 import '../../../presentation/viewmodels/league_detail_viewmodel.dart';
+import 'package:drinkaholic/core/presentation/components/drinkaholic_card.dart';
 
 class ParticipantsTab extends StatefulWidget {
   const ParticipantsTab({super.key});
@@ -79,14 +80,9 @@ class PlayerCard extends StatelessWidget {
     final img = _avatarImage();
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: DrinkaholicCard(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: const Color(0x2EFFFFFF), // white with 18% opacity
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: const Color(0x59FFFFFF)), // white with 35% opacity
-        ),
         child: Row(
           children: [
             GestureDetector(
@@ -135,14 +131,9 @@ class AddPlayerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DrinkaholicCard(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0x59FFFFFF)), // white with 35% opacity
-        color: const Color(0x1FFFFFFF), // white with 12% opacity
-      ),
       child: Row(
         children: [
           CircleAvatar(

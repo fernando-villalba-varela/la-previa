@@ -1,4 +1,4 @@
-﻿import 'dart:ui';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/models/league.dart';
@@ -6,6 +6,7 @@ import '../viewmodels/league_list_viewmodel.dart';
 import '../viewmodels/league_detail_viewmodel.dart';
 import '../screens/league_detail_screen.dart';
 import '../../../../core/services/language_service.dart';
+import '../../../../core/presentation/components/drinkaholic_card.dart';
 
 class LeagueCard extends StatelessWidget {
   final League league;
@@ -14,47 +15,11 @@ class LeagueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(22),
-      child: Stack(
-        children: [
-          // Glass background
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
-            child: Container(
-              height: 92,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0x2EFFFFFF), // white with 18% opacity
-                    Color(0x14FFFFFF), // white with 8% opacity
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                border: Border.all(
-                  width: 1.2,
-                  color: const Color(0x38FFFFFF), // white with 22% opacity
-                ),
-              ),
-            ),
-          ),
-          // Light sheen
-          Positioned.fill(
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0x1AFFFFFF), // white with 10% opacity
-                    Colors.transparent,
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-            ),
-          ),
-          Material(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: DrinkaholicCard(
+        padding: EdgeInsets.zero,
+        child: Material(
             type: MaterialType.transparency,
             child: InkWell(
               onTap: () {
@@ -104,7 +69,6 @@ class LeagueCard extends StatelessWidget {
               ),
             ),
           ),
-        ],
       ),
     );
   }

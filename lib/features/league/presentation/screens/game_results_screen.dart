@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import '../../../../core/models/player.dart';
@@ -274,7 +274,7 @@ class _GameResultsScreenState extends State<GameResultsScreen> with TickerProvid
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFC466B), Color(0xFF3F5EFB)],
+                  colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
                 ),
               ),
             ),
@@ -287,7 +287,7 @@ class _GameResultsScreenState extends State<GameResultsScreen> with TickerProvid
                   padding: EdgeInsets.all(headerPadding),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color(0xFFE91E63), Color(0xFF9C27B0)],
+                      colors: [Color(0xFF00E5FF), Color(0xFF0088CC)],
                     ),
                   ),
                   child: Row(

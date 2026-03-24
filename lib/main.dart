@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
 import 'core/services/database_service_v2.dart';
 import 'core/services/consent_and_ad_service.dart';
 import 'core/services/language_service.dart';
@@ -56,7 +57,22 @@ class MyApp extends StatelessWidget {
           title: 'La Previa',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+            scaffoldBackgroundColor: const Color(0xFF0B0B1A),
+            colorScheme: const ColorScheme.dark(
+              primary: Color(0xFFFF0055),
+              secondary: Color(0xFF8A2BE2),
+            ),
+            textTheme: TextTheme(
+              displayLarge: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+              displayMedium: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+              displaySmall: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+              headlineMedium: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w700),
+              headlineSmall: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
+              titleLarge: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
+              bodyLarge: GoogleFonts.inter(color: Colors.white),
+              bodyMedium: GoogleFonts.inter(color: Colors.white70),
+              labelLarge: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
+            ),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
                 TargetPlatform.android: FadeSlidePageTransitionsBuilder(),

@@ -1,10 +1,12 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 
-enum DrinkaholicButtonVariant { primary, secondary, outline }
+enum DrinkaholicButtonVariant { primary, secondary, accent, outline }
 
 typedef ButtonBuilder = Widget Function(BuildContext context, VoidCallback? onPressed);
 
-class DrinkaholicButton extends StatelessWidget {
+class DrinkaholicButton extends StatefulWidget {
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
@@ -20,82 +22,139 @@ class DrinkaholicButton extends StatelessWidget {
     this.icon,
     this.variant = DrinkaholicButtonVariant.primary,
     this.fullWidth = true,
-    this.height = 56,
-    this.borderRadius = 16,
+    this.height = 60,
+    this.borderRadius = 24,
   });
 
   @override
+  State<DrinkaholicButton> createState() => _DrinkaholicButtonState();
+}
+
+class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTickerProviderStateMixin {
+  late AnimationController _scaleController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _scaleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.92).animate(
+      CurvedAnimation(parent: _scaleController, curve: Curves.easeOutCubic),
+    );
+  }
+
+  @override
+  void dispose() {
+    _scaleController.dispose();
+    super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    if (widget.onPressed != null) {
+      _scaleController.forward();
+    }
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    if (widget.onPressed != null) {
+      _scaleController.reverse();
+      HapticFeedback.lightImpact();
+      widget.onPressed!();
+    }
+  }
+
+  void _handleTapCancel() {
+    if (widget.onPressed != null) {
+      _scaleController.reverse();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final bool isDisabled = onPressed == null;
+    final bool isDisabled = widget.onPressed == null;
 
     BoxDecoration decoration;
     TextStyle textStyle;
     Color? iconColor;
 
-    switch (variant) {
-      case DrinkaholicButtonVariant.primary:
-        final colors = const [Color(0xFF00C9FF), Color(0xFF92FE9D)];
+    switch (widget.variant) {
+      case DrinkaholicButtonVariant.primary: // Magenta (Jugar)
+        final colors = const [Color(0xFFFF0055), Color(0xFFFF5588)];
         decoration = BoxDecoration(
           gradient: isDisabled
-              ? LinearGradient(
-                  colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)],
-                )
+              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
               : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
           boxShadow: isDisabled
               ? []
-              : [
-                  BoxShadow(
-                    color: const Color(0xFF00C9FF).withOpacity(0.35),
-                    blurRadius: 14,
-                    spreadRadius: 1,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
+              : [BoxShadow(color: const Color(0xFFFF0055).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
         );
-        textStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
+        textStyle = GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
         iconColor = Colors.white;
         break;
 
-      case DrinkaholicButtonVariant.secondary:
+      case DrinkaholicButtonVariant.secondary: // Cyan (Modo Liga)
+        final colors = const [Color(0xFF00FFFF), Color(0xFF00B3FF)];
         decoration = BoxDecoration(
-          color: isDisabled ? Colors.white.withOpacity(0.20) : Colors.white.withOpacity(0.28),
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(color: Colors.white.withOpacity(0.45), width: 1.4),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 10, offset: const Offset(0, 4))],
+          gradient: isDisabled
+              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
+              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          boxShadow: isDisabled
+              ? []
+              : [BoxShadow(color: const Color(0xFF00FFFF).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
         );
-        textStyle = TextStyle(
-          color: Colors.white.withOpacity(isDisabled ? 0.7 : 0.95),
-          fontWeight: FontWeight.w700,
-          fontSize: 15,
-          letterSpacing: 0.5,
-        );
-        iconColor = Colors.white;
+        // Using very dark blue/black for max contrast against Cyan
+        textStyle = GoogleFonts.poppins(color: const Color(0xFF0B0B1A), fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 0.5);
+        iconColor = const Color(0xFF0B0B1A);
         break;
 
-      case DrinkaholicButtonVariant.outline:
+      case DrinkaholicButtonVariant.accent:
+        final colors = const [Color(0xFF00FFFF), Color(0xFF55FFFF)];
+        decoration = BoxDecoration(
+          gradient: isDisabled
+              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
+              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          boxShadow: isDisabled
+              ? []
+              : [BoxShadow(color: const Color(0xFF00FFFF).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
+        );
+        textStyle = GoogleFonts.poppins(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
+        iconColor = Colors.black;
+        break;
+
+      case DrinkaholicButtonVariant.outline: // Orange (Elixirs)
         decoration = BoxDecoration(
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(color: Colors.white.withOpacity(isDisabled ? 0.35 : 0.6), width: 1.6),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          border: Border.all(color: const Color(0xFFFF8C00).withOpacity(isDisabled ? 0.35 : 0.8), width: 2),
         );
-        textStyle = TextStyle(
-          color: Colors.white.withOpacity(isDisabled ? 0.7 : 1.0),
+        textStyle = GoogleFonts.poppins(
+          color: isDisabled ? Colors.white.withOpacity(0.7) : const Color(0xFFFF8C00),
           fontWeight: FontWeight.w600,
           fontSize: 15,
         );
-        iconColor = Colors.white;
+        iconColor = isDisabled ? Colors.white.withOpacity(0.7) : const Color(0xFFFF8C00);
         break;
     }
 
+    // Wrap elements to ensure perfectly centered positioning
     final child = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        if (icon != null) ...[Icon(icon, color: iconColor, size: 20), const SizedBox(width: 10)],
+        if (widget.icon != null) ...[
+          Icon(widget.icon, color: iconColor, size: 22), 
+          const SizedBox(width: 12),
+        ],
         Flexible(
           child: Text(
-            label,
+            widget.label,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
@@ -105,25 +164,31 @@ class DrinkaholicButton extends StatelessWidget {
       ],
     );
 
-    final button = Container(
-      height: height,
+    final buttonNode = Container(
+      height: widget.height,
       decoration: decoration,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: isDisabled ? null : onPressed,
-          borderRadius: BorderRadius.circular(borderRadius),
-          child: Center(
-            child: Padding(padding: const EdgeInsets.symmetric(horizontal: 16), child: child),
-          ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16), 
+          child: child,
         ),
       ),
     );
 
-    if (fullWidth) {
-      return SizedBox(width: double.infinity, child: button);
+    final tapArea = GestureDetector(
+      onTapDown: isDisabled ? null : _handleTapDown,
+      onTapUp: isDisabled ? null : _handleTapUp,
+      onTapCancel: isDisabled ? null : _handleTapCancel,
+      behavior: HitTestBehavior.opaque,
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: buttonNode,
+      ),
+    );
+
+    if (widget.fullWidth) {
+      return SizedBox(width: double.infinity, child: tapArea);
     }
-    return button;
+    return tapArea;
   }
 }
-

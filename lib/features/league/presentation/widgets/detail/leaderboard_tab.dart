@@ -1,8 +1,9 @@
-﻿import 'dart:io';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/services/language_service.dart';
 import '../../../presentation/viewmodels/league_detail_viewmodel.dart';
+import 'package:drinkaholic/core/presentation/components/drinkaholic_card.dart';
 
 class LeaderboardTab extends StatelessWidget {
   const LeaderboardTab({super.key});
@@ -60,8 +61,11 @@ class LeaderboardTab extends StatelessWidget {
         final isMvpStreak = league.currentMvpStreak == p.playerId && league.mvpStreakCount >= 2;
         final isRatitaStreak = league.currentRatitaStreak == p.playerId && league.ratitaStreakCount >= 2;
 
-        return ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        return DrinkaholicCard(
+          padding: EdgeInsets.zero,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           leading: SizedBox(
             width: 84,
             child: Row(
@@ -170,8 +174,9 @@ class LeaderboardTab extends StatelessWidget {
               ],
             ),
           ),
-        );
-      },
+        ),
+      );
+    },
     );
   }
 }

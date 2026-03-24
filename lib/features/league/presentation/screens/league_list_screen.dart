@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/league_list_viewmodel.dart';
@@ -57,7 +57,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                     letterSpacing: 1.5,
                     shadows: [
                       Shadow(color: Colors.black45, offset: Offset(2, 2), blurRadius: 4),
-                      Shadow(color: Colors.purple, offset: Offset(-1, -1), blurRadius: 2),
+                      Shadow(color: Colors.cyan, offset: Offset(-1, -1), blurRadius: 2),
                     ],
                   ),
                 ),
@@ -77,7 +77,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFC466B), Color(0xFF3F5EFB)],
+                  colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
                 ),
               ),
             ),
@@ -109,12 +109,12 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
         content: TextField(
           controller: nameCtrl,
           style: const TextStyle(color: Colors.white),
-          cursorColor: Colors.tealAccent,
+          cursorColor: Colors.cyanAccent,
           decoration: InputDecoration(
             labelText: Provider.of<LanguageService>(context, listen: false).translate('league_name_label'),
-            labelStyle: const TextStyle(color: Colors.tealAccent),
+            labelStyle: const TextStyle(color: Colors.cyanAccent),
             focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.tealAccent)),
+                borderSide: BorderSide(color: Colors.cyanAccent)),
           ),
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _submitCreateLeague(context, nameCtrl),
@@ -127,7 +127,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
           ),
           FilledButton(
             style: FilledButton.styleFrom(
-                backgroundColor: Colors.tealAccent.shade700),
+                backgroundColor: Colors.cyan.shade700),
             onPressed: () => _submitCreateLeague(context, nameCtrl),
             child: Text(Provider.of<LanguageService>(context, listen: false).translate('accept')),
           ),

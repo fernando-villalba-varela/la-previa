@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/services/database_service_v2.dart';
 
 // ---------------------------------------------------------------------------
@@ -64,6 +65,7 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
 
   Future<void> _handleVote(VoteType type) async {
     if (_loading) return;
+    HapticFeedback.lightImpact();
     setState(() => _loading = true);
 
     await widget.db.vote(widget.templateId, type);
@@ -101,7 +103,7 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
         _VoteButton(
           icon: Icons.thumb_up_rounded,
           count: _voteCount?.upCount,
-          activeColor: const Color(0xFF92FE9D),
+          activeColor: const Color(0xFF00FFFF),
           isSelected: _localVote == VoteType.up,
           onTap: () => _handleVote(VoteType.up),
         ),
@@ -109,7 +111,7 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
         _VoteButton(
           icon: Icons.thumb_down_rounded,
           count: _voteCount?.downCount,
-          activeColor: const Color(0xFFFC466B),
+          activeColor: const Color(0xFFFF0055),
           isSelected: _localVote == VoteType.down,
           onTap: () => _handleVote(VoteType.down),
           warningThreshold: DatabaseService.suppressThreshold,
@@ -188,6 +190,13 @@ class _VoteButton extends StatelessWidget {
                     : Colors.white.withOpacity(0.25)),
             width: isSelected ? 1.5 : 1,
           ),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: activeColor.withOpacity(0.4),
+              blurRadius: 10,
+              spreadRadius: 1,
+            )
+          ] : [],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

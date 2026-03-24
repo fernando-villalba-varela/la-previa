@@ -355,7 +355,9 @@ class GameCard extends StatelessWidget {
                   builder: (context, value, child) {
                     return Transform.scale(
                       scale: 0.9 + (0.1 * value),
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
                         padding: EdgeInsets.all(padding),
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         decoration: BoxDecoration(

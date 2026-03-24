@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // <-- Añade esta línea
 import '../viewmodels/participants_viewmodel.dart'; // <-- Añade esta línea
 import '../../../../core/models/player.dart';
@@ -48,8 +48,8 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF00C9FF), // Cyan (matching Quick Game button)
-                  Color(0xFF92FE9D), // Green (matching Quick Game button)
+                  Color(0xFFFF0055), // Crimson Fiesta
+                  Color(0xFFFF5588), // Crimson gradient
                 ],
               ),
             ),
@@ -170,12 +170,12 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.sports_esports, color: Color(0xFF00C9FF), size: 28),
+                              const Icon(Icons.sports_esports, color: Color(0xFFFF0055), size: 28),
                               const SizedBox(width: 12),
                                 Text(
                                   Provider.of<LanguageService>(context).translate('start_playing_button'),
                                   style: const TextStyle(
-                                    color: Color(0xFF00C9FF),
+                                    color: Color(0xFFFF0055),
                                     fontSize: 18,
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 1.2,

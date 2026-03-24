@@ -1,4 +1,5 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class DrinkaholicCard extends StatelessWidget {
   final Widget child;
@@ -22,13 +23,28 @@ class DrinkaholicCard extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.white.withOpacity(0.20), Colors.white.withOpacity(0.10)],
+          colors: [
+            const Color(0xFF1E1E2C).withOpacity(0.6),
+            const Color(0xFF0B0B1A).withOpacity(0.8),
+          ],
         ),
         borderRadius: BorderRadius.circular(borderRadius),
-        border: Border.all(color: Colors.white.withOpacity(0.35), width: 1.2),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 6))],
+        border: Border.all(color: Colors.white.withOpacity(0.15), width: 1.2),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF8A2BE2).withOpacity(0.25),
+            blurRadius: 24,
+            offset: const Offset(0, 6),
+          )
+        ],
       ),
-      child: Padding(padding: padding, child: child),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(borderRadius),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(padding: padding, child: child),
+        ),
+      ),
     );
   }
 }

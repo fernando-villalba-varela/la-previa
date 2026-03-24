@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart'; // Import LanguageService
 import '../viewmodels/league_detail_viewmodel.dart';
@@ -7,6 +7,7 @@ import 'package:drinkaholic/features/shared/presentation/widgets/animated_backgr
 import '../widgets/detail/leaderboard_tab.dart';
 import '../widgets/detail/participants_tab.dart';
 import '../widgets/detail/play_tab.dart';
+import '../widgets/detail/custom_questions_league_tab.dart';
 
 class LeagueDetailScreen extends StatefulWidget {
   const LeagueDetailScreen({super.key});
@@ -25,7 +26,7 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen> with TickerProv
     final vm = context.watch<LeagueDetailViewModel>();
     final league = vm.league;
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -71,9 +72,13 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen> with TickerProv
                   boxShadow: const [BoxShadow(color: Color(0x1A000000), blurRadius: 10, offset: Offset(0, 4))],
                 ),
                 child: TabBar(
+                  isScrollable: true,
+                  tabAlignment: TabAlignment.center,
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.white70,
-                  indicator: BoxDecoration(),
+                  indicator: const UnderlineTabIndicator(
+                    borderSide: BorderSide(color: Color(0xFF00FFFF), width: 3),
+                  ),
                   dividerColor: Colors.transparent,
                   dividerHeight: 0,
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
@@ -82,6 +87,7 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen> with TickerProv
                     Tab(text: Provider.of<LanguageService>(context).translate('scoreboard_tab')),
                     Tab(text: Provider.of<LanguageService>(context).translate('players_tab')),
                     Tab(text: Provider.of<LanguageService>(context).translate('play_tab')),
+                    Tab(text: Provider.of<LanguageService>(context).translate('custom_questions_tab') ?? 'Preguntas'),
                   ],
                 ),
               ),
@@ -95,12 +101,21 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen> with TickerProv
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFC466B), Color(0xFF3F5EFB)],
+                  colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
                 ),
               ),
             ),
             _buildAnimatedBackground(),
-            const SafeArea(child: TabBarView(children: [LeaderboardTab(), ParticipantsTab(), PlayTab()])),
+            const SafeArea(
+              child: TabBarView(
+                children: [
+                  LeaderboardTab(), 
+                  ParticipantsTab(), 
+                  PlayTab(),
+                  CustomQuestionsLeagueTab(),
+                ],
+              ),
+            ),
           ],
         ),
       ),

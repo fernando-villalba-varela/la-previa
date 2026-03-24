@@ -1,6 +1,7 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
-class FloatingParticle extends StatelessWidget {
+class FloatingParticle extends StatefulWidget {
   final double screenWidth;
   final double screenHeight;
   final int index;
@@ -8,47 +9,90 @@ class FloatingParticle extends StatelessWidget {
   const FloatingParticle({super.key, required this.screenWidth, required this.screenHeight, required this.index});
 
   @override
-  Widget build(BuildContext context) {
-    final random = (index * 1234) % 1000;
-    final size = 4.0 + (random % 8);
-    final left = (random * 0.7) % screenWidth;
-    final top = (random * 0.8) % screenHeight;
-    final opacity = 0.1 + (random % 40) / 100;
+  State<FloatingParticle> createState() => _FloatingParticleState();
+}
 
-    return Positioned(
-      left: left,
-      top: top,
-      child: TweenAnimationBuilder(
-        duration: Duration(milliseconds: 3000 + (random % 2000)),
-        tween: Tween<double>(begin: 0, end: 1),
-        onEnd: () {
-          // Restart animation - handled automatically by TweenAnimationBuilder
-        },
-        builder: (context, double value, child) {
-          return Transform.translate(
-            offset: Offset(0, -value * 50),
-            child: Opacity(
-              opacity: opacity * (1 - value),
-              child: Container(
-                width: size,
-                height: size,
-                decoration: BoxDecoration(
-                  color: const Color(0x99FFFFFF), // white with 0.6 opacity
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0x4DFFFFFF), // white with 0.3 opacity
-                      blurRadius: 4,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
+class _FloatingParticleState extends State<FloatingParticle> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    final rng = math.Random(widget.index); 
+    
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 3000 + rng.nextInt(4000)),
+    )..forward();
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.forward(from: 0.0);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Calcular propiedades permanentemente en build para evitar nulos por Hot Reload
+    final rng = math.Random(widget.index);
+    final size = 4.0 + rng.nextInt(8);
+    final left = rng.nextDouble() * widget.screenWidth;
+    final startTop = rng.nextDouble() * widget.screenHeight;
+    final baseOpacity = 0.1 + rng.nextDouble() * 0.4;
+    
+    final colorVal = rng.nextInt(3);
+    final particleColor = colorVal == 0 
+        ? const Color(0xFF00FFFF) 
+        : colorVal == 1 
+            ? const Color(0xFFFF0055) 
+            : const Color(0xFFFF8C00);
+
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        final progress = _controller.value;
+        final yOffset = startTop - (progress * 200);
+        
+        double currentOpacity = baseOpacity;
+        if (progress < 0.2) {
+          currentOpacity = baseOpacity * (progress / 0.2); 
+        } else if (progress > 0.8) {
+          currentOpacity = baseOpacity * ((1.0 - progress) / 0.2); 
+        }
+
+        return Positioned(
+          left: left,
+          top: yOffset,
+          child: Opacity(
+            opacity: currentOpacity,
+            child: Container(
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                color: particleColor.withOpacity(0.8),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: particleColor.withOpacity(0.5),
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
+
+
 

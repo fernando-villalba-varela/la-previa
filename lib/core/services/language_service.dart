@@ -40,8 +40,8 @@ class LanguageService extends ChangeNotifier {
   String translate(String key, {Map<String, String>? args}) {
     Map<String, Map<String, String>> _localizedValues = {
       'play_quick': {
-        'es': 'JUGAR',
-        'en': 'PLAY',
+        'es': 'PARTIDA RÁPIDA',
+        'en': 'QUICK GAME',
       },
       'play_league': {
         'es': 'MODO LIGA',
@@ -155,6 +155,7 @@ class LanguageService extends ChangeNotifier {
       'scoreboard_tab': {'es': 'Scoreboard', 'en': 'Scoreboard'},
       'players_tab': {'es': 'Jugadores', 'en': 'Players'},
       'play_tab': {'es': 'Jugar', 'en': 'Play'},
+      'custom_questions_tab': {'es': 'Preguntas', 'en': 'Custom Qs'},
       
       // League Game
       'exit_game_title': {'es': '¿Salir del juego?', 'en': 'Exit game?'},

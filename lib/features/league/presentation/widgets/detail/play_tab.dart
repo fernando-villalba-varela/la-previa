@@ -19,22 +19,14 @@ class PlayTab extends StatefulWidget {
 class _PlayTabState extends State<PlayTab> {
   final Set<int> _selected = {};
   bool _isProcessingGameEnd = false;
-  bool _hasCustomQuestions = false;
-  bool _mixCustomQuestions = false;
 
   @override
   void initState() {
     super.initState();
-    _checkCustomQuestions();
   }
 
   Future<void> _checkCustomQuestions() async {
-    final hasCustom = await context.read<DatabaseService>().hasPersonalizedQuestions();
-    if (mounted) {
-      setState(() {
-        _hasCustomQuestions = hasCustom;
-      });
-    }
+    // Legacy check removed
   }
 
   ImageProvider? _avatar(String? path) {
@@ -159,26 +151,7 @@ class _PlayTabState extends State<PlayTab> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (_hasCustomQuestions) ...[
-                SwitchListTile(
-                  title: Text(
-                    Provider.of<LanguageService>(context).translate('include_custom_questions') ?? 'Incluir preguntas personalizadas',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: const Text(
-                    'Mezclar tus preguntas con las de la liga',
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
-                  ),
-                  value: _mixCustomQuestions,
-                  activeColor: Colors.lightBlueAccent,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _mixCustomQuestions = value;
-                    });
-                  },
-                ),
-                const SizedBox(height: 8),
-              ],
+
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -242,7 +215,7 @@ class _PlayTabState extends State<PlayTab> {
                           builder: (context) => LeagueGameScreen(
                             players: selectedPlayers,
                             maxRounds: maxRounds,
-                            mixCustomQuestions: _mixCustomQuestions,
+                            leagueId: vm.league.id,
                             onGameEnd: (playerDrinks) {
                               // Prevenir múltiples ejecuciones
                               if (_isProcessingGameEnd) return;
