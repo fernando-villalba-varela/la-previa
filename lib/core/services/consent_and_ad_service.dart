@@ -3,11 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-// =============================================================================
-// consent_service.dart
-// Ruta: lib/core/services/consent_service.dart
-// =============================================================================
-
 class ConsentService {
   static final ConsentService _instance = ConsentService._internal();
   factory ConsentService() => _instance;
@@ -84,21 +79,12 @@ class ConsentService {
   }
 }
 
-// =============================================================================
-// ad_service.dart
-// Ruta: lib/core/services/ad_service.dart
-// =============================================================================
-
-// ── IDs ──────────────────────────────────────────────────────────────────────
-
 class AdIds {
-  // IDs de prueba — NO CAMBIAR (son los oficiales de Google para testing)
   static const String _testBannerId =
       'ca-app-pub-3940256099942544/6300978111';
   static const String _testInterstitialId =
       'ca-app-pub-3940256099942544/1033173712';
 
-  // IDs de produccion — REEMPLAZAR con los de tu cuenta AdMob
   static const String _prodBannerId =
       'ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY';
   static const String _prodInterstitialId =
@@ -110,17 +96,6 @@ class AdIds {
       kDebugMode ? _testInterstitialId : _prodInterstitialId;
 }
 
-// ── BANNER ────────────────────────────────────────────────────────────────────
-
-/// Widget de banner fijo. Colocar en bottomNavigationBar del Scaffold.
-///
-/// Uso en LeagueGameScreen y QuickGameScreen:
-///   return SafeArea(
-///     child: Scaffold(
-///       bottomNavigationBar: const BannerAdWidget(), // <-- ANADIR
-///       body: ...
-///     ),
-///   );
 class BannerAdWidget extends StatefulWidget {
   const BannerAdWidget({super.key});
 
@@ -178,35 +153,16 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
   }
 }
 
-// ── INTERSTITIAL ─────────────────────────────────────────────────────────────
-
-/// Gestor de interstitials con precarga automatica.
-///
-/// Uso en LeagueGameScreen:
-///   final _interstitial = InterstitialAdManager();
-///
-///   @override void initState() {
-///     super.initState();
-///     _interstitial.loadAd();  // precargar al inicio
-///   }
-///
-///   @override void dispose() {
-///     _interstitial.dispose();
-///     super.dispose();
-///   }
-///
-///   // Al terminar la partida (antes de Navigator.pop):
-///   await _interstitial.showIfReady();
 class InterstitialAdManager {
   InterstitialAd? _ad;
   bool _loaded = false;
 
-  /// Frecuencia: mostrar cada N rondas (modo rapido)
   int _roundsSince = 0;
-  static const int _adFrequency = 5;
+  static const int _adFrequency = 100;
 
   Future<void> loadAd() async {
-    if (!ConsentService().canShowAds || _loaded) return;
+    if (!kDebugMode && !ConsentService().canShowAds) return;
+    if (_loaded) return;
 
     await InterstitialAd.load(
       adUnitId: AdIds.interstitialId,
@@ -247,8 +203,10 @@ class InterstitialAdManager {
     return true;
   }
 
-  /// Llamar en cada avance de ronda en QuickGameScreen.
-  /// Muestra el interstitial automaticamente cada [_adFrequency] rondas.
+  Future<void> showOnEntry() async {
+    await showIfReady();
+  }
+
   Future<void> onRoundCompleted() async {
     _roundsSince++;
     if (_roundsSince >= _adFrequency) {
@@ -262,10 +220,6 @@ class InterstitialAdManager {
   }
 }
 
-// ── BOTON DE PRIVACIDAD (para home o ajustes) ─────────────────────────────────
-
-/// Muestra el boton de privacidad GDPR solo cuando es obligatorio (usuarios EEA).
-/// Anadir en HomeScreen o en una pantalla de ajustes.
 class PrivacyOptionsButton extends StatefulWidget {
   const PrivacyOptionsButton({super.key});
 

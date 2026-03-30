@@ -1,16 +1,22 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart'; // Mantener si Gridient/Color se usan aquí o en constantes, pero idealmente desacoplar.
-// En este caso, dejamos Gradient constants aquí por conveniencia de diseño centralizado,
-// pero eliminamos la lógica de navegación y contexto.
+import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final bool _isLoading = false;
   String? _errorMessage;
+  bool _isAnimating = false;
+  Gradient? _currentGradient;
+  String? _animatingButtonText;
+  IconData? _animatingIcon;
 
   // Getters
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get hasError => _errorMessage != null;
+  bool get isAnimating => _isAnimating;
+  Gradient? get currentGradient => _currentGradient;
+  String? get animatingButtonText => _animatingButtonText;
+  IconData? get animatingIcon => _animatingIcon;
 
   static const LinearGradient quickGameGradient =
       LinearGradient(colors: [Color(0xFFFF0055), Color(0xFFFF5588)]);
@@ -28,6 +34,22 @@ class HomeViewModel extends ChangeNotifier {
 
   void clearError() {
     _errorMessage = null;
+    notifyListeners();
+  }
+
+  void startAnimation(Gradient gradient, String buttonText, IconData icon) {
+    _isAnimating = true;
+    _currentGradient = gradient;
+    _animatingButtonText = buttonText;
+    _animatingIcon = icon;
+    notifyListeners();
+  }
+
+  void resetAnimation() {
+    _isAnimating = false;
+    _currentGradient = null;
+    _animatingButtonText = null;
+    _animatingIcon = null;
     notifyListeners();
   }
 

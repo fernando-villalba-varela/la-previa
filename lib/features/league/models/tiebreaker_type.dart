@@ -1,0 +1,1 @@
+enum TiebreakerType { mvp, ratita }

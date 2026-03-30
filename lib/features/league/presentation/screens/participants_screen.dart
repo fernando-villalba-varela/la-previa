@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // <-- Añade esta línea
-import '../viewmodels/participants_viewmodel.dart'; // <-- Añade esta línea
+import 'package:provider/provider.dart';
+import '../viewmodels/participants_viewmodel.dart';
 import '../../../../core/models/player.dart';
-import '../../../../core/services/language_service.dart'; // Import LanguageService
+import '../../../../core/services/language_service.dart';
 import 'package:drinkaholic/features/quick_game/presentation/screens/quick_game_screen.dart';
 import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
+import '../../../../core/services/consent_and_ad_service.dart';
+import '../widgets/participants/participants_export.dart';
 
 class ParticipantsScreen extends StatelessWidget {
   final String title;
@@ -12,7 +14,10 @@ class ParticipantsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(create: (_) => ParticipantsViewmodel(), child: const _ParticipantsScreenBody());
+    return ChangeNotifierProvider(
+      create: (_) => ParticipantsViewmodel(),
+      child: const _ParticipantsScreenBody(),
+    );
   }
 }
 
@@ -20,58 +25,78 @@ class _ParticipantsScreenBody extends StatefulWidget {
   const _ParticipantsScreenBody();
 
   @override
-  State<_ParticipantsScreenBody> createState() => _ParticipantsScreenBodyState();
+  State<_ParticipantsScreenBody> createState() =>
+      _ParticipantsScreenBodyState();
 }
 
-class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with TickerProviderStateMixin {
-  List<Player> get _players => Provider.of<ParticipantsViewmodel>(context).players;
-  TextEditingController get _controller => Provider.of<ParticipantsViewmodel>(context).controller;
+class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
+    with TickerProviderStateMixin {
+  List<Player> get _players =>
+      Provider.of<ParticipantsViewmodel>(context).players;
+  TextEditingController get _controller =>
+      Provider.of<ParticipantsViewmodel>(context).controller;
+
+  final _interstitial = InterstitialAdManager();
 
   @override
   void initState() {
     super.initState();
-    // Background animation handled by AnimatedBackground widget
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _interstitial.loadAd();
+    });
+  }
+
+  @override
+  void dispose() {
+    _interstitial.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<ParticipantsViewmodel>(context, listen: false);
+    final viewModel = Provider.of<ParticipantsViewmodel>(
+      context,
+      listen: false,
+    );
     viewModel.context = context;
 
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFFF0055), // Crimson Fiesta
-                  Color(0xFFFF5588), // Crimson gradient
-                ],
+                colors: [Color(0xFFFF0055), Color(0xFFFF5588)],
               ),
             ),
           ),
-          // Animated background shapes
-          _buildAnimatedBackground(),
-          // Floating particles effect
-          ...List.generate(
-            8,
-            (index) =>
-                _buildFloatingParticle(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height, index),
-          ),
-          // Main content
+          const AnimatedBackground(),
+          ...List.generate(8, (index) {
+            final random = (index * 1234) % 1000;
+            final size = 4.0 + (random % 8);
+            final left = (random * 0.7) % MediaQuery.of(context).size.width;
+            final top = (random * 0.8) % MediaQuery.of(context).size.height;
+            final opacity = 0.1 + (random % 40) / 100;
+
+            return Positioned(
+              left: left,
+              top: top,
+              child: FloatingParticleWidget(
+                size: size,
+                opacity: opacity,
+                duration: Duration(milliseconds: 3000 + (random % 2000)),
+              ),
+            );
+          }),
           SafeArea(
             child: Column(
               children: [
-                // Custom header with back button
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
                     children: [
-                      // Modern back button
                       GestureDetector(
                         onTap: () => Navigator.of(context).pop(),
                         child: Container(
@@ -79,7 +104,10 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.3),
+                              width: 1,
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.1),
@@ -88,31 +116,42 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                               ),
                             ],
                           ),
-                          child: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20),
+                          child: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                       ),
                       const Spacer(),
-                      // Title with modern styling
                       ShaderMask(
-                        shaderCallback: (bounds) =>
-                            const LinearGradient(colors: [Colors.white, Color(0xFFE0F7FA)]).createShader(bounds),
+                        shaderCallback: (bounds) => const LinearGradient(
+                          colors: [Colors.white, Color(0xFFE0F7FA)],
+                        ).createShader(bounds),
                         child: Text(
-                          Provider.of<LanguageService>(context).translate('players_title'),
+                          Provider.of<LanguageService>(
+                            context,
+                          ).translate('players_title'),
                           style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 3,
                             color: Colors.white,
-                            shadows: [Shadow(color: Colors.black26, offset: Offset(1, 1), blurRadius: 3)],
+                            shadows: [
+                              Shadow(
+                                color: Colors.black26,
+                                offset: Offset(1, 1),
+                                blurRadius: 3,
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       const Spacer(),
-                      const SizedBox(width: 44), // Balance space for back button
+                      const SizedBox(width: 44),
                     ],
                   ),
                 ),
-                // Players list with modern cards
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -120,15 +159,17 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                       itemCount: _players.length + 1,
                       itemBuilder: (context, index) {
                         if (index < _players.length) {
-                          return _buildPlayerCard(index);
+                          return PlayerCardWidget(
+                            index: index,
+                            players: _players,
+                          );
                         } else {
-                          return _buildAddPlayerCard();
+                          return AddPlayerCardWidget(controller: _controller);
                         }
                       },
                     ),
                   ),
                 ),
-                // Modern start game button
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: Container(
@@ -136,7 +177,10 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                     height: 65,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.white.withOpacity(0.9), Colors.white.withOpacity(0.7)],
+                        colors: [
+                          Colors.white.withOpacity(0.9),
+                          Colors.white.withOpacity(0.7),
+                        ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -153,34 +197,53 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                     child: Material(
                       color: Colors.transparent,
                       clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                      ),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(32),
-                        onTap: () {
-                          final viewModel = Provider.of<ParticipantsViewmodel>(context, listen: false);
+                        onTap: () async {
+                          final viewModel = Provider.of<ParticipantsViewmodel>(
+                            context,
+                            listen: false,
+                          );
                           if (viewModel.players.isNotEmpty) {
+                            await _interstitial.showIfReady();
+                            if (!context.mounted) return;
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => QuickGameScreen(players: viewModel.players)),
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    QuickGameScreen(players: viewModel.players),
+                              ),
                             );
                           }
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 16,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.sports_esports, color: Color(0xFFFF0055), size: 28),
+                              const Icon(
+                                Icons.sports_esports,
+                                color: Color(0xFFFF0055),
+                                size: 28,
+                              ),
                               const SizedBox(width: 12),
-                                Text(
-                                  Provider.of<LanguageService>(context).translate('start_playing_button'),
-                                  style: const TextStyle(
-                                    color: Color(0xFFFF0055),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 1.2,
-                                  ),
+                              Text(
+                                Provider.of<LanguageService>(
+                                  context,
+                                ).translate('start_playing_button'),
+                                style: const TextStyle(
+                                  color: Color(0xFFFF0055),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1.2,
                                 ),
+                              ),
                             ],
                           ),
                         ),
@@ -190,233 +253,9 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody> with T
                 ),
               ],
             ),
-          ), // Closing for Container at 102
+          ),
         ],
       ),
     );
   }
-
-  Widget _buildPlayerCard(int index) {
-    final viewModel = Provider.of<ParticipantsViewmodel>(context, listen: false);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.15),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))],
-        ),
-        child: Row(
-          children: [
-            // Avatar with modern styling
-            GestureDetector(
-              onTap: () => viewModel.onAvatarTap(index),
-              child: Container(
-                width: 72,
-                height: 72,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withOpacity(0.5), width: 2),
-                  boxShadow: [
-                    BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 2)),
-                  ],
-                ),
-                child: (_players[index].imagen != null || _players[index].avatar != null)
-                    ? ClipOval(
-                        child: _players[index].imagen != null
-                            ? Image.file(
-                                _players[index].imagen!,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                              )
-                            : Image.asset(
-                                _players[index].avatar!,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                              ),
-                      )
-                    : CircleAvatar(
-                        radius: 34,
-                        backgroundColor: Colors.white.withOpacity(0.2),
-                        child: const Icon(Icons.camera_alt, color: Colors.white, size: 26),
-                      ),
-              ),
-            ),
-            const SizedBox(width: 16),
-            // Player name
-            Expanded(
-              child: GestureDetector(
-                onTap: () => viewModel.confirmDelete(index),
-                child: Text(
-                  _players[index].nombre,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    shadows: [Shadow(color: Colors.black26, offset: Offset(1, 1), blurRadius: 2)],
-                  ),
-                ),
-              ),
-            ),
-            // Delete indicator
-            Icon(Icons.touch_app, color: Colors.white.withOpacity(0.6), size: 20),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAddPlayerCard() {
-    final viewModel = Provider.of<ParticipantsViewmodel>(context, listen: false);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withOpacity(0.3), width: 1, style: BorderStyle.solid),
-        ),
-        child: Row(
-          children: [
-            // Add icon
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.2),
-                border: Border.all(color: Colors.white.withOpacity(0.4), width: 2),
-              ),
-              child: const Icon(Icons.person_add, color: Colors.white, size: 28),
-            ),
-            const SizedBox(width: 16),
-            // Text field
-            Expanded(
-              child: TextField(
-                controller: _controller,
-                style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
-                decoration: InputDecoration(
-                  hintText: Provider.of<LanguageService>(context).translate('add_player_hint'),
-                  hintStyle: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 16),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                ),
-                onSubmitted: (_) => viewModel.addPlayer(),
-              ),
-            ),
-            // Add button
-            GestureDetector(
-              onTap: viewModel.addPlayer,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: const Icon(Icons.add, color: Colors.white, size: 24),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnimatedBackground() {
-    return const AnimatedBackground();
-  }
-
-  Widget _buildFloatingParticle(double screenWidth, double screenHeight, int index) {
-    final random = (index * 1234) % 1000;
-    final size = 4.0 + (random % 8);
-    final left = (random * 0.7) % screenWidth;
-    final top = (random * 0.8) % screenHeight;
-    final opacity = 0.1 + (random % 40) / 100;
-
-    return Positioned(
-      left: left,
-      top: top,
-      child: _FloatingParticleWidget(
-        size: size,
-        opacity: opacity,
-        duration: Duration(milliseconds: 3000 + (random % 2000)),
-      ),
-    );
-  }
 }
-
-class _FloatingParticleWidget extends StatefulWidget {
-  final double size;
-  final double opacity;
-  final Duration duration;
-
-  const _FloatingParticleWidget({required this.size, required this.opacity, required this.duration});
-
-  @override
-  State<_FloatingParticleWidget> createState() => _FloatingParticleWidgetState();
-}
-
-class _FloatingParticleWidgetState extends State<_FloatingParticleWidget> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(duration: widget.duration, vsync: this);
-
-    _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-
-    _startAnimation();
-  }
-
-  void _startAnimation() {
-    _controller.forward().then((_) {
-      if (mounted) {
-        _controller.reset();
-        _startAnimation();
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animation,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: Offset(0, -_animation.value * 50),
-          child: Opacity(
-            opacity: widget.opacity * (1 - _animation.value),
-            child: Container(
-              width: widget.size,
-              height: widget.size,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.6),
-                shape: BoxShape.circle,
-                boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.3), blurRadius: 4, spreadRadius: 1)],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-
-

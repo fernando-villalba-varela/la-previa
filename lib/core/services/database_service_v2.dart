@@ -3,29 +3,14 @@ import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
-// ---------------------------------------------------------------------------
-// DatabaseService
-// Ruta: lib/core/services/database_service.dart
-//
-// Capa de metadata local completamente independiente de los JSONs.
-// Los JSONs en assets/ nunca se modifican — este servicio actua como filtro.
-//
-// Tablas:
-//   votes        → votos up/down por template (usa el id del QuestionTemplate)
-//   suppressed   → IDs de templates excluidos del juego (soft delete)
-//   personalized → preguntas del modo personalizado escritas por el usuario
-// ---------------------------------------------------------------------------
-
 class DatabaseService {
   static const String _dbName = 'la_previa.db';
   static const int _dbVersion = 2;
 
-  /// Numero de thumbs down a partir del cual un template se suprime
   static const int suppressThreshold = 3;
 
   static Database? _db;
 
-  // --- MEMORY BACKUP FOR WEB ---
   final List<CustomQuestion> _memoryQuestions = [];
   final Map<String, VoteCount> _memoryVotes = {};
   final Set<String> _memorySuppressed = {};
@@ -49,12 +34,16 @@ class DatabaseService {
     } else {
       final dbPath = await getDatabasesPath();
       final path = join(dbPath, _dbName);
-      return openDatabase(path, version: _dbVersion, onCreate: _onCreate, onUpgrade: _onUpgrade);
+      return openDatabase(
+        path,
+        version: _dbVersion,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade,
+      );
     }
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    // Votos — clave: templateId del QuestionTemplate / EventTemplate / ChallengeTemplate
     await db.execute('''
       CREATE TABLE votes (
         template_id   TEXT PRIMARY KEY,
@@ -64,7 +53,6 @@ class DatabaseService {
       )
     ''');
 
-    // Soft delete — templates excluidos del juego
     await db.execute('''
       CREATE TABLE suppressed (
         template_id   TEXT PRIMARY KEY,
@@ -73,15 +61,6 @@ class DatabaseService {
       )
     ''');
 
-  }
-
-  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    if (oldVersion < 2) {
-      await db.execute('ALTER TABLE personalized ADD COLUMN league_id TEXT');
-      await db.execute('ALTER TABLE personalized ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1');
-    }
-
-    // Preguntas del modo personalizado
     await db.execute('''
       CREATE TABLE personalized (
         id            TEXT PRIMARY KEY,
@@ -96,19 +75,26 @@ class DatabaseService {
     ''');
   }
 
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute('ALTER TABLE personalized ADD COLUMN league_id TEXT');
+      await db.execute('ALTER TABLE personalized ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1');
+    }
+  }
+
   // ─── VOTES ────────────────────────────────────────────────────────────────
 
   Future<void> vote(String templateId, VoteType type) async {
-    if (kIsWeb) return; // Ignore votes on web preview
+    if (kIsWeb) return;
     final db = await database;
     final rows = await db.query('votes',
         where: 'template_id = ?', whereArgs: [templateId]);
 
     if (rows.isEmpty) {
       await db.insert('votes', {
-        'template_id': templateId,
-        'up_count':    type == VoteType.up ? 1 : 0,
-        'down_count':  type == VoteType.down ? 1 : 0,
+        'template_id':   templateId,
+        'up_count':      type == VoteType.up ? 1 : 0,
+        'down_count':    type == VoteType.down ? 1 : 0,
         'last_voted_at': DateTime.now().toIso8601String(),
       });
     } else {
@@ -152,10 +138,8 @@ class DatabaseService {
           (b['down_count'] as int).compareTo(a['down_count'] as int));
     return {
       'totalVoted': all.length,
-      'topRated':
-          top.take(10).map((r) => r['template_id']).toList(),
-      'lowRated':
-          low.take(10).map((r) => r['template_id']).toList(),
+      'topRated':   top.take(10).map((r) => r['template_id']).toList(),
+      'lowRated':   low.take(10).map((r) => r['template_id']).toList(),
       'exportedAt': DateTime.now().toIso8601String(),
     };
   }
@@ -195,13 +179,10 @@ class DatabaseService {
         where: 'template_id = ?', whereArgs: [templateId]);
   }
 
-  /// Devuelve el Set de templateIds suprimidos.
-  /// Llamado por QuestionGenerator / EventGenerator al cargar templates.
   Future<Set<String>> getSuppressedIds() async {
     if (kIsWeb) return _memorySuppressed;
     final db = await database;
-    final rows =
-        await db.query('suppressed', columns: ['template_id']);
+    final rows = await db.query('suppressed', columns: ['template_id']);
     return rows.map((r) => r['template_id'] as String).toSet();
   }
 
@@ -212,8 +193,7 @@ class DatabaseService {
 
   // ─── PERSONALIZED ─────────────────────────────────────────────────────────
 
-  Future<void> savePersonalizedQuestion(
-      CustomQuestion question) async {
+  Future<void> savePersonalizedQuestion(CustomQuestion question) async {
     if (kIsWeb) {
       _memoryQuestions.add(question);
       return;
@@ -255,8 +235,7 @@ class DatabaseService {
     return rows.map(CustomQuestion.fromRow).toList();
   }
 
-  Future<void> updatePersonalizedQuestion(
-      CustomQuestion question) async {
+  Future<void> updatePersonalizedQuestion(CustomQuestion question) async {
     if (kIsWeb) {
       final idx = _memoryQuestions.indexWhere((q) => q.id == question.id);
       if (idx != -1) _memoryQuestions[idx] = question;
@@ -283,8 +262,7 @@ class DatabaseService {
       return;
     }
     final db = await database;
-    await db.delete('personalized',
-        where: 'id = ?', whereArgs: [id]);
+    await db.delete('personalized', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<void> markPersonalizedAsUsed(String id) async {
@@ -301,14 +279,23 @@ class DatabaseService {
       if (idx != -1) {
         final old = _memoryQuestions[idx];
         _memoryQuestions[idx] = CustomQuestion(
-          id: old.id, text: old.text, drinks: old.drinks, 
-          timerSeconds: old.timerSeconds, leagueId: old.leagueId, isActive: isActive
+          id: old.id,
+          text: old.text,
+          drinks: old.drinks,
+          timerSeconds: old.timerSeconds,
+          leagueId: old.leagueId,
+          isActive: isActive,
         );
       }
       return;
     }
     final db = await database;
-    await db.update('personalized', {'is_active': isActive ? 1 : 0}, where: 'id = ?', whereArgs: [id]);
+    await db.update(
+      'personalized',
+      {'is_active': isActive ? 1 : 0},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
   Future<bool> hasPersonalizedQuestions() async {
