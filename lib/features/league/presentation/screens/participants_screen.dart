@@ -4,7 +4,8 @@ import '../viewmodels/participants_viewmodel.dart';
 import '../../../../core/models/player.dart';
 import '../../../../core/services/language_service.dart';
 import 'package:drinkaholic/features/quick_game/presentation/screens/quick_game_screen.dart';
-import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
+import '../../../../core/presentation/components/neon_background_layer.dart';
+import '../../../../core/presentation/components/neon_header.dart';
 import '../../../../core/services/consent_and_ad_service.dart';
 import '../widgets/participants/participants_export.dart';
 
@@ -52,6 +53,8 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
     super.dispose();
   }
 
+    // _buildSectionTitle is replaced by NeonHeader subtitle
+
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<ParticipantsViewmodel>(
@@ -61,135 +64,66 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
     viewModel.context = context;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xFFFF0055), Color(0xFFFF5588)],
-              ),
-            ),
-          ),
-          const AnimatedBackground(),
-          ...List.generate(8, (index) {
-            final random = (index * 1234) % 1000;
-            final size = 4.0 + (random % 8);
-            final left = (random * 0.7) % MediaQuery.of(context).size.width;
-            final top = (random * 0.8) % MediaQuery.of(context).size.height;
-            final opacity = 0.1 + (random % 40) / 100;
-
-            return Positioned(
-              left: left,
-              top: top,
-              child: FloatingParticleWidget(
-                size: size,
-                opacity: opacity,
-                duration: Duration(milliseconds: 3000 + (random % 2000)),
-              ),
-            );
-          }),
-          SafeArea(
+      backgroundColor: const Color(0xFF0B0B1A),
+      body: NeonBackgroundLayer(
+        child: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.3),
-                              width: 1,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_ios_new,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      ShaderMask(
-                        shaderCallback: (bounds) => const LinearGradient(
-                          colors: [Colors.white, Color(0xFFE0F7FA)],
-                        ).createShader(bounds),
-                        child: Text(
-                          Provider.of<LanguageService>(
-                            context,
-                          ).translate('players_title'),
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 3,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: Colors.black26,
-                                offset: Offset(1, 1),
-                                blurRadius: 3,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      const SizedBox(width: 44),
-                    ],
-                  ),
+                NeonHeader(
+                  title: Provider.of<LanguageService>(context).translate('play_quick').toUpperCase(),
+                  subtitle: Provider.of<LanguageService>(context).translate('players_title').toUpperCase(),
+                  themeColor: const Color(0xFFFF0055),
                 ),
+                
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: ListView.builder(
-                      itemCount: _players.length + 1,
-                      itemBuilder: (context, index) {
-                        if (index < _players.length) {
-                          return PlayerCardWidget(
-                            index: index,
-                            players: _players,
-                          );
-                        } else {
-                          return AddPlayerCardWidget(controller: _controller);
-                        }
-                      },
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: _players.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index < _players.length) {
+                                return PlayerCardWidget(
+                                  index: index,
+                                  players: _players,
+                                );
+                              } else {
+                                return AddPlayerCardWidget(controller: _controller);
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                      ],
                     ),
                   ),
                 ),
+
+                // Button Area
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: Container(
                     width: double.infinity,
                     height: 65,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.white.withOpacity(0.9),
-                          Colors.white.withOpacity(0.7),
-                        ],
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFFF0055), Color(0xFFFF5588)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(32),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          blurRadius: 15,
-                          spreadRadius: 2,
+                          color: const Color(0xFFFF0055).withOpacity(0.40),
+                          blurRadius: 20,
+                          spreadRadius: 1,
                           offset: const Offset(0, 8),
                         ),
                       ],
@@ -219,30 +153,24 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                             );
                           }
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 16,
-                          ),
+                        child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.sports_esports,
-                                color: Color(0xFFFF0055),
-                                size: 28,
-                              ),
-                              const SizedBox(width: 12),
-                              Text(
-                                Provider.of<LanguageService>(
-                                  context,
-                                ).translate('start_playing_button'),
-                                style: const TextStyle(
-                                  color: Color(0xFFFF0055),
+                              const Text(
+                                '¡A BEBER!',
+                                style: TextStyle(
+                                  color: Colors.white,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w900,
                                   letterSpacing: 1.2,
                                 ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Icon(
+                                Icons.sports_bar,
+                                color: Colors.white,
+                                size: 24,
                               ),
                             ],
                           ),
@@ -254,7 +182,6 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
               ],
             ),
           ),
-        ],
       ),
     );
   }

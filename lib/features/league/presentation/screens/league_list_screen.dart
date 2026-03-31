@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/league_list_viewmodel.dart';
 import '../../../../core/services/language_service.dart'; // Import LanguageService
-import '../widgets/league_app_bar_button.dart';
-import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
+
+import '../../../../core/presentation/components/neon_background_layer.dart';
+import '../../../../core/presentation/components/neon_header.dart';
 import '../widgets/league_card.dart';
 import '../widgets/league_empty_state.dart';
 import '../widgets/fab_new_league.dart';
@@ -17,9 +18,7 @@ class LeagueListScreen extends StatefulWidget {
 }
 
 class _LeagueListScreenState extends State<LeagueListScreen> with TickerProviderStateMixin {
-  Widget _buildAnimatedBackground() {
-    return const AnimatedBackground();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,66 +34,34 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     );
     return Consumer<LeagueListViewModel>(
       builder: (_, vm, _) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 80,
-          automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              LeagueAppBarButton(onTap: () => Navigator.of(context).pop(), icon: Icons.arrow_back),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  Provider.of<LanguageService>(context).translate('leagues_title'),
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                    letterSpacing: 1.5,
-                    shadows: [
-                      Shadow(color: Colors.black45, offset: Offset(2, 2), blurRadius: 4),
-                      Shadow(color: Colors.cyan, offset: Offset(-1, -1), blurRadius: 2),
-                    ],
-                  ),
+        backgroundColor: const Color(0xFF0B0B1A),
+        body: NeonBackgroundLayer(
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NeonHeader(
+                  title: Provider.of<LanguageService>(context).translate('play_league').toUpperCase(),
+                  subtitle: Provider.of<LanguageService>(context).translate('leagues_title').toUpperCase(),
+                  themeColor: const Color(0xFF00C9FF),
                 ),
-              ),
-              // FUTURA IMPLEMENTACION: Importar liga desde JSON
-              // LeagueAppBarButton(
-              //   onTap: () => vm.showImportLeagueDialog(context),
-              //   icon: Icons.download,
-              // ),
-            ],
+                Expanded(
+                  child: vm.leagues.isEmpty
+                      ? const LeagueEmptyState()
+                      : ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 140),
+                          itemCount: vm.leagues.length,
+                          separatorBuilder: (_, _) => const SizedBox(height: 18),
+                          itemBuilder: (_, i) => LeagueCard(league: vm.leagues[i]),
+                        ),
+                ),
+              ],
+            ),
           ),
         ),
-        body: Stack(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
-                ),
-              ),
-            ),
-            _buildAnimatedBackground(),
-            SafeArea(
-              child: vm.leagues.isEmpty
-                  ? const LeagueEmptyState()
-                  : ListView.separated(
-                      padding: const EdgeInsets.fromLTRB(16, 24, 16, 140),
-                      itemCount: vm.leagues.length,
-                      separatorBuilder: (_, _) => const SizedBox(height: 18),
-                      itemBuilder: (_, i) => LeagueCard(league: vm.leagues[i]),
-                    ),
-            ),
-          ],
+        floatingActionButton: FabNewLeague(
+          onPressed: () => _showCreateLeagueDialog(context),
         ),
-        floatingActionButton: FabNewLeague(onPressed: () => _showCreateLeagueDialog(context)),
       ),
     );
   }
@@ -144,6 +111,3 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     Navigator.pop(context);
   }
 }
-
-
-

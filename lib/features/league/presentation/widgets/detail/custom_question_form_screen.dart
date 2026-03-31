@@ -123,10 +123,12 @@ class _CustomQuestionFormScreenState extends State<CustomQuestionFormScreen> {
                     color: Colors.white.withOpacity(0.4)),
               ),
               validator: (v) {
-                if (v == null || v.trim().isEmpty)
+                if (v == null || v.trim().isEmpty) {
                   return Provider.of<LanguageService>(context, listen: false).translate('error_empty_question') ?? 'No puede estar vacío';
-                if (v.trim().length < 5)
+                }
+                if (v.trim().length < 5) {
                   return Provider.of<LanguageService>(context, listen: false).translate('error_short_question') ?? 'Demasiado corto';
+                }
                 return null;
               },
             ),

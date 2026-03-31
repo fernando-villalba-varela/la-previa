@@ -1,16 +1,17 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
 import '../../../../core/services/language_service.dart';
 import '../viewmodels/home_viewmodel.dart';
 import '../widgets/home_header.dart';
 import '../widgets/home_buttons_section.dart';
-import '../widgets/background_glows.dart';
-import '../widgets/loading_overlay.dart';
-import '../widgets/error_banner.dart';
-import '../widgets/floating_particle.dart';
+import '../../../../core/presentation/components/neon_background_layer.dart';
 import 'package:drinkaholic/features/league/presentation/screens/participants_screen.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_list_screen.dart';
+import '../widgets/loading_overlay.dart';
+import '../widgets/error_banner.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -115,140 +116,189 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0B0B1A),
       body: ListenableBuilder(
         listenable: _viewModel,
         builder: (context, child) {
-          return Stack(
-            children: [
-              // Background color
-              Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xFF0B0B1A),
-                ),
-              ),
-
-              // Glows
-              BackgroundGlows(
-                screenWidth: screenWidth,
-                screenHeight: screenHeight,
-              ),
-
-              // Floating particles
-              ...List.generate(
-                35,
-                (index) => FloatingParticle(
-                  screenWidth: screenWidth,
-                  screenHeight: screenHeight,
-                  index: index,
-                ),
-              ),
-
-              // Main content
-              SafeArea(
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    SliverFillRemaining(
-                      hasScrollBody: false,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(height: 20.h),
-                          HomeHeader(screenWidth: screenWidth),
-                          HomeButtonsSection(
-                            onQuickGamePressed: () => _handleNavigation(
-                              HomeViewModel.quickGameGradient,
-                              Provider.of<LanguageService>(context,
-                                      listen: false)
-                                  .translate('play_quick'),
-                              Icons.flash_on,
-                              _navigateToQuickGame,
-                            ),
-                            onLeaguePressed: () => _handleNavigation(
-                              HomeViewModel.leagueGradient,
-                              Provider.of<LanguageService>(context,
-                                      listen: false)
-                                  .translate('play_league'),
-                              Icons.emoji_events,
-                              _navigateToLeague,
-                            ),
-                            onElixirsPressed: () => _handleNavigation(
-                              HomeViewModel.elixirsGradient,
-                              Provider.of<LanguageService>(context,
-                                      listen: false)
-                                  .translate('menu_reload_elixirs'),
-                              Icons.local_drink,
-                              _navigateToElixirs,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Language Toggle Button
-              Positioned(
-                top: MediaQuery.of(context).padding.top + 20,
-                right: 20,
-                child: Consumer<LanguageService>(
-                  builder: (context, languageService, child) {
-                    return GestureDetector(
-                      onTap: () => languageService.toggleLanguage(),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.2),
-                          ),
-                        ),
-                        child: Row(
+          return NeonBackgroundLayer(
+            showBottomRightGlow: true,
+            child: Stack(
+              children: [
+                SafeArea(
+                  child: CustomScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    slivers: [
+                      SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              languageService.isSpanish ? '🇪🇸' : '🇬🇧',
-                              style: const TextStyle(fontSize: 24),
+                            SizedBox(height: 20.h),
+                            HomeHeader(screenWidth: screenWidth),
+                            HomeButtonsSection(
+                              onQuickGamePressed: () => _handleNavigation(
+                                HomeViewModel.quickGameGradient,
+                                Provider.of<LanguageService>(context,
+                                        listen: false)
+                                    .translate('play_quick'),
+                                Icons.flash_on,
+                                _navigateToQuickGame,
+                              ),
+                              onLeaguePressed: () => _handleNavigation(
+                                HomeViewModel.leagueGradient,
+                                Provider.of<LanguageService>(context,
+                                        listen: false)
+                                    .translate('play_league'),
+                                Icons.emoji_events,
+                                _navigateToLeague,
+                              ),
+                              onElixirsPressed: () => _handleNavigation(
+                                HomeViewModel.elixirsGradient,
+                                Provider.of<LanguageService>(context,
+                                        listen: false)
+                                    .translate('menu_reload_elixirs'),
+                                Icons.local_drink,
+                                _navigateToElixirs,
+                              ),
                             ),
-                            const SizedBox(width: 8),
-                            Text(
-                              languageService.isSpanish ? 'ES' : 'EN',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                            // Sponsors section
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 24.h),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    context.read<LanguageService>().translate('integrated_with'),
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.white54,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(height: 16.h),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/promo.png',
+                                        width: min(screenWidth * 0.25, 90),
+                                        fit: BoxFit.contain,
+                                      ),
+                                      SizedBox(width: 20.w),
+                                      Image.asset(
+                                        'assets/images/promo2.png',
+                                        width: min(screenWidth * 0.25, 90),
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-
-              // Loading overlay
-              if (_viewModel.isAnimating && _viewModel.currentGradient != null)
-                LoadingOverlay(
-                  opacityAnimation: _opacityAnimation,
-                  iconScaleAnimation: _iconScaleAnimation,
-                  gradient: _viewModel.currentGradient!,
-                  buttonText: _viewModel.animatingButtonText ?? '',
-                  icon: _viewModel.animatingIcon ?? Icons.flash_on,
+                    ],
+                  ),
                 ),
 
-              // Error banner
-              if (_viewModel.hasError)
-                ErrorBanner(
-                  errorMessage: _viewModel.errorMessage!,
+                // Top Bar
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 16,
+                  left: 20,
+                  right: 20,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Mini Logo
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/logo.png',
+                            width: 24,
+                            height: 24,
+                            color: const Color(0xFFFF0055),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'LA PREVIA',
+                            style: TextStyle(
+                              color: const Color(0xFFFF0055),
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16,
+                              letterSpacing: 2,
+                              shadows: [
+                                Shadow(
+                                  color: const Color(0xFFFF0055).withOpacity(0.5),
+                                  blurRadius: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Language Toggle
+                      Consumer<LanguageService>(
+                        builder: (context, languageService, child) {
+                          return GestureDetector(
+                            onTap: () => languageService.toggleLanguage(),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.2),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    languageService.isSpanish ? '🇪🇸' : '🇬🇧',
+                                    style: const TextStyle(fontSize: 24),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    languageService.isSpanish ? 'ES' : 'EN',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-            ],
+
+                // Loading overlay
+                if (_viewModel.isAnimating && _viewModel.currentGradient != null)
+                  LoadingOverlay(
+                    opacityAnimation: _opacityAnimation,
+                    iconScaleAnimation: _iconScaleAnimation,
+                    gradient: _viewModel.currentGradient!,
+                    buttonText: _viewModel.animatingButtonText ?? '',
+                    icon: _viewModel.animatingIcon ?? Icons.flash_on,
+                  ),
+
+                // Error banner
+                if (_viewModel.hasError)
+                  ErrorBanner(
+                    errorMessage: _viewModel.errorMessage!,
+                  ),
+              ],
+            ),
           );
         },
+
       ),
     );
   }

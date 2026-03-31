@@ -38,7 +38,7 @@ class LanguageService extends ChangeNotifier {
 
   /// Simple key-value map for UI strings that are not in the JSONs
   String translate(String key, {Map<String, String>? args}) {
-    Map<String, Map<String, String>> _localizedValues = {
+    Map<String, Map<String, String>> localizedValues = {
       'play_quick': {
         'es': 'PARTIDA RÁPIDA',
         'en': 'QUICK GAME',
@@ -55,6 +55,8 @@ class LanguageService extends ChangeNotifier {
         'es': 'Jugadores',
         'en': 'Players',
       },
+      'integrated_with': {'es': 'INTEGRADO CON', 'en': 'INTEGRATED WITH'},
+      'ignite_your_night': {'es': 'ENCIENDE TU NOCHE', 'en': 'IGNITE YOUR NIGHT'},
       'active_challenges_title': {
         'es': 'Retos y Eventos Activos',
         'en': 'Active Challenges & Events',
@@ -127,6 +129,10 @@ class LanguageService extends ChangeNotifier {
         'es': 'Añadir jugador...',
         'en': 'Add player...',
       },
+      'add_button': {
+        'es': 'Añadir',
+        'en': 'Add',
+      },
       'start_playing_button': {
         'es': '¡EMPEZAR A JUGAR!',
         'en': 'START PLAYING!',
@@ -156,6 +162,10 @@ class LanguageService extends ChangeNotifier {
       'players_tab': {'es': 'Jugadores', 'en': 'Players'},
       'play_tab': {'es': 'Jugar', 'en': 'Play'},
       'custom_questions_tab': {'es': 'Preguntas', 'en': 'Custom Qs'},
+      'stats_mvdp': {'es': 'MVDP', 'en': 'MVDP'},
+      'stats_drinks': {'es': 'Tragos', 'en': 'Drinks'},
+      'stats_ratita': {'es': 'Ratita', 'en': 'Rat'},
+      'stats_matches': {'es': 'Partidas', 'en': 'Matches'},
       
       // League Game
       'exit_game_title': {'es': '¿Salir del juego?', 'en': 'Exit game?'},
@@ -279,8 +289,8 @@ class LanguageService extends ChangeNotifier {
       'next_button': {'es': 'Siguiente', 'en': 'Next'},
     };
 
-    if (_localizedValues.containsKey(key)) {
-      String value = _localizedValues[key]?[_currentLocale.languageCode] ?? key;
+    if (localizedValues.containsKey(key)) {
+      String value = localizedValues[key]?[_currentLocale.languageCode] ?? key;
       if (args != null) {
         args.forEach((k, v) {
           value = value.replaceAll('{$k}', v);

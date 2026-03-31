@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -22,7 +22,6 @@ class ParticipantsViewmodel extends ChangeNotifier {
   List<Player> get players => _players;
   TextEditingController get controller => _controller;
   ImagePicker get picker => _picker;
-
   // Setters
   set players(List<Player> value) {
     _players

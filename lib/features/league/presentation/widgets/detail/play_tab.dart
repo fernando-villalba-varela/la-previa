@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/services/language_service.dart';
-import '../../../../../core/services/database_service_v2.dart';
 import '../../../presentation/viewmodels/league_detail_viewmodel.dart';
 import '../../../../../core/models/player.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_game_screen.dart';
@@ -101,12 +100,12 @@ class _PlayTabState extends State<PlayTab> {
               return Card(
                 elevation: 0,
                 color: selected
-                    ? Theme.of(context).colorScheme.primary.withAlpha(0x2E)
-                    : Theme.of(context).cardColor.withAlpha(0x0D),
+                    ? const Color(0xFF00C9FF).withOpacity(0.18)
+                    : Theme.of(context).cardColor.withOpacity(0.05),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                   side: BorderSide(
-                    color: selected ? Theme.of(context).colorScheme.primary : const Color(0x40808080),
+                    color: selected ? const Color(0xFF00C9FF) : const Color(0x40808080),
                     width: 1.2,
                   ),
                 ),
@@ -132,11 +131,15 @@ class _PlayTabState extends State<PlayTab> {
                             p.name,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
-                              color: selected ? Theme.of(context).colorScheme.primary : null,
+                              color: selected ? const Color(0xFF00C9FF) : null,
                             ),
                           ),
                         ),
-                        Checkbox.adaptive(value: selected, onChanged: (_) => _toggle(p.playerId)),
+                        Checkbox.adaptive(
+                          value: selected,
+                          onChanged: (_) => _toggle(p.playerId),
+                          activeColor: const Color(0xFF00C9FF),
+                        ),
                       ],
                     ),
                   ),

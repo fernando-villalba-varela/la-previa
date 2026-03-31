@@ -6,7 +6,7 @@ import '../widgets/quick_game_widgets.dart';
 import '../widgets/modals_and_dialogs.dart';
 import '../widgets/player_manager_modal.dart';
 import '../utils/responsive_utils.dart' as responsive;
-import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
+import '../../../../core/presentation/components/neon_background_layer.dart';
 import '../../../../core/models/player.dart';
 import '../../../../core/models/constant_challenge.dart';
 import '../../../../core/models/event.dart';
@@ -148,92 +148,6 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
     });
   }
 
-  Widget _buildAnimatedBackground() {
-    return const AnimatedBackground();
-  }
-
-  Widget _buildRippleEffects() {
-    if (_ripplePositions.isEmpty) return const SizedBox.shrink();
-
-    return AnimatedBuilder(
-      animation: _rippleAnimation,
-      builder: (context, child) {
-        return Stack(
-          children: _ripplePositions.asMap().entries.map((entry) {
-            final index = entry.key;
-            final position = entry.value;
-            final opacity = _rippleOpacities.length > index
-                ? _rippleOpacities[index]
-                : 0.0;
-            final animationValue = _rippleAnimation.value;
-            final size = 150.0 * animationValue;
-
-            return Positioned(
-              left: position.dx - (size / 2),
-              top: position.dy - (size / 2),
-              child: Container(
-                width: size,
-                height: size,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white.withOpacity(
-                      opacity * (1 - animationValue) * 0.6,
-                    ),
-                    width: 3,
-                  ),
-                ),
-              ),
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
-
-  Widget _buildFloatingParticle(
-    double screenWidth,
-    double screenHeight,
-    int index,
-  ) {
-    final random = (index * 1234) % 1000;
-    final size = 4.0 + (random % 8);
-    final left = (random * 0.7) % screenWidth;
-    final top = (random * 0.8) % screenHeight;
-    final opacity = 0.1 + (random % 40) / 100;
-
-    return Positioned(
-      left: left,
-      top: top,
-      child: TweenAnimationBuilder(
-        duration: Duration(milliseconds: 3000 + (random % 2000)),
-        tween: Tween<double>(begin: 0, end: 1),
-        builder: (context, double value, child) {
-          return Transform.translate(
-            offset: Offset(0, -value * 50),
-            child: Opacity(
-              opacity: opacity * (1 - value),
-              child: Container(
-                width: size,
-                height: size,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.white.withOpacity(0.3),
-                      blurRadius: 4,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 
   Future<void> _handleNextChallenge() async {
     _tapAnimationController.forward().then((_) {
@@ -324,32 +238,10 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
               large: 32.0,
             );
 
-            return Stack(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFFFF0055),
-                        Color(0xFFFF5588),
-                      ],
-                    ),
-                  ),
-                ),
-                _buildAnimatedBackground(),
-                // Partículas flotantes
-                ...List.generate(
-                  8,
-                  (index) => _buildFloatingParticle(
-                    MediaQuery.of(context).size.width,
-                    MediaQuery.of(context).size.height,
-                    index,
-                  ),
-                ),
-                // Contenido principal
-                SafeArea(
+            return NeonBackgroundLayer(
+              child: Stack(
+                children: [
+                  SafeArea(
                   child: Padding(
                     padding: EdgeInsets.all(padding),
                     child: Row(
@@ -469,7 +361,40 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
                                           ),
                                         ),
                                       ),
-                                      _buildRippleEffects(),
+                                      // Efectos eliminados, o reemplazar si los ripples siguen siendo _buildRippleEffects
+                                      // Oops, wait. Ripple effects use the private function _buildRippleEffects, which I deleted. I will put it back.
+                                      // Actually, I should just embed my old _buildRippleEffects instead.
+                                      if (_ripplePositions.isNotEmpty)
+                                        AnimatedBuilder(
+                                          animation: _rippleAnimation,
+                                          builder: (context, child) {
+                                            return Stack(
+                                              children: _ripplePositions.asMap().entries.map((entry) {
+                                                final index = entry.key;
+                                                final position = entry.value;
+                                                final opacity = _rippleOpacities.length > index ? _rippleOpacities[index] : 0.0;
+                                                final animationValue = _rippleAnimation.value;
+                                                final size = 150.0 * animationValue;
+
+                                                return Positioned(
+                                                  left: position.dx - (size / 2),
+                                                  top: position.dy - (size / 2),
+                                                  child: Container(
+                                                    width: size,
+                                                    height: size,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: Colors.white.withOpacity(opacity * (1 - animationValue) * 0.6),
+                                                        width: 3,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -587,8 +512,9 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
                     ],
                   ),
                 ),
-              ],
-            );
+            ],
+          ),
+        );
           },
         ),
       ),

@@ -5,6 +5,7 @@ import '../../../../core/models/player.dart';
 import '../../../../core/services/language_service.dart';
 import '../viewmodels/game_results_viewmodel.dart';
 import '../widgets/game/results/results_export.dart';
+import '../../../../core/presentation/components/neon_background_layer.dart';
 import 'tiebreaker_screen.dart';
 
 class GameResultsScreen extends StatefulWidget {
@@ -194,121 +195,113 @@ class _GameResultsScreenState extends State<GameResultsScreen>
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        body: Stack(
-          children: [
-            // Background gradient
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
-                ),
-              ),
-            ),
-            // Main content
-            SafeArea(
-              child: Column(
-                children: [
-                  // Header
-                  GameResultsHeader(
-                    padding: headerPadding,
-                    iconSize: iconSize,
-                    titleFontSize: titleFontSize,
-                  ),
-                  // Content
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.all(contentPadding),
-                      child: Column(
-                        children: [
-                          Text(
-                            '${Provider.of<LanguageService>(context).translate('rounds_completed_text')} ${widget.maxRounds} ${Provider.of<LanguageService>(context).translate('rounds')}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: subtitleFontSize,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          SizedBox(height: isSmallScreen ? 16 : 24),
-                          // MVP Card
-                          if (mvpPlayer != null)
-                            MVPCard(
-                              player: mvpPlayer,
-                              drinks: widget.playerDrinks[mvpPlayer.id] ?? 0,
-                              glowAnimation: _glowController,
-                              isSmallScreen: isSmallScreen,
-                            ),
-                          SizedBox(height: isSmallScreen ? 16 : 24),
-                          // Stats Section
-                          if (ratitaPlayer != null)
-                            GameStatsSection(
-                              playerDrinks: widget.playerDrinks,
-                              players: widget.players,
-                              maxRounds: widget.maxRounds,
-                              ratitaPlayer: ratitaPlayer,
-                              glowAnimation: _glowController,
-                              isSmallScreen: isSmallScreen,
-                            ),
-                          // Streak Messages
-                          if (widget.streakMessages != null &&
-                              widget.streakMessages!.isNotEmpty)
-                            StreakMessagesSection(
-                              players: widget.players,
-                              streakMessages: widget.streakMessages!,
-                              glowAnimation: _glowController,
-                              isSmallScreen: isSmallScreen,
-                            ),
-                        ],
-                      ),
+        body: NeonBackgroundLayer(
+          child: Stack(
+            children: [
+              SafeArea(
+                child: Column(
+                  children: [
+                    // Header
+                    GameResultsHeader(
+                      padding: headerPadding,
+                      iconSize: iconSize,
+                      titleFontSize: titleFontSize,
                     ),
-                  ),
-                  // Action Button
-                  Padding(
-                    padding: EdgeInsets.all(buttonPadding),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: _isConfirming ? null : _handleConfirm,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00C9FF),
-                          foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(
-                            vertical: isSmallScreen ? 12 : 16,
-                          ),
-                          textStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: buttonFontSize,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 4,
-                        ),
-                        child: Text(
-                          Provider.of<LanguageService>(context)
-                              .translate('save_and_return_button'),
+                    // Content
+                    Expanded(
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.all(contentPadding),
+                        child: Column(
+                          children: [
+                            Text(
+                              '${Provider.of<LanguageService>(context).translate('rounds_completed_text')} ${widget.maxRounds} ${Provider.of<LanguageService>(context).translate('rounds')}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: subtitleFontSize,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: isSmallScreen ? 16 : 24),
+                            // MVP Card
+                            if (mvpPlayer != null)
+                              MVPCard(
+                                player: mvpPlayer,
+                                drinks: widget.playerDrinks[mvpPlayer.id] ?? 0,
+                                glowAnimation: _glowController,
+                                isSmallScreen: isSmallScreen,
+                              ),
+                            SizedBox(height: isSmallScreen ? 16 : 24),
+                            // Stats Section
+                            if (ratitaPlayer != null)
+                              GameStatsSection(
+                                playerDrinks: widget.playerDrinks,
+                                players: widget.players,
+                                maxRounds: widget.maxRounds,
+                                ratitaPlayer: ratitaPlayer,
+                                glowAnimation: _glowController,
+                                isSmallScreen: isSmallScreen,
+                              ),
+                            // Streak Messages
+                            if (widget.streakMessages != null &&
+                                widget.streakMessages!.isNotEmpty)
+                              StreakMessagesSection(
+                                players: widget.players,
+                                streakMessages: widget.streakMessages!,
+                                glowAnimation: _glowController,
+                                isSmallScreen: isSmallScreen,
+                              ),
+                          ],
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            // Confetti overlay
-            ConfettiOverlay(controller: _confettiController),
-            // Orientation overlay
-            if (_showOrientationOverlay)
-              Positioned.fill(
-                child: AnimatedBuilder(
-                  animation: _orientationFade,
-                  builder: (context, _) => Container(
-                    color: Colors.black.withOpacity(_orientationFade.value),
-                  ),
+                    // Action Button
+                    Padding(
+                      padding: EdgeInsets.all(buttonPadding),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: _isConfirming ? null : _handleConfirm,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF00C9FF),
+                            foregroundColor: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                              vertical: isSmallScreen ? 12 : 16,
+                            ),
+                            textStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: buttonFontSize,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 4,
+                          ),
+                          child: Text(
+                            Provider.of<LanguageService>(context)
+                                .translate('save_and_return_button'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-          ],
+              // Confetti overlay
+              ConfettiOverlay(controller: _confettiController),
+              // Orientation overlay
+              if (_showOrientationOverlay)
+                Positioned.fill(
+                  child: AnimatedBuilder(
+                    animation: _orientationFade,
+                    builder: (context, _) => Container(
+                      color: Colors.black.withOpacity(_orientationFade.value),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
+
       ),
     );
   }

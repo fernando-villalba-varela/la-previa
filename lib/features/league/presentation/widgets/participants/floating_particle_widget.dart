@@ -5,7 +5,7 @@ class FloatingParticleWidget extends StatefulWidget {
   final double opacity;
   final Duration duration;
 
-  const FloatingParticleWidget({
+  const FloatingParticleWidget({super.key, 
     required this.size,
     required this.opacity,
     required this.duration,
