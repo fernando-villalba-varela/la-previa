@@ -51,13 +51,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/drinkaholic_logo.png
-    - assets/images/logo.png
-    - assets/images/promo.png
-    - assets/images/promo2.png
-    - assets/images/drinkaholic_logo.gif
+    - assets/images/drinkaholic_logo.webp
+    - assets/images/logo.webp
+    - assets/images/promo.webp
+    - assets/images/promo2.webp
     - assets/avatars/
-    - assets/images/potion_background.png
-    - assets/images/button_background.png
     - assets/questions.json
     - assets/constant_challenges.json
     - assets/events.json

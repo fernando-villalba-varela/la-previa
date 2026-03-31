@@ -247,6 +247,7 @@ class LanguageService extends ChangeNotifier {
       'for_player': {'es': 'Para: {name}', 'en': 'For: {name}'},
       'rename_player_title': {'es': 'Renombrar jugador', 'en': 'Rename player'},
       'name_hint': {'es': 'Nombre', 'en': 'Name'},
+      'add_button': {'es': 'Añadir', 'en': 'Add'},
       'save_button': {'es': 'Guardar', 'en': 'Save'},
       'done_button': {'es': 'Listo', 'en': 'Done'},
       'include_custom_questions': {'es': 'Incluir preguntas personalizadas', 'en': 'Include custom questions'},

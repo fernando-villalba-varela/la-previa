@@ -21,7 +21,7 @@ class HomeHeader extends StatelessWidget {
           SizedBox(height: 60.h), // Top padding for the new top bar
           // Logo above title
           Image.asset(
-            'assets/images/logo.png',
+            'assets/images/logo.webp',
             width: min(screenWidth * 0.4, 180),
             height: min(screenWidth * 0.4, 180),
             fit: BoxFit.contain,
@@ -75,6 +75,27 @@ class HomeHeader extends StatelessWidget {
           const Shadow(color: Colors.black87, blurRadius: 10, offset: Offset(2, 4)),
         ],
       ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPromoImages(double screenWidth) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/promo.webp',
+          width: min(screenWidth * 0.25, 90),
+          fit: BoxFit.contain,
+        ),
+        SizedBox(width: 10.w),
+        Image.asset(
+          'assets/images/promo2.webp',
+          width: min(screenWidth * 0.25, 90),
+          fit: BoxFit.contain,
+        ),
+      ],
     );
   }
 }
