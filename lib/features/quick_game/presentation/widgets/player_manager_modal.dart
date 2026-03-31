@@ -230,11 +230,11 @@ class _PlayerManagerModalState extends State<PlayerManagerModal> {
               onPressed: () => _renamePlayer(index),
             ),
             IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.delete_outline,
-                color: Colors.redAccent,
+                color: _tempPlayers.length <= 2 ? Colors.white24 : Colors.redAccent,
               ),
-              onPressed: () => _removePlayer(index),
+              onPressed: _tempPlayers.length <= 2 ? null : () => _removePlayer(index),
             ),
           ],
         ),

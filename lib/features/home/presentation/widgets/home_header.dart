@@ -18,7 +18,7 @@ class HomeHeader extends StatelessWidget {
         children: [
           // Logo above title
           Image.asset(
-            'assets/images/logo.png',
+            'assets/images/logo.webp',
             width: min(screenWidth * 0.4, 180),
             height: min(screenWidth * 0.4, 180),
             fit: BoxFit.contain,
@@ -115,13 +115,13 @@ class HomeHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/promo.png',
+          'assets/images/promo.webp',
           width: min(screenWidth * 0.25, 90),
           fit: BoxFit.contain,
         ),
         SizedBox(width: 10.w),
         Image.asset(
-          'assets/images/promo2.png',
+          'assets/images/promo2.webp',
           width: min(screenWidth * 0.25, 90),
           fit: BoxFit.contain,
         ),

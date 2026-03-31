@@ -1,20 +1,20 @@
 {
     "avatars": [
-        "assets/avatars/Airsoft.png",
-        "assets/avatars/Architect.png",
-        "assets/avatars/Bald.png",
-        "assets/avatars/Centaur.png",
-        "assets/avatars/Cruise.png",
-        "assets/avatars/Explorer.png",
-        "assets/avatars/Goblin.png",
-        "assets/avatars/Granny.png",
-        "assets/avatars/Guard.png",
-        "assets/avatars/Indigenous.png",
-        "assets/avatars/Jiujitsu.png",
-        "assets/avatars/Kevin.png",
-        "assets/avatars/Math.png",
-        "assets/avatars/Monkey.png",
-        "assets/avatars/Rapunzel.png",
-        "assets/avatars/Wizard.png"
+        "assets/avatars/Airsoft.webp",
+        "assets/avatars/Architect.webp",
+        "assets/avatars/Bald.webp",
+        "assets/avatars/Centaur.webp",
+        "assets/avatars/Cruise.webp",
+        "assets/avatars/Explorer.webp",
+        "assets/avatars/Goblin.webp",
+        "assets/avatars/Granny.webp",
+        "assets/avatars/Guard.webp",
+        "assets/avatars/Indigenous.webp",
+        "assets/avatars/Jiujitsu.webp",
+        "assets/avatars/Kevin.webp",
+        "assets/avatars/Math.webp",
+        "assets/avatars/Monkey.webp",
+        "assets/avatars/Rapunzel.webp",
+        "assets/avatars/Wizard.webp"
     ]
 }

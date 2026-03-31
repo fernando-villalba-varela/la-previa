@@ -251,6 +251,11 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                     ),
                   ),
                 ),
+              const SizedBox(height: 12),
+              const SizedBox(
+                width: double.infinity,
+                child: BannerAdWidget(),
+              ),
               ],
             ),
           ),
