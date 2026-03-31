@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/models/player.dart';
 import '../../../../core/services/language_service.dart';
@@ -112,6 +113,7 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
   @override
   Widget build(BuildContext context) {
     final isMVP = widget.type == TiebreakerType.mvp;
+    final themeColor = isMVP ? const Color(0xFFFFD700) : const Color(0xFFFF7B7B);
 
     return Scaffold(
       body: NeonBackgroundLayer(
@@ -143,7 +145,7 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                               Provider.of<LanguageService>(
                                 context,
                               ).translate('spin_hint'),
-                              style: const TextStyle(
+                              style: GoogleFonts.inter(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
@@ -156,10 +158,10 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                               Provider.of<LanguageService>(
                                 context,
                               ).translate('spinning_text'),
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 18,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w700,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -179,10 +181,11 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                                   Provider.of<LanguageService>(
                                     context,
                                   ).translate('elf_chooses'),
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: Colors.white,
                                     fontSize: 26,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w900,
+                                    fontStyle: FontStyle.italic,
                                     letterSpacing: 1.2,
                                   ),
                                   textAlign: TextAlign.center,
@@ -197,12 +200,11 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                                     : Provider.of<LanguageService>(
                                         context,
                                       ).translate('ratita_winner_msg'),
-                                style: TextStyle(
-                                  color: isMVP
-                                      ? const Color(0xFFFFD700)
-                                      : const Color(0xFF8B4513),
+                                style: GoogleFonts.poppins(
+                                  color: themeColor,
                                   fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w900,
+                                  fontStyle: FontStyle.italic,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -247,7 +249,7 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                               ),
                               child: Text(
                                 '${Provider.of<LanguageService>(context).translate('question_tiebreaker_result_1')} ${_viewModel.extractQuestionPart()}${Provider.of<LanguageService>(context).translate('question_tiebreaker_result_2')} ${_viewModel.getDrinksFromQuestion()} ${Provider.of<LanguageService>(context).translate('drinks_count_suffix')}!',
-                                style: const TextStyle(
+                                style: GoogleFonts.inter(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -286,7 +288,7 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                                   loser,
                                 );
                               },
-                              variant: DrinkaholicButtonVariant.primary,
+                              variant: DrinkaholicButtonVariant.accent,
                               fullWidth: false,
                               height: 52,
                             )

@@ -287,6 +287,16 @@ class LanguageService extends ChangeNotifier {
       'repeat_button': {'es': 'Repetir', 'en': 'Repeat'},
       'finish_button': {'es': 'Terminar', 'en': 'Finish'},
       'next_button': {'es': 'Siguiente', 'en': 'Next'},
+      // Home Screen Redesign
+      'home_hero_1': {'es': '¿DÓNDE EMPIEZA', 'en': 'WHERE DOES'},
+      'home_hero_2': {'es': 'LA FIESTA?', 'en': 'THE PARTY START?'},
+      'player_label': {'es': 'JUGADOR', 'en': 'PLAYER'},
+      'balance_label': {'es': 'BALANCE', 'en': 'BALANCE'},
+      'elixir_count': {'es': '420 ELIXIR', 'en': '420 ELIXIR'},
+      'quick_game_subtitle': {'es': 'Empieza el lío ya ⚡', 'en': 'Start the chaos now ⚡'},
+      'league_subtitle': {'es': 'Compite con tus amigos 🏅', 'en': 'Compete with your friends 🏅'},
+      'elixir_subtitle': {'es': 'No te quedes seco 🍻', 'en': "Don't run dry 🍻"},
+      'lets_drink': {'es': '¡A BEBER!', 'en': "LET'S DRINK!"},
     };
 
     if (localizedValues.containsKey(key)) {

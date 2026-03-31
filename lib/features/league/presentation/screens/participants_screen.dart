@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/participants_viewmodel.dart';
 import '../../../../core/models/player.dart';
@@ -53,8 +54,6 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
     super.dispose();
   }
 
-    // _buildSectionTitle is replaced by NeonHeader subtitle
-
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<ParticipantsViewmodel>(
@@ -73,7 +72,7 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                 NeonHeader(
                   title: Provider.of<LanguageService>(context).translate('play_quick').toUpperCase(),
                   subtitle: Provider.of<LanguageService>(context).translate('players_title').toUpperCase(),
-                  themeColor: const Color(0xFFFF0055),
+                  themeColor: const Color(0xFFFF7B7B),
                 ),
                 
                 Expanded(
@@ -114,16 +113,16 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                     height: 65,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFFFF0055), Color(0xFFFF5588)],
+                        colors: [Color(0xFFFF7B7B), Color(0xFFFFA07A)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(32),
+                      borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFFF0055).withOpacity(0.40),
-                          blurRadius: 20,
-                          spreadRadius: 1,
+                          color: const Color(0xFFFF7B7B).withOpacity(0.35),
+                          blurRadius: 24,
+                          spreadRadius: 0,
                           offset: const Offset(0, 8),
                         ),
                       ],
@@ -132,10 +131,10 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                       color: Colors.transparent,
                       clipBehavior: Clip.antiAlias,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
+                        borderRadius: BorderRadius.circular(24),
                       ),
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(32),
+                        borderRadius: BorderRadius.circular(24),
                         onTap: () async {
                           final viewModel = Provider.of<ParticipantsViewmodel>(
                             context,
@@ -157,10 +156,10 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
-                                '¡A BEBER!',
-                                style: TextStyle(
-                                  color: Colors.white,
+                              Text(
+                                Provider.of<LanguageService>(context).translate('lets_drink'),
+                                style: GoogleFonts.poppins(
+                                  color: const Color(0xFF1A0A0A),
                                   fontSize: 18,
                                   fontWeight: FontWeight.w900,
                                   letterSpacing: 1.2,
@@ -169,7 +168,7 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                               const SizedBox(width: 8),
                               const Icon(
                                 Icons.sports_bar,
-                                color: Colors.white,
+                                color: Color(0xFF1A0A0A),
                                 size: 24,
                               ),
                             ],

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'dart:math';
 import '../../../../core/services/language_service.dart';
 import '../viewmodels/home_viewmodel.dart';
+import '../widgets/home_top_bar.dart';
+import '../widgets/player_info_bar.dart';
 import '../widgets/home_header.dart';
 import '../widgets/home_buttons_section.dart';
 import '../../../../core/presentation/components/neon_background_layer.dart';
@@ -112,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -131,10 +130,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       SliverFillRemaining(
                         hasScrollBody: false,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(height: 20.h),
+                            const SizedBox(height: 8),
+
+                            // Top Bar — Logo + Title + Language Toggle
+                            const HomeTopBar(),
+
+                            const SizedBox(height: 8),
+
+                            // Player Info Bar — Glassmorphism pill
+                            const PlayerInfoBar(),
+
+                            const SizedBox(height: 16),
+
+                            // Hero Title — "¿DÓNDE EMPIEZA LA FIESTA?"
                             HomeHeader(screenWidth: screenWidth),
+
+                            const SizedBox(height: 8),
+
+                            // Game Cards
                             HomeButtonsSection(
                               onQuickGamePressed: () => _handleNavigation(
                                 HomeViewModel.quickGameGradient,
@@ -161,119 +175,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 _navigateToElixirs,
                               ),
                             ),
-                            // Sponsors section
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 24.h),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    context.read<LanguageService>().translate('integrated_with'),
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: Colors.white54,
-                                      letterSpacing: 2,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(height: 16.h),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/promo.png',
-                                        width: min(screenWidth * 0.25, 90),
-                                        fit: BoxFit.contain,
-                                      ),
-                                      SizedBox(width: 20.w),
-                                      Image.asset(
-                                        'assets/images/promo2.png',
-                                        width: min(screenWidth * 0.25, 90),
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
+
+                            const SizedBox(height: 24),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Top Bar
-                Positioned(
-                  top: MediaQuery.of(context).padding.top + 16,
-                  left: 20,
-                  right: 20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Mini Logo
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/logo.png',
-                            width: 24,
-                            height: 24,
-                            color: const Color(0xFFFF0055),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'LA PREVIA',
-                            style: TextStyle(
-                              color: const Color(0xFFFF0055),
-                              fontWeight: FontWeight.w900,
-                              fontSize: 16,
-                              letterSpacing: 2,
-                              shadows: [
-                                Shadow(
-                                  color: const Color(0xFFFF0055).withOpacity(0.5),
-                                  blurRadius: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      // Language Toggle
-                      Consumer<LanguageService>(
-                        builder: (context, languageService, child) {
-                          return GestureDetector(
-                            onTap: () => languageService.toggleLanguage(),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: Colors.white.withOpacity(0.2),
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    languageService.isSpanish ? '🇪🇸' : '🇬🇧',
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    languageService.isSpanish ? 'ES' : 'EN',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
                       ),
                     ],
                   ),
@@ -298,7 +203,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           );
         },
-
       ),
     );
   }

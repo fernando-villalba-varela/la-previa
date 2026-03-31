@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
 import '../viewmodels/league_detail_viewmodel.dart';
@@ -34,7 +35,7 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
           automaticallyImplyLeading: false,
           title: NeonHeader(
             title: league.name.toUpperCase(),
-            themeColor: const Color(0xFF00C9FF),
+            themeColor: const Color(0xFFFFD700),
             padding: EdgeInsets.zero,
           ),
           bottom: PreferredSize(
@@ -43,34 +44,36 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
               padding: const EdgeInsets.fromLTRB(18, 0, 18, 12),
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0x26FFFFFF),
+                  color: const Color(0xFF1A1A3E).withOpacity(0.7),
                   borderRadius: BorderRadius.circular(25),
-                  border: Border.all(color: const Color(0x4DFFFFFF), width: 1),
-                  boxShadow: const [
+                  border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
+                  boxShadow: [
                     BoxShadow(
-                      color: Color(0x1A000000),
-                      blurRadius: 10,
-                      offset: Offset(0, 4),
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
                 child: TabBar(
                   isScrollable: true,
                   tabAlignment: TabAlignment.center,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.white70,
-                  indicator: const UnderlineTabIndicator(
-                    borderSide: BorderSide(color: Color(0xFF00FFFF), width: 3),
+                  labelColor: const Color(0xFFFFD700),
+                  unselectedLabelColor: Colors.white60,
+                  indicator: UnderlineTabIndicator(
+                    borderSide: const BorderSide(color: Color(0xFFFFD700), width: 3),
+                    insets: const EdgeInsets.symmetric(horizontal: 16),
                   ),
                   dividerColor: Colors.transparent,
                   dividerHeight: 0,
-                  labelStyle: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                  labelStyle: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                    letterSpacing: 0.5,
                   ),
-                  unselectedLabelStyle: const TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
+                  unselectedLabelStyle: GoogleFonts.inter(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13,
                   ),
                   tabs: [
                     Tab(
@@ -110,7 +113,6 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
                   ParticipantsTab(),
                   const PlayTab(),
                   const CustomQuestionsLeagueTab(),
-
                 ],
               ),
             ),

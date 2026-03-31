@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/models/player.dart';
 import '../../../../core/services/language_service.dart';
@@ -215,8 +216,8 @@ class _GameResultsScreenState extends State<GameResultsScreen>
                           children: [
                             Text(
                               '${Provider.of<LanguageService>(context).translate('rounds_completed_text')} ${widget.maxRounds} ${Provider.of<LanguageService>(context).translate('rounds')}',
-                              style: TextStyle(
-                                color: Colors.white,
+                              style: GoogleFonts.inter(
+                                color: Colors.white70,
                                 fontSize: subtitleFontSize,
                               ),
                               textAlign: TextAlign.center,
@@ -257,24 +258,41 @@ class _GameResultsScreenState extends State<GameResultsScreen>
                     // Action Button
                     Padding(
                       padding: EdgeInsets.all(buttonPadding),
-                      child: SizedBox(
+                      child: Container(
                         width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFFD700), Color(0xFFFFE44D)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFFFFD700).withOpacity(0.35),
+                              blurRadius: 20,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                        ),
                         child: ElevatedButton(
                           onPressed: _isConfirming ? null : _handleConfirm,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF00C9FF),
-                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: const Color(0xFF1A1500),
+                            shadowColor: Colors.transparent,
                             padding: EdgeInsets.symmetric(
-                              vertical: isSmallScreen ? 12 : 16,
+                              vertical: isSmallScreen ? 14 : 18,
                             ),
-                            textStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
+                            textStyle: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w800,
                               fontSize: buttonFontSize,
+                              letterSpacing: 0.5,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            elevation: 4,
+                            elevation: 0,
                           ),
                           child: Text(
                             Provider.of<LanguageService>(context)

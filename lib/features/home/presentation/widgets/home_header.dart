@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'dart:math';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
 
@@ -14,66 +13,47 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageService>();
+
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: 60.h), // Top padding for the new top bar
-          // Logo above title
-          Image.asset(
-            'assets/images/logo.png',
-            width: min(screenWidth * 0.4, 180),
-            height: min(screenWidth * 0.4, 180),
-            fit: BoxFit.contain,
-          ),
-          SizedBox(height: 20.h),
-
-          // Title with neon glow
-          _buildNeonTitle(screenWidth),
-
-          SizedBox(height: 6.h),
-          Text(
-            context.read<LanguageService>().translate('ignite_your_night'),
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: const Color(0xCCFFFFFF),
-              letterSpacing: 4.0,
-              fontWeight: FontWeight.w400,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Hero Title — Line 1 (white)
+            Text(
+              lang.translate('home_hero_1'),
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: screenWidth * 0.075 > 32 ? 32 : screenWidth * 0.075,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+                letterSpacing: 2,
+                height: 1.2,
+              ),
             ),
-          ),
-          SizedBox(height: 16.h),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNeonTitle(double screenWidth) {
-    return Text(
-      'LA PREVIA',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: min(screenWidth * 0.12, 88),
-        fontWeight: FontWeight.w900,
-        letterSpacing: 8,
-        color: Colors.white,
-        shadows: [
-          Shadow(
-            color: const Color(0xFFFF0055).withOpacity(0.8),
-            blurRadius: 15,
-            offset: const Offset(0, 0),
-          ),
-          Shadow(
-            color: const Color(0xFFFF0055).withOpacity(0.5),
-            blurRadius: 30,
-            offset: const Offset(0, 0),
-          ),
-          Shadow(
-            color: const Color(0xFFFF0055).withOpacity(0.3),
-            blurRadius: 45,
-            offset: const Offset(0, 0),
-          ),
-          const Shadow(color: Colors.black87, blurRadius: 10, offset: Offset(2, 4)),
-        ],
+            // Hero Title — Line 2 (magenta italic)
+            Text(
+              lang.translate('home_hero_2'),
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: screenWidth * 0.085 > 38 ? 38 : screenWidth * 0.085,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.italic,
+                color: const Color(0xFFFF0055),
+                letterSpacing: 2,
+                height: 1.2,
+                shadows: [
+                  Shadow(
+                    color: const Color(0xFFFF0055).withOpacity(0.5),
+                    blurRadius: 20,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

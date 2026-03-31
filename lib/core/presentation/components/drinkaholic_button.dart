@@ -81,7 +81,37 @@ class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTicker
     Color? iconColor;
 
     switch (widget.variant) {
-      case DrinkaholicButtonVariant.primary: // Magenta (Jugar)
+      case DrinkaholicButtonVariant.primary: // Coral/Salmon (Partida Rápida)
+        final colors = const [Color(0xFFFF7B7B), Color(0xFFFFA07A)];
+        decoration = BoxDecoration(
+          gradient: isDisabled
+              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
+              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          boxShadow: isDisabled
+              ? []
+              : [BoxShadow(color: const Color(0xFFFF7B7B).withOpacity(0.35), blurRadius: 20, spreadRadius: 0, offset: const Offset(0, 8))],
+        );
+        textStyle = GoogleFonts.poppins(color: const Color(0xFF1A0A0A), fontWeight: FontWeight.w800, fontSize: 16, letterSpacing: 0.5);
+        iconColor = const Color(0xFF1A0A0A);
+        break;
+
+      case DrinkaholicButtonVariant.secondary: // Golden Yellow (Liga)
+        final colors = const [Color(0xFFFFD700), Color(0xFFFFE44D)];
+        decoration = BoxDecoration(
+          gradient: isDisabled
+              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
+              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          boxShadow: isDisabled
+              ? []
+              : [BoxShadow(color: const Color(0xFFFFD700).withOpacity(0.35), blurRadius: 20, spreadRadius: 0, offset: const Offset(0, 8))],
+        );
+        textStyle = GoogleFonts.poppins(color: const Color(0xFF1A1500), fontWeight: FontWeight.w800, fontSize: 16, letterSpacing: 0.5);
+        iconColor = const Color(0xFF1A1500);
+        break;
+
+      case DrinkaholicButtonVariant.accent: // Magenta accent
         final colors = const [Color(0xFFFF0055), Color(0xFFFF5588)];
         decoration = BoxDecoration(
           gradient: isDisabled
@@ -90,55 +120,28 @@ class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTicker
           borderRadius: BorderRadius.circular(widget.borderRadius),
           boxShadow: isDisabled
               ? []
-              : [BoxShadow(color: const Color(0xFFFF0055).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
+              : [BoxShadow(color: const Color(0xFFFF0055).withOpacity(0.35), blurRadius: 20, spreadRadius: 0, offset: const Offset(0, 8))],
         );
-        textStyle = GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
+        textStyle = GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16, letterSpacing: 0.5);
         iconColor = Colors.white;
         break;
 
-      case DrinkaholicButtonVariant.secondary: // Cyan (Modo Liga)
-        final colors = const [Color(0xFF00FFFF), Color(0xFF00B3FF)];
+      case DrinkaholicButtonVariant.outline: // Dark glassmorphism (Elixirs)
         decoration = BoxDecoration(
           gradient: isDisabled
               ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
-              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
+              : LinearGradient(
+                  colors: [const Color(0xFF1E1E3A).withOpacity(0.9), const Color(0xFF2A2A4A).withOpacity(0.9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
           borderRadius: BorderRadius.circular(widget.borderRadius),
+          border: Border.all(color: Colors.white.withOpacity(0.12), width: 1),
           boxShadow: isDisabled
               ? []
-              : [BoxShadow(color: const Color(0xFF00FFFF).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
+              : [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 16, spreadRadius: 0, offset: const Offset(0, 6))],
         );
-        // Using very dark blue/black for max contrast against Cyan
-        textStyle = GoogleFonts.poppins(color: const Color(0xFF0B0B1A), fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: 0.5);
-        iconColor = const Color(0xFF0B0B1A);
-        break;
-
-      case DrinkaholicButtonVariant.accent:
-        final colors = const [Color(0xFF00FFFF), Color(0xFF55FFFF)];
-        decoration = BoxDecoration(
-          gradient: isDisabled
-              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
-              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
-          borderRadius: BorderRadius.circular(widget.borderRadius),
-          boxShadow: isDisabled
-              ? []
-              : [BoxShadow(color: const Color(0xFF00FFFF).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
-        );
-        textStyle = GoogleFonts.poppins(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
-        iconColor = Colors.black;
-        break;
-
-      case DrinkaholicButtonVariant.outline: // Orange (Elixirs)
-        final colors = const [Color(0xFFFF8C00), Color(0xFFFFAA00)];
-        decoration = BoxDecoration(
-          gradient: isDisabled
-              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
-              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
-          borderRadius: BorderRadius.circular(widget.borderRadius),
-          boxShadow: isDisabled
-              ? []
-              : [BoxShadow(color: const Color(0xFFFF8C00).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
-        );
-        textStyle = GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
+        textStyle = GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 16, letterSpacing: 0.5);
         iconColor = Colors.white;
         break;
     }
@@ -169,7 +172,7 @@ class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTicker
           ],
         ),
         if (hasArrow)
-          Icon(Icons.arrow_forward_ios, color: iconColor, size: 18),
+          Icon(Icons.chevron_right_rounded, color: iconColor?.withOpacity(0.6), size: 24),
       ],
     );
 

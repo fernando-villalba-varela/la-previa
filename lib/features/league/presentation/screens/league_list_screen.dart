@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/league_list_viewmodel.dart';
-import '../../../../core/services/language_service.dart'; // Import LanguageService
+import '../../../../core/services/language_service.dart';
 
 import '../../../../core/presentation/components/neon_background_layer.dart';
 import '../../../../core/presentation/components/neon_header.dart';
@@ -18,7 +19,6 @@ class LeagueListScreen extends StatefulWidget {
 }
 
 class _LeagueListScreenState extends State<LeagueListScreen> with TickerProviderStateMixin {
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                 NeonHeader(
                   title: Provider.of<LanguageService>(context).translate('play_league').toUpperCase(),
                   subtitle: Provider.of<LanguageService>(context).translate('leagues_title').toUpperCase(),
-                  themeColor: const Color(0xFF00C9FF),
+                  themeColor: const Color(0xFFFFD700),
                 ),
                 Expanded(
                   child: vm.leagues.isEmpty
@@ -71,17 +71,23 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF16363F),
-        title: Text(Provider.of<LanguageService>(context, listen: false).translate('create_new_league_title'), style: const TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF1A1A3E),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text(
+          Provider.of<LanguageService>(context, listen: false).translate('create_new_league_title'),
+          style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w700),
+        ),
         content: TextField(
           controller: nameCtrl,
-          style: const TextStyle(color: Colors.white),
-          cursorColor: Colors.cyanAccent,
+          style: GoogleFonts.inter(color: Colors.white),
+          cursorColor: const Color(0xFFFFD700),
           decoration: InputDecoration(
             labelText: Provider.of<LanguageService>(context, listen: false).translate('league_name_label'),
-            labelStyle: const TextStyle(color: Colors.cyanAccent),
+            labelStyle: GoogleFonts.inter(color: const Color(0xFFFFD700)),
             focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.cyanAccent)),
+                borderSide: BorderSide(color: Color(0xFFFFD700))),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white.withOpacity(0.3))),
           ),
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => _submitCreateLeague(context, nameCtrl),
@@ -89,14 +95,22 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child:
-                Text(Provider.of<LanguageService>(context, listen: false).translate('cancel'), style: const TextStyle(color: Colors.white70)),
+            child: Text(
+              Provider.of<LanguageService>(context, listen: false).translate('cancel'),
+              style: GoogleFonts.inter(color: Colors.white70),
+            ),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
-                backgroundColor: Colors.cyan.shade700),
+              backgroundColor: const Color(0xFFFFD700),
+              foregroundColor: const Color(0xFF1A1500),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            ),
             onPressed: () => _submitCreateLeague(context, nameCtrl),
-            child: Text(Provider.of<LanguageService>(context, listen: false).translate('accept')),
+            child: Text(
+              Provider.of<LanguageService>(context, listen: false).translate('accept'),
+              style: GoogleFonts.poppins(fontWeight: FontWeight.w700),
+            ),
           ),
         ],
       ),

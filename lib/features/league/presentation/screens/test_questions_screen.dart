@@ -1,7 +1,10 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:drinkaholic/core/models/question_generator.dart';
 import 'package:drinkaholic/core/presentation/components/drinkaholic_button.dart';
 import 'package:drinkaholic/core/presentation/components/drinkaholic_card.dart';
+import 'package:drinkaholic/core/presentation/components/neon_background_layer.dart';
+import 'package:drinkaholic/core/presentation/components/neon_header.dart';
 
 class TestQuestionsScreen extends StatefulWidget {
   const TestQuestionsScreen({super.key});
@@ -74,9 +77,13 @@ class _TestQuestionsScreenState extends State<TestQuestionsScreen> {
   void _testProbabilities() {
     QuestionGenerator.testDrinkProbabilities(1000);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Revisa la consola para ver los resultados del test de probabilidades'),
-        backgroundColor: Colors.green,
+      SnackBar(
+        content: Text('Revisa la consola para ver los resultados del test de probabilidades',
+          style: GoogleFonts.inter(color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFF2A4A2A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        behavior: SnackBarBehavior.floating,
       ),
     );
   }
@@ -84,117 +91,130 @@ class _TestQuestionsScreenState extends State<TestQuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF23606E),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text(
-          'Test de Preguntas',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            // Pregunta actual
-            DrinkaholicCard(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (_currentCategory.isNotEmpty && _currentCategory != 'Error')
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      margin: const EdgeInsets.only(bottom: 15),
-                      decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(20)),
-                      child: Text(
-                        _currentCategory,
-                        style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  _isLoading
-                      ? const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
-                      : Text(
-                          _currentQuestion,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            height: 1.4,
-                          ),
+      backgroundColor: const Color(0xFF0B0B1A),
+      body: NeonBackgroundLayer(
+        child: SafeArea(
+          child: Column(
+            children: [
+              NeonHeader(
+                title: 'TEST DE PREGUNTAS',
+                themeColor: const Color(0xFFFF7B7B),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      // Pregunta actual
+                      DrinkaholicCard(
+                        margin: const EdgeInsets.only(bottom: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (_currentCategory.isNotEmpty && _currentCategory != 'Error')
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 15),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFF7B7B).withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: const Color(0xFFFF7B7B).withOpacity(0.3)),
+                                ),
+                                child: Text(
+                                  _currentCategory,
+                                  style: GoogleFonts.inter(
+                                    color: const Color(0xFFFF7B7B),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            _isLoading
+                                ? const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFF7B7B)))
+                                : Text(
+                                    _currentQuestion,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      height: 1.4,
+                                    ),
+                                  ),
+                          ],
                         ),
-                ],
-              ),
-            ),
+                      ),
 
-            // Botón generar pregunta aleatoria
-            SizedBox(
-              width: double.infinity,
-              child: DrinkaholicButton(
-                label: 'Generar Pregunta Aleatoria',
-                icon: Icons.shuffle,
-                onPressed: _isLoading ? null : _generateRandomQuestion,
-                variant: DrinkaholicButtonVariant.primary,
-                height: 56,
-              ),
-            ),
+                      // Botón generar pregunta aleatoria
+                      SizedBox(
+                        width: double.infinity,
+                        child: DrinkaholicButton(
+                          label: 'Generar Pregunta Aleatoria',
+                          icon: Icons.shuffle,
+                          onPressed: _isLoading ? null : _generateRandomQuestion,
+                          variant: DrinkaholicButtonVariant.primary,
+                          height: 56,
+                        ),
+                      ),
 
-            const SizedBox(height: 20),
+                      const SizedBox(height: 16),
 
-            // Botón test de probabilidades
-            SizedBox(
-              width: double.infinity,
-              child: DrinkaholicButton(
-                label: 'Test Probabilidades (Ver Consola)',
-                icon: Icons.analytics_outlined,
-                onPressed: _testProbabilities,
-                variant: DrinkaholicButtonVariant.secondary,
-                height: 52,
-              ),
-            ),
+                      // Botón test de probabilidades
+                      SizedBox(
+                        width: double.infinity,
+                        child: DrinkaholicButton(
+                          label: 'Test Probabilidades',
+                          icon: Icons.analytics_outlined,
+                          onPressed: _testProbabilities,
+                          variant: DrinkaholicButtonVariant.secondary,
+                          height: 52,
+                        ),
+                      ),
 
-            const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-            // Categorías
-            const Text(
-              'Generar por categoría:',
-              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
+                      // Categorías
+                      Text(
+                        'GENERAR POR CATEGORÍA:',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
 
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 2.5,
+                      Expanded(
+                        child: GridView.builder(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 2.5,
+                          ),
+                          itemCount: _categories.length,
+                          itemBuilder: (context, index) {
+                            final category = _categories[index];
+                            return DrinkaholicButton(
+                              label: category,
+                              onPressed: _isLoading ? null : () => _generateQuestionByCategory(category),
+                              variant: DrinkaholicButtonVariant.outline,
+                              fullWidth: true,
+                              height: 44,
+                              borderRadius: 16,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                itemCount: _categories.length,
-                itemBuilder: (context, index) {
-                  final category = _categories[index];
-                  return DrinkaholicButton(
-                    label: category,
-                    onPressed: _isLoading ? null : () => _generateQuestionByCategory(category),
-                    variant: DrinkaholicButtonVariant.secondary,
-                    fullWidth: true,
-                    height: 44,
-                  );
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-

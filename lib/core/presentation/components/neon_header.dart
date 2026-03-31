@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NeonHeader extends StatelessWidget {
   final String title;
@@ -28,25 +29,38 @@ class NeonHeader extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: onBack ?? () => Navigator.of(context).pop(),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: themeColor,
-                  size: 28,
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: themeColor.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: themeColor.withOpacity(0.25),
+                      width: 1,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.arrow_back_rounded,
+                    color: themeColor,
+                    size: 22,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
                   title,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 20,
                     fontWeight: FontWeight.w900,
-                    letterSpacing: 2,
+                    fontStyle: FontStyle.italic,
+                    letterSpacing: 1.5,
                     color: themeColor,
                     shadows: [
                       Shadow(
-                        color: themeColor.withOpacity(0.5),
-                        blurRadius: 10,
+                        color: themeColor.withOpacity(0.4),
+                        blurRadius: 12,
                       ),
                     ],
                   ),
@@ -60,10 +74,10 @@ class NeonHeader extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, bottom: 12, top: 0),
             child: Text(
               subtitle!,
-              style: const TextStyle(
+              style: GoogleFonts.inter(
                 color: Colors.white60,
                 fontSize: 12,
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w700,
                 letterSpacing: 2,
               ),
             ),
