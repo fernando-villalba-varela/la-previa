@@ -138,25 +138,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             HomeButtonsSection(
                               onQuickGamePressed: () => _handleNavigation(
                                 HomeViewModel.quickGameGradient,
-                                Provider.of<LanguageService>(context,
-                                        listen: false)
-                                    .translate('play_quick'),
+                                Provider.of<LanguageService>(context, listen: false).translate('play_quick'),
                                 Icons.flash_on,
                                 _navigateToQuickGame,
                               ),
                               onLeaguePressed: () => _handleNavigation(
                                 HomeViewModel.leagueGradient,
-                                Provider.of<LanguageService>(context,
-                                        listen: false)
-                                    .translate('play_league'),
+                                Provider.of<LanguageService>(context, listen: false).translate('play_league'),
                                 Icons.emoji_events,
                                 _navigateToLeague,
                               ),
                               onElixirsPressed: () => _handleNavigation(
                                 HomeViewModel.elixirsGradient,
-                                Provider.of<LanguageService>(context,
-                                        listen: false)
-                                    .translate('menu_reload_elixirs'),
+                                Provider.of<LanguageService>(context, listen: false).translate('menu_reload_elixirs'),
                                 Icons.local_drink,
                                 _navigateToElixirs,
                               ),
@@ -167,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               child: Column(
                                 children: [
                                   Text(
-                                    context.read<LanguageService>().translate('integrated_with'),
+                                    Provider.of<LanguageService>(context).translate('integrated_with'),
                                     style: TextStyle(
                                       fontSize: 12.sp,
                                       color: Colors.white54,
@@ -180,13 +174,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        'assets/images/promo.png',
+                                        'assets/images/promo.webp',
                                         width: min(screenWidth * 0.25, 90),
                                         fit: BoxFit.contain,
                                       ),
                                       SizedBox(width: 20.w),
                                       Image.asset(
-                                        'assets/images/promo2.png',
+                                        'assets/images/promo2.webp',
                                         width: min(screenWidth * 0.25, 90),
                                         fit: BoxFit.contain,
                                       ),
@@ -214,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       Row(
                         children: [
                           Image.asset(
-                            'assets/images/logo.png',
+                            'assets/images/logo.webp',
                             width: 24,
                             height: 24,
                             color: const Color(0xFFFF0055),

@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
+import 'language_service.dart';
 
 class ConsentService {
   static final ConsentService _instance = ConsentService._internal();
@@ -250,8 +252,9 @@ class _PrivacyOptionsButtonState extends State<PrivacyOptionsButton> {
           ConsentService().showPrivacyOptionsForm(onDismiss: (_) => _check()),
       icon: const Icon(Icons.privacy_tip_outlined,
           size: 14, color: Colors.white54),
-      label: const Text('Privacidad',
-          style: TextStyle(fontSize: 12, color: Colors.white54)),
+      label: Text(
+          Provider.of<LanguageService>(context).translate('privacy_button'),
+          style: const TextStyle(fontSize: 12, color: Colors.white54)),
     );
   }
 }

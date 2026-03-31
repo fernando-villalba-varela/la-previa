@@ -157,9 +157,9 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
-                                '¡A BEBER!',
-                                style: TextStyle(
+                              Text(
+                                Provider.of<LanguageService>(context).translate('lets_drink_button'),
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w900,

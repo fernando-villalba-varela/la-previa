@@ -56,7 +56,7 @@ class LanguageService extends ChangeNotifier {
         'en': 'Players',
       },
       'integrated_with': {'es': 'INTEGRADO CON', 'en': 'INTEGRATED WITH'},
-      'ignite_your_night': {'es': 'ENCIENDE TU NOCHE', 'en': 'IGNITE YOUR NIGHT'},
+      'ignite_your_night': {'es': 'ENCIENDE TU NOCHE', 'en': 'GET THE PARTY STARTED'},
       'active_challenges_title': {
         'es': 'Retos y Eventos Activos',
         'en': 'Active Challenges & Events',
@@ -91,7 +91,7 @@ class LanguageService extends ChangeNotifier {
       },
        'menu_reload_elixirs': {
         'es': 'Recarga tus elixires',
-        'en': 'Replenish your elixirs',
+        'en': 'Refill your elixirs',
       },
       'round_100_title': {
         'es': '¡Ronda 100 Completada!',
@@ -137,6 +137,14 @@ class LanguageService extends ChangeNotifier {
         'es': '¡EMPEZAR A JUGAR!',
         'en': 'START PLAYING!',
       },
+      'lets_drink_button': {
+        'es': '¡A BEBER!',
+        'en': "LET'S DRINK!",
+      },
+      'privacy_button': {
+        'es': 'Privacidad',
+        'en': 'Privacy',
+      },
       'leagues_title': {
         'es': 'LIGAS',
         'en': 'LEAGUES',
@@ -158,7 +166,7 @@ class LanguageService extends ChangeNotifier {
         'en': 'Accept',
       },
       // League Details
-      'scoreboard_tab': {'es': 'Scoreboard', 'en': 'Scoreboard'},
+      'scoreboard_tab': {'es': 'Clasificación', 'en': 'Scoreboard'},
       'players_tab': {'es': 'Jugadores', 'en': 'Players'},
       'play_tab': {'es': 'Jugar', 'en': 'Play'},
       'custom_questions_tab': {'es': 'Preguntas', 'en': 'Custom Qs'},
@@ -247,7 +255,6 @@ class LanguageService extends ChangeNotifier {
       'for_player': {'es': 'Para: {name}', 'en': 'For: {name}'},
       'rename_player_title': {'es': 'Renombrar jugador', 'en': 'Rename player'},
       'name_hint': {'es': 'Nombre', 'en': 'Name'},
-      'add_button': {'es': 'Añadir', 'en': 'Add'},
       'save_button': {'es': 'Guardar', 'en': 'Save'},
       'done_button': {'es': 'Listo', 'en': 'Done'},
       'include_custom_questions': {'es': 'Incluir preguntas personalizadas', 'en': 'Include custom questions'},
@@ -271,8 +278,8 @@ class LanguageService extends ChangeNotifier {
       'new_question_title': {'es': 'Nueva pregunta', 'en': 'New Question'},
       'save_question_button': {'es': 'Guardar', 'en': 'Save'},
       'question_or_challenge_label': {'es': 'Pregunta o reto', 'en': 'Question or challenge'},
-      'question_hint': {'es': 'Ej: Bebe quien más tarde se haya levantado...', 'en': 'Ex: Drink who woke up the latest...'},
-      'error_empty_question': {'es': 'Escribe el texto de la pregunta', 'en': 'Write the question text'},
+      'question_hint': {'es': 'Ej: Bebe quien se haya levantado más tarde...', 'en': 'Ex: Drink who woke up the latest...'},
+      'error_empty_question': {'es': 'Escribe una pregunta', 'en': 'Enter a question'},
       'error_short_question': {'es': 'La pregunta es demasiado corta', 'en': 'The question is too short'},
       'drinks_label': {'es': 'Tragos', 'en': 'Drinks'},
       'timer_label': {'es': 'Temporizador', 'en': 'Timer'},
