@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class BackgroundGlows extends StatelessWidget {
   final double screenWidth;
   final double screenHeight;
+  final bool showBottomRightGlow;
 
   const BackgroundGlows({
     super.key,
     required this.screenWidth,
     required this.screenHeight,
+    this.showBottomRightGlow = true,
   });
 
   @override
@@ -34,24 +36,25 @@ class BackgroundGlows extends StatelessWidget {
           ),
         ),
         // Glow bottom-right
-        Positioned(
-          bottom: -screenHeight * 0.1,
-          right: -screenWidth * 0.4,
-          child: Container(
-            width: screenWidth * 1.2,
-            height: screenWidth * 1.2,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: RadialGradient(
-                colors: [
-                  const Color(0xFFFF0055).withOpacity(0.15), // Crimson Fiesta
-                  Colors.transparent,
-                ],
-                stops: const [0.2, 1.0],
+        if (showBottomRightGlow)
+          Positioned(
+            bottom: -screenHeight * 0.1,
+            right: -screenWidth * 0.4,
+            child: Container(
+              width: screenWidth * 1.2,
+              height: screenWidth * 1.2,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    const Color(0xFFFF0055).withOpacity(0.15), // Crimson Fiesta
+                    Colors.transparent,
+                  ],
+                  stops: const [0.2, 1.0],
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

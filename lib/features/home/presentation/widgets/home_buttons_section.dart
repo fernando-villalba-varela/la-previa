@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
 import '../../../../core/services/consent_and_ad_service.dart';
 import '../../../../core/presentation/components/drinkaholic_button.dart';
-import '../viewmodels/home_viewmodel.dart';
 
 class HomeButtonsSection extends StatelessWidget {
   final VoidCallback onQuickGamePressed;

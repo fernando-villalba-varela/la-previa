@@ -128,39 +128,48 @@ class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTicker
         break;
 
       case DrinkaholicButtonVariant.outline: // Orange (Elixirs)
+        final colors = const [Color(0xFFFF8C00), Color(0xFFFFAA00)];
         decoration = BoxDecoration(
-          color: Colors.transparent,
+          gradient: isDisabled
+              ? LinearGradient(colors: [const Color(0xFF5A5A6E).withOpacity(0.6), const Color(0xFF7A7A8E).withOpacity(0.6)])
+              : LinearGradient(colors: colors, begin: Alignment.topLeft, end: Alignment.bottomRight),
           borderRadius: BorderRadius.circular(widget.borderRadius),
-          border: Border.all(color: const Color(0xFFFF8C00).withOpacity(isDisabled ? 0.35 : 0.8), width: 2),
+          boxShadow: isDisabled
+              ? []
+              : [BoxShadow(color: const Color(0xFFFF8C00).withOpacity(0.40), blurRadius: 20, spreadRadius: 1, offset: const Offset(0, 8))],
         );
-        textStyle = GoogleFonts.poppins(
-          color: isDisabled ? Colors.white.withOpacity(0.7) : const Color(0xFFFF8C00),
-          fontWeight: FontWeight.w600,
-          fontSize: 15,
-        );
-        iconColor = isDisabled ? Colors.white.withOpacity(0.7) : const Color(0xFFFF8C00);
+        textStyle = GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 0.5);
+        iconColor = Colors.white;
         break;
     }
 
     // Wrap elements to ensure perfectly centered positioning
+    final bool hasArrow = widget.variant == DrinkaholicButtonVariant.primary || 
+                          widget.variant == DrinkaholicButtonVariant.secondary ||
+                          widget.variant == DrinkaholicButtonVariant.outline;
+
     final child = Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        if (widget.icon != null) ...[
-          Icon(widget.icon, color: iconColor, size: 22), 
-          const SizedBox(width: 12),
-        ],
-        Flexible(
-          child: Text(
-            widget.label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: textStyle,
-          ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (widget.icon != null) ...[
+              Icon(widget.icon, color: iconColor, size: 24), 
+              const SizedBox(width: 16),
+            ],
+            Text(
+              widget.label.toUpperCase(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.left,
+              style: textStyle,
+            ),
+          ],
         ),
+        if (hasArrow)
+          Icon(Icons.arrow_forward_ios, color: iconColor, size: 18),
       ],
     );
 
@@ -169,7 +178,7 @@ class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTicker
       decoration: decoration,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16), 
+          padding: const EdgeInsets.symmetric(horizontal: 24), 
           child: child,
         ),
       ),

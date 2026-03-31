@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/models/player.dart';
 import '../../../../core/services/language_service.dart';
-import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
+import '../../../../core/presentation/components/neon_background_layer.dart';
 import 'package:drinkaholic/core/presentation/components/drinkaholic_button.dart';
 import '../viewmodels/tiebreaker_viewmodel.dart';
 import '../widgets/tiebreaker/tiebreaker_export.dart';
@@ -114,20 +114,8 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
     final isMVP = widget.type == TiebreakerType.mvp;
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF00C9FF), Color(0xFF92FE9D)],
-          ),
-        ),
-        child: Stack(
-          children: [
-            const AnimatedBackground(),
-            SafeArea(
+      body: NeonBackgroundLayer(
+        child: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 24.0,
@@ -322,8 +310,6 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                 ),
               ),
             ),
-          ],
-        ),
       ),
     );
   }

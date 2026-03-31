@@ -7,13 +7,12 @@ import '../../../../core/models/player.dart';
 import '../../../../core/services/language_service.dart';
 
 import '../../../../core/services/database_service_v2.dart';
-import 'package:drinkaholic/features/shared/presentation/widgets/animated_background.dart';
+import '../../../../core/presentation/components/neon_background_layer.dart';
 
 import '../viewmodels/league_game_viewmodel.dart';
 import '../widgets/game/game_card_widget.dart';
 import '../widgets/game/player_selector_overlay.dart';
 import '../widgets/game/letter_counter_overlay.dart';
-import '../widgets/game/league_game/animations/floating_particles_widget.dart';
 import '../widgets/game/league_game/animations/ripple_effect_widget.dart';
 import '../widgets/game/league_game/modals/challenges_modal_content.dart';
 import '../screens/tiebreaker_screen.dart';
@@ -276,25 +275,10 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       child: SafeArea(
         child: Scaffold(
 
-          body: Stack(
-            children: [
-              // Background
-              Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xFF00FFFF), Color(0xFF00B3FF)],
-                  ),
-                ),
-              ),
-              const AnimatedBackground(),
-              FloatingParticlesWidget(
-                screenWidth: MediaQuery.of(context).size.width,
-                screenHeight: MediaQuery.of(context).size.height,
-              ),
-
-              SafeArea(child: _buildGameContent()),
+          body: NeonBackgroundLayer(
+            child: Stack(
+              children: [
+                SafeArea(child: _buildGameContent()),
 
               // Overlays driven by ViewModel state
               Consumer<LeagueGameViewModel>(
@@ -337,7 +321,8 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                     ),
                   ),
                 ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

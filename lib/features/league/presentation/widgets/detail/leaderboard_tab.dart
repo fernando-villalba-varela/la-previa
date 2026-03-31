@@ -166,7 +166,7 @@ class LeaderboardTab extends StatelessWidget {
               ],
             ),
             subtitle: Text(
-              'MVDP: ${p.mvdpCount} | Tragos: ${p.totalDrinks} | Ratita: ${p.ratitaCount} | Partidas: ${p.gamesPlayed}',
+              '${Provider.of<LanguageService>(context).translate('stats_mvdp')}: ${p.mvdpCount} | ${Provider.of<LanguageService>(context).translate('stats_drinks')}: ${p.totalDrinks} | ${Provider.of<LanguageService>(context).translate('stats_ratita')}: ${p.ratitaCount} | ${Provider.of<LanguageService>(context).translate('stats_matches')}: ${p.gamesPlayed}',
               style: const TextStyle(color: Colors.white70), // ← cambiado
             ),
             trailing: Container(

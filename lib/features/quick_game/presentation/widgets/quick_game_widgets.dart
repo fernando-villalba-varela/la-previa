@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'dart:math';
 import '../../../../core/models/game_state.dart';
 import 'avatar_builders.dart';
