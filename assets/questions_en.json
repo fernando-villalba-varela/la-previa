@@ -26,7 +26,7 @@
           "drinks"
         ]
       },
-      "categoria": "Clothing"
+      "categoria": "Atributos y Preferencias"
     },
     {
       "id": "color_ropa_beber",
@@ -58,7 +58,7 @@
           "shorts"
         ]
       },
-      "categoria": "Clothing"
+      "categoria": "Atributos y Preferencias"
     },
     {
       "id": "caracteristica_fisica",
@@ -84,172 +84,7 @@
           "drinks"
         ]
       },
-      "categoria": "Physical"
-    },
-    {
-      "id": "edad_condicion",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "is over 25",
-          "is under 25",
-          "is over 30",
-          "is under 20",
-          "was born in the 90s",
-          "was born in the 2000s",
-          "has a birthday this month",
-          "has already had their birthday this year"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Age"
-    },
-    {
-      "id": "estado_sentimental",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "is single",
-          "is in a relationship",
-          "is married",
-          "has been on a date this month",
-          "has an ex they still talk to",
-          "uses dating apps",
-          "is looking for love",
-          "has been in a relationship for over 2 years"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Relationships"
-    },
-    {
-      "id": "tecnologia",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "has an iPhone",
-          "has an Android",
-          "posted on social media today",
-          "has TikTok installed",
-          "uses Instagram daily",
-          "has more than 500 followers",
-          "checked their phone in the last 10 minutes",
-          "has a smartwatch"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Technology"
-    },
-    {
-      "id": "comida_preferencias",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "loves pizza",
-          "is vegetarian",
-          "is vegan",
-          "drinks coffee daily",
-          "prefers tea over coffee",
-          "loves spicy food",
-          "hates vegetables",
-          "has a sweet tooth",
-          "drinks energy drinks",
-          "loves chocolate"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Food"
-    },
-    {
-      "id": "hobbies_actividades",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "plays video games",
-          "exercises regularly",
-          "reads books",
-          "watches Netflix daily",
-          "plays a musical instrument",
-          "speaks more than one language",
-          "has traveled to another country",
-          "knows how to cook well",
-          "drives a car",
-          "practices a sport"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Hobbies"
-    },
-    {
-      "id": "trabajo_estudio",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "works from home",
-          "works on weekends",
-          "is a student",
-          "has a boss",
-          "works in an office",
-          "works with computers",
-          "has coworkers",
-          "commutes to work",
-          "works shifts"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Work"
-    },
-    {
-      "id": "habitos_personales",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "woke up before 8 AM today",
-          "went to bed after midnight last night",
-          "forgot something important this week",
-          "lost their keys recently",
-          "sang in the shower this week",
-          "talked to themselves today",
-          "procrastinated on something important",
-          "checked the weather today"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Habits"
-    },
-    {
-      "id": "situaciones_divertidas",
-      "template": "Anyone who {X} drinks {Y}",
-      "variables": {
-        "X": [
-          "sent a message to the wrong chat",
-          "tripped in public this week",
-          "forgot someone's name today",
-          "lied about their age",
-          "faked being sick to skip work",
-          "stalked their ex on social media",
-          "cried watching a movie this month",
-          "danced alone at home"
-        ],
-        "Y": [
-          "drinks"
-        ]
-      },
-      "categoria": "Fun"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "vocal_nombre",
@@ -263,7 +98,7 @@
           "U"
         ]
       },
-      "categoria": "Names"
+      "categoria": "Atributos y Preferencias"
     },
     {
       "id": "generico_bebe_simple",
@@ -280,7 +115,7 @@
           "5"
         ]
       },
-      "categoria": "Generic - Drink"
+      "categoria": "Bebida Rápida y Sarcasmos"
     },
     {
       "id": "dual_comparacion_fisica",
@@ -313,7 +148,7 @@
           "5"
         ]
       },
-      "categoria": "Dual - Comparison"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "dual_quien_primero",
@@ -333,7 +168,13 @@
           "laughs",
           "coughs",
           "sneezes",
-          "yawns"
+          "yawns",
+          "speaks",
+          "walks",
+          "closes their eyes",
+          "opens their eyes",
+          "makes eye contact",
+          "looks at the camera"
         ],
         "ACTION": [
           "drinks",
@@ -345,11 +186,11 @@
           "4"
         ]
       },
-      "categoria": "Dual - Condition"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "dual_batalla_conocimiento",
-      "template": "Between {PLAYER1} and {PLAYER2}, whoever {CHALLENGE} better {ACTION} {AMOUNT} drinks",
+      "template": "Between {PLAYER1} and {PLAYER2}, whoever {CHALLENGE} worse drinks {AMOUNT} drinks",
       "variables": {
         "PLAYER1": [
           "DUAL_PLAYER1"
@@ -364,11 +205,8 @@
           "says a tongue twister",
           "tells a joke",
           "does push-ups",
-          "raps"
-        ],
-        "ACTION": [
-          "drinks",
-          "gives"
+          "raps",
+          "strikes the best pose"
         ],
         "AMOUNT": [
           "3",
@@ -376,7 +214,7 @@
           "5"
         ]
       },
-      "categoria": "Dual - Battle"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "dual_verdad_mentira",
@@ -407,7 +245,7 @@
           "4"
         ]
       },
-      "categoria": "Dual - Truth"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "dual_adivinanza",
@@ -429,7 +267,7 @@
           "3"
         ]
       },
-      "categoria": "Dual - Guessing"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "generico_reparte_simple",
@@ -446,7 +284,7 @@
           "5"
         ]
       },
-      "categoria": "Generic - Give"
+      "categoria": "Bebida Rápida y Sarcasmos"
     },
     {
       "id": "generico_reto_exito",
@@ -480,7 +318,7 @@
           "tell a joke that makes everyone laugh"
         ]
       },
-      "categoria": "Generic - Challenge Success"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_reto_fallo",
@@ -514,7 +352,7 @@
           "recite the multiplication table of 7"
         ]
       },
-      "categoria": "Generic - Challenge Fail"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_pregunta_exito",
@@ -548,7 +386,7 @@
           "What is the capital of Australia? (Canberra)"
         ]
       },
-      "categoria": "Generic - Knowledge Success"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "generico_pregunta_fallo",
@@ -582,7 +420,7 @@
           "What is the most abundant metal on Earth?"
         ]
       },
-      "categoria": "Generic - Knowledge Fail"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "generico_matematicas_exito",
@@ -616,11 +454,11 @@
           "9 x 6"
         ]
       },
-      "categoria": "Generic - Math Success"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "generico_matematicas_fallo",
-      "template": "{X} drinks {Y} drinks if they don't solve: {Z}",
+      "template": "{X} drinks {Y} drinks if they don't solve: {Z} in 10 seconds",
       "variables": {
         "X": [
           "PLAYER"
@@ -647,10 +485,15 @@
           "6 x 7",
           "45 / 9",
           "12 + 28",
-          "9 x 6"
+          "9 x 6",
+          "100 / 2",
+          "5 x 5",
+          "30 - 12",
+          "8 x 8",
+          "20 + 30"
         ]
       },
-      "categoria": "Generic - Math Fail"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "generico_imitacion_exito",
@@ -684,7 +527,7 @@
           "someone in a big rush"
         ]
       },
-      "categoria": "Generic - Imitation Success"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_memoria_exito",
@@ -718,7 +561,7 @@
           "their first pet"
         ]
       },
-      "categoria": "Generic - Memory Success"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "generico_actuacion_exito",
@@ -752,7 +595,7 @@
           "an exaggerated weatherman"
         ]
       },
-      "categoria": "Generic - Acting Success"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_bebe_razon",
@@ -786,7 +629,7 @@
           "being everyone's favorite"
         ]
       },
-      "categoria": "Generic - Drink for Reason"
+      "categoria": "Bebida Rápida y Sarcasmos"
     },
     {
       "id": "generico_reparte_razon",
@@ -820,755 +663,7 @@
           "being so special"
         ]
       },
-      "categoria": "Generic - Give for Reason"
-    },
-    {
-      "id": "generico_bebe_simple_1",
-      "template": "{X} drinks {Y} drinks for arriving late",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_2",
-      "template": "{X} drinks {Y} drinks if they sent an embarrassing message",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_3",
-      "template": "{X} drinks {Y} drinks if they stalked someone this week",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_4",
-      "template": "{X} drinks {Y} drinks for checking their phone during the game",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_5",
-      "template": "{X} drinks {Y} drinks if they have ever lied in this game",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_6",
-      "template": "{X} drinks {Y} drinks for saying a forbidden word",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_7",
-      "template": "{X} drinks {Y} drinks if they had a date this week",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_8",
-      "template": "{X} drinks {Y} drinks if they have ever kissed another player",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_9",
-      "template": "{X} drinks {Y} drinks if they ghosted someone",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_10",
-      "template": "{X} drinks {Y} drinks if they haven't exercised all week",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_11",
-      "template": "{X} drinks {Y} drinks if they lost something important recently",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_12",
-      "template": "{X} drinks {Y} drinks if they had a fight this week",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_13",
-      "template": "{X} drinks {Y} drinks if they ate junk food today",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_14",
-      "template": "{X} drinks {Y} drinks if they cried watching a movie",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_15",
-      "template": "{X} drinks {Y} drinks if they had a hangover this week",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_16",
-      "template": "{X} drinks {Y} drinks if they used an excuse to not go out",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_17",
-      "template": "{X} drinks {Y} drinks if they had a crush on a teacher or boss",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_18",
-      "template": "{X} drinks {Y} drinks if they spoke badly about someone in the group",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_19",
-      "template": "{X} drinks {Y} drinks if they had a weird dream recently",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_20",
-      "template": "{X} drinks {Y} drinks if they made an impulse purchase recently",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_21",
-      "template": "{X} drinks {Y} drinks if they used a dating app",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_22",
-      "template": "{X} drinks {Y} drinks if they lied about their age",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_23",
-      "template": "{X} drinks {Y} drinks if they fell asleep in a class or meeting",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_simple_24",
-      "template": "{X} drinks {Y} drinks if they stalked their ex",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Generic - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_1",
-      "template": "{X} drinks {Y} drinks for having that frustrated influencer face",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_2",
-      "template": "{X} drinks {Y} drinks for existing so intensely",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_3",
-      "template": "{X} drinks {Y} drinks for thinking they're the life of the party... and failing",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_4",
-      "template": "{X} drinks {Y} drinks for using motivational quotes on Instagram",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_5",
-      "template": "{X} drinks {Y} drinks for believing their horoscope guides their life",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_6",
-      "template": "{X} drinks {Y} drinks for that laugh that sounds like a car alarm",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_7",
-      "template": "{X} drinks {Y} drinks for thinking facial hair gives them a personality",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_8",
-      "template": "{X} drinks {Y} drinks for wearing Crocs and thinking they're stylish",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_9",
-      "template": "{X} drinks {Y} drinks for saying 'I don't drink much' while drinking this",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_10",
-      "template": "{X} drinks {Y} drinks for having more selfies than brain cells",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_11",
-      "template": "{X} drinks {Y} drinks for saying they 'don't like drama' while creating it",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_12",
-      "template": "{X} drinks {Y} drinks for having more exes than shoes",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_13",
-      "template": "{X} drinks {Y} drinks for keeping on saying they'll go to the gym 'tomorrow'",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_14",
-      "template": "{X} drinks {Y} drinks for thinking they're a model just because they have TikTok",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_15",
-      "template": "{X} drinks {Y} drinks for saying they're single by choice",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_16",
-      "template": "{X} drinks {Y} drinks for being the one who talks the most and adds the least",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_17",
-      "template": "{X} drinks {Y} drinks for having a 'sad twerking' playlist",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_18",
-      "template": "{X} drinks {Y} drinks for sending stickers instead of answers",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_19",
-      "template": "{X} drinks {Y} drinks for saying 'I'm different' like everyone else",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
-    },
-    {
-      "id": "generico_bebe_sarcasmo_20",
-      "template": "{X} drinks {Y} drinks just for looking that suspicious",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Sarcasm - Drink"
+      "categoria": "Bebida Rápida y Sarcasmos"
     },
     {
       "id": "dual_quien_se_rie_primero",
@@ -1586,7 +681,7 @@
           "4"
         ]
       },
-      "categoria": "Dual - Reaction"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "dual_quien_mira_movil_primero",
@@ -1605,7 +700,7 @@
           "5"
         ]
       },
-      "categoria": "Dual - Condition"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "generico_trabalenguas_rapido",
@@ -1625,7 +720,7 @@
           "How much wood would a woodchuck chuck"
         ]
       },
-      "categoria": "Generic - Verbal Skill"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_equilibrio_20s",
@@ -1640,7 +735,7 @@
           "4"
         ]
       },
-      "categoria": "Generic - Physical Skill"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_plancha_30s",
@@ -1656,7 +751,7 @@
           "5"
         ]
       },
-      "categoria": "Generic - Physical Skill"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_mimo_adivinanza",
@@ -1674,10 +769,14 @@
           "an animal",
           "a profession",
           "a famous movie",
-          "a sport"
+          "a sport",
+          "an actor",
+          "an actress",
+          "some singer",
+          "a song"
         ]
       },
-      "categoria": "Generic - Imitation Success"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_rap_10s",
@@ -1699,7 +798,7 @@
           "Mondays"
         ]
       },
-      "categoria": "Generic - Acting Success"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_lista_rapida",
@@ -1722,10 +821,12 @@
           "fruits",
           "singers",
           "car brands",
-          "movies"
+          "movies",
+          "TV shows",
+          "actors"
         ]
       },
-      "categoria": "Generic - Challenge Success"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_memoria_cadena",
@@ -1745,7 +846,7 @@
           "4"
         ]
       },
-      "categoria": "Generic - Memory Fail"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "dual_palabra_prohibida",
@@ -1761,7 +862,13 @@
           "okay",
           "literally",
           "bro",
-          "nothing"
+          "nothing",
+          "dude",
+          "girl",
+          "fuck",
+          "damn",
+          "yes",
+          "no"
         ],
         "AMOUNT": [
           "2",
@@ -1770,7 +877,7 @@
           "5"
         ]
       },
-      "categoria": "Dual - Condition"
+      "categoria": "Duelos y Batallas"
     },
     {
       "id": "generico_bebe_por_fallo_memoria",
@@ -1786,17 +893,21 @@
           "5"
         ]
       },
-      "categoria": "Generic - Memory Fail"
+      "categoria": "Trivial y Conocimientos"
     },
     {
       "id": "generico_susurro",
       "template": "You all drink {Y} drinks for being a bunch of clowns",
       "variables": {
         "Y": [
-          "drinks"
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
         ]
       },
-      "categoria": "Restriction"
+      "categoria": "Retos y Castigos"
     },
     {
       "id": "generico_movil_en_mesa",
@@ -1806,11 +917,11 @@
           "drinks"
         ]
       },
-      "categoria": "Technology"
+      "categoria": "Atributos y Preferencias"
     },
     {
       "id": "generico_dificil_raro",
-      "template": "{X} drinks {AMOUNT} drinks if they can't say 10 words rhyming with 'cool' in 30 seconds",
+      "template": "{X} drinks {AMOUNT} drinks if they cannot say 10 words that rhyme with {RHYME} in 30 seconds",
       "variables": {
         "X": [
           "PLAYER"
@@ -1818,188 +929,16 @@
         "AMOUNT": [
           "5",
           "6"
-        ]
-      },
-      "categoria": "Generic - Hard"
-    },
-    {
-      "id": "mas_probable_que",
-      "template": "On the count of 3 everyone points to the player most likely to {THING}; that player drinks {AMOUNT} drinks",
-      "variables": {
-        "THING": [
-          "fall asleep at the party",
-          "be late to everything",
-          "reply to their ex tonight",
-          "get married first",
-          "forget their own birthday",
-          "do karaoke in public without shame",
-          "get lost going home",
-          "organize the next party",
-          "break a game rule",
-          "send a 5-minute voice note",
-          "cry watching a movie",
-          "hook up tonight",
-          "win a dance contest",
-          "leave without saying goodbye",
-          "make a fool of themselves in public",
-          "take an impromptu trip",
-          "become famous on social media",
-          "have more hangovers this month",
-          "propose in public",
-          "become a millionaire",
-          "adopt a dog",
-          "get a tattoo on impulse",
-          "eat pizza at 6 am",
-          "sing in the shower today",
-          "lose their phone"
         ],
-        "AMOUNT": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
+        "RHYME": [
+          "at",
+          "ar",
+          "ing",
+          "ee",
+          "ou"
         ]
       },
-      "categoria": "Most Likely"
-    },
-    {
-      "id": "mas_probable_que_v2",
-      "template": "On the count of 3, point to whoever is most likely to {THING}. That person drinks {AMOUNT} drinks",
-      "variables": {
-        "THING": [
-          "forget their house keys",
-          "move to another city this year",
-          "post an embarrassing story",
-          "change their look radically tomorrow",
-          "get a tattoo without thinking",
-          "binge-watch a series without sleeping",
-          "cook for the whole group",
-          "sign up for a triathlon",
-          "become an influencer",
-          "break their phone this week",
-          "forget where they parked",
-          "lose their wallet",
-          "match with their ex",
-          "get a piercing",
-          "sing loudly in a taxi",
-          "fall asleep on public transport",
-          "steal the spotlight at a wedding",
-          "adopt a cat",
-          "go vegan for a month",
-          "cry laughing today",
-          "accidentally tell a secret",
-          "change jobs this year",
-          "leave everything to the last minute",
-          "sign up for dance classes",
-          "start a YouTube channel",
-          "lose a bet today",
-          "fall in love on the first date",
-          "ghost someone",
-          "get back with an ex",
-          "forget to pay for a round"
-        ],
-        "AMOUNT": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Most Likely"
-    },
-    {
-      "id": "mas_probable_que_v3",
-      "template": "On the count of 3, point to whoever you think would {THING}; whoever gets the most fingers drinks {AMOUNT} drinks",
-      "variables": {
-        "THING": [
-          "organize a weekend getaway",
-          "learn a new language",
-          "start a podcast",
-          "get lost in their own neighborhood",
-          "make an epic fool of themselves at work",
-          "forget to reply to messages for days",
-          "become famous for a meme",
-          "become addicted to the gym",
-          "leave their phone at home",
-          "become a professional night owl",
-          "kiss someone tonight",
-          "break a diet in 24 hours",
-          "collect plants and accidentally kill them",
-          "befriend the waiter",
-          "order shots for everyone",
-          "buy something they don't need",
-          "jump on karaoke without being asked",
-          "make a viral TikTok",
-          "be the last one to leave the party",
-          "arrive before everyone else at the party",
-          "forget an important appointment",
-          "change hairstyles every month",
-          "get passionate about a weird hobby",
-          "close the bar",
-          "trip in public",
-          "make friends with strangers",
-          "get fined for bad parking",
-          "be on the news for something funny",
-          "dye their hair a crazy color",
-          "mess up in a meeting"
-        ],
-        "AMOUNT": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Most Likely"
-    },
-    {
-      "id": "mas_probable_que_v4",
-      "template": "On the count of 3, point to the person most prone to {THING}; the chosen one drinks {AMOUNT} drinks",
-      "variables": {
-        "THING": [
-          "forgetting an anniversary",
-          "buying flights without telling anyone",
-          "learning to play an instrument",
-          "changing their name on social media",
-          "running a marathon",
-          "sleeping 12 hours straight",
-          "reading a book in a day",
-          "breaking their own nap record",
-          "playing a prank",
-          "calling their ex by accident",
-          "cooking an impossible recipe",
-          "going to an after-party unplanned",
-          "doing a TikTok dance in public",
-          "getting lost in a mall",
-          "forgetting where they left their glasses",
-          "saying yes to everything for a day",
-          "starting a company",
-          "running out of battery again",
-          "ordering food at 4 am",
-          "winning a random contest",
-          "talking to strangers in line",
-          "traveling alone",
-          "spending everything on whimsical things",
-          "breaking a glass by accident",
-          "becoming the party DJ",
-          "adopting a plant and naming it",
-          "being a trending topic in the group",
-          "going on an impromptu vacation",
-          "learning magic",
-          "trying an extreme sport"
-        ],
-        "AMOUNT": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
-      },
-      "categoria": "Most Likely"
+      "categoria": "Atributos y Preferencias"
     },
     {
       "id": "yo_nunca",
@@ -2053,193 +992,407 @@
           "6"
         ]
       },
-      "categoria": "Never Have I Ever"
+      "categoria": "Mini-Juegos Clásicos"
     },
     {
-      "id": "verdad_o_bebe_liar",
-      "template": "{X} answer if you would hook up with anyone in the game or drink {Y} drinks",
+      "id": "generico_bebe_condicion_unificado",
+      "template": "{X} drinks {Y} drinks {Z}",
       "variables": {
         "X": [
           "PLAYER"
         ],
         "Y": [
-          "3",
-          "4",
-          "5",
-          "6"
-        ]
-      },
-      "categoria": "Truth or Drink"
-    },
-    {
-      "id": "verdad_o_bebe_acciones_pasadas",
-      "template": "{X} confess if you have ever {ACTION} or drink {Y} drinks",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
+          "1",
+          "2",
           "3",
           "4",
           "5"
         ],
-        "ACTION": [
-          "stolen something from a store",
-          "lied to a police officer",
-          "cried to get out of a fine",
-          "spied on your partner's phone",
-          "gone on a date just for free food",
-          "said 'I love you' without meaning it",
-          "faked an orgasm",
-          "used someone else's toothbrush without telling them",
-          "read someone's diary",
-          "peed in a public pool as an adult",
-          "lied on your resume",
-          "ghosted someone you liked just out of laziness",
-          "stalked your current partner's ex",
-          "given a fake name to a stranger",
-          "had an erotic dream about someone in this group",
-          "kissed more than 3 people in one night",
-          "been unfaithful ever",
-          "caught your parents doing it",
-          "had sex in a public place",
-          "vomited on another person",
-          "sent nudes to the wrong person"
+        "Z": [
+          "for arriving late",
+          "if they sent an embarrassing message",
+          "if they stalked someone this week",
+          "for checking their phone during the game",
+          "if they have ever lied in this game",
+          "for saying a forbidden word",
+          "if they had a date this week",
+          "if they have ever kissed another player",
+          "if they ghosted someone",
+          "if they haven't exercised all week",
+          "if they lost something important recently",
+          "if they had a fight this week",
+          "if they ate junk food today",
+          "if they cried watching a movie",
+          "if they had a hangover this week",
+          "if they used an excuse to not go out",
+          "if they had a crush on a teacher or boss",
+          "if they spoke badly about someone in the group",
+          "if they had a weird dream recently",
+          "if they made an impulse purchase recently",
+          "if they used a dating app",
+          "if they lied about their age",
+          "if they fell asleep in a class or meeting",
+          "if they stalked their ex"
         ]
       },
-      "categoria": "Truth or Drink"
+      "categoria": "Bebida Rápida y Sarcasmos"
     },
     {
-      "id": "verdad_o_bebe_opiniones_grupo",
-      "template": "{X} answer who in the group {JUDGEMENT} or drink {Y} drinks",
+      "id": "generico_bebe_sarcasmo_unificado",
+      "template": "{X} drinks {Y} drinks for {Z}",
       "variables": {
         "X": [
           "PLAYER"
         ],
         "Y": [
+          "1",
+          "2",
           "3",
           "4",
           "5"
         ],
-        "JUDGEMENT": [
-          "you like the least",
-          "is the fakest",
-          "dresses best",
-          "is most likely to end up in jail",
-          "would be the first to die in a horror movie",
-          "is the smartest",
-          "has the worst music taste",
-          "is the stingiest",
-          "you would take to a desert island",
-          "dances worst",
-          "kisses best (if you know)",
-          "has the shadiest search history",
-          "is the most dramatic",
-          "would flirt more if they shut up",
-          "never pays for anything",
-          "is the best looking",
-          "would be your partner if you knew no one else",
-          "you think earns the most money",
-          "has the ugliest feet",
-          "always smells best"
+        "Z": [
+          "having that frustrated influencer face",
+          "existing so intensely",
+          "thinking they're the life of the party... and failing",
+          "using motivational quotes on Instagram",
+          "believing their horoscope guides their life",
+          "that laugh that sounds like a car alarm",
+          "thinking facial hair gives them a personality",
+          "wearing Crocs and thinking they're stylish",
+          "saying 'I don't drink much' while drinking this",
+          "having more selfies than brain cells",
+          "saying they 'don't like drama' while creating it",
+          "having more exes than shoes",
+          "keeping on saying they'll go to the gym 'tomorrow'",
+          "thinking they're a model just because they have TikTok",
+          "saying they're single by choice",
+          "being the one who talks the most and adds the least",
+          "having a 'sad twerking' playlist",
+          "sending stickers instead of answers",
+          "saying 'I'm different' like everyone else",
+          "looking that suspicious"
         ]
       },
-      "categoria": "Truth or Drink"
+      "categoria": "Bebida Rápida y Sarcasmos"
     },
     {
-      "id": "verdad_o_bebe_movil_privacidad",
-      "template": "{X} answer {QUESTION_MOBILE} or drink {Y} drinks",
+      "id": "cualquiera_que_condicion_unificada",
+      "template": "Anyone who {X} drinks {Y}",
+      "variables": {
+        "X": [
+          "drinks coffee daily",
+          "works on weekends",
+          "uses dating apps",
+          "has traveled to another country",
+          "has been on a date this month",
+          "is vegetarian",
+          "loves chocolate",
+          "plays a musical instrument",
+          "is under 20",
+          "has a boss",
+          "is married",
+          "tripped in public this week",
+          "has an iPhone",
+          "sang in the shower this week",
+          "lost their keys recently",
+          "talked to themselves today",
+          "is over 30",
+          "speaks more than one language",
+          "danced alone at home",
+          "has a birthday this month",
+          "checked the weather today",
+          "was born in the 90s",
+          "commutes to work",
+          "is single",
+          "checked their phone in the last 10 minutes",
+          "watches Netflix daily",
+          "has an Android",
+          "is over 25",
+          "uses Instagram daily",
+          "has an ex they still talk to",
+          "posted on social media today",
+          "loves spicy food",
+          "is vegan",
+          "hates vegetables",
+          "exercises regularly",
+          "procrastinated on something important",
+          "is under 25",
+          "has already had their birthday this year",
+          "reads books",
+          "loves pizza",
+          "is a student",
+          "stalked their ex on social media",
+          "has been in a relationship for over 2 years",
+          "has coworkers",
+          "drinks energy drinks",
+          "cried watching a movie this month",
+          "has a sweet tooth",
+          "forgot something important this week",
+          "works from home",
+          "is looking for love",
+          "has more than 500 followers",
+          "drives a car",
+          "works with computers",
+          "plays video games",
+          "sent a message to the wrong chat",
+          "prefers tea over coffee",
+          "was born in the 2000s",
+          "knows how to cook well",
+          "forgot someone's name today",
+          "lied about their age",
+          "went to bed after midnight last night",
+          "has TikTok installed",
+          "works shifts",
+          "has a smartwatch",
+          "is in a relationship",
+          "practices a sport",
+          "faked being sick to skip work",
+          "woke up before 8 AM today",
+          "works in an office"
+        ],
+        "Y": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "mas_probable_que_unificado",
+      "template": "On the count of 3, point to whoever is most likely to {THING}; the chosen one drinks {AMOUNT} drinks",
+      "variables": {
+        "THING": [
+          "collect plants and accidentally kill them",
+          "buy something they don't need",
+          "become a professional night owl",
+          "be on the news for something funny",
+          "get married first",
+          "get lost going home",
+          "sign up for dance classes",
+          "getting lost in a mall",
+          "make an epic fool of themselves at work",
+          "become a millionaire",
+          "fall asleep at the party",
+          "do karaoke in public without shame",
+          "reading a book in a day",
+          "be late to everything",
+          "lose their wallet",
+          "buying flights without telling anyone",
+          "organize a weekend getaway",
+          "have more hangovers this month",
+          "break their phone this week",
+          "get back with an ex",
+          "saying yes to everything for a day",
+          "change their look radically tomorrow",
+          "changing their name on social media",
+          "kiss someone tonight",
+          "become an influencer",
+          "reply to their ex tonight",
+          "playing a prank",
+          "become famous for a meme",
+          "be the last one to leave the party",
+          "ordering food at 4 am",
+          "going on an impromptu vacation",
+          "become addicted to the gym",
+          "dye their hair a crazy color",
+          "hook up tonight",
+          "running a marathon",
+          "break a diet in 24 hours",
+          "take an impromptu trip",
+          "forget their house keys",
+          "leave everything to the last minute",
+          "winning a random contest",
+          "forget to reply to messages for days",
+          "get lost in their own neighborhood",
+          "cook for the whole group",
+          "leave without saying goodbye",
+          "lose their phone",
+          "learn a new language",
+          "cry laughing today",
+          "adopt a cat",
+          "binge-watch a series without sleeping",
+          "start a YouTube channel",
+          "steal the spotlight at a wedding",
+          "forget an important appointment",
+          "being a trending topic in the group",
+          "organize the next party",
+          "go vegan for a month",
+          "order shots for everyone",
+          "cry watching a movie",
+          "jump on karaoke without being asked",
+          "propose in public",
+          "lose a bet today",
+          "become famous on social media",
+          "get a tattoo on impulse",
+          "sleeping 12 hours straight",
+          "win a dance contest",
+          "make a viral TikTok",
+          "cooking an impossible recipe",
+          "ghost someone",
+          "running out of battery again",
+          "fall asleep on public transport",
+          "get a tattoo without thinking",
+          "make friends with strangers",
+          "starting a company",
+          "send a 5-minute voice note",
+          "forget to pay for a round",
+          "breaking a glass by accident",
+          "get passionate about a weird hobby",
+          "break a game rule",
+          "start a podcast",
+          "spending everything on whimsical things",
+          "sing in the shower today",
+          "breaking their own nap record",
+          "arrive before everyone else at the party",
+          "talking to strangers in line",
+          "sign up for a triathlon",
+          "forget where they parked",
+          "close the bar",
+          "eat pizza at 6 am",
+          "befriend the waiter",
+          "get fined for bad parking",
+          "adopting a plant and naming it",
+          "mess up in a meeting",
+          "move to another city this year",
+          "calling their ex by accident",
+          "forgetting an anniversary",
+          "going to an after-party unplanned",
+          "fall in love on the first date",
+          "make a fool of themselves in public",
+          "learning to play an instrument",
+          "get a piercing",
+          "sing loudly in a taxi",
+          "forgetting where they left their glasses",
+          "change jobs this year",
+          "adopt a dog",
+          "trying an extreme sport",
+          "traveling alone",
+          "change hairstyles every month",
+          "forget their own birthday",
+          "becoming the party DJ",
+          "match with their ex",
+          "post an embarrassing story",
+          "doing a TikTok dance in public",
+          "accidentally tell a secret",
+          "leave their phone at home",
+          "learning magic",
+          "trip in public"
+        ],
+        "AMOUNT": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "categoria": "Mini-Juegos Clásicos"
+    },
+    {
+      "id": "verdad_o_bebe_unificado",
+      "template": "{X} answer: {PREGUNTA_VERDAD} or drink {Y} drinks",
       "variables": {
         "X": [
           "PLAYER"
         ],
         "Y": [
+          "2",
           "3",
           "4",
           "5"
         ],
-        "QUESTION_MOBILE": [
-          "how much time you spend on TikTok/Instagram a day",
-          "who you last stalked on Instagram",
-          "what is the last photo you deleted from your gallery",
-          "what does the last WhatsApp message you read and didn't reply to say",
-          "who is the most famous person following you",
-          "what is your unlock password (or part of it)",
-          "what is the weirdest thing you searched on Google this week",
-          "how many selfies you take before posting one",
-          "who is your pinned contact on WhatsApp",
-          "which app drains your battery the most",
-          "which picture in your gallery embarrasses you the most",
-          "what was the last screenshot you took",
-          "who have you muted on stories",
-          "what WhatsApp audio would you be embarrassed if someone heard",
-          "what is the WhatsApp group with the most ridiculous name you have"
-        ]
-      },
-      "categoria": "Truth or Drink"
-    },
-    {
-      "id": "verdad_o_bebe_cantidades",
-      "template": "{X} answer {QUESTION_COUNT} or drink {Y} drinks",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "3",
-          "4",
-          "5"
-        ],
-        "QUESTION_COUNT": [
-          "how many people you've been with this year",
-          "how much money you have in your account right now (approx)",
-          "how many times you've truly fallen in love",
-          "at what age you lost your virginity",
-          "how many times a week you masturbate",
-          "how many traffic tickets you've had",
-          "how many people in the group you've hooked up with",
-          "how many times you've vomited from alcohol this year",
-          "what's the most you've spent in a night out",
-          "how many days have you gone without showering in a row",
+        "PREGUNTA_VERDAD": [
+          "what false rumor have you spread about someone",
           "how many times have you lied today",
+          "if you have ever peed in a public pool as an adult",
+          "if you have ever gone on a date just for free food",
+          "who in the group you think earns the most money",
+          "if you have ever stolen something from a store",
+          "how many times a week you masturbate",
+          "who have you muted on stories",
+          "what turns you on the most",
+          "who in the group is the stingiest",
+          "who in the group is the smartest",
+          "who in the group has the ugliest feet",
+          "if you have ever been unfaithful ever",
+          "if you have ever sent nudes to the wrong person",
+          "what would you do if you were the opposite sex for a day",
+          "what was the last screenshot you took",
+          "what does the last WhatsApp message you read and didn't reply to say",
+          "if you have ever caught your parents doing it",
+          "what do you like least about your personality",
+          "if you have ever faked an orgasm",
+          "what secret haven't you told your parents",
+          "how many days have you gone without showering in a row",
+          "who in the group is most likely to end up in jail",
+          "if you have ever read someone's diary",
+          "what is the weirdest thing you searched on Google this week",
+          "what part of your body would you change if you could",
+          "how many times have you been rejected",
+          "what WhatsApp audio would you be embarrassed if someone heard",
+          "how much time you spend on TikTok/Instagram a day",
+          "what's the most you've spent in a night out",
+          "if you have ever ghosted someone you liked just out of laziness",
+          "who is your pinned contact on WhatsApp",
+          "who in the group would be the first to die in a horror movie",
           "how many people have you blocked on social media",
           "how many serious relationships have you had",
-          "how many times have you been rejected"
-        ]
-      },
-      "categoria": "Truth or Drink"
-    },
-    {
-      "id": "verdad_o_bebe_preferencias",
-      "template": "{X} answer {QUESTION_PREF} or drink {Y} drinks",
-      "variables": {
-        "X": [
-          "PLAYER"
-        ],
-        "Y": [
-          "3",
-          "4",
-          "5"
-        ],
-        "QUESTION_PREF": [
-          "what part of your body would you change if you could",
-          "what do you like least about your personality",
-          "what is your biggest irrational fear",
-          "what is the grossest thing you've eaten",
-          "what is your most embarrassing guilty pleasure",
-          "what would you do if you were the opposite sex for a day",
-          "what illegal thing would you do if there were no consequences",
-          "what is the biggest lie you've told to pick someone up",
-          "what false rumor have you spread about someone",
-          "what do you regret most in your life",
-          "what was your worst date",
           "what would you do with 1 million euros right now",
-          "what secret haven't you told your parents",
-          "what turns you on the most",
-          "what is your favorite position"
+          "if you have ever vomited on another person",
+          "if you have ever used someone else's toothbrush without telling them",
+          "who in the group never pays for anything",
+          "who in the group has the worst music taste",
+          "who in the group kisses best (if you know)",
+          "who in the group would flirt more if they shut up",
+          "if you have ever kissed more than 3 people in one night",
+          "which picture in your gallery embarrasses you the most",
+          "what was your worst date",
+          "what is the grossest thing you've eaten",
+          "which app drains your battery the most",
+          "who in the group has the shadiest search history",
+          "what do you regret most in your life",
+          "how many people in the group you've hooked up with",
+          "how much money you have in your account right now (approx)",
+          "what is the last photo you deleted from your gallery",
+          "if you have ever lied on your resume",
+          "if you would make out with someone in the game",
+          "what is your biggest irrational fear",
+          "who is the most famous person following you",
+          "how many traffic tickets you've had",
+          "who in the group would be your partner if you knew no one else",
+          "how many times you've truly fallen in love",
+          "what is the WhatsApp group with the most ridiculous name you have",
+          "how many people you've been with this year",
+          "if you have ever spied on your partner's phone",
+          "how many selfies you take before posting one",
+          "if you have ever had an erotic dream about someone in this group",
+          "how many times you've vomited from alcohol this year",
+          "if you have ever stalked your current partner's ex",
+          "who in the group you like the least",
+          "if you have ever said 'I love you' without meaning it",
+          "if you have ever had sex in a public place",
+          "who in the group is the best looking",
+          "if you have ever cried to get out of a fine",
+          "what is the biggest lie you've told to pick someone up",
+          "what is your unlock password (or part of it)",
+          "at what age you lost your virginity",
+          "who in the group dresses best",
+          "what is your most embarrassing guilty pleasure",
+          "if you have ever lied to a police officer",
+          "who in the group is the most dramatic",
+          "what is your favorite position",
+          "who in the group is the fakest",
+          "who in the group you would take to a desert island",
+          "if you have ever given a fake name to a stranger",
+          "what illegal thing would you do if there were no consequences",
+          "who in the group always smells best",
+          "who in the group dances worst",
+          "who you last stalked on Instagram"
         ]
       },
-      "categoria": "Truth or Drink"
+      "categoria": "Mini-Juegos Clásicos"
     }
   ]
 }

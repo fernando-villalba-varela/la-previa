@@ -7,24 +7,48 @@
       "endTemplate": "{PLAYER} ya puede usar todas las palabras",
       "punishment": "Si {PLAYER} usa una palabra prohibida, bebe {DRINKS} tragos",
       "variables": {
-        "LETTER": ["T", "S", "M", "P", "C", "B", "R", "D", "L", "N"],
-        "DRINKS": ["1", "2", "3", "4"]
+        "LETTER": [
+          "T",
+          "S",
+          "M",
+          "P",
+          "C",
+          "B",
+          "R",
+          "D",
+          "L",
+          "N"
+        ],
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Restricción de palabras",
+      "categoria": "Obligación y Restricción Verbal",
       "minRounds": 5,
       "maxRounds": 10
     },
     {
       "id": "no_drink_gesture",
-      "type": "restriction", 
+      "type": "restriction",
       "template": "{PLAYER} no puede beber con la mano {HAND}",
       "endTemplate": "{PLAYER} ya puede beber con ambas manos",
       "punishment": "Si {PLAYER} bebe con la mano prohibida, bebe {DRINKS} tragos adicionales",
       "variables": {
-        "HAND": ["izquierda", "derecha"],
-        "DRINKS": ["1", "2", "3", "4"]
+        "HAND": [
+          "izquierda",
+          "derecha"
+        ],
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Restricción física",
+      "categoria": "Obligación y Restricción Física",
       "minRounds": 5,
       "maxRounds": 8
     },
@@ -35,9 +59,14 @@
       "endTemplate": "{PLAYER} ya puede beber sentado",
       "punishment": "Si {PLAYER} bebe sentado, bebe {DRINKS} tragos adicionales",
       "variables": {
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Obligación física",
+      "categoria": "Obligación y Restricción Física",
       "minRounds": 4,
       "maxRounds": 7
     },
@@ -55,9 +84,14 @@
           "¡Arriba, abajo, al centro y adentro!",
           "Sin prisa pero sin pausa"
         ],
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Obligación verbal",
+      "categoria": "Obligación y Restricción Verbal",
       "minRounds": 5,
       "maxRounds": 9
     },
@@ -68,10 +102,19 @@
       "endTemplate": "{PLAYER} ya puede reírse libremente",
       "punishment": "Si {PLAYER} se ríe, bebe {DRINKS} tragos",
       "variables": {
-        "ROUNDS": ["3", "4", "5"],
-        "DRINKS": ["1", "2", "3", "4"]
+        "ROUNDS": [
+          "3",
+          "4",
+          "5"
+        ],
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Restricción emocional",
+      "categoria": "Castigos y Reglas Especiales",
       "minRounds": 3,
       "maxRounds": 6
     },
@@ -84,7 +127,7 @@
       "variables": {
         "ACCENT": [
           "argentino",
-          "mexicano", 
+          "mexicano",
           "gallego",
           "chileno",
           "colombiano",
@@ -100,9 +143,14 @@
           "ruso",
           "brasileño"
         ],
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Obligación verbal",
+      "categoria": "Obligación y Restricción Verbal",
       "minRounds": 5,
       "maxRounds": 8
     },
@@ -113,9 +161,14 @@
       "endTemplate": "{PLAYER} ya puede señalar normalmente",
       "punishment": "Si {PLAYER} señala con el dedo, bebe {DRINKS} tragos",
       "variables": {
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Restricción gestual",
+      "categoria": "Obligación y Restricción Física",
       "minRounds": 4,
       "maxRounds": 7
     },
@@ -126,9 +179,14 @@
       "endTemplate": "{PLAYER} ya no necesita rimar sus frases",
       "punishment": "Si {PLAYER} no rima, bebe {DRINKS} tragos",
       "variables": {
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Obligación verbal",
+      "categoria": "Obligación y Restricción Verbal",
       "minRounds": 5,
       "maxRounds": 8
     },
@@ -139,9 +197,14 @@
       "endTemplate": "{PLAYER} ya puede decir nombres libremente",
       "punishment": "Si {PLAYER} dice un nombre, bebe {DRINKS} tragos",
       "variables": {
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Restricción verbal",
+      "categoria": "Obligación y Restricción Verbal",
       "minRounds": 6,
       "maxRounds": 10
     },
@@ -152,9 +215,14 @@
       "endTemplate": "{PLAYER} ya no necesita bailar antes de beber",
       "punishment": "Si {PLAYER} no baila, bebe {DRINKS} tragos adicionales",
       "variables": {
-        "DRINKS": ["1", "2", "3", "4"]
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Obligación física",
+      "categoria": "Obligación y Restricción Física",
       "minRounds": 4,
       "maxRounds": 6
     },
@@ -165,26 +233,23 @@
       "endTemplate": "{PLAYER1} ya no necesita imitar los tragos de {PLAYER2}",
       "punishment": "Si {PLAYER1} no bebe cuando debe, bebe {DRINKS} tragos adicionales",
       "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"],
-        "MULTIPLIER": ["1", "2"],
-        "DRINKS": ["2", "3", "4"]
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "MULTIPLIER": [
+          "1",
+          "2"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Dual - Imitación",
-      "minRounds": 5,
-      "maxRounds": 8
-    },
-    {
-      "id": "dual_mirror_drinking_fixed_1",
-      "type": "rule",
-      "template": "{PLAYER1}, cada vez que {PLAYER2} beba por el juego, bebes 1 trago",
-      "endTemplate": "{PLAYER1} ya no necesita imitar los tragos de {PLAYER2}",
-      "punishment": "Si {PLAYER1} no bebe cuando debe, bebe 3 tragos adicionales",
-      "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"]
-      },
-      "categoria": "Dual - Imitación",
+      "categoria": "Interacciones Duales",
       "minRounds": 5,
       "maxRounds": 8
     },
@@ -195,11 +260,19 @@
       "endTemplate": "{PLAYER1} y {PLAYER2} ya pueden mirarse normalmente",
       "punishment": "Si {PLAYER1} y {PLAYER2} se miran a los ojos, ambos beben {DRINKS} tragos",
       "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"],
-        "DRINKS": ["2", "3", "4"]
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Dual - Restricción",
+      "categoria": "Interacciones Duales",
       "minRounds": 4,
       "maxRounds": 7
     },
@@ -210,11 +283,19 @@
       "endTemplate": "{PLAYER1} y {PLAYER2} ya pueden hablar por separado",
       "punishment": "Si {PLAYER1} y {PLAYER2} no hablan sincronizados, ambos beben {DRINKS} tragos",
       "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"],
-        "DRINKS": ["2", "3", "4"]
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Dual - Obligación",
+      "categoria": "Interacciones Duales",
       "minRounds": 3,
       "maxRounds": 6
     },
@@ -225,11 +306,19 @@
       "endTemplate": "{PLAYER1} y {PLAYER2} ya pueden hablarse directamente",
       "punishment": "Si {PLAYER1} o {PLAYER2} se hablan directamente, ambos beben {DRINKS} tragos",
       "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"],
-        "DRINKS": ["1", "2", "3"]
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "DRINKS": [
+          "1",
+          "2",
+          "3"
+        ]
       },
-      "categoria": "Dual - Restricción",
+      "categoria": "Interacciones Duales",
       "minRounds": 5,
       "maxRounds": 9
     },
@@ -240,11 +329,19 @@
       "endTemplate": "{PLAYER1} ya no es el guardaespaldas de {PLAYER2}",
       "punishment": "Si {PLAYER1} no cumple su rol de guardaespaldas, bebe {DRINKS} tragos adicionales",
       "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"],
-        "DRINKS": ["3", "4", "5"]
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "DRINKS": [
+          "3",
+          "4",
+          "5"
+        ]
       },
-      "categoria": "Dual - Regla especial",
+      "categoria": "Interacciones Duales",
       "minRounds": 4,
       "maxRounds": 7
     },
@@ -255,399 +352,208 @@
       "endTemplate": "{PLAYER1} ya no necesita traducir a {PLAYER2}",
       "punishment": "Si {PLAYER1} no traduce correctamente, bebe {DRINKS} tragos",
       "variables": {
-        "PLAYER1": ["DUAL_PLAYER1"],
-        "PLAYER2": ["DUAL_PLAYER2"],
-        "DRINKS": ["2", "3", "4"]
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
       },
-      "categoria": "Dual - Obligación verbal",
+      "categoria": "Obligación y Restricción Verbal",
       "minRounds": 3,
       "maxRounds": 6
     },
     {
-    "id": "dual_obligation_insulto_1",
-    "type": "obligation",
-    "template": "{PLAYER1} debe mirar a {PLAYER2} como si fuera la peor decisión de su vida",
-    "endTemplate": "{PLAYER1} ya puede dejar de mirar con desprecio a {PLAYER2}",
-    "punishment": "Si no lo hace con suficiente asco, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
+      "id": "no_proper_names_player",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir nombres propios",
+      "endTemplate": "{PLAYER} ya puede decir nombres propios",
+      "punishment": "Si {PLAYER} dice un nombre propio, bebe {DRINKS} tragos",
+      "variables": {
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Obligación y Restricción Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 2,
-    "maxRounds": 4
-  },
-  {
-    "id": "dual_obligation_insulto_2",
-    "type": "obligation",
-    "template": "{PLAYER1} debe hablarle a {PLAYER2} como si fuera un ser sin neuronas",
-    "endTemplate": "{PLAYER1} ya puede dejar de insultar intelectualmente a {PLAYER2}",
-    "punishment": "Si no es lo suficientemente cruel, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
+    {
+      "id": "speak_third_person",
+      "type": "obligation",
+      "template": "{PLAYER} debe hablar de sí mismo en tercera persona",
+      "endTemplate": "{PLAYER} ya puede hablar normalmente",
+      "punishment": "Si {PLAYER} no lo hace, bebe {DRINKS} tragos",
+      "variables": {
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Obligación y Restricción Verbal",
+      "minRounds": 4,
+      "maxRounds": 7
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "dual_obligation_insulto_3",
-    "type": "obligation",
-    "template": "{PLAYER1} debe terminar cada frase de {PLAYER2} con 'como siempre, haciendo el ridículo'",
-    "endTemplate": "{PLAYER1} ya puede dejar de rematar frases de {PLAYER2}",
-    "punishment": "Si se olvida, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["3", "4", "5"]
+    {
+      "id": "forbidden_word_no",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir la palabra 'no'",
+      "endTemplate": "{PLAYER} ya puede decir 'no'",
+      "punishment": "Si {PLAYER} dice 'no', bebe {DRINKS} tragos",
+      "variables": {
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Obligación y Restricción Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 4,
-    "maxRounds": 6
-  },
-  {
-    "id": "dual_obligation_insulto_4",
-    "type": "obligation",
-    "template": "{PLAYER1} debe imitar a {PLAYER2} como si fuera un cavernícola sin evolución",
-    "endTemplate": "{PLAYER1} ya no necesita ser un cavernícola",
-    "punishment": "Si no da risa, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
+    {
+      "id": "must_end_with_vowel",
+      "type": "obligation",
+      "template": "{PLAYER} debe terminar cada frase con una palabra que acabe en {VOWEL}",
+      "endTemplate": "{PLAYER} ya no necesita terminar sus frases con esa vocal",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} tragos",
+      "variables": {
+        "VOWEL": [
+          "a",
+          "e",
+          "i",
+          "o",
+          "u"
+        ],
+        "DRINKS": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Obligación y Restricción Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 2,
-    "maxRounds": 5
-  },
-  {
-    "id": "dual_obligation_insulto_5",
-    "type": "obligation",
-    "template": "{PLAYER1} debe decirle a {PLAYER2} un insulto nuevo cada vez que hable",
-    "endTemplate": "{PLAYER1} ya puede dejar de insultar creativamente a {PLAYER2}",
-    "punishment": "Si repite insulto, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["3", "4", "5"]
+    {
+      "id": "heavy_punishment_player",
+      "type": "rule",
+      "template": "Si {PLAYER} rompe cualquier regla o reto, bebe {DRINKS} tragos",
+      "endTemplate": "{PLAYER} ya no tiene castigo especial adicional",
+      "punishment": "Al romper una regla, {PLAYER} bebe {DRINKS} tragos",
+      "variables": {
+        "DRINKS": [
+          "4",
+          "5",
+          "6"
+        ]
+      },
+      "categoria": "Castigos y Reglas Especiales",
+      "minRounds": 2,
+      "maxRounds": 4
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "dual_obligation_insulto_6",
-    "type": "obligation",
-    "template": "{PLAYER1} debe gritar '¡Cállate, payaso!' cada vez que {PLAYER2} intente hablar",
-    "endTemplate": "{PLAYER1} ya puede dejar de callar al payaso",
-    "punishment": "Si no lo hace a tiempo, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
+    {
+      "id": "dual_obligation_insulto_unificado",
+      "type": "obligation",
+      "template": "{PLAYER1} debe {INSULT}",
+      "endTemplate": "{PLAYER1} ya puede dejar de atormentar a {PLAYER2}",
+      "punishment": "Si {PLAYER1} no cumple, bebe {DRINKS} tragos",
+      "variables": {
+        "PLAYER1": [
+          "DUAL_PLAYER1"
+        ],
+        "PLAYER2": [
+          "DUAL_PLAYER2"
+        ],
+        "INSULT": [
+          "mirar a {PLAYER2} como si fuera la peor decisión de su vida",
+          "hablarle a {PLAYER2} como si fuera un ser sin neuronas",
+          "terminar cada frase de {PLAYER2} con 'como siempre, haciendo el ridículo'",
+          "imitar a {PLAYER2} como si fuera un cavernícola sin evolución",
+          "decirle a {PLAYER2} un insulto nuevo cada vez que hable",
+          "gritar '¡Cállate, payaso!' cada vez que {PLAYER2} intente hablar",
+          "actuar como si {PLAYER2} oliera a fracaso",
+          "preguntarle a {PLAYER2} si ya terminó la primaria, en cada turno",
+          "usar voz de idiota cada vez que imite a {PLAYER2}",
+          "dirigirse a {PLAYER2} como 'mi decepción favorita'",
+          "hacerle reverencia a {PLAYER2} como si fuera el rey de los idiotas",
+          "decirle a {PLAYER2} que su IQ es negativo cada vez que intente hablar"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "categoria": "Interacciones Duales",
+      "minRounds": 2,
+      "maxRounds": 6
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 2,
-    "maxRounds": 5
-  },
-  {
-    "id": "dual_obligation_insulto_7",
-    "type": "obligation",
-    "template": "{PLAYER1} debe actuar como si {PLAYER2} oliera a fracaso",
-    "endTemplate": "{PLAYER1} ya puede dejar de hacer caras por el olor a perdedor",
-    "punishment": "Si se ríe en el proceso, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
+    {
+      "id": "restriction_ridiculo_unificada",
+      "type": "restriction",
+      "template": "{PLAYER} {RIDICULE}",
+      "endTemplate": "{PLAYER} ya puede volver a la normalidad",
+      "punishment": "Por no hacerlo bien, bebe {DRINKS} tragos",
+      "variables": {
+        "PLAYER": [
+          "PLAYER"
+        ],
+        "RIDICULE": [
+          "debe hablar como un robot durante todo el turno",
+          "debe hablar como si tuviera un micrófono imaginario en un reality show",
+          "debe hablar con voz chillona y exagerada como caricatura",
+          "solo puede moverse en cámara lenta",
+          "debe hacer sonidos de animales antes de cada frase"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Obligación y Restricción Física",
+      "minRounds": 3,
+      "maxRounds": 6
     },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "dual_obligation_insulto_8",
-    "type": "obligation",
-    "template": "{PLAYER1} debe preguntarle a {PLAYER2} si ya terminó la primaria, en cada turno",
-    "endTemplate": "{PLAYER1} ya no necesita dudar del nivel educativo de {PLAYER2}",
-    "punishment": "Si se le olvida, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["3", "4"]
-    },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "dual_obligation_insulto_9",
-    "type": "obligation",
-    "template": "{PLAYER1} debe usar voz de idiota cada vez que imite a {PLAYER2}",
-    "endTemplate": "{PLAYER1} ya puede hablar normalmente",
-    "punishment": "Si no exagera, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
-    },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 2,
-    "maxRounds": 4
-  },
-  {
-    "id": "dual_obligation_insulto_10",
-    "type": "obligation",
-    "template": "{PLAYER1} debe dirigirse a {PLAYER2} como 'mi decepción favorita'",
-    "endTemplate": "{PLAYER1} ya no necesita recordar su decepción",
-    "punishment": "Si se le escapa otro apodo, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["3", "4", "5"]
-    },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "dual_obligation_insulto_11",
-    "type": "obligation",
-    "template": "{PLAYER1} debe hacerle reverencia a {PLAYER2} como si fuera el rey de los idiotas",
-    "endTemplate": "{PLAYER1} ya no necesita rendir homenaje",
-    "punishment": "Si no lo hace con sarcasmo, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["2", "3", "4"]
-    },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 2,
-    "maxRounds": 4
-  },
-  {
-    "id": "dual_obligation_insulto_12",
-    "type": "obligation",
-    "template": "{PLAYER1} debe decirle a {PLAYER2} que su IQ es negativo cada vez que intente hablar",
-    "endTemplate": "{PLAYER1} ya puede dejar de medir el coeficiente",
-    "punishment": "Si no lo hace con tono burlón, bebe {DRINKS} tragos",
-    "variables": {
-      "PLAYER1": ["DUAL_PLAYER1"],
-      "PLAYER2": ["DUAL_PLAYER2"],
-      "DRINKS": ["3", "4"]
-    },
-    "categoria": "Dual - Obligación insultante",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "restriction_ridiculo_1",
-    "type": "restriction",
-    "template": "{PLAYER} debe hablar como un robot durante todo el turno",
-    "endTemplate": "{PLAYER} ya puede hablar como humano",
-    "punishment": "Si no lo hace en modo robot, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["2", "3", "4"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Hacer el ridículo",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "restriction_ridiculo_2",
-    "type": "restriction",
-    "template": "{PLAYER} debe hablar como si tuviera un micrófono imaginario en un reality show",
-    "endTemplate": "{PLAYER} ya puede dejar de ser una celebridad falsa",
-    "punishment": "Si rompe personaje, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["1", "2", "3"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Hacer el ridículo",
-    "minRounds": 4,
-    "maxRounds": 7
-  },
-  {
-    "id": "restriction_ridiculo_3",
-    "type": "restriction",
-    "template": "{PLAYER} debe hablar con voz chillona y exagerada como caricatura",
-    "endTemplate": "{PLAYER} ya puede volver a su voz aburrida",
-    "punishment": "Si se le olvida la voz, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["2", "3", "4"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Hacer el ridículo",
-    "minRounds": 3,
-    "maxRounds": 5
-  },
-  {
-    "id": "restriction_ridiculo_4",
-    "type": "restriction",
-    "template": "{PLAYER} solo puede moverse en cámara lenta",
-    "endTemplate": "{PLAYER} ya puede moverse como persona normal",
-    "punishment": "Si se mueve rápido, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["1", "2", "3", "4"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Hacer el ridículo",
-    "minRounds": 2,
-    "maxRounds": 4
-  },
-  {
-    "id": "restriction_ridiculo_5",
-    "type": "restriction",
-    "template": "{PLAYER} debe hacer sonidos de animales antes de cada frase",
-    "endTemplate": "{PLAYER} ya puede dejar de ser el zoológico",
-    "punishment": "Si no lo hace, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["2", "3"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Hacer el ridículo",
-    "minRounds": 3,
-    "maxRounds": 6
-  },
-  {
-    "id": "restriction_beber_1",
-    "type": "restriction",
-    "template": "{PLAYER} solo puede beber usando los codos",
-    "endTemplate": "{PLAYER} ya puede beber con las manos",
-    "punishment": "Si usa las manos, bebe {DRINKS} tragos extra",
-    "variables": {
-      "DRINKS": ["2", "3", "4"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Forma de beber",
-    "minRounds": 4,
-    "maxRounds": 15
-  },
-  {
-    "id": "restriction_beber_2",
-    "type": "restriction",
-    "template": "{PLAYER} debe beber con los ojos cerrados",
-    "endTemplate": "{PLAYER} ya puede abrir los ojos para beber",
-    "punishment": "Si los abre, bebe {DRINKS} tragos más",
-    "variables": {
-      "DRINKS": ["1", "2", "3"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Forma de beber",
-    "minRounds": 5,
-    "maxRounds": 20
-  },
-  {
-    "id": "restriction_beber_3",
-    "type": "restriction",
-    "template": "{PLAYER} no puede usar pajita ni sorbete para beber",
-    "endTemplate": "{PLAYER} ya puede usar cañita si quiere",
-    "punishment": "Si lo hace, bebe {DRINKS} tragos de castigo",
-    "variables": {
-      "DRINKS": ["2", "3"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Forma de beber",
-    "minRounds": 3,
-    "maxRounds": 17
-  },
-  {
-    "id": "restriction_beber_4",
-    "type": "restriction",
-    "template": "{PLAYER} debe beber con la cabeza inclinada hacia atrás todo el tiempo",
-    "endTemplate": "{PLAYER} ya puede usar el cuello normalmente",
-    "punishment": "Si baja la cabeza, bebe {DRINKS} tragos más",
-    "variables": {
-      "DRINKS": ["2", "3", "4"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Forma de beber",
-    "minRounds": 6,
-    "maxRounds": 24
-  },
-  {
-    "id": "restriction_beber_5",
-    "type": "restriction",
-    "template": "{PLAYER} debe beber desde un vaso colocado en el suelo",
-    "endTemplate": "{PLAYER} ya puede beber como persona civilizada",
-    "punishment": "Si se niega, bebe {DRINKS} tragos directamente del vaso en el suelo",
-    "variables": {
-      "DRINKS": ["2", "3", "4"],
-      "PLAYER": ["PLAYER"]
-    },
-    "categoria": "Restricción - Forma de beber",
-    "minRounds": 7,
-    "maxRounds": 28
-  },
-  {
-    "id": "no_proper_names_player",
-    "type": "restriction",
-    "template": "{PLAYER} no puede decir nombres propios",
-    "endTemplate": "{PLAYER} ya puede decir nombres propios",
-    "punishment": "Si {PLAYER} dice un nombre propio, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["1", "2", "3", "4"]
-    },
-    "categoria": "Restricción verbal",
-    "minRounds": 4,
-    "maxRounds": 8
-  },
-  {
-    "id": "speak_third_person",
-    "type": "obligation",
-    "template": "{PLAYER} debe hablar de sí mismo en tercera persona",
-    "endTemplate": "{PLAYER} ya puede hablar normalmente",
-    "punishment": "Si {PLAYER} no lo hace, bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["1", "2", "3", "4"]
-    },
-    "categoria": "Obligación verbal",
-    "minRounds": 4,
-    "maxRounds": 7
-  },
-  {
-    "id": "forbidden_word_no",
-    "type": "restriction",
-    "template": "{PLAYER} no puede decir la palabra 'no'",
-    "endTemplate": "{PLAYER} ya puede decir 'no'",
-    "punishment": "Si {PLAYER} dice 'no', bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["2", "3", "4"]
-    },
-    "categoria": "Restricción verbal",
-    "minRounds": 5,
-    "maxRounds": 9
-  },
-  {
-    "id": "must_end_with_vowel",
-    "type": "obligation",
-    "template": "{PLAYER} debe terminar cada frase con una palabra que acabe en {VOWEL}",
-    "endTemplate": "{PLAYER} ya no necesita terminar sus frases con esa vocal",
-    "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} tragos",
-    "variables": {
-      "VOWEL": ["a", "e", "i", "o", "u"],
-      "DRINKS": ["1", "2", "3", "4"]
-    },
-    "categoria": "Obligación verbal",
-    "minRounds": 4,
-    "maxRounds": 8
-  },
-  {
-    "id": "heavy_punishment_player",
-    "type": "rule",
-    "template": "Si {PLAYER} rompe cualquier regla o reto, bebe {DRINKS} tragos",
-    "endTemplate": "{PLAYER} ya no tiene castigo especial adicional",
-    "punishment": "Al romper una regla, {PLAYER} bebe {DRINKS} tragos",
-    "variables": {
-      "DRINKS": ["4", "5", "6"]
-    },
-    "categoria": "Regla especial - Castigo",
-    "minRounds": 2,
-    "maxRounds": 4
-  }
+    {
+      "id": "restriction_beber_unificada",
+      "type": "restriction",
+      "template": "{PLAYER} {DRINKING_RULE}",
+      "endTemplate": "Forma de beber libre para {PLAYER}",
+      "punishment": "Si rompe la regla de beber, bebe {DRINKS} tragos",
+      "variables": {
+        "PLAYER": [
+          "PLAYER"
+        ],
+        "DRINKING_RULE": [
+          "solo puede beber usando los codos",
+          "debe beber con los ojos cerrados",
+          "no puede usar pajita ni sorbete para beber",
+          "debe beber con la cabeza inclinada hacia atrás todo el tiempo",
+          "debe beber desde un vaso colocado en el suelo"
+        ],
+        "DRINKS": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Obligación y Restricción Física",
+      "minRounds": 3,
+      "maxRounds": 15
+    }
   ]
 }

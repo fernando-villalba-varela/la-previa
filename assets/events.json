@@ -12,7 +12,7 @@
           "3"
         ]
       },
-      "categoria": "multiplier",
+      "categoria": "Multiplicadores",
       "minRounds": 3,
       "maxRounds": 8,
       "metadata": {
@@ -31,7 +31,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 7,
       "metadata": {}
@@ -48,7 +48,7 @@
           "2"
         ]
       },
-      "categoria": "group",
+      "categoria": "Modificadores",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -69,7 +69,7 @@
           "3"
         ]
       },
-      "categoria": "time_limit",
+      "categoria": "Modificadores",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -86,7 +86,7 @@
           "2"
         ]
       },
-      "categoria": "social",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 7,
       "metadata": {}
@@ -103,7 +103,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -125,7 +125,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -142,7 +142,7 @@
           "4"
         ]
       },
-      "categoria": "truth",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 6,
       "metadata": {}
@@ -159,7 +159,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 7,
       "metadata": {}
@@ -176,7 +176,7 @@
           "3"
         ]
       },
-      "categoria": "memory",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -196,7 +196,7 @@
           "2"
         ]
       },
-      "categoria": "multiplier",
+      "categoria": "Multiplicadores",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {
@@ -228,7 +228,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -252,7 +252,7 @@
           "3"
         ]
       },
-      "categoria": "creative",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -269,7 +269,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 7,
       "metadata": {}
@@ -287,7 +287,7 @@
           "4"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -304,7 +304,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -322,7 +322,7 @@
           "4"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -344,7 +344,7 @@
           "4"
         ]
       },
-      "categoria": "time_limit",
+      "categoria": "Modificadores",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -360,7 +360,7 @@
           "3"
         ]
       },
-      "categoria": "multiplier",
+      "categoria": "Multiplicadores",
       "minRounds": 2,
       "maxRounds": 3,
       "metadata": {
@@ -380,7 +380,7 @@
           "6"
         ]
       },
-      "categoria": "group",
+      "categoria": "Modificadores",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -397,7 +397,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -414,7 +414,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -431,7 +431,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -448,7 +448,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -465,7 +465,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -482,7 +482,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 8,
       "metadata": {}
@@ -499,7 +499,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 8,
       "metadata": {}
@@ -516,7 +516,7 @@
           "3"
         ]
       },
-      "categoria": "social",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 5,
       "maxRounds": 10,
       "metadata": {}
@@ -533,7 +533,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -550,7 +550,7 @@
           "3"
         ]
       },
-      "categoria": "social",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 7,
       "metadata": {}
@@ -567,7 +567,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 4,
       "maxRounds": 8,
       "metadata": {}
@@ -584,7 +584,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -601,7 +601,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -618,7 +618,7 @@
           "3"
         ]
       },
-      "categoria": "group",
+      "categoria": "Modificadores",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -635,7 +635,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -652,7 +652,7 @@
           "3"
         ]
       },
-      "categoria": "restriction",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -668,7 +668,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -685,7 +685,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -701,7 +701,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 2,
       "maxRounds": 4,
       "metadata": {}
@@ -718,7 +718,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -735,7 +735,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -752,7 +752,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -768,7 +768,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -785,7 +785,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
@@ -802,7 +802,7 @@
           "3"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 5,
       "metadata": {}
@@ -818,7 +818,7 @@
           "2"
         ]
       },
-      "categoria": "fun",
+      "categoria": "Comportamiento y Reglas",
       "minRounds": 3,
       "maxRounds": 6,
       "metadata": {}
