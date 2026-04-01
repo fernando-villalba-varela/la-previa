@@ -119,12 +119,16 @@ class StreakMessagesSection extends StatelessWidget {
         vertical: isSmallScreen ? 4 : 6,
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.black.withOpacity(0.6),
         borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: const Color(0xFFCC0000).withOpacity(0.8),
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.white.withOpacity(0.3),
-            blurRadius: 4,
+            color: const Color(0xFFCC0000).withOpacity(0.4),
+            blurRadius: 8,
             spreadRadius: 1,
           ),
         ],

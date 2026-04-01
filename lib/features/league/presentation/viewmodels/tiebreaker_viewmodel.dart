@@ -77,37 +77,34 @@ class TiebreakerViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void spinBottle() async {
+  void calculateSpinAngle() {
     if (_isSpinning || _hasSpun) return;
 
     HapticFeedback.mediumImpact();
     SystemSound.play(SystemSoundType.click);
 
+    final random = Random();
+    final randomAngle = random.nextDouble() * 2 * pi;
+    final extraSpins = 4 + random.nextInt(4);
+    _finalBottleAngle = randomAngle + (extraSpins * 2 * pi);
+
     _isSpinning = true;
     _winner = null;
     notifyListeners();
+  }
 
-    final random = Random();
+  void finalizeWinner() {
     final playerCount = tiedPlayers.length;
-
-    final randomAngle = random.nextDouble() * 2 * pi;
-    final extraSpins = 4 + random.nextInt(4);
-    final totalAngle = randomAngle + (extraSpins * 2 * pi);
-
-    _finalBottleAngle = totalAngle;
-
-    final normalizedAngle = totalAngle % (2 * pi);
+    final normalizedAngle = _finalBottleAngle % (2 * pi);
     final anglePerSection = (2 * pi) / playerCount;
     final sectionIndex = (normalizedAngle / anglePerSection).floor() % playerCount;
-    final winnerIndex = sectionIndex;
 
-    _winner = tiedPlayers[winnerIndex];
+    _winner = tiedPlayers[sectionIndex];
     _isSpinning = false;
     _hasSpun = true;
 
     HapticFeedback.heavyImpact();
     SystemSound.play(SystemSoundType.alert);
-
     notifyListeners();
   }
 

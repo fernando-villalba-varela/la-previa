@@ -91,21 +91,23 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
     _spinController.dispose();
     _winnerScaleController.dispose();
     _colorChangeController.dispose();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
   }
 
   void _handleSpin() async {
-    _viewModel.spinBottle();
+    _viewModel.calculateSpinAngle();
 
     _spinAnimation = Tween<double>(
       begin: 0.0,
       end: _viewModel.finalBottleAngle,
     ).animate(CurvedAnimation(parent: _spinController, curve: Curves.easeOut));
 
-    await _spinController.forward();
-    _winnerScaleController.forward(from: 0.0);
+    setState(() {});
 
+    await _spinController.forward();
+
+    _viewModel.finalizeWinner();
+    _winnerScaleController.forward(from: 0.0);
     setState(() {});
   }
 
