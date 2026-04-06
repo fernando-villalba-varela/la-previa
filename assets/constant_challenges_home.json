@@ -2,9 +2,328 @@
   "templates": [
     {
       "id": "home_c1",
-      "title": "El sofá es lava",
-      "description": "El objetivo no puede sentarse en ningún lado en toda la partida. Si lo hace bebe castigo.",
-      "categoria": "Físico"
+      "type": "obligation",
+      "template": "{PLAYER} debe pedir permiso al anfitrión antes de sentarse o levantarse.",
+      "endTemplate": "{PLAYER} ya puede moverse libremente.",
+      "punishment": "Si {PLAYER} se mueve sin permiso, bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "home_c2",
+      "type": "restriction",
+      "template": "{PLAYER} no puede tocar el mando de la TV ni ningún aparato electrónico.",
+      "endTemplate": "{PLAYER} ya puede tocar la tecnología.",
+      "punishment": "Si {PLAYER} toca algo, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Reglas",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "home_c3",
+      "type": "obligation",
+      "template": "{PLAYER} debe decir 'Como en casa en ningún sitio' después de cada trago.",
+      "endTemplate": "{PLAYER} ya no necesita alabar la casa.",
+      "punishment": "Si {PLAYER} olvida la frase, bebe {DRINKS} trago extra.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "home_c4",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar palabras que contengan la letra 'H'.",
+      "endTemplate": "{PLAYER} ya puede usar la 'H'.",
+      "punishment": "Si {PLAYER} dice la 'H', bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "home_c5",
+      "type": "obligation",
+      "template": "{PLAYER} debe actuar como si estuviera limpiando el polvo cada vez que hable.",
+      "endTemplate": "{PLAYER} deja de limpiar.",
+      "punishment": "Si {PLAYER} no actúa, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "home_c6",
+      "type": "restriction",
+      "template": "{PLAYER} no puede beber si no está sentado en el suelo.",
+      "endTemplate": "{PLAYER} ya puede beber en la silla.",
+      "punishment": "Si {PLAYER} bebe en alto, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "home_c7",
+      "type": "obligation",
+      "template": "{PLAYER} debe llevar un posavasos (o algo parecido) siempre bajo su vaso.",
+      "endTemplate": "{PLAYER} ya no necesita posavasos.",
+      "punishment": "Si {PLAYER} apoya el vaso sin protección, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Reglas de la Casa",
+      "minRounds": 6,
+      "maxRounds": 12
+    },
+    {
+      "id": "home_c8",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir los nombres de los otros jugadores.",
+      "endTemplate": "{PLAYER} ya puede usar nombres.",
+      "punishment": "Si {PLAYER} dice un nombre, bebe {DRINKS} tragos de castigo.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "home_c9",
+      "type": "obligation",
+      "template": "{PLAYER} debe preguntar '¿Alguien quiere algo de la cocina?' cada vez que alguien beba.",
+      "endTemplate": "{PLAYER} deja de ser el camarero.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "home_c10",
+      "type": "restriction",
+      "template": "{PLAYER} no puede reírse si el anfitrión no se ríe primero.",
+      "endTemplate": "{PLAYER} ya puede reírse libremente.",
+      "punishment": "Si {PLAYER} se ríe antes, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "home_c11",
+      "type": "obligation",
+      "template": "{PLAYER} debe beber siempre con el dedo índice señalando al techo.",
+      "endTemplate": "{PLAYER} ya puede bajar el dedo.",
+      "punishment": "Si {PLAYER} baja el dedo, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "home_c12",
+      "type": "restriction",
+      "template": "{PLAYER} no puede tocar su vaso con la mano derecha (o la izquierda si es zurdo).",
+      "endTemplate": "{PLAYER} recupera su mano buena.",
+      "punishment": "Si {PLAYER} usa la mano prohibida, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "home_c13",
+      "type": "obligation",
+      "template": "{PLAYER} debe actuar como si estuviera muy cansado y bostezar antes de hablar.",
+      "endTemplate": "{PLAYER} se despierta.",
+      "punishment": "Si {PLAYER} habla con energía, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "home_c14",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir 'Sí' bajo ningún concepto.",
+      "endTemplate": "{PLAYER} ya puede decir 'Sí'.",
+      "punishment": "Si {PLAYER} dice 'Sí', bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "home_c15",
+      "type": "obligation",
+      "template": "{PLAYER} debe dar un saltito cada vez que le toque repartir tragos.",
+      "endTemplate": "{PLAYER} ya no necesita saltar.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 5
+    },
+    {
+      "id": "home_c16",
+      "type": "restriction",
+      "template": "{PLAYER} no puede hacer contacto visual con el anfitrión.",
+      "endTemplate": "{PLAYER} ya puede mirar al anfitrión.",
+      "punishment": "Si {PLAYER} le mira, bebe {DRINKS} tragos por descarado.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "home_c17",
+      "type": "obligation",
+      "template": "{PLAYER} debe decir '¡Qué bonita es esta casa!' antes de cada reto.",
+      "endTemplate": "{PLAYER} ya ha hecho suficiente la pelota.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 11
+    },
+    {
+      "id": "home_c18",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar el baño solo; debe ir acompañado (o no ir).",
+      "endTemplate": "{PLAYER} recupera su intimidad.",
+      "punishment": "Si {PLAYER} va solo, bebe {DRINKS} tragos de castigo.",
+      "variables": {
+        "DRINKS": ["4"]
+      },
+      "categoria": "Reglas",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "home_c19",
+      "type": "obligation",
+      "template": "{PLAYER} debe beber siempre de rodillas en el suelo.",
+      "endTemplate": "{PLAYER} ya puede beber sentado.",
+      "punishment": "Si {PLAYER} bebe en alto, bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "home_c20",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar palabras inglesas (o extranjeras).",
+      "endTemplate": "{PLAYER} ya puede ser bilingüe.",
+      "punishment": "Si {PLAYER} usa un anglicismo, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "home_c21",
+      "type": "obligation",
+      "template": "{PLAYER} debe llevar los brazos cruzados siempre que no esté bebiendo.",
+      "endTemplate": "{PLAYER} ya puede soltar los brazos.",
+      "punishment": "Si {PLAYER} descruza los brazos, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "home_c22",
+      "type": "restriction",
+      "template": "{PLAYER} no puede mencionar nombres de objetos de la casa (mesa, silla, etc.).",
+      "endTemplate": "{PLAYER} ya puede hablar de muebles.",
+      "punishment": "Si {PLAYER} menciona un mueble, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 8
+    },
+    {
+      "id": "home_c23",
+      "type": "obligation",
+      "template": "{PLAYER} debe susurrarle al oído al anfitrión cada vez que quiera decir algo importante.",
+      "endTemplate": "{PLAYER} deja de susurrar.",
+      "punishment": "Si {PLAYER} habla alto, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "home_c24",
+      "type": "restriction",
+      "template": "{PLAYER} no puede beber si no toca su propia oreja con la mano libre.",
+      "endTemplate": "{PLAYER} ya puede beber normal.",
+      "punishment": "Si {PLAYER} olvida la oreja, bebe {DRINKS} tragos extra.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "home_c25",
+      "type": "obligation",
+      "template": "{PLAYER} debe dar las gracias a la casa después de cada trago.",
+      "endTemplate": "{PLAYER} ya no necesita ser agradecido.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 12
     }
   ]
 }

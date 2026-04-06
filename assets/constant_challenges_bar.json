@@ -2,9 +2,328 @@
   "templates": [
     {
       "id": "bar_c1",
-      "title": "Ley del Meñique",
-      "description": "El jugador objetivo debe beber siempre con el meñique levantado. Si olvida hacerlo, bebe 2 tragos adicionales.",
-      "categoria": "Normas"
+      "type": "obligation",
+      "template": "{PLAYER} debe pedir permiso al 'Barman' antes de beber cualquier trago.",
+      "endTemplate": "{PLAYER} ya puede beber sin permiso.",
+      "punishment": "Si {PLAYER} bebe sin permiso, bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c2",
+      "type": "restriction",
+      "template": "{PLAYER} no puede apoyar el vaso en la mesa; debe tenerlo siempre en la mano.",
+      "endTemplate": "{PLAYER} ya puede soltar el vaso.",
+      "punishment": "Si {PLAYER} apoya el vaso, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c3",
+      "type": "obligation",
+      "template": "{PLAYER} debe guiñar un ojo a alguien antes de cada trago.",
+      "endTemplate": "{PLAYER} ya no necesita guiñar.",
+      "punishment": "Si {PLAYER} no guiña, bebe {DRINKS} trago extra.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c4",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir la palabra 'beber' ni sus variantes.",
+      "endTemplate": "{PLAYER} ya puede decir 'beber'.",
+      "punishment": "Si {PLAYER} dice la palabra prohibida, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 6,
+      "maxRounds": 12
+    },
+    {
+      "id": "bar_c5",
+      "type": "obligation",
+      "template": "{PLAYER} debe limpiar su zona de la mesa con una servilleta imaginaria cada turno.",
+      "endTemplate": "{PLAYER} puede dejar de limpiar.",
+      "punishment": "Si {PLAYER} olvida limpiar, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c6",
+      "type": "restriction",
+      "template": "{PLAYER} no puede mirar a los ojos a nadie mientras hable.",
+      "endTemplate": "{PLAYER} ya puede mirar a los ojos.",
+      "punishment": "Si {PLAYER} hace contacto visual, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c7",
+      "type": "obligation",
+      "template": "{PLAYER} debe referirse al dueño del juego como 'Jefe'.",
+      "endTemplate": "{PLAYER} ya puede usar su nombre.",
+      "punishment": "Si {PLAYER} olvida el rango, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 11
+    },
+    {
+      "id": "bar_c8",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar el teléfono para nada.",
+      "endTemplate": "{PLAYER} recupera su vida digital.",
+      "punishment": "Si {PLAYER} mira el móvil, bebe {DRINKS} tragos de castigo.",
+      "variables": {
+        "DRINKS": ["5"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 15
+    },
+    {
+      "id": "bar_c9",
+      "type": "obligation",
+      "template": "{PLAYER} debe chocar los cinco con alguien antes de cada reto.",
+      "endTemplate": "{PLAYER} ya no necesita chocar los cinco.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "bar_c10",
+      "type": "restriction",
+      "template": "{PLAYER} no puede reírse a carcajadas (solo risa silenciosa).",
+      "endTemplate": "{PLAYER} ya puede reírse fuerte.",
+      "punishment": "Si {PLAYER} emite sonido, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Comportamiento",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c11",
+      "type": "obligation",
+      "template": "{PLAYER} debe decir '¡Qué buena está!' después de cada trago.",
+      "endTemplate": "{PLAYER} ya no necesita comentar la bebida.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c12",
+      "type": "restriction",
+      "template": "{PLAYER} no puede cruzar las piernas mientras esté sentado.",
+      "endTemplate": "{PLAYER} ya puede cruzar las piernas.",
+      "punishment": "Si {PLAYER} cruza las piernas, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c13",
+      "type": "obligation",
+      "template": "{PLAYER} debe actuar como si estuviera borracho (hablar arrastrado) cuando le toque hablar.",
+      "endTemplate": "{PLAYER} se vuelve sobrio.",
+      "punishment": "Si {PLAYER} habla normal, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c14",
+      "type": "restriction",
+      "template": "{PLAYER} no puede tocar su cara con las manos.",
+      "endTemplate": "{PLAYER} ya puede tocarse la cara.",
+      "punishment": "Si {PLAYER} se toca la cara, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c15",
+      "type": "obligation",
+      "template": "{PLAYER} debe imitar a un camarero sirviendo copas cada vez que alguien beba.",
+      "endTemplate": "{PLAYER} termina su turno de camarero.",
+      "punishment": "Si {PLAYER} no actúa, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 3,
+      "maxRounds": 5
+    },
+    {
+      "id": "bar_c16",
+      "type": "restriction",
+      "template": "{PLAYER} no puede sentarse del todo; debe estar apoyado en el borde de la silla.",
+      "endTemplate": "{PLAYER} ya puede sentarse cómodo.",
+      "punishment": "Si {PLAYER} se sienta cómodo, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c17",
+      "type": "obligation",
+      "template": "{PLAYER} debe decir '¡Ponme otra!' al aire después de cada reto.",
+      "endTemplate": "{PLAYER} ya no necesita gritar.",
+      "punishment": "Si {PLAYER} se olvida, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "bar_c18",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar palabras de más de 3 sílabas.",
+      "endTemplate": "{PLAYER} recupera el vocabulario.",
+      "punishment": "Si {PLAYER} usa palabra larga, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c19",
+      "type": "obligation",
+      "template": "{PLAYER} debe beber siempre con los ojos cerrados.",
+      "endTemplate": "{PLAYER} ya puede ver mientras bebe.",
+      "punishment": "Si {PLAYER} abre los ojos, bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 11
+    },
+    {
+      "id": "bar_c20",
+      "type": "restriction",
+      "template": "{PLAYER} no puede mencionar nombres de bebidas alcohólicas.",
+      "endTemplate": "{PLAYER} ya puede hablar de alcohol.",
+      "punishment": "Si {PLAYER} menciona una bebida, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c21",
+      "type": "obligation",
+      "template": "{PLAYER} debe hacer sonar el hielo de su vaso (si tiene) antes de hablar.",
+      "endTemplate": "{PLAYER} ya no necesita hacer ruido.",
+      "punishment": "Si {PLAYER} olvida el ruido, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c22",
+      "type": "restriction",
+      "template": "{PLAYER} no puede tocar a ningún otro jugador.",
+      "endTemplate": "{PLAYER} ya puede tocar a los demás.",
+      "punishment": "Si {PLAYER} toca a alguien, bebe {DRINKS} tragos por contacto.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c23",
+      "type": "obligation",
+      "template": "{PLAYER} debe preguntar '¿Qué me has dicho?' cada vez que alguien le hable.",
+      "endTemplate": "{PLAYER} recupera el oído.",
+      "punishment": "Si {PLAYER} no pregunta, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c24",
+      "type": "restriction",
+      "template": "{PLAYER} no puede beber si no hay otros 2 jugadores bebiendo a la vez (deben acompañarle).",
+      "endTemplate": "{PLAYER} ya puede beber solo.",
+      "punishment": "Si {PLAYER} bebe solo, bebe {DRINKS} tragos extra.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Especial",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c25",
+      "type": "obligation",
+      "template": "{PLAYER} debe dar un golpe seco en la mesa antes y después de cada trago.",
+      "endTemplate": "{PLAYER} ya no necesita golpear la mesa.",
+      "punishment": "Si {PLAYER} olvida el golpe, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 12
     }
   ]
 }

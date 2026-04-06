@@ -2,25 +2,417 @@
   "templates": [
     {
       "id": "val_q1",
-      "template": "El que haya sido peor en una cita bebe {Y} tragos",
+      "template": "The person who has been the worst at a date drinks {Y} sips",
       "variables": {
-        "Y": [
-          "3",
-          "4"
-        ]
+        "Y": ["3", "4"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
     },
     {
       "id": "val_q2",
-      "template": "Cualquiera que tenga pareja en este momento reparte {Y} tragos",
+      "template": "Anyone who is currently in a relationship deals {Y} sips",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q3",
+      "template": "Anyone who is single drinks {Y} sips to celebrate their freedom",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q4",
+      "template": "The person who has had the most disastrous date deals {Y} sips for surviving",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q5",
+      "template": "{X} must give a compliment to the person on their right or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q6",
+      "template": "Anyone who has used a dating app this week drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q7",
+      "template": "Whoever believes in love at first sight deals {Y} sips for being a romantic",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q8",
+      "template": "Anyone who has ever been 'ghosted' drinks {Y} sips to forget",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q9",
+      "template": "The last person to make a heart shape with their hands drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q10",
+      "template": "{X} must name 3 famous love songs in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "val_q11",
+      "template": "Anyone who still has photos of their ex on their phone drinks {Y} punishment sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q12",
+      "template": "The person who had their first kiss at the youngest age deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q13",
+      "template": "If anyone is wearing something pink, they deal {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q14",
+      "template": "{X} must confess their famous 'celebrity crush' or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q15",
+      "template": "Anyone who prefers a romantic dinner over a wild party drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q16",
+      "template": "The person who knows when their parents' anniversary is deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "val_q17",
+      "template": "If the group decides that {X} is the most flirtatious, they deal {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4", "5"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "val_q18",
+      "template": "Anyone who has ever cried over love drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q19",
+      "template": "The last person to point to someone they think is attractive drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q20",
+      "template": "{X} must imitate a romantic movie scene or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q21",
+      "template": "Anyone who has given flowers in the last year deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q22",
+      "template": "The person who has had the longest relationship in the group deals {Y} sips for being an expert",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q23",
+      "template": "If you believe in the red thread of fate, drink {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q24",
+      "template": "{X} must name 3 typical pet names in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "val_q25",
+      "template": "The first person to say 'I LOVE YOU!' out loud deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q26",
+      "template": "Anyone who has ever written a love letter deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q27",
+      "template": "The person who is the most thoughtful according to the group deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q28",
+      "template": "{X} must try to convince the group they are the best catch or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q29",
+      "template": "Anyone who has ever fallen for a friend drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q30",
+      "template": "The last person to blow a kiss into the air drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q31",
+      "template": "If you are in love right now, deal {Y} sips for your happiness",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q32",
+      "template": "{X} must name 3 ideal first date locations in 10 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "val_q33",
+      "template": "Anyone who has ever forgiven infidelity drinks {Y} sips for being a saint",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q34",
+      "template": "The person who can wink at {PLAYER2} without laughing deals {Y} sips",
+      "variables": {
+        "PLAYER2": ["PLAYER"],
+        "Y": ["2", "3"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "val_q35",
+      "template": "{X} must sing a verse of a romantic song or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q36",
+      "template": "Anyone who has had an unforgettable summer romance drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q37",
+      "template": "The last person to touch something red drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q38",
+      "template": "If anyone has had a blind date, they deal {Y} sips for being brave",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q39",
+      "template": "{X} must choose who in the group has the most beautiful eyes. The chosen one deals {Y} sips.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q40",
+      "template": "Anyone who prefers chocolate over flowers deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q41",
+      "template": "The person who knows who Cupid is deals {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "val_q42",
+      "template": "Anyone who has ever forgotten an anniversary drinks {Y} punishment sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q43",
+      "template": "{X} must try to guess what {PLAYER2}'s ideal type is or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER1"],
+        "PLAYER2": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "val_q44",
+      "template": "The last person to blow a kiss to the group drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q45",
+      "template": "Anyone who has kissed someone in this room deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q46",
+      "template": "{X} must confess who their first childhood crush was or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "val_q47",
+      "template": "The first one to find something heart-shaped deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "val_q48",
+      "template": "Anyone who has 'our song' with someone deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q49",
+      "template": "Whoever believes in destiny as the engine of love deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "val_q50",
+      "template": "Everyone toasts to love (or to being single) and drinks {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Celebration"
     }
   ]
 }

@@ -2,9 +2,400 @@
   "templates": [
     {
       "id": "xmas_e1",
+      "type": "global_rule",
       "title": "¡Feliz Navidad, Madafakas!",
-      "description": "Cada jugador debe darle un abrazo a quien tenga a su derecha o beber 3 tragos.",
-      "categoria": "Global"
+      "template": "EVENTO: 🎄 Cada jugador debe darle un abrazo a quien tenga a su derecha o beber 3 tragos.",
+      "endTemplate": "El momento de los abrazos ha terminado.",
+      "categoria": "Global",
+      "minRounds": 1,
+      "maxRounds": 1,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e2",
+      "type": "multiplier",
+      "title": "Espíritu Navideño",
+      "template": "EVENTO: 🎅 El espíritu de la Navidad duplica todos los tragos (x2) mientras dure este evento.",
+      "endTemplate": "El espíritu navideño se ha ido. Los tragos vuelven a la normalidad.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "xmas_e3",
+      "type": "global_rule",
+      "title": "Cena de Nochebuena",
+      "template": "EVENTO: 🍽️ Nadie puede hablar con la boca abierta (ni siquiera para beber). Si alguien lo hace, bebe {PUNISHMENT} tragos.",
+      "endTemplate": "La cena de Nochebuena ha terminado. Ya podéis hablar libremente.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e4",
+      "type": "special_condition",
+      "title": "Villancicos Sin Parar",
+      "template": "EVENTO: 🎶 Antes de cada trago, debes cantar una línea de un villancico. Si no lo haces, bebes {PUNISHMENT} tragos extra.",
+      "endTemplate": "Ya no es necesario cantar para beber.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Especial",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e5",
+      "type": "global_rule",
+      "title": "El Regalo Envenenado",
+      "template": "EVENTO: 🎁 Si te toca beber, puedes 'regalar' la mitad de tus tragos a otro jugador, pero tú bebes la otra mitad siempre.",
+      "endTemplate": "Ya no se pueden regalar tragos.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e6",
+      "type": "global_rule",
+      "title": "Modo Elfo Trabajador",
+      "template": "EVENTO: 🧝 Todos deben referirse al dueño de la casa como 'Santa'. Quien se equivoque bebe {PUNISHMENT} tragos.",
+      "endTemplate": "Santa ha vuelto al Polo Norte.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e7",
+      "type": "multiplier",
+      "title": "Tormenta de Nieve",
+      "template": "EVENTO: ❄️ ¡Hace frío! Los tragos de bebidas frías valen x3 mientras dure la tormenta.",
+      "endTemplate": "La tormenta ha pasado. Los tragos vuelven a valer x1.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "xmas_e8",
+      "type": "global_rule",
+      "title": "Prohibido el Grinch",
+      "template": "EVENTO: 🚫 Prohibido quejarse o poner mala cara. Quien lo haga, bebe {PUNISHMENT} tragos por arruinar la Navidad.",
+      "endTemplate": "El modo Grinch vuelve a estar permitido.",
+      "variables": {
+        "PUNISHMENT": ["3", "4"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e9",
+      "type": "special_condition",
+      "title": "Brindis Navideño",
+      "template": "EVENTO: 🥂 Cada vez que alguien beba, todos deben decir '¡Salud y Feliz Navidad!'. Quien lo olvide bebe {PUNISHMENT} trago.",
+      "endTemplate": "Los brindis obligatorios han terminado.",
+      "variables": {
+        "PUNISHMENT": ["1"]
+      },
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e10",
+      "type": "global_rule",
+      "title": "Manoplas de Santa",
+      "template": "EVENTO: 🧤 Debes beber como si llevaras manoplas puestas (sin usar los dedos por separado). Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Ya podéis usar los dedos para beber.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Desafío Físico",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e11",
+      "type": "global_rule",
+      "title": "Las 12 Campanadas",
+      "template": "EVENTO: 🔔 Cada vez que alguien beba, debe hacer el sonido de una campana '¡Dong!'. Si olvida, bebe {PUNISHMENT} tragos extra.",
+      "endTemplate": "Las campanas han dejado de sonar.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e12",
+      "type": "special_condition",
+      "title": "Amigo Invisible Forzoso",
+      "template": "EVENTO: 🕵️ Eliges a un 'Amigo Invisible'. Cada vez que tú bebas, él bebe la misma cantidad. Si él bebe, tú no bebes.",
+      "endTemplate": "El Amigo Invisible ha terminado.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 5,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e13",
+      "type": "global_rule",
+      "title": "Acento de Laponia",
+      "template": "EVENTO: 🗺️ Todos deben hablar como si tuvieran mucho frío y les tiritaran los dientes. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Ya podéis hablar con vuestro acento normal.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e14",
+      "type": "multiplier",
+      "title": "Lotería de Navidad",
+      "template": "EVENTO: 🎫 Tira un dado imaginario (o real si tienes). Si sale par, tus tragos valen x2. Si sale impar, valen x0.",
+      "endTemplate": "La lotería ha pasado. Volvemos al valor normal.",
+      "variables": {},
+      "categoria": "Suerte",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e15",
+      "type": "global_rule",
+      "title": "Protocolo Real de Reyes",
+      "template": "EVENTO: 👑 Debéis referiros a los demás como 'Su Majestad'. Quien use el nombre real bebe {PUNISHMENT} tragos.",
+      "endTemplate": "El protocolo real ha terminado.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e16",
+      "type": "special_condition",
+      "title": "Regalo Compartido",
+      "template": "EVENTO: 🤝 Cada vez que bebas, la persona a tu izquierda también bebe un trago por solidaridad navideña.",
+      "endTemplate": "La solidaridad navideña ha terminado.",
+      "variables": {},
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e17",
+      "type": "global_rule",
+      "title": "Silencio de Noche de Paz",
+      "template": "EVENTO: 🤫 Solo se puede hablar susurrando. El que hable normal bebe {PUNISHMENT} tragos.",
+      "endTemplate": "La noche de paz ha terminado. Ya podéis gritar.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e18",
+      "type": "special_condition",
+      "title": "El Reno Rodolfo",
+      "template": "EVENTO: 🦌 Debes tocarte la nariz (haciendo que es roja) antes de cada trago. Si olvidas, bebes {PUNISHMENT} tragos extra.",
+      "endTemplate": "Rodolfo se ha ido a descansar.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e19",
+      "type": "global_rule",
+      "title": "Carbón para los Malos",
+      "template": "EVENTO: 🌑 El jugador que más haya fallado hasta ahora recibe el 'Carbón': sus tragos valen x2 durante este evento.",
+      "endTemplate": "El carbón se ha convertido en diamante (o simplemente se ha ido).",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e20",
+      "type": "global_rule",
+      "title": "Ho Ho Ho Obligatorio",
+      "template": "EVENTO: 🎅 Debes terminar cada frase con un 'Ho Ho Ho'. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Santa se ha quedado sin voz.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e21",
+      "type": "multiplier",
+      "title": "Helada Nocturna",
+      "template": "EVENTO: 🧊 ¡Todo se congela! Si no bebes tu trago en menos de 10 segundos, el castigo se triplica.",
+      "endTemplate": "La helada ha terminado.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "xmas_e22",
+      "type": "global_rule",
+      "title": "Roscón de Reyes",
+      "template": "EVENTO: 🥮 Hay un 'haba' invisible. Si te toca beber un número par de tragos, bebes 1 extra (el haba).",
+      "endTemplate": "El roscón se ha acabado.",
+      "variables": {},
+      "categoria": "Azar",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e23",
+      "type": "global_rule",
+      "title": "Modo Estrella de Navidad",
+      "template": "EVENTO: ⭐ El jugador con la prenda más brillante es la 'Estrella'. Todos beben cuando la Estrella beba.",
+      "endTemplate": "La estrella se ha apagado.",
+      "variables": {},
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e24",
+      "type": "special_condition",
+      "title": "Cariño Navideño",
+      "template": "EVENTO: ❤️ Antes de que alguien beba, debe recibir un cumplido navideño del grupo o no se le permite beber (y bebe castigo de {PUNISHMENT} tragos).",
+      "endTemplate": "El exceso de cariño ha terminado.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e25",
+      "type": "global_rule",
+      "title": "Aviso de Muérdago",
+      "template": "EVENTO: 🌿 Si dos personas se miran fijamente durante más de 3 segundos, deben darse un beso en la mejilla o beber {PUNISHMENT} tragos.",
+      "endTemplate": "El muérdago se ha marchitado.",
+      "variables": {
+        "PUNISHMENT": ["3"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e26",
+      "type": "global_rule",
+      "title": "Traje de Santa",
+      "template": "EVENTO: 🧥 No puedes usar las manos para tocar tu vaso; alguien debe ayudarte a beber (o bebes {PUNISHMENT} tragos de castigo).",
+      "endTemplate": "Ya podéis usar vuestras propias manos.",
+      "variables": {
+        "PUNISHMENT": ["4"]
+      },
+      "categoria": "Desafío Físico",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e27",
+      "type": "multiplier",
+      "title": "Calor de Chimenea",
+      "template": "EVENTO: 🔥 ¡Qué relax! Los tragos de gente sentada valen la mitad, los de gente de pie valen doble.",
+      "endTemplate": "La chimenea se ha apagado.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e28",
+      "type": "global_rule",
+      "title": "Modo Belén Viviente",
+      "template": "EVENTO: 🐑 Cada jugador debe elegir un animal del Belén y hacer su sonido antes de hablar. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "El Belén se ha desmontado.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Reglas de Comportamiento",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e29",
+      "type": "global_rule",
+      "title": "Cronómetro de Uvas",
+      "template": "EVENTO: 🕒 Tienes 12 segundos para cumplir cualquier reto que se te asigne durante este evento. Si tardas más, bebes el doble.",
+      "endTemplate": "Ya no hay prisa con las uvas.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e30",
+      "type": "global_rule",
+      "title": "Año Nuevo, Vida Nueva",
+      "template": "EVENTO: 🎉 ¡Cambio de rol! La persona que más ha repartido tragos ahora es la que más bebe, y viceversa.",
+      "endTemplate": "Los roles vuelven a su estado original.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
     }
   ]
 }

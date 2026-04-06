@@ -2,9 +2,328 @@
   "templates": [
     {
       "id": "bar_c1",
-      "title": "Ley del Meñique",
-      "description": "El jugador objetivo debe beber siempre con el meñique levantado. Si olvida hacerlo, bebe 2 tragos adicionales.",
-      "categoria": "Normas"
+      "type": "obligation",
+      "template": "{PLAYER} must ask for permission from the 'Bartender' (host) before taking any drink.",
+      "endTemplate": "{PLAYER} can now drink without permission.",
+      "punishment": "If {PLAYER} drinks without permission, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c2",
+      "type": "restriction",
+      "template": "{PLAYER} cannot rest their glass on the table; they must always keep it in their hand.",
+      "endTemplate": "{PLAYER} can let go of the glass now.",
+      "punishment": "If {PLAYER} rests the glass, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c3",
+      "type": "obligation",
+      "template": "{PLAYER} must wink at someone before each drink.",
+      "endTemplate": "{PLAYER} no longer needs to wink.",
+      "punishment": "If {PLAYER} doesn't wink, drink {DRINKS} extra sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c4",
+      "type": "restriction",
+      "template": "{PLAYER} cannot say the word 'drinking' or its variants.",
+      "endTemplate": "{PLAYER} can say 'drinking' now.",
+      "punishment": "If {PLAYER} says the forbidden word, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 6,
+      "maxRounds": 12
+    },
+    {
+      "id": "bar_c5",
+      "type": "obligation",
+      "template": "{PLAYER} must clean their area of the table with an imaginary napkin every turn.",
+      "endTemplate": "{PLAYER} can stop cleaning.",
+      "punishment": "If {PLAYER} forgets to clean, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c6",
+      "type": "restriction",
+      "template": "{PLAYER} cannot look anyone in the eyes while speaking.",
+      "endTemplate": "{PLAYER} can make eye contact now.",
+      "punishment": "If {PLAYER} makes eye contact, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c7",
+      "type": "obligation",
+      "template": "{PLAYER} must refer to the game owner as 'Boss'.",
+      "endTemplate": "{PLAYER} can use their name now.",
+      "punishment": "If {PLAYER} forgets the rank, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 11
+    },
+    {
+      "id": "bar_c8",
+      "type": "restriction",
+      "template": "{PLAYER} cannot use their phone for anything.",
+      "endTemplate": "{PLAYER} gets their digital life back.",
+      "punishment": "If {PLAYER} looks at their phone, drink {DRINKS} punishment sips.",
+      "variables": {
+        "DRINKS": ["5"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 15
+    },
+    {
+      "id": "bar_c9",
+      "type": "obligation",
+      "template": "{PLAYER} must high-five someone before each challenge.",
+      "endTemplate": "{PLAYER} no longer needs to high-five.",
+      "punishment": "If {PLAYER} forgets, drink {DRINKS} extra sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "bar_c10",
+      "type": "restriction",
+      "template": "{PLAYER} cannot laugh out loud (silent laughter only).",
+      "endTemplate": "{PLAYER} can laugh loudly now.",
+      "punishment": "If {PLAYER} makes a sound, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c11",
+      "type": "obligation",
+      "template": "{PLAYER} must say 'That's a good one!' after every drink.",
+      "endTemplate": "{PLAYER} no longer needs to comment on the drink.",
+      "punishment": "If {PLAYER} forgets, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c12",
+      "type": "restriction",
+      "template": "{PLAYER} cannot cross their legs while sitting.",
+      "endTemplate": "{PLAYER} can cross their legs now.",
+      "punishment": "If {PLAYER} crosses their legs, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c13",
+      "type": "obligation",
+      "template": "{PLAYER} must act as if they are drunk (slurred speech) when it's their turn to speak.",
+      "endTemplate": "{PLAYER} becomes sober.",
+      "punishment": "If {PLAYER} speaks normally, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Acting",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c14",
+      "type": "restriction",
+      "template": "{PLAYER} cannot touch their face with their hands.",
+      "endTemplate": "{PLAYER} can touch their face now.",
+      "punishment": "If {PLAYER} touches their face, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c15",
+      "type": "obligation",
+      "template": "{PLAYER} must imitate a waiter serving drinks every time someone drinks.",
+      "endTemplate": "{PLAYER} finishes their waiter shift.",
+      "punishment": "If {PLAYER} doesn't act, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Acting",
+      "minRounds": 3,
+      "maxRounds": 5
+    },
+    {
+      "id": "bar_c16",
+      "type": "restriction",
+      "template": "{PLAYER} cannot sit all the way back; they must lean on the edge of the chair.",
+      "endTemplate": "{PLAYER} can sit comfortably now.",
+      "punishment": "If {PLAYER} sits comfortably, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c17",
+      "type": "obligation",
+      "template": "{PLAYER} must yell 'Give me another one!' to the air after every challenge.",
+      "endTemplate": "{PLAYER} no longer needs to yell.",
+      "punishment": "If {PLAYER} forgets, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "bar_c18",
+      "type": "restriction",
+      "template": "{PLAYER} cannot use words with more than 3 syllables.",
+      "endTemplate": "{PLAYER} recovers their vocabulary.",
+      "punishment": "If {PLAYER} uses a long word, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c19",
+      "type": "obligation",
+      "template": "{PLAYER} must always drink with their eyes closed.",
+      "endTemplate": "{PLAYER} can see while drinking now.",
+      "punishment": "If {PLAYER} opens their eyes, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 11
+    },
+    {
+      "id": "bar_c20",
+      "type": "restriction",
+      "template": "{PLAYER} cannot mention names of alcoholic drinks.",
+      "endTemplate": "{PLAYER} can talk about alcohol now.",
+      "punishment": "If {PLAYER} mentions a drink, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c21",
+      "type": "obligation",
+      "template": "{PLAYER} must rattle the ice in their glass (if they have any) before speaking.",
+      "endTemplate": "{PLAYER} no longer needs to make noise.",
+      "punishment": "If {PLAYER} forgets the noise, drink {DRINKS} sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "bar_c22",
+      "type": "restriction",
+      "template": "{PLAYER} cannot touch any other player.",
+      "endTemplate": "{PLAYER} can touch others now.",
+      "punishment": "If {PLAYER} touches someone, drink {DRINKS} sips for contact.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "bar_c23",
+      "type": "obligation",
+      "template": "{PLAYER} must ask 'What did you say to me?' every time someone speaks to them.",
+      "endTemplate": "{PLAYER} recovers their hearing.",
+      "punishment": "If {PLAYER} doesn't ask, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "bar_c24",
+      "type": "restriction",
+      "template": "{PLAYER} cannot drink unless 2 other players are drinking at the same time (they must accompany them).",
+      "endTemplate": "{PLAYER} can drink alone now.",
+      "punishment": "If {PLAYER} drinks alone, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Special",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "bar_c25",
+      "type": "obligation",
+      "template": "{PLAYER} must strike the table before and after each drink.",
+      "endTemplate": "{PLAYER} no longer needs to strike the table.",
+      "punishment": "If {PLAYER} forgets the strike, drink {DRINKS} extra sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 12
     }
   ]
 }

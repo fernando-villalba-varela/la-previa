@@ -2,9 +2,412 @@
   "templates": [
     {
       "id": "home_e1",
-      "title": "Viaje a la nevera",
-      "description": "El ultimo en ir a la cocina bebe 3 tragos.",
-      "categoria": "Acción"
+      "type": "global_rule",
+      "title": "Fiesta de Inauguración",
+      "template": "EVENTO: 🏠 ¡Bienvenidos a mi humilde morada! Todos los jugadores deben alabar algo de la casa o beber 2 tragos.",
+      "endTemplate": "La inauguración ha terminado.",
+      "categoria": "Global",
+      "minRounds": 1,
+      "maxRounds": 1,
+      "metadata": {}
+    },
+    {
+      "id": "home_e2",
+      "type": "multiplier",
+      "title": "Bar Abierto del Anfitrión",
+      "template": "EVENTO: 🍷 El anfitrión está generoso. Todos los tragos que reparta el dueño de la casa valen doble (x2).",
+      "endTemplate": "El anfitrión ha cerrado el grifo. Tragos normales.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "home_e3",
+      "type": "global_rule",
+      "title": "Zapatos Fuera",
+      "template": "EVENTO: 👟 ¡Cuidado con el suelo! Nadie puede llevar los zapatos puestos (o no pueden tocar el suelo con ellos). Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Ya podéis pisar normal.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "home_e4",
+      "type": "special_condition",
+      "title": "El Chef de la Casa",
+      "template": "EVENTO: 🍳 Antes de beber, debes decir el nombre de un plato que sepas cocinar. Si repites uno ya dicho, bebes {PUNISHMENT} extra.",
+      "endTemplate": "La cocina está cerrada.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e5",
+      "type": "global_rule",
+      "title": "Prohibido el Sofá",
+      "template": "EVENTO: 🚫 Nadie puede sentarse en el sofá. Si alguien lo hace, bebe {PUNISHMENT} tragos por cada minuto.",
+      "endTemplate": "El sofá vuelve a ser zona segura.",
+      "variables": {
+        "PUNISHMENT": ["3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "home_e6",
+      "type": "multiplier",
+      "title": "Noche de Juegos",
+      "template": "EVENTO: 🎲 ¡Todo o nada! Si fallas un reto, bebes el triple (x3). Si aciertas, repartes el triple.",
+      "endTemplate": "La noche de juegos intensos ha terminado.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "home_e7",
+      "type": "global_rule",
+      "title": "Vecinos Molestos",
+      "template": "EVENTO: 🤫 ¡Shhh! Solo se puede hablar susurrando para no despertar a los vecinos. El que hable normal bebe {PUNISHMENT} tragos.",
+      "endTemplate": "Los vecinos se han ido a trabajar. Podéis gritar.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Comportamiento",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "home_e8",
+      "type": "special_condition",
+      "title": "Inspector de Sanidad",
+      "template": "EVENTO: 🧼 El anfitrión puede mandar a cualquiera a limpiar algo (o hacer un gesto de limpieza) antes de que beba. Si no lo hace, bebe {PUNISHMENT} extra.",
+      "endTemplate": "El inspector se ha ido.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Reglas",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e9",
+      "type": "global_rule",
+      "title": "Mascota de la Casa",
+      "template": "EVENTO: 🐱 Cada vez que alguien beba, debe hacer el sonido de un animal doméstico. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Se acabó el zoológico en casa.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "home_e10",
+      "type": "global_rule",
+      "title": "Nevera Vacía",
+      "template": "EVENTO: 🧊 ¡No queda hielo! Todos los tragos calientes (sin hielo) valen x2.",
+      "endTemplate": "¡Hemos comprado hielo! Tragos normales.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e11",
+      "type": "special_condition",
+      "title": "Contraseña del Wi-Fi",
+      "template": "EVENTO: 📶 Antes de hablar, debes decir la 'contraseña' de 3 palabras que elija el anfitrión ahora mismo. Si la olvidas, bebes {PUNISHMENT} tragos.",
+      "endTemplate": "El Wi-Fi ya no tiene contraseña.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Comportamiento",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "home_e12",
+      "type": "global_rule",
+      "title": "Dueño del Mando",
+      "template": "EVENTO: 📺 El que tenga el control remoto (o esté más cerca de la TV) decide quién bebe cada vez que haya un trago general.",
+      "endTemplate": "Se acabó el poder de la televisión.",
+      "variables": {},
+      "categoria": "Reglas",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "home_e13",
+      "type": "global_rule",
+      "title": "Prohibido el Móvil",
+      "template": "EVENTO: 🚫 ¡Noche de desconexión! El primero que toque su móvil bebe {PUNISHMENT} tragos de castigo.",
+      "endTemplate": "Ya podéis mirar Instagram.",
+      "variables": {
+        "PUNISHMENT": ["4", "5"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 15,
+      "metadata": {}
+    },
+    {
+      "id": "home_e14",
+      "type": "multiplier",
+      "title": "Calefacción Rota",
+      "template": "EVENTO: 🥶 ¡Qué frío! Los que no lleven chaqueta o algo de abrigo beben doble para entrar en calor.",
+      "endTemplate": "Ya funciona la calefacción.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "home_e15",
+      "type": "global_rule",
+      "title": "Idioma de la Casa",
+      "template": "EVENTO: 🌎 En esta casa solo se habla un idioma inventado (o inglés si preferís). Hablar español = {PUNISHMENT} tragos.",
+      "endTemplate": "Volvemos al castellano.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "home_e16",
+      "type": "special_condition",
+      "title": "Pasar la Aspiradora",
+      "template": "EVENTO: 🧹 Debes dar una vuelta completa a tu silla antes de sentarte tras cada trago. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "La casa ya está limpia.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e17",
+      "type": "global_rule",
+      "title": "Mano de Obra",
+      "template": "EVENTO: ✋ Solo podéis usar la mano no dominante para beber. Si eres diestro, usa la izquierda. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Ya podéis usar vuestra mano buena.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "home_e18",
+      "type": "multiplier",
+      "title": "Hora de la Siesta",
+      "template": "EVENTO: 😴 ¡Todos a dormir! El que se ría o hable alto bebe el triple.",
+      "endTemplate": "Se acabó la siesta.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "home_e19",
+      "type": "global_rule",
+      "title": "Sin Palabras en 'P'",
+      "template": "EVENTO: 🚫 Prohibido decir palabras que empiecen por 'P'. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "Ya podéis usar la 'P'.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e20",
+      "type": "special_condition",
+      "title": "El Fantasma de la Casa",
+      "template": "EVENTO: 👻 Elige a un jugador para ser el 'Fantasma'. Nadie puede hablarle ni mirarle. El que lo haga, bebe {PUNISHMENT} tragos.",
+      "endTemplate": "El fantasma se ha ido.",
+      "variables": {
+        "PUNISHMENT": ["3"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "home_e21",
+      "type": "global_rule",
+      "title": "Protocolo de Invitados",
+      "template": "EVENTO: 🤵 Debes decir 'Por favor' y 'Gracias' en cada interacción. Fallar = {PUNISHMENT} tragos por maleducado.",
+      "endTemplate": "Podéis volver a ser informales.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Comportamiento",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "home_e22",
+      "type": "multiplier",
+      "title": "Día de Limpieza",
+      "template": "EVENTO: ✨ El que tenga el vaso más vacío debe beber el doble de lo normal para 'limpiar' su fondo.",
+      "endTemplate": "Fin de la limpieza.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "home_e23",
+      "type": "global_rule",
+      "title": "Toque a la Puerta",
+      "template": "EVENTO: 🚪 Debes tocar la mesa dos veces antes de beber, como si llamaras a una puerta. Fallar = {PUNISHMENT} tragos.",
+      "endTemplate": "La puerta está abierta.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "home_e24",
+      "type": "special_condition",
+      "title": "Mudanza Loca",
+      "template": "EVENTO: 📦 ¡Todos cambiad de sitio! El último en sentarse en su nueva silla bebe {PUNISHMENT} tragos.",
+      "endTemplate": "Asentaos en vuestros nuevos sitios.",
+      "variables": {
+        "PUNISHMENT": ["3", "4"]
+      },
+      "categoria": "Físico",
+      "minRounds": 1,
+      "maxRounds": 1,
+      "metadata": {}
+    },
+    {
+      "id": "home_e25",
+      "type": "global_rule",
+      "title": "Modo Mayordomo",
+      "template": "EVENTO: 💂 Debes servir la bebida a los demás cuando lo necesiten. El que no se deje servir bebe {PUNISHMENT} tragos.",
+      "endTemplate": "Se acabó el servicio.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e26",
+      "type": "global_rule",
+      "title": "Agua para Todos",
+      "template": "EVENTO: 💧 Por cada trago que bebas, debes dar un sorbo de agua. Si no tienes agua, bebes el doble de alcohol.",
+      "endTemplate": "Se acabó la hidratación obligatoria.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "home_e27",
+      "type": "multiplier",
+      "title": "Cena de Gala",
+      "template": "EVENTO: 🍴 El que use cubiertos (si hay comida) reparte el doble. El que coma con las manos bebe el doble.",
+      "endTemplate": "La cena de gala ha terminado.",
+      "variables": {},
+      "categoria": "Multiplicadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "home_e28",
+      "type": "global_rule",
+      "title": "Seguridad del Hogar",
+      "template": "EVENTO: 👮 Nadie puede entrar ni salir de la habitación donde estáis. El que lo haga, bebe {PUNISHMENT} tragos.",
+      "endTemplate": "Podéis moveros por toda la casa.",
+      "variables": {
+        "PUNISHMENT": ["4"]
+      },
+      "categoria": "Reglas",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "home_e29",
+      "type": "special_condition",
+      "title": "Alquiler Vacacional",
+      "template": "EVENTO: 🏨 Cada vez que bebas en tu turno, debes elegir a alguien para que te 'pague' un trago extra (él lo bebe).",
+      "endTemplate": "El alquiler ha vencido.",
+      "variables": {},
+      "categoria": "Modificadores",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "home_e30",
+      "type": "global_rule",
+      "title": "Fiesta de Pijamas",
+      "template": "EVENTO: 🛌 ¡Todos al suelo! El último en tocar el suelo con la mano cuando yo diga '¡Dormir!', bebe {PUNISHMENT} tragos.",
+      "endTemplate": "Despertad, el evento ha terminado.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Global",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
     }
   ]
 }

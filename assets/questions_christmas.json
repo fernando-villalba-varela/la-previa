@@ -4,10 +4,7 @@
       "id": "xmas_q1",
       "template": "El que lleve el jersey más feo según el grupo bebe {Y} tragos",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
       "categoria": "Atributos y Preferencias"
     },
@@ -15,12 +12,403 @@
       "id": "xmas_q2",
       "template": "El que adore cantar villancicos reparte {Y} tragos",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
       "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q3",
+      "template": "El que haya puesto el árbol de Navidad primero este año bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q4",
+      "template": "Cualquiera que odie el turrón de mazapán bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q5",
+      "template": "El que haya comido más polvorones hoy reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q6",
+      "template": "{X} debe imitar a Papá Noel riendo; si no convence, bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q7",
+      "template": "El que sepa decir 'Feliz Navidad' en 3 idiomas diferentes reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "xmas_q8",
+      "template": "Cualquiera que tenga un calcetín de Navidad con su nombre bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q9",
+      "template": "El que haya hecho el Amigo Invisible más caro este año reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q10",
+      "template": "Cualquiera que haya visto 'Solo en Casa' este mes bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q11",
+      "template": "El último en gritar '¡FELIZ NAVIDAD!' bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "xmas_q12",
+      "template": "{X} debe nombrar 3 renos de Papá Noel en 5 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "xmas_q13",
+      "template": "Cualquiera que prefiera los Reyes Magos a Papá Noel reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q14",
+      "template": "Si llevas algo de color rojo o verde, repartes {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q15",
+      "template": "El que haya recibido el peor regalo de la historia bebe {Y} tragos por pena",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q16",
+      "template": "Cualquiera que haya ido a una cena de empresa este año bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q17",
+      "template": "{X} debe cantar el estribillo de un villancico o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q18",
+      "template": "El que tenga más luces de Navidad en su casa reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q19",
+      "template": "Cualquiera que haya comido uvas antes de tiempo por error bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q20",
+      "template": "El que sea capaz de comerse un polvorón y decir 'Pamplona' sin atragantarse reparte {Y} tragos",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q21",
+      "template": "Cualquiera que haya gastado más de 100€ en lotería este año bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q22",
+      "template": "El que siempre se queda dormido antes de las campanadas bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q23",
+      "template": "{X} debe adivinar quién es el 'Grinch' del grupo. Si acierta, el Grinch bebe {Y}. Si falla, bebe {X}.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "xmas_q24",
+      "template": "Cualquiera que ya tenga los regalos de Reyes comprados reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q25",
+      "template": "El que tenga el pijama de Navidad más ridículo bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q26",
+      "template": "{X} debe nombrar 3 platos típicos de Navidad en 5 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "xmas_q27",
+      "template": "Cualquiera que haya brindado ya hoy reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q28",
+      "template": "El que haya montado un Belén en su casa bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q29",
+      "template": "Cualquiera que sepa quién es Rodolfo el Reno reparte {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "xmas_q30",
+      "template": "{X} debe imitar a un elfo trabajando en el taller de Papá Noel o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q31",
+      "template": "El que haya devuelto algún regalo de Navidad este año bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q32",
+      "template": "Cualquiera que lleve purpurina encima hoy bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q33",
+      "template": "El que sea capaz de nombrar los 3 Reyes Magos en menos de 2 segundos reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "xmas_q34",
+      "template": "Cualquiera que prefiera el Roscón de Reyes sin nata bebe {Y} tragos por raro",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q35",
+      "template": "{X} debe contar un chiste malo navideño. Si nadie se ríe, bebe {Y} tragos.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q36",
+      "template": "El que tenga una foto con Papá Noel de pequeño reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q37",
+      "template": "Cualquiera que odie las reuniones familiares navideñas bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q38",
+      "template": "El primero que encuentre algo navideño en la habitación reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "xmas_q39",
+      "template": "{X} debe decir 'Ho Ho Ho' con voz muy grave cada vez que alguien beba durante los próximos 5 minutos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q40",
+      "template": "Cualquiera que haya llorado viendo una película de Navidad bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q41",
+      "template": "El que sepa qué se celebra el 28 de diciembre reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "xmas_q42",
+      "template": "Cualquiera que haya hecho un muñeco de nieve de verdad alguna vez reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q43",
+      "template": "{X} debe intentar silbar 'Last Christmas' de Wham! o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "xmas_q44",
+      "template": "El que tenga el contacto de su madre como 'Mamá ❤️' o similar bebe {Y} tragos por tierno",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q45",
+      "template": "Cualquiera que haya quemado algo cocinando en Navidad bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q46",
+      "template": "El último en tocarse la nariz como si fuera Rodolfo bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "xmas_q47",
+      "template": "{X} debe nombrar 5 cosas que se suelen regalar en Navidad en 10 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "xmas_q48",
+      "template": "Cualquiera que tenga un jersey navideño puesto ahora mismo reparte {Y} tragos",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q49",
+      "template": "El que haya comido más hoy bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q50",
+      "template": "Todos brindan y beben {Y} tragos por una feliz Navidad",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Celebración"
     }
   ]
 }

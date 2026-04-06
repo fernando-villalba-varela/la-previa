@@ -2,26 +2,414 @@
   "templates": [
     {
       "id": "home_q1",
-      "template": "Cualquiera que esté en calcetines bebe {Y} tragos",
+      "template": "Anyone wearing socks drinks {Y} sips",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
     },
     {
       "id": "home_q2",
-      "template": "El dueño de la casa reparte {Y} tragos por ser buen anfitrión",
+      "template": "The host deals {Y} sips for being a great host",
       "variables": {
-        "Y": [
-          "3",
-          "4",
-          "5"
-        ]
+        "Y": ["3", "4", "5"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q3",
+      "template": "Anyone who didn't bring anything to drink today drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q4",
+      "template": "The first one to touch the fridge deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q5",
+      "template": "{X} must go get ice or refill the glasses; if not, drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q6",
+      "template": "Anyone sitting on the floor drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q7",
+      "template": "Whoever helped clean up before the party started deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q8",
+      "template": "Anyone who lives less than 10 minutes from here drinks {Y} sips for being lucky",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q9",
+      "template": "The last person to touch a TV remote drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q10",
+      "template": "{X} must name 3 kitchen appliances in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "home_q11",
+      "template": "Anyone who has a plant in their own house that is still alive deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q12",
+      "template": "The person who has the WiFi for this house saved on their phone from before today deals {Y} sips for being a veteran",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q13",
+      "template": "If there's a pet in the house, everyone drinks {Y} sips in its honor",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q14",
+      "template": "{X} must try to make a basket with a paper ball into the trash can or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q15",
+      "template": "Anyone who is barefoot (no shoes or socks) drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q16",
+      "template": "The person who knows how many rooms this house has deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "home_q17",
+      "template": "If someone has ever broken something in this house, drink {Y} punishment sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q18",
+      "template": "Anyone who prefers ordering food delivery over cooking deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q19",
+      "template": "The last person to sit on a sofa drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q20",
+      "template": "{X} must organize any shoes lying around or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q21",
+      "template": "Anyone whose bed is currently unmade drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q22",
+      "template": "The person with the weirdest painting or poster in their own home drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q23",
+      "template": "If we are drinking from the house's glassware, everyone deals {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q24",
+      "template": "{X} must guess what color the host's toothbrush is or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "home_q25",
+      "template": "The first one to name 3 detergent brands deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q26",
+      "template": "Anyone currently sharing a flat drinks {Y} sips for the drama they live through",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q27",
+      "template": "The person with the most magnets on their fridge deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q28",
+      "template": "{X} must confess the weirdest thing they've done while home alone or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q29",
+      "template": "Anyone who has ever been locked out of their own house drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q30",
+      "template": "The last person to touch a pillow or cushion drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q31",
+      "template": "If someone brought ice today, they deal {Y} sips for saving the night",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q32",
+      "template": "{X} must name 3 things always in their pantry in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "home_q33",
+      "template": "Anyone with a shared Netflix/Disney+ subscription deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q34",
+      "template": "The best cook in the group, as voted, deals {Y} sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "home_q35",
+      "template": "{X} must try to imitate a noisy neighbor or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q36",
+      "template": "Anyone who killed a plant this year drinks {Y} sips for being a murderer",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q37",
+      "template": "The last person to say the host's full name drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q38",
+      "template": "If the house has a long hallway, the last to touch the end of it drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q39",
+      "template": "{X} must go to the kitchen and bring snacks for everyone or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q40",
+      "template": "Anyone currently wearing the host's slippers drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q41",
+      "template": "Whoever has the messiest room, by their own confession, drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q42",
+      "template": "Anyone who knows where the nearest light switch is deals {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "home_q43",
+      "template": "{X} must try to guess what's inside the fridge (a specific item) or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "home_q44",
+      "template": "The last to touch a wooden table drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q45",
+      "template": "Anyone who has ever slept on this sofa deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q46",
+      "template": "{X} must confess if they've ever snooped through someone's medicine cabinet or drawers or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "home_q47",
+      "template": "The first one to find a remote control deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "home_q48",
+      "template": "Anyone who has their parents' house keys deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q49",
+      "template": "The one who has lived in their current home the longest deals {Y} sips for stability",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "home_q50",
+      "template": "Everyone toasts to the good hosts and drinks {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Celebration"
     }
   ]
 }

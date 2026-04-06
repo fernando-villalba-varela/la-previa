@@ -4,10 +4,7 @@
       "id": "home_q1",
       "template": "Cualquiera que esté en calcetines bebe {Y} tragos",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
       "categoria": "Atributos y Preferencias"
     },
@@ -15,13 +12,404 @@
       "id": "home_q2",
       "template": "El dueño de la casa reparte {Y} tragos por ser buen anfitrión",
       "variables": {
-        "Y": [
-          "3",
-          "4",
-          "5"
-        ]
+        "Y": ["3", "4", "5"]
       },
       "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q3",
+      "template": "Cualquiera que no haya traído nada de beber hoy bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q4",
+      "template": "El primero que toque la nevera reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q5",
+      "template": "{X} debe ir a por hielo o rellenar los vasos; si no, bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q6",
+      "template": "Cualquiera que esté sentado en el suelo bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q7",
+      "template": "El que haya ayudado a limpiar antes de empezar la fiesta reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q8",
+      "template": "Cualquiera que viva a menos de 10 minutos de aquí bebe {Y} tragos por la suerte que tiene",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q9",
+      "template": "El último en tocar un mando de la tele bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q10",
+      "template": "{X} debe nombrar 3 electrodomésticos de la cocina en 5 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "home_q11",
+      "template": "Cualquiera que tenga una planta en su propia casa y siga viva reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q12",
+      "template": "El que tenga el WiFi de esta casa guardado en el móvil de antes de hoy reparte {Y} tragos por veterano",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q13",
+      "template": "Si hay alguna mascota en la casa, todos beben {Y} tragos en su honor",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q14",
+      "template": "{X} debe intentar hacer un triple con una bola de papel en la papelera o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q15",
+      "template": "Cualquiera que esté descalzo (sin zapatos ni calcetines) bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q16",
+      "template": "El que sepa cuántas habitaciones tiene esta casa reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "home_q17",
+      "template": "Si alguien ha roto algo en esta casa alguna vez, bebe {Y} tragos de castigo",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q18",
+      "template": "Cualquiera que prefiera pedir comida a domicilio antes que cocinar reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q19",
+      "template": "El último en sentarse en un sofá bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q20",
+      "template": "{X} debe organizar los zapatos que haya por ahí o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q21",
+      "template": "Cualquiera que tenga su cama sin hacer ahora mismo bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q22",
+      "template": "El que tenga el cuadro o póster más raro en su propia casa bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q23",
+      "template": "Si estamos bebiendo en vasos de cristal de la casa, todos reparten {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q24",
+      "template": "{X} debe adivinar de qué color es el cepillo de dientes del dueño de la casa o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "home_q25",
+      "template": "El primero que diga el nombre de 3 marcas de detergente reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q26",
+      "template": "Cualquiera que comparta piso actualmente bebe {Y} tragos por los dramas que vive",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q27",
+      "template": "El que tenga más imanes en su nevera reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q28",
+      "template": "{X} debe confesar lo más raro que ha hecho estando solo en casa o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q29",
+      "template": "Cualquiera que se haya quedado encerrado fuera de casa alguna vez bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q30",
+      "template": "El último en tocar una almohada o cojín bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q31",
+      "template": "Si alguien ha traído hielos hoy, reparte {Y} tragos por salvar la noche",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q32",
+      "template": "{X} debe nombrar 3 cosas que siempre hay en su despensa en 5 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "home_q33",
+      "template": "Cualquiera que tenga una suscripción compartida de Netflix/Disney+ reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q34",
+      "template": "El que cocine mejor del grupo según votación reparte {Y} tragos",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "home_q35",
+      "template": "{X} debe intentar imitar a un vecino ruidoso o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q36",
+      "template": "Cualquiera que haya matado una planta este año bebe {Y} tragos por asesino",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q37",
+      "template": "El último en decir el nombre completo del dueño de la casa bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q38",
+      "template": "Si la casa tiene un pasillo largo, el último en tocar el final del pasillo bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q39",
+      "template": "{X} debe ir a la cocina y traer algo para picar para todos o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q40",
+      "template": "Cualquiera que esté usando las pantuflas del dueño de la casa bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q41",
+      "template": "El que tenga el cuarto más desordenado según su propia confesión bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q42",
+      "template": "Cualquiera que sepa dónde está el interruptor de la luz más cercano reparte {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "home_q43",
+      "template": "{X} debe intentar adivinar qué hay dentro de la nevera (un objeto concreto) o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "home_q44",
+      "template": "El último en tocar una mesa de madera bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q45",
+      "template": "Cualquiera que haya dormido en este sofá alguna vez reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q46",
+      "template": "{X} debe confesar si alguna vez ha espiado el botiquín o los cajones de alguien o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "home_q47",
+      "template": "El primero que encuentre un mando a distancia reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "home_q48",
+      "template": "Cualquiera que tenga las llaves de casa de sus padres reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q49",
+      "template": "El que lleve más tiempo viviendo en su casa actual reparte {Y} tragos por estabilidad",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q50",
+      "template": "Todos brindan por los buenos anfitriones y beben {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Celebración"
     }
   ]
 }

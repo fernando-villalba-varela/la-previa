@@ -2,9 +2,328 @@
   "templates": [
     {
       "id": "val_c1",
-      "title": "Cupido borracho",
-      "description": "El objetivo debe mirar fijamente a los ojos a la persona que le hable. Si mira a otro lado, bebe castigo.",
-      "categoria": "Interacción"
+      "type": "obligation",
+      "template": "{PLAYER} must ask 'Cupid' (the host) for permission before speaking to anyone.",
+      "endTemplate": "{PLAYER} can speak freely now.",
+      "punishment": "If {PLAYER} speaks without permission, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "val_c2",
+      "type": "restriction",
+      "template": "{PLAYER} cannot use their hands to drink; someone must bring the glass to their mouth.",
+      "endTemplate": "{PLAYER} can use their hands now.",
+      "punishment": "If {PLAYER} touches their glass, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "val_c3",
+      "type": "obligation",
+      "template": "{PLAYER} must blow a kiss to the air after every drink.",
+      "endTemplate": "{PLAYER} no longer needs to blow kisses.",
+      "punishment": "If {PLAYER} forgets, drink {DRINKS} extra sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "val_c4",
+      "type": "restriction",
+      "template": "{PLAYER} cannot say the word 'No'. They can only say 'Yes' or 'Maybe'.",
+      "endTemplate": "{PLAYER} can be negative again.",
+      "punishment": "If {PLAYER} says 'No', drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "val_c5",
+      "type": "obligation",
+      "template": "{PLAYER} must wink flirtatiously at someone every time they are assigned to distribute drinks.",
+      "endTemplate": "{PLAYER} stops winking.",
+      "punishment": "If {PLAYER} doesn't do it, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "val_c6",
+      "type": "restriction",
+      "template": "{PLAYER} cannot be more than an arm's length away from their 'partner' (chosen now).",
+      "endTemplate": "{PLAYER} can move away.",
+      "punishment": "If they move away, {PLAYER} drinks {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "val_c7",
+      "type": "obligation",
+      "template": "{PLAYER} must refer to others as 'Your Highness of Love'.",
+      "endTemplate": "{PLAYER} can use normal names now.",
+      "punishment": "If {PLAYER} forgets the title, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "val_c8",
+      "type": "restriction",
+      "template": "{PLAYER} cannot look at their phone or reply to messages.",
+      "endTemplate": "{PLAYER} gets their phone back.",
+      "punishment": "If {PLAYER} looks at their phone, drink {DRINKS} punishment sips for ignoring those present.",
+      "variables": {
+        "DRINKS": ["5"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 12
+    },
+    {
+      "id": "val_c9",
+      "type": "obligation",
+      "template": "{PLAYER} must make a heart with their hands every time someone drinks.",
+      "endTemplate": "{PLAYER} can let go of their hands now.",
+      "punishment": "If {PLAYER} forgets, drink {DRINKS} extra sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "val_c10",
+      "type": "restriction",
+      "template": "{PLAYER} cannot say anything 'negative' or anything that sounds like a complaint.",
+      "endTemplate": "{PLAYER} can complain now.",
+      "punishment": "If {PLAYER} complains, drink {DRINKS} sips to sweeten up.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "val_c11",
+      "type": "obligation",
+      "template": "{PLAYER} must blush (or fake it) before answering any question.",
+      "endTemplate": "{PLAYER} can be serious now.",
+      "punishment": "If {PLAYER} doesn't blush, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Acting",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "val_c12",
+      "type": "restriction",
+      "template": "{PLAYER} cannot touch their glass if they are not smiling.",
+      "endTemplate": "{PLAYER} can be sad now.",
+      "punishment": "If {PLAYER} drinks while being serious, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "val_c13",
+      "type": "obligation",
+      "template": "{PLAYER} must say 'How romantic!' after any player distributes drinks.",
+      "endTemplate": "{PLAYER} can be quiet now.",
+      "punishment": "If {PLAYER} forgets, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "val_c14",
+      "type": "restriction",
+      "template": "{PLAYER} cannot use words that rhyme with each other.",
+      "endTemplate": "{PLAYER} can rhyme now.",
+      "punishment": "If {PLAYER} rhymes accidentally, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "val_c15",
+      "type": "obligation",
+      "template": "{PLAYER} must give a hug (if comfortable/safe) to someone every 3 turns.",
+      "endTemplate": "{PLAYER} no longer needs to hug.",
+      "punishment": "If {PLAYER} forgets the hug, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["3"]
+      },
+      "categoria": "Social",
+      "minRounds": 6,
+      "maxRounds": 12
+    },
+    {
+      "id": "val_c16",
+      "type": "restriction",
+      "template": "{PLAYER} cannot drink with their eyes open.",
+      "endTemplate": "{PLAYER} can look at their drink now.",
+      "punishment": "If {PLAYER} opens their eyes, drink {DRINKS} extra sips for peeking.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 9
+    },
+    {
+      "id": "val_c17",
+      "type": "obligation",
+      "template": "{PLAYER} must sing a line from a love song every time they are asked something.",
+      "endTemplate": "{PLAYER} can speak normally now.",
+      "punishment": "If {PLAYER} doesn't sing, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "val_c18",
+      "type": "restriction",
+      "template": "{PLAYER} cannot use their thumb for anything.",
+      "endTemplate": "{PLAYER} gets their thumbs back.",
+      "punishment": "If {PLAYER} uses their thumb, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "val_c19",
+      "type": "obligation",
+      "template": "{PLAYER} must say 'I love you so much, (someone's name)' before drinking.",
+      "endTemplate": "{PLAYER} can be cold now.",
+      "punishment": "If {PLAYER} forgets the love, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "val_c20",
+      "type": "restriction",
+      "template": "{PLAYER} cannot mention the word 'Love'.",
+      "endTemplate": "{PLAYER} can say 'Love' now.",
+      "punishment": "If {PLAYER} says the forbidden word, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 11
+    },
+    {
+      "id": "val_c21",
+      "type": "obligation",
+      "template": "{PLAYER} must lean on someone's shoulder when another person is speaking.",
+      "endTemplate": "{PLAYER} can stand upright now.",
+      "punishment": "If {PLAYER} separates, drink {DRINKS} sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "val_c22",
+      "type": "restriction",
+      "template": "{PLAYER} cannot sit down; they must stand or kneel until love gives them permission.",
+      "endTemplate": "{PLAYER} can sit down now.",
+      "punishment": "If {PLAYER} sits, drink {DRINKS} sips for being lazy.",
+      "variables": {
+        "DRINKS": ["3"]
+      },
+      "categoria": "Physical",
+      "minRounds": 3,
+      "maxRounds": 5
+    },
+    {
+      "id": "val_c23",
+      "type": "obligation",
+      "template": "{PLAYER} must imitate a character from a famous romantic movie.",
+      "endTemplate": "{PLAYER} gets out of the role.",
+      "punishment": "If {PLAYER} gets out of character, drink {DRINKS} sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Acting",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "val_c24",
+      "type": "restriction",
+      "template": "{PLAYER} cannot drink unless they toast with someone first.",
+      "endTemplate": "{PLAYER} can drink without toasting now.",
+      "punishment": "If {PLAYER} forgets the toast, drink {DRINKS} extra sips.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "val_c25",
+      "type": "obligation",
+      "template": "{PLAYER} must give a long, deep sigh after every drink.",
+      "endTemplate": "{PLAYER} can breathe normally now.",
+      "punishment": "If {PLAYER} forgets the sigh, drink {DRINKS} extra sip.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Physical",
+      "minRounds": 5,
+      "maxRounds": 12
     }
   ]
 }

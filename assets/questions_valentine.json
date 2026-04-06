@@ -4,10 +4,7 @@
       "id": "val_q1",
       "template": "El que haya sido peor en una cita bebe {Y} tragos",
       "variables": {
-        "Y": [
-          "3",
-          "4"
-        ]
+        "Y": ["3", "4"]
       },
       "categoria": "Atributos y Preferencias"
     },
@@ -15,12 +12,407 @@
       "id": "val_q2",
       "template": "Cualquiera que tenga pareja en este momento reparte {Y} tragos",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
       "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q3",
+      "template": "Cualquiera que esté soltero/a bebe {Y} tragos para celebrar su libertad",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q4",
+      "template": "El que haya tenido la cita más desastrosa reparte {Y} tragos por haber sobrevivido",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q5",
+      "template": "{X} debe decir un piropo a la persona de su derecha o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q6",
+      "template": "Cualquiera que haya usado una app de citas esta semana bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q7",
+      "template": "El que crea en el amor a primera vista reparte {Y} tragos por romántico",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q8",
+      "template": "Cualquiera que haya sido 'ghosteado' alguna vez bebe {Y} tragos para olvidar",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q9",
+      "template": "El último en hacer un corazón con las manos bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q10",
+      "template": "{X} debe nombrar 3 canciones de amor famosas en 5 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "val_q11",
+      "template": "Cualquiera que guarde fotos de su ex en el móvil bebe {Y} tragos de castigo",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q12",
+      "template": "El que haya dado el primer beso más joven reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q13",
+      "template": "Si alguien lleva algo de color rosa puesto, reparte {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q14",
+      "template": "{X} debe confesar su 'crush' platónico famoso o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q15",
+      "template": "Cualquiera que prefiera una cena romántica a una fiesta salvaje bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q16",
+      "template": "El que sepa cuándo es el aniversario de sus padres reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "val_q17",
+      "template": "Si el grupo decide que {X} es el más ligón, reparte {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4", "5"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "val_q18",
+      "template": "Cualquiera que haya llorado por amor alguna vez bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q19",
+      "template": "El último en señalar a alguien que le parezca guapo/a bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q20",
+      "template": "{X} debe imitar una escena de película romántica o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q21",
+      "template": "Cualquiera que haya regalado flores este último año reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q22",
+      "template": "El que haya tenido la relación más larga del grupo reparte {Y} tragos por experto",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q23",
+      "template": "Si crees en el hilo rojo del destino, bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q24",
+      "template": "{X} debe nombrar 3 motes cariñosos típicos en 5 segundos o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "val_q25",
+      "template": "El primero que diga '¡TE QUIERO!' en alto repartes {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q26",
+      "template": "Cualquiera que haya escrito una carta de amor alguna vez reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q27",
+      "template": "El que sea más detallista según el grupo reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q28",
+      "template": "{X} debe intentar convencer al grupo de que es el mejor partido o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q29",
+      "template": "Cualquiera que se haya enamorado de un amigo/a alguna vez bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q30",
+      "template": "El último en dar un beso al aire bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q31",
+      "template": "Si estás enamorado/a ahora mismo, reparte {Y} tragos por tu felicidad",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q32",
+      "template": "{X} debe nombrar 3 lugares ideales para una primera cita en 10 segundos o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "val_q33",
+      "template": "Cualquiera que haya perdonado una infidelidad alguna vez bebe {Y} tragos por santo",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q34",
+      "template": "El que sea capaz de guiñarle un ojo a {PLAYER2} sin reírse reparte {Y} tragos",
+      "variables": {
+        "PLAYER2": ["PLAYER"],
+        "Y": ["2", "3"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "val_q35",
+      "template": "{X} debe cantar una estrofa de una canción romántica o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q36",
+      "template": "Cualquiera que haya tenido un amor de verano inolvidable bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q37",
+      "template": "El último en tocar algo de color rojo bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q38",
+      "template": "Si alguien ha tenido una cita a ciegas, reparte {Y} tragos por valiente",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q39",
+      "template": "{X} debe elegir quién del grupo tiene los ojos más bonitos. El elegido reparte {Y} tragos.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q40",
+      "template": "Cualquiera que prefiera el chocolate a las flores repartes {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q41",
+      "template": "El que sepa quién es Cupido reparte {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "val_q42",
+      "template": "Cualquiera que haya olvidado un aniversario alguna vez bebe {Y} tragos de castigo",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q43",
+      "template": "{X} debe intentar adivinar cuál es el tipo ideal de {PLAYER2} o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER1"],
+        "PLAYER2": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "val_q44",
+      "template": "El último en soplar un beso al grupo bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q45",
+      "template": "Cualquiera que haya besado a alguien en esta habitación reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q46",
+      "template": "{X} debe confesar cuál fue su primer amor de la infancia o beber {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "val_q47",
+      "template": "El primero que encuentre algo con forma de corazón repartes {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "val_q48",
+      "template": "Cualquiera que tenga una canción 'nuestra' con alguien reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q49",
+      "template": "El que crea en el destino como motor del amor repartes {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "val_q50",
+      "template": "Todos brindan por el amor (o por la soltería) y beben {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Celebración"
     }
   ]
 }

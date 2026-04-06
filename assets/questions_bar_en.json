@@ -2,38 +2,415 @@
   "templates": [
     {
       "id": "bar_q1",
-      "template": "El que tenga la bebida con menos hielo bebe {Y} tragos",
+      "template": "The person with the drink with the least ice drinks {Y} sips",
       "variables": {
-        "Y": [
-          "2",
-          "3",
-          "4"
-        ]
+        "Y": ["2", "3", "4"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
     },
     {
       "id": "bar_q2",
-      "template": "Cualquiera que haya invitado alguna ronda hoy reparte {Y} tragos",
+      "template": "Anyone who has bought a round today deals {Y} sips",
       "variables": {
-        "Y": [
-          "2",
-          "3",
-          "4"
-        ]
+        "Y": ["2", "3", "4"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
     },
     {
       "id": "bar_q3",
-      "template": "El primero que choque vasos con la mesa bebe {Y} tragos",
+      "template": "The first one to clink their glass on the table drinks {Y} sips",
       "variables": {
-        "Y": [
-          "1",
-          "2"
-        ]
+        "Y": ["1", "2"]
       },
-      "categoria": "Velocidad"
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q4",
+      "template": "{X} must go and ask the bartender for a napkin; if they don't, drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q5",
+      "template": "The person keeping track of how much we've spent drinks {Y} sips for being responsible",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q6",
+      "template": "Anyone who has ever picked someone up in this bar deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q7",
+      "template": "The person who knows the name of the server who attended us deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "bar_q8",
+      "template": "If you are drinking beer, deal {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q9",
+      "template": "If you are drinking a mixed drink or cocktail, drink {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q10",
+      "template": "The last person to raise their glass and say 'CHEERS!' drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q11",
+      "template": "{X} must guess how much the cheapest drink in the bar costs or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "bar_q12",
+      "template": "Anyone who has gone to the bathroom in the last 10 minutes drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q13",
+      "template": "The first person to name 3 different brands of whiskey deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q14",
+      "template": "If the group decides that {X} is the one who can drink the most, deal {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4", "5"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "bar_q15",
+      "template": "Anyone sitting on a bar stool drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q16",
+      "template": "The person who suggested coming to this bar drinks {Y} sips for their choice",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q17",
+      "template": "{X} must try to toss a piece of paper into an empty glass or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["2", "3"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q18",
+      "template": "Anyone who has already finished their drink drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q19",
+      "template": "The person with the fullest glass right now deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q20",
+      "template": "The last person to touch the bar counter drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q21",
+      "template": "Anyone who has been to this bar more than 5 times deals {Y} sips for being a regular",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q22",
+      "template": "{X} must name 5 ingredients of a Mojito in 10 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "bar_q23",
+      "template": "The person who has the song currently playing in their playlist deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q24",
+      "template": "Anyone who is behaving 'too well' according to the group drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q25",
+      "template": "The first person to say the name of 3 different types of beer deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q26",
+      "template": "{X} must imitate an overworked bartender or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q27",
+      "template": "Anyone who has eaten some snacks (chips, nuts...) drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q28",
+      "template": "The person with the least phone battery deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q29",
+      "template": "If the bar has a terrace and we are inside, everyone drinks {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q30",
+      "template": "The person who can wink at someone at another table without them getting mad deals {Y} sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q31",
+      "template": "Anyone who has ordered a glass of water today drinks {Y} sips for being sensible",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q32",
+      "template": "{X} must name 3 brands of gin in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "bar_q33",
+      "template": "The last person to touch something blue drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q34",
+      "template": "Anyone who prefers rum over gin drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q35",
+      "template": "{X} must tell a funny story that happened to them in a bar. If no one laughs, drink {Y} sips.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q36",
+      "template": "The person who has gone the longest without letting go of their phone drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q37",
+      "template": "Anyone who has a visible tattoo deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q38",
+      "template": "The first person to point to a bathroom deals {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q39",
+      "template": "{X} must try to convince someone from another table to say hi to the group or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q40",
+      "template": "Anyone who has ever worked in hospitality deals {Y} sips for being a veteran",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q41",
+      "template": "The person who knows what an 'Old Fashioned' is deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "bar_q42",
+      "template": "Anyone wearing sunglasses (even on their head) drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q43",
+      "template": "{X} must try to guess what {PLAYER2} is going to order next or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER1"],
+        "PLAYER2": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "bar_q44",
+      "template": "The person with the emptiest glass must go and order the next round or drink {Y} sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "bar_q45",
+      "template": "Anyone drinking something non-alcoholic drinks {Y} sips for being healthy",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q46",
+      "template": "The last person to touch their own drink drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "bar_q47",
+      "template": "{X} must name 3 typical party songs in 10 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "bar_q48",
+      "template": "Anyone dancing, even while sitting, deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q49",
+      "template": "The person with the most keys in their pocket drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "bar_q50",
+      "template": "Everyone raises their glass, toasts to the night, and drinks {Y} sips",
+      "variables": {
+        "Y": ["1", "2", "3"]
+      },
+      "categoria": "Celebration"
     }
   ]
 }

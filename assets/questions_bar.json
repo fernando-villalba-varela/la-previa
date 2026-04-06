@@ -4,11 +4,7 @@
       "id": "bar_q1",
       "template": "El que tenga la bebida con menos hielo bebe {Y} tragos",
       "variables": {
-        "Y": [
-          "2",
-          "3",
-          "4"
-        ]
+        "Y": ["2", "3", "4"]
       },
       "categoria": "Atributos y Preferencias"
     },
@@ -16,11 +12,7 @@
       "id": "bar_q2",
       "template": "Cualquiera que haya invitado alguna ronda hoy reparte {Y} tragos",
       "variables": {
-        "Y": [
-          "2",
-          "3",
-          "4"
-        ]
+        "Y": ["2", "3", "4"]
       },
       "categoria": "Atributos y Preferencias"
     },
@@ -28,12 +20,397 @@
       "id": "bar_q3",
       "template": "El primero que choque vasos con la mesa bebe {Y} tragos",
       "variables": {
-        "Y": [
-          "1",
-          "2"
-        ]
+        "Y": ["1", "2"]
       },
       "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q4",
+      "template": "{X} debe ir a pedir una servilleta al camarero; si no lo hace, bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q5",
+      "template": "El que lleve la cuenta de cuánto llevamos gastado bebe {Y} tragos por responsable",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q6",
+      "template": "Cualquiera que haya ligado en este bar alguna vez reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q7",
+      "template": "El que sepa el nombre del camarero/a que nos ha atendido reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "bar_q8",
+      "template": "Si estás bebiendo cerveza, repartes {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q9",
+      "template": "Si estás bebiendo un combinado o cocktail, bebes {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q10",
+      "template": "El último en levantar su copa y decir '¡SALUD!' bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q11",
+      "template": "{X} debe adivinar cuánto cuesta la bebida más barata del bar o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "bar_q12",
+      "template": "Cualquiera que haya ido al baño en los últimos 10 minutos bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q13",
+      "template": "El primero que nombre 3 marcas de whisky diferentes reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q14",
+      "template": "Si el grupo decide que {X} es el que más aguanta bebiendo, reparte {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4", "5"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "bar_q15",
+      "template": "Cualquiera que esté sentado en un taburete bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q16",
+      "template": "El que haya propuesto venir a este bar bebe {Y} tragos por su elección",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q17",
+      "template": "{X} debe intentar encestar un papel en un vaso vacío o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["2", "3"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q18",
+      "template": "Cualquiera que ya se haya terminado su bebida bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q19",
+      "template": "El que tenga el vaso más lleno en este momento reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q20",
+      "template": "El último en tocar la barra del bar bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q21",
+      "template": "Cualquiera que haya venido a este bar más de 5 veces reparte {Y} tragos por ser un habitual",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q22",
+      "template": "{X} debe nombrar 5 ingredientes del Mojito en 10 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "bar_q23",
+      "template": "El que tenga la canción que está sonando en su playlist reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q24",
+      "template": "Cualquiera que se esté portando demasiado bien según el grupo bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q25",
+      "template": "El primero que diga el nombre de 3 tipos de cerveza diferentes reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q26",
+      "template": "{X} debe imitar a un camarero desbordado de trabajo o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q27",
+      "template": "Cualquiera que haya comido algo de picar (patatas, frutos secos...) bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q28",
+      "template": "El que tenga menos batería en el móvil reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q29",
+      "template": "Si el bar tiene terraza y estamos dentro, todos beben {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q30",
+      "template": "El que sea capaz de guiñarle un ojo a alguien de otra mesa sin que se enfade reparte {Y} tragos",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q31",
+      "template": "Cualquiera que haya pedido un vaso de agua hoy bebe {Y} tragos por sensato",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q32",
+      "template": "{X} debe nombrar 3 marcas de ginebra en 5 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "bar_q33",
+      "template": "El último en tocar algo de color azul bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q34",
+      "template": "Cualquiera que prefiera el ron al gin bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q35",
+      "template": "{X} debe contar una anécdota graciosa que le haya pasado en un bar. Si nadie se ríe, bebe {Y} tragos.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q36",
+      "template": "El que lleve más tiempo sin soltar el móvil bebe {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q37",
+      "template": "Cualquiera que tenga un tatuaje visible reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q38",
+      "template": "El primero que señale un baño reparte {Y} tragos",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q39",
+      "template": "{X} debe intentar convencer a alguien de otra mesa para que salude al grupo o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q40",
+      "template": "Cualquiera que haya trabajado alguna vez en hosteleria reparte {Y} tragos por veterano",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q41",
+      "template": "El que sepa qué es un 'Old Fashioned' reparte {Y} tragos",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "bar_q42",
+      "template": "Cualquiera que lleve gafas de sol (aunque sea en la cabeza) bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q43",
+      "template": "{X} debe intentar adivinar qué es lo siguiente que va a pedir {PLAYER2} o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER1"],
+        "PLAYER2": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duelos y Batallas"
+    },
+    {
+      "id": "bar_q44",
+      "template": "El que tenga el vaso más vacío debe ir a pedir la siguiente ronda o beber {Y} tragos",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Retos y Castigos"
+    },
+    {
+      "id": "bar_q45",
+      "template": "Cualquiera que esté bebiendo algo que no contenga alcohol bebe {Y} tragos por sano",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q46",
+      "template": "El último en tocar su propia bebida bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Velocidad"
+    },
+    {
+      "id": "bar_q47",
+      "template": "{X} debe nombrar 3 canciones típicas de fiesta en 10 segundos o bebe {Y} tragos",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivial y Conocimientos"
+    },
+    {
+      "id": "bar_q48",
+      "template": "Cualquiera que esté bailando aunque sea sentado reparte {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q49",
+      "template": "El que tenga más llaves en el bolsillo bebe {Y} tragos",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q50",
+      "template": "Todos levantan su copa, brindan por la noche y beben {Y} tragos",
+      "variables": {
+        "Y": ["1", "2", "3"]
+      },
+      "categoria": "Celebración"
     }
   ]
 }

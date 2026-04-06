@@ -2,9 +2,406 @@
   "templates": [
     {
       "id": "bar_e1",
-      "title": "¡Ronda de la casa!",
-      "description": "Todos beben 2 tragos en honor al camarero.",
-      "categoria": "Global"
+      "type": "global_rule",
+      "title": "Round on the House",
+      "template": "EVENT: 🍻 The bar is hosting! (I wish). All players must choose someone to drink 2 sips.",
+      "endTemplate": "The round on the house is over.",
+      "categoria": "Global",
+      "minRounds": 1,
+      "maxRounds": 1,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e2",
+      "type": "multiplier",
+      "title": "Happy Hour",
+      "template": "EVENT: 🍹 It's Happy Hour! All distributed drinks are worth double (x2).",
+      "endTemplate": "Happy Hour is over. Normal prices again.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "bar_e3",
+      "type": "global_rule",
+      "title": "Music Too Loud",
+      "template": "EVENT: 📢 Can't hear anything! You can only speak by shouting. Anyone speaking normally drinks {PUNISHMENT} sips.",
+      "endTemplate": "The music has been turned down. You can talk normally now.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e4",
+      "type": "special_condition",
+      "title": "The Bartender is Watching",
+      "template": "EVENT: 👨‍🍳 Watch the 'Bartender' (the game host). If they catch you looking at your phone, drink {PUNISHMENT} sips.",
+      "endTemplate": "The Bartender has gone to the kitchen.",
+      "variables": {
+        "PUNISHMENT": ["3", "4"]
+      },
+      "categoria": "Rules",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e5",
+      "type": "global_rule",
+      "title": "No Leaning",
+      "template": "EVENT: 🚫 The bar is sticky! No one can lean their elbows on the table. Fail = {PUNISHMENT} sips.",
+      "endTemplate": "You can lean your elbows again.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e6",
+      "type": "multiplier",
+      "title": "Bar Closing",
+      "template": "EVENT: 🕒 Last call! All drinks are worth triple (x3) to finish up quickly.",
+      "endTemplate": "The bar has closed. Oh wait, we're still going.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "bar_e7",
+      "type": "global_rule",
+      "title": "Classy Mode",
+      "template": "EVENT: 🍷 We're in a luxury bar. Before drinking, you must make a sophisticated toast. Fail = {PUNISHMENT} sips.",
+      "endTemplate": "Back to the usual bar.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e8",
+      "type": "special_condition",
+      "title": "Bar Fight",
+      "template": "EVENT: 🥊 Duel! Every time someone drinks, they must challenge another player to 'Rock, Paper, Scissors'. The loser drinks {PUNISHMENT} extra sips.",
+      "endTemplate": "The fight is over. Everyone friends again.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Duels",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e9",
+      "type": "global_rule",
+      "title": "No Real Names",
+      "template": "EVENT: 🏷️ You're with strangers. You must call everyone by an invented nickname. Using a real name = {PUNISHMENT} sips.",
+      "endTemplate": "You all know each other now.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e10",
+      "type": "global_rule",
+      "title": "Warm Beer",
+      "template": "EVENT: 🍺 How gross! Those drinking beer (or similar) drink double for not complaining.",
+      "endTemplate": "The beer is cold again.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e11",
+      "type": "special_condition",
+      "title": "Crazy Jukebox",
+      "template": "EVENT: 📻 You have to hum a famous song before speaking. If no one guesses it, drink {PUNISHMENT} sips.",
+      "endTemplate": "The Jukebox is fixed.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e12",
+      "type": "global_rule",
+      "title": "The Big Guy in the Bar",
+      "template": "EVENT: 🕺 The heaviest player (or largest) decides who drinks every time the game says 'PLAYER'.",
+      "endTemplate": "The power of the Big Guy has ended.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e13",
+      "type": "global_rule",
+      "title": "No Pointing",
+      "template": "EVENT: ☝️ It's rude to point in public. Anyone pointing with their finger drinks {PUNISHMENT} sips.",
+      "endTemplate": "You can point now.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 5,
+      "maxRounds": 9,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e14",
+      "type": "multiplier",
+      "title": "Friend's Day",
+      "template": "EVENT: 🫂 For every sip you drink, a friend of your choice must drink another. Solidarity!",
+      "endTemplate": "Solidarity is over.",
+      "variables": {},
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e15",
+      "type": "global_rule",
+      "title": "Foreign Accent",
+      "template": "EVENT: 🌍 You're a tourist in this bar. You must speak with an accent from another country. Fail = {PUNISHMENT} sips.",
+      "endTemplate": "You're going home.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e16",
+      "type": "special_condition",
+      "title": "The Bathroom is Busy",
+      "template": "EVENT: 🚽 No one can go to the bathroom for the duration of this event. Anyone who can't hold it drinks {PUNISHMENT} punishment sips.",
+      "endTemplate": "The bathroom is free.",
+      "variables": {
+        "PUNISHMENT": ["5"]
+      },
+      "categoria": "Rules",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e17",
+      "type": "global_rule",
+      "title": "Left Hand Only",
+      "template": "EVENT: ✋ You can only use your left hand to touch your glass. Using the right = {PUNISHMENT} sips.",
+      "endTemplate": "You can use both hands again.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e18",
+      "type": "multiplier",
+      "title": "Shot Night",
+      "template": "EVENT: 🥃 All individual drinks turn into 'imaginary shots' (drink double).",
+      "endTemplate": "Shots are over.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "bar_e19",
+      "type": "global_rule",
+      "title": "No Dirty Words",
+      "template": "EVENT: 🤐 This is a family bar (not really). No swearing. Each swear word = {PUNISHMENT} sips.",
+      "endTemplate": "You can be rude again.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Behavior",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e20",
+      "type": "special_condition",
+      "title": "The Shy Waiter",
+      "template": "EVENT: 😶 You can only communicate via gestures, no talking. Anyone who speaks drinks {PUNISHMENT} sips.",
+      "endTemplate": "You can talk again.",
+      "variables": {
+        "PUNISHMENT": ["3"]
+      },
+      "categoria": "Social",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e21",
+      "type": "global_rule",
+      "title": "Mandatory Tip",
+      "template": "EVENT: 💸 Every time you give out drinks, you must drink 1 yourself as a 'tip' for the service.",
+      "endTemplate": "No more tips.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e22",
+      "type": "multiplier",
+      "title": "Non-Alcoholic Alcohol",
+      "template": "EVENT: 🥤 Anyone drinking something non-alcoholic drinks triple (or invites 3 sips if they don't want to drink).",
+      "endTemplate": "No more soda discrimination.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "bar_e23",
+      "type": "global_rule",
+      "title": "Finger Up",
+      "template": "EVENT: ☝️ The last one to put their finger on the table when the Bartender does, drinks {PUNISHMENT} sips.",
+      "endTemplate": "Finger game over.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Global",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e24",
+      "type": "special_condition",
+      "title": "Bar Tab",
+      "template": "EVENT: 🧾 At the end of this event, the one who drank the least must drink the sum of the drinks of the two who drank the most.",
+      "endTemplate": "Pay up! (Drink now).",
+      "variables": {},
+      "categoria": "Rules",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e25",
+      "type": "global_rule",
+      "title": "Karaoke Mode",
+      "template": "EVENT: 🎤 Everything you say must be sung. Speaking normally = {PUNISHMENT} sips.",
+      "endTemplate": "Karaoke is over.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e26",
+      "type": "global_rule",
+      "title": "Ice down the Back",
+      "template": "EVENT: 🧊 If you fail a challenge, someone can choose to put an imaginary ice cube (drink {PUNISHMENT} extra sips) or a real one on you.",
+      "endTemplate": "No more ice cubes.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Modifiers",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e27",
+      "type": "multiplier",
+      "title": "Ladies/Gents Night",
+      "template": "EVENT: 💃 Men drink double; 🕺 Women drink double (The Bartender chooses gender at random each turn).",
+      "endTemplate": "Equality for everyone.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "bar_e28",
+      "type": "global_rule",
+      "title": "Bar Security",
+      "template": "EVENT: 👮 No one can leave their seat. Anyone who gets up drinks {PUNISHMENT} sips and sits back down.",
+      "endTemplate": "You can move around.",
+      "variables": {
+        "PUNISHMENT": ["3"]
+      },
+      "categoria": "Physical",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e29",
+      "type": "special_condition",
+      "title": "Crazy Mix",
+      "template": "EVENT: 🧪 If you drink, you must mix a bit of another drink into your glass (if possible/safe) or drink double.",
+      "endTemplate": "No more mixing.",
+      "variables": {},
+      "categoria": "Rules",
+      "minRounds": 2,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "bar_e30",
+      "type": "global_rule",
+      "title": "The Last Mohican",
+      "template": "EVENT: 🏹 The last one to finish their actual drink before this event ends invites a general round of 3 sips.",
+      "endTemplate": "Event finished.",
+      "variables": {},
+      "categoria": "Global",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
     }
   ]
 }

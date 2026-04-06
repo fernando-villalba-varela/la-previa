@@ -2,25 +2,413 @@
   "templates": [
     {
       "id": "xmas_q1",
-      "template": "El que lleve el jersey más feo según el grupo bebe {Y} tragos",
+      "template": "The person wearing the ugliest sweater according to the group drinks {Y} sips",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
     },
     {
       "id": "xmas_q2",
-      "template": "El que adore cantar villancicos reparte {Y} tragos",
+      "template": "Anyone who loves singing Christmas carols deals {Y} sips",
       "variables": {
-        "Y": [
-          "2",
-          "3"
-        ]
+        "Y": ["2", "3"]
       },
-      "categoria": "Atributos y Preferencias"
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q3",
+      "template": "The person who put up the Christmas tree first this year drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q4",
+      "template": "Anyone who hates marzipan drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q5",
+      "template": "The person who has eaten the most Christmas sweets today deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q6",
+      "template": "{X} must imitate Santa Claus laughing; if not convincing, drinks {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q7",
+      "template": "The person who can say 'Merry Christmas' in 3 different languages deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "xmas_q8",
+      "template": "Anyone who has a Christmas stocking with their name on it drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q9",
+      "template": "The person who did the most expensive Secret Santa this year deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q10",
+      "template": "Anyone who has watched 'Home Alone' this month drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q11",
+      "template": "The last person to shout 'MERRY CHRISTMAS!' drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "xmas_q12",
+      "template": "{X} must name 3 of Santa's reindeer in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "xmas_q13",
+      "template": "Anyone who prefers the Three Wise Men over Santa deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q14",
+      "template": "If you are wearing something red or green, deal {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q15",
+      "template": "The person who received the worst gift ever drinks {Y} sips out of pity",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q16",
+      "template": "Anyone who went to an office Christmas party this year drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q17",
+      "template": "{X} must sing the chorus of a Christmas carol or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q18",
+      "template": "The person with the most Christmas lights at home deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q19",
+      "template": "Anyone who accidentally ate the 'lucky grapes' early drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q20",
+      "template": "The person who can eat a 'polvorón' and say 'Christmas' without choking deals {Y} sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q21",
+      "template": "Anyone who spent more than $100 on the lottery this Christmas drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q22",
+      "template": "The person who always falls asleep before midnight on New Year's Eve drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q23",
+      "template": "{X} must guess who the 'Grinch' of the group is. If correct, the Grinch drinks {Y}. If wrong, {X} drinks.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Duels and Battles"
+    },
+    {
+      "id": "xmas_q24",
+      "template": "Anyone who has already bought all their gifts deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q25",
+      "template": "The person with the most ridiculous Christmas pajamas drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q26",
+      "template": "{X} must name 3 typical Christmas dishes in 5 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "xmas_q27",
+      "template": "Anyone who has already made a toast today deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q28",
+      "template": "The person who set up a Nativity scene at home drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q29",
+      "template": "Anyone who knows who Rudolph the Reindeer is deals {Y} sips",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "xmas_q30",
+      "template": "{X} must imitate an elf working in Santa's workshop or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q31",
+      "template": "The person who returned a Christmas gift this year drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q32",
+      "template": "Anyone wearing glitter today drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q33",
+      "template": "The person who can name the 3 Wise Men in less than 2 seconds deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "xmas_q34",
+      "template": "Anyone who prefers Christmas cake without cream drinks {Y} sips for being weird",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q35",
+      "template": "{X} must tell a bad Christmas joke. If no one laughs, drink {Y} sips.",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q36",
+      "template": "The person who has a childhood photo with Santa deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q37",
+      "template": "Anyone who hates Christmas family gatherings drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q38",
+      "template": "The first person to find something Christmas-related in the room deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "xmas_q39",
+      "template": "{X} must say 'Ho Ho Ho' in a very deep voice every time someone drinks for the next 5 minutes or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["4", "5"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q40",
+      "template": "Anyone who has cried watching a Christmas movie drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q41",
+      "template": "The person who knows what is celebrated on December 26th deals {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "xmas_q42",
+      "template": "Anyone who has ever made a real snowman deals {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q43",
+      "template": "{X} must try to whistle 'Last Christmas' by Wham! or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Challenges and Punishments"
+    },
+    {
+      "id": "xmas_q44",
+      "template": "The person who has their mother saved as 'Mom ❤️' or similar drinks {Y} sips for being sweet",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q45",
+      "template": "Anyone who has burned something while cooking at Christmas drinks {Y} sips",
+      "variables": {
+        "Y": ["3", "4"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q46",
+      "template": "The last person to touch their nose as if they were Rudolph drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Speed"
+    },
+    {
+      "id": "xmas_q47",
+      "template": "{X} must name 5 things commonly given as Christmas gifts in 10 seconds or drink {Y} sips",
+      "variables": {
+        "X": ["PLAYER"],
+        "Y": ["3", "4"]
+      },
+      "categoria": "Trivia and Knowledge"
+    },
+    {
+      "id": "xmas_q48",
+      "template": "Anyone wearing a Christmas sweater right now deals {Y} sips",
+      "variables": {
+        "Y": ["4", "5"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q49",
+      "template": "The person who has eaten the most today drinks {Y} sips",
+      "variables": {
+        "Y": ["2", "3"]
+      },
+      "categoria": "Attributes and Preferences"
+    },
+    {
+      "id": "xmas_q50",
+      "template": "Everyone toasts and drinks {Y} sips for a Merry Christmas",
+      "variables": {
+        "Y": ["1", "2"]
+      },
+      "categoria": "Celebration"
     }
   ]
 }

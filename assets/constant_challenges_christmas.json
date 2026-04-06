@@ -2,9 +2,328 @@
   "templates": [
     {
       "id": "xmas_c1",
-      "title": "Modo Elfo",
-      "description": "El objetivo debe terminar cada frase diciendo 'Ho ho ho'.",
-      "categoria": "Verbal"
+      "type": "obligation",
+      "template": "{PLAYER} debe terminar cada frase diciendo 'Ho ho ho'.",
+      "endTemplate": "{PLAYER} ya no tiene que decir 'Ho ho ho'.",
+      "punishment": "Si {PLAYER} olvida el 'Ho ho ho', bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "xmas_c2",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar las manos para tocar su vaso; debe pedir ayuda.",
+      "endTemplate": "{PLAYER} ya puede usar sus manos.",
+      "punishment": "Si {PLAYER} usa las manos, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "xmas_c3",
+      "type": "obligation",
+      "template": "{PLAYER} debe llevar un gorro de Santa (o algo que lo parezca) puesto.",
+      "endTemplate": "{PLAYER} ya puede quitarse el gorro.",
+      "punishment": "Si {PLAYER} se quita el gorro, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Prenda",
+      "minRounds": 6,
+      "maxRounds": 12
+    },
+    {
+      "id": "xmas_c4",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir la palabra 'Navidad'.",
+      "endTemplate": "{PLAYER} ya puede decir 'Navidad'.",
+      "punishment": "Si {PLAYER} dice 'Navidad', bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "xmas_c5",
+      "type": "obligation",
+      "template": "{PLAYER} debe reírse como Santa (¡Jo, jo, jo!) antes de cada trago.",
+      "endTemplate": "{PLAYER} ya puede reírse normal.",
+      "punishment": "Si {PLAYER} no se ríe así, bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "xmas_c6",
+      "type": "restriction",
+      "template": "{PLAYER} no puede sentarse mientras los demás estén de pie.",
+      "endTemplate": "{PLAYER} ya puede sentarse libremente.",
+      "punishment": "Si {PLAYER} se sienta, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "xmas_c7",
+      "type": "obligation",
+      "template": "{PLAYER} debe actuar como un reno cada vez que alguien diga su nombre.",
+      "endTemplate": "{PLAYER} deja de ser un reno.",
+      "punishment": "Si {PLAYER} no hace de reno, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 5,
+      "maxRounds": 8
+    },
+    {
+      "id": "xmas_c8",
+      "type": "restriction",
+      "template": "{PLAYER} no puede beber su propio trago; otro jugador debe dárselo.",
+      "endTemplate": "{PLAYER} ya puede beber solo.",
+      "punishment": "Si {PLAYER} bebe solo, bebe {DRINKS} tragos extra.",
+      "variables": {
+        "DRINKS": ["3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 5
+    },
+    {
+      "id": "xmas_c9",
+      "type": "obligation",
+      "template": "{PLAYER} debe referirse a todos como 'Mi pequeño elfo'.",
+      "endTemplate": "{PLAYER} ya puede usar nombres normales.",
+      "punishment": "Si {PLAYER} olvida el apodo, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "xmas_c10",
+      "type": "restriction",
+      "template": "{PLAYER} no puede decir 'Sí' ni 'No'.",
+      "endTemplate": "{PLAYER} ya puede decir 'Sí' y 'No'.",
+      "punishment": "Si {PLAYER} dice una prohibida, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "xmas_c11",
+      "type": "obligation",
+      "template": "{PLAYER} debe bailar un villancico imaginario cada vez que beba.",
+      "endTemplate": "{PLAYER} deja de bailar.",
+      "punishment": "Si {PLAYER} no baila, bebe {DRINKS} tragos adicionales.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "xmas_c12",
+      "type": "restriction",
+      "template": "{PLAYER} no puede mirar su teléfono.",
+      "endTemplate": "{PLAYER} ya puede mirar su teléfono.",
+      "punishment": "Si {PLAYER} mira el móvil, bebe {DRINKS} tragos por antisocial.",
+      "variables": {
+        "DRINKS": ["4", "5"]
+      },
+      "categoria": "Social",
+      "minRounds": 5,
+      "maxRounds": 15
+    },
+    {
+      "id": "xmas_c13",
+      "type": "obligation",
+      "template": "{PLAYER} debe beber con el dedo meñique levantado como un rey mago.",
+      "endTemplate": "{PLAYER} ya puede beber normal.",
+      "punishment": "Si {PLAYER} baja el meñique, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "xmas_c14",
+      "type": "restriction",
+      "template": "{PLAYER} no puede hablar sin antes pedir permiso a Santa (el dueño de la casa).",
+      "endTemplate": "{PLAYER} ya puede hablar libremente.",
+      "punishment": "Si {PLAYER} habla sin permiso, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "xmas_c15",
+      "type": "obligation",
+      "template": "{PLAYER} debe imitar a un juguete de Navidad cada vez que le toque un reto.",
+      "endTemplate": "{PLAYER} vuelve a ser humano.",
+      "punishment": "Si {PLAYER} no actúa, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "xmas_c16",
+      "type": "restriction",
+      "template": "{PLAYER} no puede tocar el suelo con los pies descalzos (si lo está).",
+      "endTemplate": "{PLAYER} ya puede tocar el suelo.",
+      "punishment": "Si {PLAYER} toca el suelo, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Físico",
+      "minRounds": 4,
+      "maxRounds": 8
+    },
+    {
+      "id": "xmas_c17",
+      "type": "obligation",
+      "template": "{PLAYER} debe decir '¡Es un milagro de Navidad!' después de cada respuesta correcta.",
+      "endTemplate": "{PLAYER} ya no necesita celebrar.",
+      "punishment": "Si {PLAYER} olvida el milagro, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "xmas_c18",
+      "type": "restriction",
+      "template": "{PLAYER} no puede beber si no hay música sonando.",
+      "endTemplate": "{PLAYER} puede beber en silencio.",
+      "punishment": "Si {PLAYER} bebe sin música, bebe {DRINKS} tragos extra.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Especial",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "xmas_c19",
+      "type": "obligation",
+      "template": "{PLAYER} debe llevar los brazos en jarra como un muñeco de nieve.",
+      "endTemplate": "{PLAYER} ya puede bajar los brazos.",
+      "punishment": "Si {PLAYER} baja los brazos, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 3,
+      "maxRounds": 6
+    },
+    {
+      "id": "xmas_c20",
+      "type": "restriction",
+      "template": "{PLAYER} no puede usar palabras que contengan la letra 'R'.",
+      "endTemplate": "{PLAYER} ya puede usar la 'R'.",
+      "punishment": "Si {PLAYER} dice la 'R', bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 3,
+      "maxRounds": 5
+    },
+    {
+      "id": "xmas_c21",
+      "type": "obligation",
+      "template": "{PLAYER} debe guiñar un ojo cada vez que beba.",
+      "endTemplate": "{PLAYER} ya no necesita guiñar.",
+      "punishment": "Si {PLAYER} no guiña, bebe {DRINKS} trago adicional.",
+      "variables": {
+        "DRINKS": ["1"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 10
+    },
+    {
+      "id": "xmas_c22",
+      "type": "restriction",
+      "template": "{PLAYER} no puede mencionar nombres de comidas navideñas.",
+      "endTemplate": "{PLAYER} ya puede hablar de comida.",
+      "punishment": "Si {PLAYER} menciona comida, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 8
+    },
+    {
+      "id": "xmas_c23",
+      "type": "obligation",
+      "template": "{PLAYER} debe actuar como si tuviera mucho frío siempre que hable.",
+      "endTemplate": "{PLAYER} ya puede entrar en calor.",
+      "punishment": "Si {PLAYER} habla normal, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2"]
+      },
+      "categoria": "Actuación",
+      "minRounds": 4,
+      "maxRounds": 7
+    },
+    {
+      "id": "xmas_c24",
+      "type": "restriction",
+      "template": "{PLAYER} no puede beber con la mano que usa normalmente.",
+      "endTemplate": "{PLAYER} vuelve a su mano habitual.",
+      "punishment": "Si {PLAYER} usa su mano buena, bebe {DRINKS} tragos.",
+      "variables": {
+        "DRINKS": ["2", "3"]
+      },
+      "categoria": "Físico",
+      "minRounds": 5,
+      "maxRounds": 9
+    },
+    {
+      "id": "xmas_c25",
+      "type": "obligation",
+      "template": "{PLAYER} debe dar las gracias a Santa después de cada trago.",
+      "endTemplate": "{PLAYER} ya no necesita ser agradecido.",
+      "punishment": "Si {PLAYER} olvida las gracias, bebe {DRINKS} trago.",
+      "variables": {
+        "DRINKS": ["1", "2"]
+      },
+      "categoria": "Verbal",
+      "minRounds": 5,
+      "maxRounds": 10
     }
   ]
 }

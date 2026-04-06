@@ -2,9 +2,400 @@
   "templates": [
     {
       "id": "xmas_e1",
-      "title": "¡Feliz Navidad, Madafakas!",
-      "description": "Cada jugador debe darle un abrazo a quien tenga a su derecha o beber 3 tragos.",
-      "categoria": "Global"
+      "type": "global_rule",
+      "title": "Merry Christmas, Madafakas!",
+      "template": "EVENT: 🎄 Each player must give a hug to the person on their right or drink 3 sips.",
+      "endTemplate": "Hug time is over.",
+      "categoria": "Global",
+      "minRounds": 1,
+      "maxRounds": 1,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e2",
+      "type": "multiplier",
+      "title": "Christmas Spirit",
+      "template": "EVENT: 🎅 The spirit of Christmas doubles all drinks (x2) for the duration of this event.",
+      "endTemplate": "The Christmas spirit has left. Drinks return to normal.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {
+        "multiplier": 2
+      }
+    },
+    {
+      "id": "xmas_e3",
+      "type": "global_rule",
+      "title": "Christmas Eve Dinner",
+      "template": "EVENT: 🍽️ No one can talk with their mouth open (not even to drink). If someone does, they drink {PUNISHMENT} sips.",
+      "endTemplate": "Christmas Eve dinner is over. You can talk freely again.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e4",
+      "type": "special_condition",
+      "title": "Christmas Carols Non-Stop",
+      "template": "EVENT: 🎶 Before each drink, you must sing a line from a Christmas carol. If you don't, drink {PUNISHMENT} extra sips.",
+      "endTemplate": "Singing is no longer required to drink.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Special",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e5",
+      "type": "global_rule",
+      "title": "The Poisoned Gift",
+      "template": "EVENT: 🎁 If it's your turn to drink, you can 'gift' half of your sips to another player, but you always drink the other half yourself.",
+      "endTemplate": "Drinks can no longer be gifted.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e6",
+      "type": "global_rule",
+      "title": "Worker Elf Mode",
+      "template": "EVENT: 🧝 Everyone must refer to the host as 'Santa'. Whoever makes a mistake drinks {PUNISHMENT} sips.",
+      "endTemplate": "Santa has gone back to the North Pole.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 5,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e7",
+      "type": "multiplier",
+      "title": "Snowstorm",
+      "template": "EVENT: ❄️ It's cold! Drinks of cold beverages are worth x3 for the duration of the storm.",
+      "endTemplate": "The storm has passed. Drinks are back to x1.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "xmas_e8",
+      "type": "global_rule",
+      "title": "No Grinch Allowed",
+      "template": "EVENT: 🚫 Complaining or making faces is forbidden. Whoever does, drinks {PUNISHMENT} sips for ruining Christmas.",
+      "endTemplate": "Grinch mode is allowed once again.",
+      "variables": {
+        "PUNISHMENT": ["3", "4"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e9",
+      "type": "special_condition",
+      "title": "Christmas Toast",
+      "template": "EVENT: 🥂 Each time someone drinks, everyone must say 'Cheers and Merry Christmas!'. Whoever forgets drinks {PUNISHMENT} sip.",
+      "endTemplate": "Mandatory toasts are over.",
+      "variables": {
+        "PUNISHMENT": ["1"]
+      },
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e10",
+      "type": "global_rule",
+      "title": "Santa's Mittens",
+      "template": "EVENT: 🧤 You must drink as if you were wearing mittens (without using individual fingers). Fail = {PUNISHMENT} sips.",
+      "endTemplate": "You can use your fingers to drink again.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Physical Challenge",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e11",
+      "type": "global_rule",
+      "title": "The 12 Bells",
+      "template": "EVENT: 🔔 Each time someone drinks, they must make a bell sound 'Ding!'. If they forget, they drink {PUNISHMENT} extra sips.",
+      "endTemplate": "The bells have stopped ringing.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e12",
+      "type": "special_condition",
+      "title": "Forced Secret Santa",
+      "template": "EVENT: 🕵️ You choose a 'Secret Santa'. Every time you drink, they drink the same amount. If they drink, you don't.",
+      "endTemplate": "Secret Santa is over.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 5,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e13",
+      "type": "global_rule",
+      "title": "Lapland Accent",
+      "template": "EVENT: 🗺️ Everyone must talk as if they were very cold and their teeth were chattering. Fail = {PUNISHMENT} sips.",
+      "endTemplate": "You can talk with your normal accent now.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e14",
+      "type": "multiplier",
+      "title": "Christmas Lottery",
+      "template": "EVENT: 🎫 Roll an imaginary (or real) die. If even, your drinks are worth x2. If odd, they are worth x0.",
+      "endTemplate": "The lottery is over. Back to normal value.",
+      "variables": {},
+      "categoria": "Luck",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e15",
+      "type": "global_rule",
+      "title": "Royal Protocol of the Three Kings",
+      "template": "EVENT: 👑 You must refer to others as 'Your Majesty'. Whoever uses a real name drinks {PUNISHMENT} sips.",
+      "endTemplate": "Royal protocol has ended.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e16",
+      "type": "special_condition",
+      "title": "Shared Gift",
+      "template": "EVENT: 🤝 Each time you drink, the person to your left also drinks a sip out of Christmas solidarity.",
+      "endTemplate": "Christmas solidarity is over.",
+      "variables": {},
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e17",
+      "type": "global_rule",
+      "title": "Silent Night Silence",
+      "template": "EVENT: 🤫 You can only speak in whispers. Anyone who speaks normally drinks {PUNISHMENT} sips.",
+      "endTemplate": "The silent night is over. You can shout now.",
+      "variables": {
+        "PUNISHMENT": ["2", "3"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e18",
+      "type": "special_condition",
+      "title": "Rudolph the Reindeer",
+      "template": "EVENT: 🦌 You must touch your nose (pretending it's red) before each drink. If you forget, drink {PUNISHMENT} extra sips.",
+      "endTemplate": "Rudolph has gone to rest.",
+      "variables": {
+        "PUNISHMENT": ["1", "2"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 4,
+      "maxRounds": 7,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e19",
+      "type": "global_rule",
+      "title": "Coal for the Naughty",
+      "template": "EVENT: 🌑 The player who has failed the most so far receives the 'Coal': their drinks are worth x2 during this event.",
+      "endTemplate": "The coal has turned into a diamond (or just gone).",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e20",
+      "type": "global_rule",
+      "title": "Mandatory Ho Ho Ho",
+      "template": "EVENT: 🎅 You must end every sentence with a 'Ho Ho Ho'. Fail = {PUNISHMENT} sips.",
+      "endTemplate": "Santa has lost his voice.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e21",
+      "type": "multiplier",
+      "title": "Night Frost",
+      "template": "EVENT: 🧊 Everything freezes! If you don't drink your sips in less than 10 seconds, the punishment triples.",
+      "endTemplate": "The frost is over.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {
+        "multiplier": 3
+      }
+    },
+    {
+      "id": "xmas_e22",
+      "type": "global_rule",
+      "title": "Three Kings Cake",
+      "template": "EVENT: 🥮 There is an invisible 'bean'. If you have to drink an even number of sips, you drink 1 extra (the bean).",
+      "endTemplate": "The cake is gone.",
+      "variables": {},
+      "categoria": "Chance",
+      "minRounds": 4,
+      "maxRounds": 8,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e23",
+      "type": "global_rule",
+      "title": "Christmas Star Mode",
+      "template": "EVENT: ⭐ The player with the shiniest clothing is the 'Star'. Everyone drinks when the Star drinks.",
+      "endTemplate": "The star has dimmed.",
+      "variables": {},
+      "categoria": "Global",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e24",
+      "type": "special_condition",
+      "title": "Christmas Affection",
+      "template": "EVENT: ❤️ Before someone drinks, they must receive a Christmas compliment from the group or they are not allowed to drink (and drink {PUNISHMENT} punishment sips instead).",
+      "endTemplate": "The excess affection is over.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Social",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e25",
+      "type": "global_rule",
+      "title": "Mistletoe Warning",
+      "template": "EVENT: 🌿 If two people stare at each other for more than 3 seconds, they must give each other a kiss on the cheek or drink {PUNISHMENT} sips.",
+      "endTemplate": "The mistletoe has withered.",
+      "variables": {
+        "PUNISHMENT": ["3"]
+      },
+      "categoria": "Social",
+      "minRounds": 4,
+      "maxRounds": 10,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e26",
+      "type": "global_rule",
+      "title": "Santa's Suit",
+      "template": "EVENT: 🧥 You can't use your hands to touch your glass; someone must help you drink (or you drink {PUNISHMENT} punishment sips).",
+      "endTemplate": "You can use your own hands again.",
+      "variables": {
+        "PUNISHMENT": ["4"]
+      },
+      "categoria": "Physical Challenge",
+      "minRounds": 2,
+      "maxRounds": 4,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e27",
+      "type": "multiplier",
+      "title": "Fireplace Heat",
+      "template": "EVENT: 🔥 So relaxing! Drinks of people sitting down are half, drinks of people standing up are double.",
+      "endTemplate": "The fireplace has gone out.",
+      "variables": {},
+      "categoria": "Multipliers",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e28",
+      "type": "global_rule",
+      "title": "Living Nativity Mode",
+      "template": "EVENT: 🐑 Each player must choose an animal from the Nativity scene and make its sound before speaking. Fail = {PUNISHMENT} sips.",
+      "endTemplate": "The Nativity scene has been disassembled.",
+      "variables": {
+        "PUNISHMENT": ["2"]
+      },
+      "categoria": "Behavior Rules",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e29",
+      "type": "global_rule",
+      "title": "Grape Timer",
+      "template": "EVENT: 🕒 You have 12 seconds to complete any challenge assigned to you during this event. If it takes longer, drink double.",
+      "endTemplate": "There is no longer a rush with the grapes.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 3,
+      "maxRounds": 6,
+      "metadata": {}
+    },
+    {
+      "id": "xmas_e30",
+      "type": "global_rule",
+      "title": "New Year, New Life",
+      "template": "EVENT: 🎉 Role swap! The person who has given out the most sips so far is now the one who drinks the most, and vice versa.",
+      "endTemplate": "Roles return to their original state.",
+      "variables": {},
+      "categoria": "Modifiers",
+      "minRounds": 3,
+      "maxRounds": 5,
+      "metadata": {}
     }
   ]
 }
