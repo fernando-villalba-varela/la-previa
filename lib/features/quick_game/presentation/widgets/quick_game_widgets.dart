@@ -6,6 +6,7 @@ import 'challenge_builders.dart';
 import 'event_builders.dart';
 import 'icon_helpers.dart';
 import 'package:drinkaholic/features/shared/presentation/widgets/answer_info_button.dart';
+import 'package:drinkaholic/features/quick_game/presentation/utils/pack_theme_extension.dart';
 
 /// Construye el contenido central del juego
 Widget buildCenterContent(GameState gameState) {
@@ -98,83 +99,100 @@ Widget buildCenterContent(GameState gameState) {
                 builder: (context, value, child) {
                   return Transform.scale(
                     scale: 0.9 + (0.1 * value),
-                    child: Container(
-                      padding: EdgeInsets.all(padding),
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.white.withOpacity(0.25), Colors.white.withOpacity(0.10)],
-                        ),
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Colors.white.withOpacity(0.4), width: 2),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 25,
-                            offset: const Offset(0, 8),
-                            spreadRadius: 2,
-                          ),
-                          BoxShadow(
-                            color: Colors.white.withOpacity(0.1),
-                            blurRadius: 15,
-                            offset: const Offset(0, -5),
-                            spreadRadius: 1,
-                          ),
-                          BoxShadow(
-                            color: Colors.cyan.withOpacity(0.2),
-                            blurRadius: 30,
-                            offset: const Offset(0, 0),
-                            spreadRadius: -5,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          TweenAnimationBuilder<double>(
-                            duration: const Duration(milliseconds: 800),
-                            tween: Tween(begin: 0.0, end: 1.0),
-                            builder: (context, iconValue, child) {
-                              return Transform.rotate(
-                                angle: iconValue * 2 * pi,
-                                child: Icon(
-                                  getDynamicIcon(gameState.currentChallenge!),
-                                  size: iconSize + (sin(iconValue * 2 * pi) * 5),
-                                  color: Colors.white.withOpacity(0.9 + (0.1 * iconValue)),
-                                ),
-                              );
-                            },
-                          ),
-                          SizedBox(height: isSmallScreen ? 10 : 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                child: AnimatedDefaultTextStyle(
-                                  duration: const Duration(milliseconds: 400),
-                                  style: TextStyle(
-                                    fontSize: fontSize,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    height: 1.4,
-                                    shadows: [
-                                      Shadow(color: Colors.black.withOpacity(0.5), offset: const Offset(2, 2), blurRadius: 4),
-                                      Shadow(
-                                        color: Colors.cyan.withOpacity(0.3),
-                                        offset: const Offset(-1, -1),
-                                        blurRadius: 2,
-                                      ),
-                                    ],
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(padding),
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          decoration: gameState.packType == PackThemeType.classic
+                              ? BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [Colors.white.withOpacity(0.25), Colors.white.withOpacity(0.10)],
                                   ),
-                                  child: Text(gameState.currentChallenge!, textAlign: TextAlign.center),
-                                ),
+                                  borderRadius: BorderRadius.circular(25),
+                                  border: Border.all(color: Colors.white.withOpacity(0.4), width: 2),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 25,
+                                      offset: const Offset(0, 8),
+                                      spreadRadius: 2,
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.white.withOpacity(0.1),
+                                      blurRadius: 15,
+                                      offset: const Offset(0, -5),
+                                      spreadRadius: 1,
+                                    ),
+                                    BoxShadow(
+                                      color: Colors.cyan.withOpacity(0.2),
+                                      blurRadius: 30,
+                                      offset: const Offset(0, 0),
+                                      spreadRadius: -5,
+                                    ),
+                                  ],
+                                )
+                              : gameState.cardDecoration,
+                          child: Column(
+                            children: [
+                              TweenAnimationBuilder<double>(
+                                duration: const Duration(milliseconds: 800),
+                                tween: Tween(begin: 0.0, end: 1.0),
+                                builder: (context, iconValue, child) {
+                                  return Transform.rotate(
+                                    angle: iconValue * 2 * pi,
+                                    child: Icon(
+                                      getDynamicIcon(gameState.currentChallenge!),
+                                      size: iconSize + (sin(iconValue * 2 * pi) * 5),
+                                      color: Colors.white.withOpacity(0.9 + (0.1 * iconValue)),
+                                    ),
+                                  );
+                                },
                               ),
-                              AnswerInfoButton(answer: gameState.currentAnswer),
+                              SizedBox(height: isSmallScreen ? 10 : 20),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: AnimatedDefaultTextStyle(
+                                      duration: const Duration(milliseconds: 400),
+                                      style: TextStyle(
+                                        fontSize: fontSize,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        height: 1.4,
+                                        shadows: [
+                                          Shadow(color: Colors.black.withOpacity(0.5), offset: const Offset(2, 2), blurRadius: 4),
+                                          Shadow(
+                                            color: Colors.cyan.withOpacity(0.3),
+                                            offset: const Offset(-1, -1),
+                                            blurRadius: 2,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Text(gameState.currentChallenge!, textAlign: TextAlign.center),
+                                    ),
+                                  ),
+                                  AnswerInfoButton(answer: gameState.currentAnswer),
+                                ],
+                              ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        if (gameState.themeIcon != null)
+                          Positioned(
+                            top: 15,
+                            right: 35,
+                            child: Icon(
+                              gameState.themeIcon,
+                              color: Colors.white.withOpacity(0.4),
+                              size: 28,
+                            ),
+                          ),
+                      ],
                     ),
                   );
                 },

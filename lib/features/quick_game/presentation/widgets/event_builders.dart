@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/models/game_state.dart';
 import 'avatar_builders.dart';
 import 'package:drinkaholic/features/shared/presentation/widgets/answer_info_button.dart';
+import 'package:drinkaholic/features/quick_game/presentation/utils/pack_theme_extension.dart';
 
 /// Construye el contenido de eventos globales
 Widget buildEventContent(GameState gameState) {
@@ -121,59 +122,107 @@ Widget buildEventContent(GameState gameState) {
             builder: (context, value, child) {
               return Transform.scale(
                 scale: 0.85 + (0.15 * value),
-                child: Container(
-                  padding: EdgeInsets.all(padding),
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: isEndingEvent
-                          ? [Colors.purple.withOpacity(0.2), Colors.indigo.withOpacity(0.05)]
-                          : [Colors.cyan.withOpacity(0.2), Colors.blue.withOpacity(0.05)],
-                    ),
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.5), width: 3),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 25, offset: const Offset(0, 10)),
-                      BoxShadow(
-                        color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.2),
-                        blurRadius: 30,
-                        spreadRadius: -2,
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      // Event description with cosmic styling
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            child: AnimatedDefaultTextStyle(
-                              duration: const Duration(milliseconds: 600),
-                              style: TextStyle(
-                                fontSize: fontSize,
-                                fontWeight: FontWeight.w800,
-                                color: Colors.white,
-                                height: 1.3,
-                                shadows: [
-                                  Shadow(color: Colors.black.withOpacity(0.6), offset: const Offset(2, 2), blurRadius: 6),
-                                  Shadow(
-                                    color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.4),
-                                    offset: const Offset(-1, -1),
-                                    blurRadius: 3,
-                                  ),
-                                ],
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(padding),
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: gameState.packType == PackThemeType.classic
+                          ? BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: isEndingEvent
+                                    ? [Colors.purple.withOpacity(0.2), Colors.indigo.withOpacity(0.05)]
+                                    : [Colors.cyan.withOpacity(0.2), Colors.blue.withOpacity(0.05)],
                               ),
-                              child: Text(gameState.currentChallenge!, textAlign: TextAlign.center),
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.5), width: 3),
+                              boxShadow: [
+                                BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 25, offset: const Offset(0, 10)),
+                                BoxShadow(
+                                  color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.2),
+                                  blurRadius: 30,
+                                  spreadRadius: -2,
+                                ),
+                              ],
+                            )
+                          : gameState.cardDecoration.copyWith(
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                color: isEndingEvent ? Colors.purple.withOpacity(0.6) : gameState.themeBorderColor,
+                                width: 3,
+                              ),
+                            ),
+                      child: Column(
+                        children: [
+                          // Event description with cosmic styling
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.15),
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.3),
+                                      blurRadius: 15,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                child: Icon(
+                                  isEndingEvent ? Icons.auto_awesome : Icons.rocket_launch,
+                                  color: Colors.white,
+                                  size: 32,
+                                ),
+                              ),
+                              const SizedBox(width: 15),
+                              Text(
+                                isEndingEvent ? 'EVÉNTO FINAL' : 'EVENTO GLOBAL',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.9),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 2,
+                                  shadows: [Shadow(color: (isEndingEvent ? Colors.purple : Colors.cyan), blurRadius: 10)],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 25),
+                          Expanded(
+                            child: Center(
+                              child: Text(
+                                isEndingEvent ? gameState.currentEventEnd!.endDescription : gameState.currentChallenge!,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.4,
+                                  shadows: [Shadow(color: Colors.black.withOpacity(0.5), offset: const Offset(2, 2), blurRadius: 4)],
+                                ),
+                              ),
                             ),
                           ),
-                          AnswerInfoButton(answer: gameState.currentAnswer),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    if (gameState.themeIcon != null)
+                      Positioned(
+                        top: 15,
+                        right: 30,
+                        child: Icon(
+                          gameState.themeIcon,
+                          color: Colors.white.withOpacity(0.3),
+                          size: 24,
+                        ),
+                      ),
+                  ],
                 ),
               );
             },

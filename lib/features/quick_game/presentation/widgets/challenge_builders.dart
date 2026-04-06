@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/models/game_state.dart';
 import 'avatar_builders.dart';
+import '../utils/pack_theme_extension.dart';
 
 /// Construye el contenido de retos constantes
 Widget buildConstantChallengeContent(GameState gameState) {
@@ -79,55 +80,83 @@ Widget buildConstantChallengeContent(GameState gameState) {
           SizedBox(height: 20),
 
           // Challenge container with special styling
-          Container(
-            padding: EdgeInsets.all(padding),
-            margin: EdgeInsets.symmetric(horizontal: padding),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: isEndingChallenge
-                    ? [Colors.green.withOpacity(0.15), Colors.green.withOpacity(0.05)]
-                    : [Colors.orange.withOpacity(0.15), Colors.orange.withOpacity(0.05)],
-              ),
-              borderRadius: BorderRadius.circular(25),
-              border: Border.all(color: (isEndingChallenge ? Colors.green : Colors.orange).withOpacity(0.4), width: 2),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 20, offset: const Offset(0, 8))],
-            ),
-            child: Column(
-              children: [
-                // Challenge text with star icon
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      isEndingChallenge ? Icons.celebration : Icons.star,
-                      size: iconSize * 0.7,
-                      color: isEndingChallenge ? Colors.green : Colors.orange,
-                    ),
-                    const SizedBox(width: 8),
-                    Flexible(
-                      child: Text(
-                        gameState.currentChallenge!,
-                        style: TextStyle(
-                          fontSize: fontSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          height: 1.3,
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                padding: EdgeInsets.all(padding),
+                margin: EdgeInsets.symmetric(horizontal: padding),
+                decoration: gameState.packType == PackThemeType.classic
+                    ? BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: isEndingChallenge
+                              ? [Colors.green.withOpacity(0.15), Colors.green.withOpacity(0.05)]
+                              : [Colors.orange.withOpacity(0.15), Colors.orange.withOpacity(0.05)],
                         ),
-                        textAlign: TextAlign.center,
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(color: (isEndingChallenge ? Colors.green : Colors.orange).withOpacity(0.4), width: 2),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 20, offset: const Offset(0, 8))],
+                      )
+                    : gameState.cardDecoration.copyWith(
+                        border: Border.all(
+                          color: isEndingChallenge ? Colors.green.withOpacity(0.6) : gameState.themeBorderColor,
+                          width: 2,
+                        ),
+                      ),
+                child: Column(
+                  children: [
+                    // Challenge text with star icon
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          isEndingChallenge ? Icons.check_circle : Icons.star,
+                          color: Colors.white.withOpacity(0.9),
+                          size: 28,
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          child: Text(
+                            isEndingChallenge ? 'RETO FINALIZADO' : 'RETO CONSTANTE',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 1.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      isEndingChallenge ? gameState.currentChallengeEnd!.endDescription : gameState.currentChallenge!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSize,
+                        fontWeight: FontWeight.bold,
+                        height: 1.3,
+                        shadows: [Shadow(color: Colors.black.withOpacity(0.3), offset: const Offset(1, 1), blurRadius: 2)],
                       ),
                     ),
                   ],
                 ),
-                // Show punishment info for new constant challenges
-                if (isNewChallenge && !isEndingChallenge) ...[
-                  const SizedBox(height: 15),
-                  ..._buildPunishmentInfo(gameState, context),
-                ],
-              ],
-            ),
+              ),
+              if (gameState.themeIcon != null)
+                Positioned(
+                  top: 12,
+                  right: padding + 12,
+                  child: Icon(
+                    gameState.themeIcon,
+                    color: Colors.white.withOpacity(0.3),
+                    size: 24,
+                  ),
+                ),
+            ],
           ),
         ],
       );
