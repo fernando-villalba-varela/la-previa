@@ -1,0 +1,27 @@
+{
+  "templates": [
+    {
+      "id": "home_q1",
+      "template": "Cualquiera que esté en calcetines bebe {Y} tragos",
+      "variables": {
+        "Y": [
+          "2",
+          "3"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "home_q2",
+      "template": "El dueño de la casa reparte {Y} tragos por ser buen anfitrión",
+      "variables": {
+        "Y": [
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    }
+  ]
+}

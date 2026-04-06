@@ -1,0 +1,26 @@
+{
+  "templates": [
+    {
+      "id": "xmas_q1",
+      "template": "El que lleve el jersey más feo según el grupo bebe {Y} tragos",
+      "variables": {
+        "Y": [
+          "2",
+          "3"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "xmas_q2",
+      "template": "El que adore cantar villancicos reparte {Y} tragos",
+      "variables": {
+        "Y": [
+          "2",
+          "3"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    }
+  ]
+}

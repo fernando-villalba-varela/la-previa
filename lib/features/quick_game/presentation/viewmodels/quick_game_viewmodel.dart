@@ -11,6 +11,7 @@ import '../../../../core/models/event.dart';
 import '../../../../core/models/event_generator.dart';
 import '../../../../core/services/consent_and_ad_service.dart';
 import '../../../../core/services/language_service.dart';
+import '../../../../core/services/pack_service.dart';
 
 /// ViewModel que gestiona toda la lógica del juego rápido.
 /// Maneja: generación de desafíos, selección de jugadores, rondas,
@@ -183,6 +184,7 @@ class QuickGameViewModel extends ChangeNotifier {
         question = await QuestionGenerator.generateRandomQuestionForPlayer(
           selectedPlayer.nombre,
           language: languageCode,
+          activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
         );
         attempts++;
       } while (_usedQuestions.contains(question.question) && attempts < 30);
@@ -199,6 +201,7 @@ class QuickGameViewModel extends ChangeNotifier {
       do {
         question = await QuestionGenerator.generateRandomQuestion(
           language: languageCode,
+          activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
         );
         attempts++;
       } while (_usedQuestions.contains(question.question) && attempts < 30);
@@ -297,6 +300,7 @@ class QuickGameViewModel extends ChangeNotifier {
         player1.nombre,
         player2.nombre,
         language: languageCode,
+        activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
       );
       attempts++;
     } while (_usedQuestions.contains(question.question) && attempts < 30);
@@ -342,6 +346,7 @@ class QuickGameViewModel extends ChangeNotifier {
           eligiblePlayer,
           _currentRound,
           language: languageCode,
+          activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
         );
 
     _constantChallenges.add(constantChallenge);
@@ -376,6 +381,7 @@ class QuickGameViewModel extends ChangeNotifier {
           player2,
           _currentRound,
           language: languageCode,
+          activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
         );
 
     _constantChallenges.add(constantChallenge);
@@ -395,6 +401,7 @@ class QuickGameViewModel extends ChangeNotifier {
     final event = await EventGenerator.generateRandomEvent(
       _currentRound,
       language: languageCode,
+      activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
     );
 
     _events.add(event);
@@ -487,8 +494,8 @@ class QuickGameViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Avanza al siguiente desafío
-  Future<void> nextChallenge() async {
+  /// Avanza al siguiente desafío. Retorna true si se mostró un anuncio y el usuario no es premium (para mostrar upsell).
+  Future<bool> nextChallenge() async {
     _gameStarted = true;
     _currentRound++;
     _currentChallengeEnd = null;
@@ -499,24 +506,28 @@ class QuickGameViewModel extends ChangeNotifier {
     _isCurrentChallengeConstant = false;
     notifyListeners();
 
-    await _interstitial.onRoundCompleted();
+    final isPremiumUser = context.read<PackService>().isPremium;
+    final adShown = await _interstitial.onRoundCompleted(isPremium: isPremiumUser);
 
     // Verificar checkpoint de endless mode
     if (await checkEndlessModeCheckpoint()) {
-      return; // El screen manejará el diálogo
+      return false; // El screen manejará el diálogo
+    }
+
+    // Si se mostró un anuncio y no es premium, avisamos al UI para el upsell
+    if (adShown && !isPremiumUser) {
+      // Nota: No generamos el siguiente reto aún o sí? 
+      // El usuario querrá ver el siguiente reto TRAS el upsell.
+      // Pero mejor generarlo ya para que esté listo.
     }
 
     // Verificar fin de evento
     await _checkForEventEnding();
-    if (_currentEventEnd != null) {
-      return;
-    }
+    if (_currentEventEnd != null) return adShown && !isPremiumUser;
 
     // Verificar fin de reto constante
     await _checkForConstantChallengeEnding();
-    if (_currentChallengeEnd != null) {
-      return;
-    }
+    if (_currentChallengeEnd != null) return adShown && !isPremiumUser;
 
     // Generar nuevo evento
     final gameState = createGameState();
@@ -526,7 +537,7 @@ class QuickGameViewModel extends ChangeNotifier {
           gameState.activeEvents,
         )) {
       await _generateNewEvent();
-      return;
+      return adShown && !isPremiumUser;
     }
 
     // Generar nuevo reto constante
@@ -540,7 +551,7 @@ class QuickGameViewModel extends ChangeNotifier {
       } else {
         await _generateNewConstantChallenge();
       }
-      return;
+      return adShown && !isPremiumUser;
     }
 
     // Generar nuevo desafío normal
@@ -560,6 +571,8 @@ class QuickGameViewModel extends ChangeNotifier {
       _currentPlayerIndex = -1;
       notifyListeners();
     }
+
+    return adShown && !isPremiumUser;
   }
 
   /// Actualiza la lista de jugadores

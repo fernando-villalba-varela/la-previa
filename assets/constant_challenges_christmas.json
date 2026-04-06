@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "xmas_c1",
+      "title": "Modo Elfo",
+      "description": "El objetivo debe terminar cada frase diciendo 'Ho ho ho'.",
+      "categoria": "Verbal"
+    }
+  ]
+}

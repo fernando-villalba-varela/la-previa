@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
 
@@ -11,7 +11,7 @@ class FabNewLeague extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       foregroundColor: Colors.black87,
-      backgroundColor: Colors.tealAccent.shade200,
+      backgroundColor: const Color(0xFF00C9FF),
       elevation: 4,
       onPressed: onPressed,
       icon: const Icon(Icons.add),

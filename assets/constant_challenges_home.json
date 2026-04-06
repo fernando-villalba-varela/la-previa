@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "home_c1",
+      "title": "El sofá es lava",
+      "description": "El objetivo no puede sentarse en ningún lado en toda la partida. Si lo hace bebe castigo.",
+      "categoria": "Físico"
+    }
+  ]
+}

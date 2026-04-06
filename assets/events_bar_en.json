@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "bar_e1",
+      "title": "¡Ronda de la casa!",
+      "description": "Todos beben 2 tragos en honor al camarero.",
+      "categoria": "Global"
+    }
+  ]
+}

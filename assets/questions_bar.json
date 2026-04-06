@@ -1,0 +1,39 @@
+{
+  "templates": [
+    {
+      "id": "bar_q1",
+      "template": "El que tenga la bebida con menos hielo bebe {Y} tragos",
+      "variables": {
+        "Y": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q2",
+      "template": "Cualquiera que haya invitado alguna ronda hoy reparte {Y} tragos",
+      "variables": {
+        "Y": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "categoria": "Atributos y Preferencias"
+    },
+    {
+      "id": "bar_q3",
+      "template": "El primero que choque vasos con la mesa bebe {Y} tragos",
+      "variables": {
+        "Y": [
+          "1",
+          "2"
+        ]
+      },
+      "categoria": "Velocidad"
+    }
+  ]
+}

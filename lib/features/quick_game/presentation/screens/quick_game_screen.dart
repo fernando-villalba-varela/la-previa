@@ -11,6 +11,8 @@ import '../../../../core/models/player.dart';
 import '../../../../core/models/constant_challenge.dart';
 import '../../../../core/models/event.dart';
 import '../../../../core/services/language_service.dart';
+import '../../../../core/services/pack_service.dart';
+import '../../../../features/home/presentation/screens/premium_offer_screen.dart';
 
 class QuickGameScreen extends StatelessWidget {
   final List<Player> players;
@@ -148,7 +150,6 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
     });
   }
 
-
   Future<void> _handleNextChallenge() async {
     _tapAnimationController.forward().then((_) {
       _tapAnimationController.reverse();
@@ -176,7 +177,22 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
       }
     }
 
-    await viewModel.nextChallenge();
+    final adShown = await viewModel.nextChallenge();
+    
+    if (adShown && mounted) {
+      final isPremium = context.read<PackService>().isPremium;
+      if (!isPremium) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PremiumOfferScreen(
+              nextRoute: MaterialPageRoute(builder: (context) => const SizedBox.shrink()),
+              isModal: true, 
+            ),
+          ),
+        );
+      }
+    }
   }
 
   void _openActiveChallengesModal() {
@@ -200,7 +216,6 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
   }
 
   void _openPlayerManager() {
-    // Capturar el viewModel ANTES de abrir el modal
     final viewModel = context.read<QuickGameViewModel>();
     
     showModalBottomSheet(
@@ -242,279 +257,237 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
               child: Stack(
                 children: [
                   SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.all(padding),
-                    child: Row(
-                      children: [
-                        const SizedBox(width: 0),
-                        Expanded(
-                          child: AnimatedBuilder(
-                            animation: _tapAnimation,
-                            builder: (context, child) {
-                              return Transform.scale(
-                                scale: _tapAnimation.value,
-                                child: GestureDetector(
-                                  onTapDown: (details) {
-                                    final RenderBox renderBox =
-                                        context.findRenderObject() as RenderBox;
-                                    final localPosition = renderBox
-                                        .globalToLocal(details.globalPosition);
-                                    _addRippleEffect(localPosition);
-                                  },
-                                  onTap: _handleNextChallenge,
-                                  behavior: HitTestBehavior.opaque,
-                                  child: Stack(
-                                    children: [
-                                      SizedBox(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        child: SingleChildScrollView(
-                                          physics:
-                                              const ClampingScrollPhysics(),
-                                          child: Center(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                buildCenterContent(
-                                                  viewModel.createGameState(),
-                                                ),
-                                                const SizedBox(height: 0),
-                                                if (!viewModel.gameStarted)
-                                                  AnimatedBuilder(
-                                                    animation: _glowAnimation,
-                                                    builder: (context, child) {
-                                                      return Container(
-                                                        padding:
-                                                            EdgeInsets.all(7),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white
-                                                              .withOpacity(0.1),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(25),
-                                                          border: Border.all(
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                              _glowAnimation
-                                                                      .value *
-                                                                  0.8,
-                                                            ),
-                                                            width: 2,
-                                                          ),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                    _glowAnimation
-                                                                            .value *
-                                                                        0.3,
-                                                                  ),
-                                                              blurRadius: 15,
-                                                              spreadRadius: 2,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Icon(
-                                                              Icons.touch_app,
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                    _glowAnimation
-                                                                        .value,
-                                                                  ),
-                                                              size: 25,
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 8,
-                                                            ),
-                                                            Text(
-                                                              'TOCA LA PANTALLA',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                      _glowAnimation
-                                                                          .value,
-                                                                    ),
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                letterSpacing:
-                                                                    1.2,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      );
-                                                    },
+                    child: Padding(
+                      padding: EdgeInsets.all(padding),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: AnimatedBuilder(
+                              animation: _tapAnimation,
+                              builder: (context, child) {
+                                return Transform.scale(
+                                  scale: _tapAnimation.value,
+                                  child: GestureDetector(
+                                    onTapDown: (details) {
+                                      final RenderBox renderBox =
+                                          context.findRenderObject() as RenderBox;
+                                      final localPosition = renderBox
+                                          .globalToLocal(details.globalPosition);
+                                      _addRippleEffect(localPosition);
+                                    },
+                                    onTap: _handleNextChallenge,
+                                    behavior: HitTestBehavior.opaque,
+                                    child: Stack(
+                                      children: [
+                                        SizedBox(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          child: SingleChildScrollView(
+                                            physics: const ClampingScrollPhysics(),
+                                            child: Center(
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  buildCenterContent(
+                                                    viewModel.createGameState(),
                                                   ),
-                                              ],
+                                                  if (!viewModel.gameStarted)
+                                                    AnimatedBuilder(
+                                                      animation: _glowAnimation,
+                                                      builder: (context, child) {
+                                                        return Container(
+                                                          margin: const EdgeInsets.only(top: 20),
+                                                          padding: const EdgeInsets.all(7),
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.white.withOpacity(0.1),
+                                                            borderRadius: BorderRadius.circular(25),
+                                                            border: Border.all(
+                                                              color: Colors.white.withOpacity(_glowAnimation.value * 0.8),
+                                                              width: 2,
+                                                            ),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors.white.withOpacity(_glowAnimation.value * 0.3),
+                                                                blurRadius: 15,
+                                                                spreadRadius: 2,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize: MainAxisSize.min,
+                                                            children: [
+                                                              Icon(
+                                                                Icons.touch_app,
+                                                                color: Colors.white.withOpacity(_glowAnimation.value),
+                                                                size: 25,
+                                                              ),
+                                                              const SizedBox(width: 8),
+                                                              Text(
+                                                                'TOCA LA PANTALLA',
+                                                                style: TextStyle(
+                                                                  color: Colors.white.withOpacity(_glowAnimation.value),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  letterSpacing: 1.2,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      // Efectos eliminados, o reemplazar si los ripples siguen siendo _buildRippleEffects
-                                      // Oops, wait. Ripple effects use the private function _buildRippleEffects, which I deleted. I will put it back.
-                                      // Actually, I should just embed my old _buildRippleEffects instead.
-                                      if (_ripplePositions.isNotEmpty)
-                                        AnimatedBuilder(
-                                          animation: _rippleAnimation,
-                                          builder: (context, child) {
-                                            return Stack(
-                                              children: _ripplePositions.asMap().entries.map((entry) {
-                                                final index = entry.key;
-                                                final position = entry.value;
-                                                final opacity = _rippleOpacities.length > index ? _rippleOpacities[index] : 0.0;
-                                                final animationValue = _rippleAnimation.value;
-                                                final size = 150.0 * animationValue;
+                                        if (_ripplePositions.isNotEmpty)
+                                          AnimatedBuilder(
+                                            animation: _rippleAnimation,
+                                            builder: (context, child) {
+                                              return Stack(
+                                                children: _ripplePositions.asMap().entries.map((entry) {
+                                                  final index = entry.key;
+                                                  final position = entry.value;
+                                                  final opacity = _rippleOpacities.length > index ? _rippleOpacities[index] : 0.0;
+                                                  final animationValue = _rippleAnimation.value;
+                                                  final size = 150.0 * animationValue;
 
-                                                return Positioned(
-                                                  left: position.dx - (size / 2),
-                                                  top: position.dy - (size / 2),
-                                                  child: Container(
-                                                    width: size,
-                                                    height: size,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: Colors.white.withOpacity(opacity * (1 - animationValue) * 0.6),
-                                                        width: 3,
+                                                  return Positioned(
+                                                    left: position.dx - (size / 2),
+                                                    top: position.dy - (size / 2),
+                                                    child: Container(
+                                                      width: size,
+                                                      height: size,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: Colors.white.withOpacity(opacity * (1 - animationValue) * 0.6),
+                                                          width: 3,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                );
-                                              }).toList(),
-                                            );
-                                          },
-                                        ),
-                                    ],
+                                                  );
+                                                }).toList(),
+                                              );
+                                            },
+                                          ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: padding,
+                    right: padding + iconSize + 24,
+                    child: GestureDetector(
+                      onTap: _openActiveChallengesModal,
+                      child: Container(
+                        padding: const EdgeInsets.all(7),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.list_alt,
+                          color: Colors.white,
+                          size: iconSize,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: padding,
+                    right: padding,
+                    child: GestureDetector(
+                      onTap: _openPlayerManager,
+                      child: Container(
+                        padding: const EdgeInsets.all(7),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.group,
+                          color: Colors.white,
+                          size: iconSize,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: padding,
+                    left: padding,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: Container(
+                            padding: const EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: Colors.white.withOpacity(0.3),
+                                width: 1,
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: iconSize,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.2),
+                            ),
+                          ),
+                          child: Text(
+                            '${Provider.of<LanguageService>(context).translate('round')} ${viewModel.currentRound}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: responsive.getResponsiveSize(
+                                context,
+                                small: 14,
+                                medium: 16,
+                                large: 20,
+                              ),
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.2,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                // Botón de desafíos activos
-                Positioned(
-                  top: padding,
-                  right: padding + iconSize + 24,
-                  child: GestureDetector(
-                    onTap: _openActiveChallengesModal,
-                    child: Container(
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.list_alt,
-                        color: Colors.white,
-                        size: iconSize,
-                      ),
-                    ),
-                  ),
-                ),
-                // Botón de editar jugadores
-                Positioned(
-                  top: padding,
-                  right: padding,
-                  child: GestureDetector(
-                    onTap: _openPlayerManager,
-                    child: Container(
-                      padding: const EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.group,
-                        color: Colors.white,
-                        size: iconSize,
-                      ),
-                    ),
-                  ),
-                ),
-                // Botón atrás y contador de rondas
-                Positioned(
-                  top: padding,
-                  left: padding,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          margin: const EdgeInsets.all(0),
-                          padding: const EdgeInsets.all(7),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.3),
-                              width: 1,
-                            ),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                            size: iconSize,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.2),
-                          ),
-                        ),
-                        child: Text(
-                          '${Provider.of<LanguageService>(context).translate('round')} ${viewModel.currentRound}',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: responsive.getResponsiveSize(
-                              context,
-                              small: 14,
-                              medium: 16,
-                              large: 20,
-                            ),
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        );
+                ],
+              ),
+            );
           },
         ),
       ),

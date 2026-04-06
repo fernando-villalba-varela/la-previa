@@ -61,37 +61,54 @@ class QuestionGenerator {
   static final Random _random = Random();
   static List<QuestionTemplate>? _templates;
   static String _currentLanguage = 'es';
+  static List<String> _currentPacks = ['classic'];
 
-  /// Cargar las plantillas desde el JSON
-  static Future<void> loadTemplates({String language = 'es'}) async {
-    // Si ya están cargadas y el idioma es el mismo, no hacer nada
-    if (_templates != null && _currentLanguage == language) return;
+  /// Cargar las plantillas desde múltiples JSONs según los packs activos
+  static Future<void> loadTemplates({String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    // Si ya están cargadas y el idioma y packs son los mismos, no hacer nada
+    bool hasSamePacks = _currentPacks.length == activePackIds.length && _currentPacks.toSet().containsAll(activePackIds);
+    if (_templates != null && _currentLanguage == language && hasSamePacks) return;
 
-    // Actualizar idioma actual
+    // Actualizar estado actual
     _currentLanguage = language;
+    _currentPacks = List.from(activePackIds);
     
     // Resetear templates para forzar recarga
-    _templates = null;
+    _templates = [];
 
-    try {
-      final String jsonPath = language == 'es' 
-          ? 'assets/questions.json' 
-          : 'assets/questions_$language.json';
+    for (final packId in activePackIds) {
+      try {
+        String jsonPath;
+        if (packId == 'classic') {
+          jsonPath = language == 'es' 
+              ? 'assets/questions.json' 
+              : 'assets/questions_$language.json';
+        } else {
+          jsonPath = language == 'es' 
+              ? 'assets/questions_$packId.json' 
+              : 'assets/questions_${packId}_$language.json';
+        }
           
-      final String jsonString = await rootBundle.loadString(jsonPath);
-      final Map<String, dynamic> jsonData = json.decode(jsonString);
+        final String jsonString = await rootBundle.loadString(jsonPath);
+        final Map<String, dynamic> jsonData = json.decode(jsonString);
 
-      _templates = (jsonData['templates'] as List).map((template) => QuestionTemplate.fromJson(template)).toList();
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error loading questions ($language): $e');
+        final packTemplates = (jsonData['templates'] as List)
+            .map((template) => QuestionTemplate.fromJson(template))
+            .toList();
+            
+        _templates!.addAll(packTemplates);
+      } catch (e) {
+        if (kDebugMode) {
+          print('Error loading questions for pack $packId ($language): $e');
+        }
       }
+    }
+
+    if (_templates!.isEmpty) {
       // Fallback a español si falla inglés (opcional, pero seguro)
       if (language != 'es') {
-        print('Falling back to Spanish questions');
-        await loadTemplates(language: 'es');
-      } else {
-        _templates = [];
+        if (kDebugMode) print('Falling back to Spanish questions');
+        await loadTemplates(language: 'es', activePackIds: activePackIds);
       }
     }
   }
@@ -127,8 +144,8 @@ class QuestionGenerator {
   }
 
   /// Generar una pregunta aleatoria (excluyendo templates con PLAYER)
-  static Future<GeneratedQuestion> generateRandomQuestion({String language = 'es'}) async {
-    await loadTemplates(language: language);
+  static Future<GeneratedQuestion> generateRandomQuestion({String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
       return GeneratedQuestion(
@@ -164,8 +181,8 @@ class QuestionGenerator {
   }
 
   /// Generar una pregunta aleatoria con un jugador específico
-  static Future<GeneratedQuestion> generateRandomQuestionForPlayer(String playerName, {String language = 'es'}) async {
-    await loadTemplates(language: language);
+  static Future<GeneratedQuestion> generateRandomQuestionForPlayer(String playerName, {String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
       return GeneratedQuestion(
@@ -200,11 +217,11 @@ class QuestionGenerator {
   }
 
   /// Generar una pregunta dual aleatoria (para 2 jugadores)
-  static Future<GeneratedQuestion> generateRandomDualQuestion(String player1Name, String player2Name, {String language = 'es'}) async {
-    await loadTemplates(language: language);
+  static Future<GeneratedQuestion> generateRandomDualQuestion(String player1Name, String player2Name, {String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
-      return generateRandomQuestion();
+      return generateRandomQuestion(language: language, activePackIds: activePackIds);
     }
 
     // Filtrar solo templates duales
@@ -217,7 +234,7 @@ class QuestionGenerator {
 
     if (dualTemplates.isEmpty) {
       // Si no hay templates duales, generar uno normal
-      return generateRandomQuestion();
+      return generateRandomQuestion(language: language, activePackIds: activePackIds);
     }
 
     final template = dualTemplates[_random.nextInt(dualTemplates.length)];
@@ -225,17 +242,17 @@ class QuestionGenerator {
   }
 
   /// Generar una pregunta de una categoría específica
-  static Future<GeneratedQuestion> generateQuestionByCategory(String categoria, {String? playerName}) async {
-    await loadTemplates();
+  static Future<GeneratedQuestion> generateQuestionByCategory(String categoria, {String? playerName, List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
-      return generateRandomQuestion();
+      return generateRandomQuestion(activePackIds: activePackIds);
     }
 
     final categoryTemplates = _templates!.where((template) => template.categoria == categoria).toList();
 
     if (categoryTemplates.isEmpty) {
-      return generateRandomQuestion();
+      return generateRandomQuestion(activePackIds: activePackIds);
     }
 
     final template = categoryTemplates[_random.nextInt(categoryTemplates.length)];
@@ -243,8 +260,8 @@ class QuestionGenerator {
   }
 
   /// Obtener todas las categorías disponibles
-  static Future<List<String>> getCategories() async {
-    await loadTemplates();
+  static Future<List<String>> getCategories({List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
       return [];
@@ -311,13 +328,13 @@ class QuestionGenerator {
   }
 
   /// Generar múltiples preguntas únicas
-  static Future<List<GeneratedQuestion>> generateMultipleQuestions(int count) async {
+  static Future<List<GeneratedQuestion>> generateMultipleQuestions(int count, {List<String> activePackIds = const ['classic']}) async {
     List<GeneratedQuestion> questions = [];
     Set<String> usedQuestions = {};
 
     int attempts = 0;
     while (questions.length < count && attempts < count * 3) {
-      final question = await generateRandomQuestion();
+      final question = await generateRandomQuestion(activePackIds: activePackIds);
       if (!usedQuestions.contains(question.question)) {
         questions.add(question);
         usedQuestions.add(question.question);

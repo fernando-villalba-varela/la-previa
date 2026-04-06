@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "val_e1",
+      "title": "¡Beso de judas!",
+      "description": "Da un beso al aire al jugador más guapo, el elegido reparte 3 tragos.",
+      "categoria": "Global"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "xmas_e1",
+      "title": "¡Feliz Navidad, Madafakas!",
+      "description": "Cada jugador debe darle un abrazo a quien tenga a su derecha o beber 3 tragos.",
+      "categoria": "Global"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "bar_c1",
+      "title": "Ley del Meñique",
+      "description": "El jugador objetivo debe beber siempre con el meñique levantado. Si olvida hacerlo, bebe 2 tragos adicionales.",
+      "categoria": "Normas"
+    }
+  ]
+}

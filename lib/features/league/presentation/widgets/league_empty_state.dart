@@ -12,7 +12,7 @@ class LeagueEmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.local_drink, size: 110, color: const Color(0xFF8A2BE2)), // Neon Violet
+          Icon(Icons.local_drink, size: 110, color: const Color(0xFF00C9FF)), // Neon Cyan
           const SizedBox(height: 34),
           Text(
             Provider.of<LanguageService>(context).translate('empty_league_title'),

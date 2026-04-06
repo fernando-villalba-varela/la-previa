@@ -7,8 +7,9 @@ import '../viewmodels/home_viewmodel.dart';
 import '../widgets/home_header.dart';
 import '../widgets/home_buttons_section.dart';
 import '../../../../core/presentation/components/neon_background_layer.dart';
-import 'package:drinkaholic/features/league/presentation/screens/participants_screen.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_list_screen.dart';
+import 'package:drinkaholic/features/league/presentation/screens/participants_screen.dart';
+import '../../../../features/home/presentation/screens/premium_offer_screen.dart';
 import '../widgets/loading_overlay.dart';
 import '../widgets/error_banner.dart';
 
@@ -230,6 +231,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                           ),
                         ],
+                      ),
+                      // Premium Button
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PremiumOfferScreen(
+                                nextRoute: MaterialPageRoute(builder: (context) => const HomeScreen()),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFCC00).withOpacity(0.1),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color(0xFFFFCC00).withOpacity(0.5),
+                              width: 1.5,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFFFFCC00).withOpacity(0.2),
+                                blurRadius: 10,
+                                spreadRadius: 1,
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.workspace_premium,
+                            color: Color(0xFFFFCC00),
+                            size: 24,
+                          ),
+                        ),
                       ),
                       // Language Toggle
                       Consumer<LanguageService>(

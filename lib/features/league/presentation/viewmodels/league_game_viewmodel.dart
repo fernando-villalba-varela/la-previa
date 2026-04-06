@@ -77,8 +77,8 @@ class LeagueGameViewModel extends ChangeNotifier {
       ..shuffle(Random());
   }
 
-  Future<void> initializeFirstChallenge(LanguageService lang) async {
-    await _generateNewChallenge(lang);
+  Future<void> initializeFirstChallenge(LanguageService lang, List<String> activePackIds) async {
+    await _generateNewChallenge(lang, activePackIds);
 
     final gs = _buildGameState(AlwaysStoppedAnimation<double>(0.0));
     if (!gs.isChallengeForAll && !isGenericPlayerQuestion() && !gs.isDualChallenge) {
@@ -93,7 +93,7 @@ class LeagueGameViewModel extends ChangeNotifier {
   // Challenge generation (private)
   // -------------------------------------------------------------------------
 
-  Future<void> _generateNewChallenge(LanguageService lang) async {
+  Future<void> _generateNewChallenge(LanguageService lang, List<String> activePackIds) async {
     if (_pendingCustomQuestions.isNotEmpty) {
       // Probabilidad dinámica: distribuir las preguntas pendientes entre las
       // rondas restantes (~70% de las rondas generan un reto normal).
@@ -124,7 +124,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       var attempts = 0;
       GeneratedQuestion question;
       do {
-        question = await QuestionGenerator.generateRandomQuestionForPlayer(selectedPlayer.nombre);
+        question = await QuestionGenerator.generateRandomQuestionForPlayer(selectedPlayer.nombre, activePackIds: activePackIds);
         attempts++;
       } while (_usedQuestions.contains(question.question) && attempts < 30);
       _usedQuestions.add(question.question);
@@ -138,7 +138,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       var attempts = 0;
       GeneratedQuestion question;
       do {
-        question = await QuestionGenerator.generateRandomQuestion();
+        question = await QuestionGenerator.generateRandomQuestion(activePackIds: activePackIds);
         attempts++;
       } while (_usedQuestions.contains(question.question) && attempts < 30);
       _usedQuestions.add(question.question);
@@ -151,8 +151,8 @@ class LeagueGameViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> _generateNewEvent() async {
-    final event = await EventGenerator.generateRandomEvent(_currentRound);
+  Future<void> _generateNewEvent(List<String> activePackIds) async {
+    final event = await EventGenerator.generateRandomEvent(_currentRound, activePackIds: activePackIds);
 
     events.add(event);
     _currentChallenge = '${event.typeIcon} ${event.title}: ${event.description}';
@@ -162,7 +162,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _generateNewConstantChallenge() async {
+  Future<void> _generateNewConstantChallenge(List<String> activePackIds) async {
     final eligiblePlayer = ConstantChallengeGenerator.selectPlayerForNewChallenge(
       players,
       constantChallenges.where((c) => c.isActiveAtRound(_currentRound)).toList(),
@@ -176,6 +176,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     final constantChallenge = await ConstantChallengeGenerator.generateRandomConstantChallenge(
       eligiblePlayer,
       _currentRound,
+      activePackIds: activePackIds,
     );
 
     constantChallenges.add(constantChallenge);
@@ -187,10 +188,10 @@ class LeagueGameViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _generateNewDualChallenge(LanguageService lang) async {
+  Future<void> _generateNewDualChallenge(LanguageService lang, List<String> activePackIds) async {
     final selectedPlayers = _selectTwoRandomPlayers();
     if (selectedPlayers.length < 2) {
-      await _generateNewChallenge(lang);
+      await _generateNewChallenge(lang, activePackIds);
       return;
     }
 
@@ -200,7 +201,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     var attempts = 0;
     GeneratedQuestion question;
     do {
-      question = await QuestionGenerator.generateRandomDualQuestion(player1.nombre, player2.nombre);
+      question = await QuestionGenerator.generateRandomDualQuestion(player1.nombre, player2.nombre, activePackIds: activePackIds);
       attempts++;
     } while (_usedQuestions.contains(question.question) && attempts < 30);
     _usedQuestions.add(question.question);
@@ -219,10 +220,10 @@ class LeagueGameViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _generateNewDualConstantChallenge() async {
+  Future<void> _generateNewDualConstantChallenge(List<String> activePackIds) async {
     final selectedPlayers = _selectTwoRandomPlayers();
     if (selectedPlayers.length < 2) {
-      await _generateNewConstantChallenge();
+      await _generateNewConstantChallenge(activePackIds);
       return;
     }
 
@@ -233,6 +234,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       player1,
       player2,
       _currentRound,
+      activePackIds: activePackIds,
     );
 
     constantChallenges.add(constantChallenge);
@@ -295,7 +297,7 @@ class LeagueGameViewModel extends ChangeNotifier {
   // -------------------------------------------------------------------------
 
   /// Returns true if game ended (round > maxRounds).
-  Future<bool> nextChallenge(LanguageService lang, int maxRounds) async {
+  Future<bool> nextChallenge(LanguageService lang, List<String> activePackIds, int maxRounds) async {
     _maxRounds = maxRounds;
     _gameStarted = true;
     _currentRound++;
@@ -320,7 +322,7 @@ class LeagueGameViewModel extends ChangeNotifier {
 
     if (tempGs.canHaveEvents &&
         EventGenerator.shouldGenerateEvent(_currentRound, tempGs.activeEvents)) {
-      await _generateNewEvent();
+      await _generateNewEvent(activePackIds);
       return false;
     }
 
@@ -328,12 +330,12 @@ class LeagueGameViewModel extends ChangeNotifier {
         ConstantChallengeGenerator.shouldGenerateConstantChallenge(
             _currentRound, tempGs.activeChallenges)) {
       if (players.length >= 2 && math.Random().nextDouble() < 0.2) {
-        await _generateNewDualConstantChallenge();
+        await _generateNewDualConstantChallenge(activePackIds);
       } else {
-        await _generateNewConstantChallenge();
+        await _generateNewConstantChallenge(activePackIds);
         // If constant challenge returned without setting one, fall through to normal
         if (!_isCurrentChallengeConstant) {
-          await _generateNewChallenge(lang);
+          await _generateNewChallenge(lang, activePackIds);
         }
       }
       final gs2 = _buildGameState(AlwaysStoppedAnimation<double>(0.0));
@@ -347,9 +349,9 @@ class LeagueGameViewModel extends ChangeNotifier {
     }
 
     if (players.length >= 2 && math.Random().nextDouble() < 0.15) {
-      await _generateNewDualChallenge(lang);
+      await _generateNewDualChallenge(lang, activePackIds);
     } else {
-      await _generateNewChallenge(lang);
+      await _generateNewChallenge(lang, activePackIds);
     }
 
     final gs3 = _buildGameState(AlwaysStoppedAnimation<double>(0.0));

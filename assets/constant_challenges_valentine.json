@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "val_c1",
+      "title": "Cupido borracho",
+      "description": "El objetivo debe mirar fijamente a los ojos a la persona que le hable. Si mira a otro lado, bebe castigo.",
+      "categoria": "Interacción"
+    }
+  ]
+}

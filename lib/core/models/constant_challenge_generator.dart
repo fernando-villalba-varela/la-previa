@@ -1,6 +1,5 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:math';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'constant_challenge.dart';
 import 'player.dart';
@@ -62,40 +61,50 @@ class ConstantChallengeGenerator {
   static final Random _random = Random();
   static List<ConstantChallengeTemplate>? _templates;
   static String _currentLanguage = 'es';
+  static List<String> _currentPacks = ['classic'];
 
   /// Load constant challenge templates from JSON
-  static Future<void> loadTemplates({String language = 'es'}) async {
-    if (_templates != null && _currentLanguage == language) return;
+  static Future<void> loadTemplates({String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    bool hasSamePacks = _currentPacks.length == activePackIds.length && _currentPacks.toSet().containsAll(activePackIds);
+    if (_templates != null && _currentLanguage == language && hasSamePacks) return;
     
     _currentLanguage = language;
-    _templates = null;
+    _currentPacks = List.from(activePackIds);
+    _templates = [];
 
-    try {
-      final String jsonPath = language == 'es' 
-          ? 'assets/constant_challenges.json' 
-          : 'assets/constant_challenges_$language.json';
+    for (final packId in activePackIds) {
+      try {
+        String jsonPath;
+        if (packId == 'classic') {
+          jsonPath = language == 'es' 
+              ? 'assets/constant_challenges.json' 
+              : 'assets/constant_challenges_$language.json';
+        } else {
+          jsonPath = language == 'es' 
+              ? 'assets/constant_challenges_$packId.json' 
+              : 'assets/constant_challenges_${packId}_$language.json';
+        }
 
-      final String jsonString = await rootBundle.loadString(jsonPath);
-      final Map<String, dynamic> jsonData = json.decode(jsonString);
+        final String jsonString = await rootBundle.loadString(jsonPath);
+        final Map<String, dynamic> jsonData = json.decode(jsonString);
 
-      _templates = (jsonData['templates'] as List)
-          .map((template) => ConstantChallengeTemplate.fromJson(template))
-          .toList();
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error loading constant challenges ($language): $e');
+        final packTemplates = (jsonData['templates'] as List)
+            .map((template) => ConstantChallengeTemplate.fromJson(template))
+            .toList();
+        _templates!.addAll(packTemplates);
+      } catch (e) {
+        // Ignore if pack file not found yet
       }
-      if (language != 'es') {
-        await loadTemplates(language: 'es');
-      } else {
-        _templates = [];
-      }
+    }
+
+    if (_templates!.isEmpty && language != 'es') {
+      await loadTemplates(language: 'es', activePackIds: activePackIds);
     }
   }
 
   /// Generate a random constant challenge for a specific player
-  static Future<ConstantChallenge> generateRandomConstantChallenge(Player targetPlayer, int currentRound, {String language = 'es'}) async {
-    await loadTemplates(language: language);
+  static Future<ConstantChallenge> generateRandomConstantChallenge(Player targetPlayer, int currentRound, {String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
       // Fallback challenge
@@ -131,9 +140,9 @@ class ConstantChallengeGenerator {
     Player player1,
     Player player2,
     int currentRound,
-    {String language = 'es'}
+    {String language = 'es', List<String> activePackIds = const ['classic']}
   ) async {
-    await loadTemplates(language: language);
+    await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
       // Fallback dual challenge
@@ -158,7 +167,7 @@ class ConstantChallengeGenerator {
     }).toList();
 
     if (dualTemplates.isEmpty) {
-      return generateRandomConstantChallenge(player1, currentRound, language: language);
+      return generateRandomConstantChallenge(player1, currentRound, language: language, activePackIds: activePackIds);
     }
 
     final template = dualTemplates[_random.nextInt(dualTemplates.length)];

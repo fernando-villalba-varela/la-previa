@@ -8,6 +8,7 @@ import '../../../../core/presentation/components/neon_header.dart';
 import '../widgets/detail/participants_tab.dart';
 import '../widgets/detail/play_tab.dart';
 import '../widgets/detail/custom_questions_league_tab.dart';
+import '../widgets/detail/packs_tab.dart'; // AÑADIDO: PacksTab
 
 class LeagueDetailScreen extends StatefulWidget {
   const LeagueDetailScreen({super.key});
@@ -24,7 +25,7 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
     final vm = context.watch<LeagueDetailViewModel>();
     final league = vm.league;
     return DefaultTabController(
-      length: 4,
+      length: 5, // AÑADIDO: Ahora son 5 pestañas
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -93,6 +94,11 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
                         context,
                       ).translate('custom_questions_tab'),
                     ),
+                    Tab(
+                      text: Provider.of<LanguageService>(
+                        context,
+                      ).translate('packs_tab'), // AÑADIDO: Nueva pestaña
+                    ),
                   ],
                 ),
               ),
@@ -110,7 +116,7 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
                   ParticipantsTab(),
                   const PlayTab(),
                   const CustomQuestionsLeagueTab(),
-
+                  const PacksTab(), // AÑADIDO: Widget de Packs
                 ],
               ),
             ),

@@ -170,6 +170,17 @@ class LanguageService extends ChangeNotifier {
       'players_tab': {'es': 'Jugadores', 'en': 'Players'},
       'play_tab': {'es': 'Jugar', 'en': 'Play'},
       'custom_questions_tab': {'es': 'Preguntas', 'en': 'Custom Qs'},
+      'packs_tab': {'es': 'Packs', 'en': 'Packs'},
+      'pack_classic': {'es': 'Clásico', 'en': 'Classic'},
+      'pack_classic_desc': {'es': 'Desafíos normales y reglas básicas', 'en': 'Standard challenges and basic rules'},
+      'pack_bar': {'es': 'En el bar', 'en': 'At the bar'},
+      'pack_bar_desc': {'es': 'Retos para jugar en un bar', 'en': 'Challenges to play at a bar'},
+      'pack_home': {'es': 'En casa', 'en': 'At home'},
+      'pack_home_desc': {'es': 'Retos para jugar en casa', 'en': 'Challenges to play at home'},
+      'pack_christmas': {'es': 'Navidad', 'en': 'Christmas'},
+      'pack_christmas_desc': {'es': 'Desafíos temáticos festivos', 'en': 'Festive themed challenges'},
+      'pack_valentine': {'es': 'San Valentín', 'en': 'Valentine\'s Day'},
+      'pack_valentine_desc': {'es': 'Retos románticos y en pareja', 'en': 'Couple and romantic challenges'},
       'stats_mvdp': {'es': 'MVDP', 'en': 'MVDP'},
       'stats_drinks': {'es': 'Tragos', 'en': 'Drinks'},
       'stats_ratita': {'es': 'Ratita', 'en': 'Rat'},
@@ -295,6 +306,17 @@ class LanguageService extends ChangeNotifier {
       'repeat_button': {'es': 'Repetir', 'en': 'Repeat'},
       'finish_button': {'es': 'Terminar', 'en': 'Finish'},
       'next_button': {'es': 'Siguiente', 'en': 'Next'},
+      
+      // Premium Screen
+      'premium_title': {'es': 'PREMIUM', 'en': 'PREMIUM'},
+      'premium_subtitle': {'es': 'ELIMINA ANUNCIOS Y DESBLOQUEA TODO', 'en': 'REMOVE ADS & UNLOCK EVERYTHING'},
+      'premium_headline': {'es': '¡Juega sin interrupciones!', 'en': 'Play without interruptions!'},
+      'premium_description': {
+        'es': 'Pásate a la versión de pago para eliminar permanentemente los anuncios y tener acceso a todos los packs exclusivos.',
+        'en': 'Upgrade to the paid version to permanently remove ads and get access to all exclusive packs.'
+      },
+      'buy_premium_button': {'es': 'COMPRAR PREMIUM', 'en': 'BUY PREMIUM'},
+      'continue_with_ads': {'es': 'Continuar con anuncios', 'en': 'Continue with ads'},
     };
 
     if (localizedValues.containsKey(key)) {

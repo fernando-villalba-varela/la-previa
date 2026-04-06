@@ -1,0 +1,10 @@
+{
+  "templates": [
+    {
+      "id": "home_e1",
+      "title": "Viaje a la nevera",
+      "description": "El ultimo en ir a la cocina bebe 3 tragos.",
+      "categoria": "Acción"
+    }
+  ]
+}

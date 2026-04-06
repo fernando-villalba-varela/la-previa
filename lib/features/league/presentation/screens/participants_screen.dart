@@ -8,6 +8,9 @@ import '../../../../core/presentation/components/neon_background_layer.dart';
 import '../../../../core/presentation/components/neon_header.dart';
 import '../../../../core/services/consent_and_ad_service.dart';
 import '../widgets/participants/participants_export.dart';
+import '../../../../features/quick_game/presentation/widgets/quick_game_packs_tab.dart';
+import '../../../../features/home/presentation/screens/premium_offer_screen.dart';
+import '../../../../core/services/pack_service.dart';
 
 class ParticipantsScreen extends StatelessWidget {
   final String title;
@@ -63,9 +66,11 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
     );
     viewModel.context = context;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0B1A),
-      body: NeonBackgroundLayer(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: const Color(0xFF0B0B1A),
+        body: NeonBackgroundLayer(
         child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,8 +81,38 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                   themeColor: const Color(0xFFFF0055),
                 ),
                 
+                // TAB BAR
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(18, 0, 18, 12),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0x26FFFFFF),
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: const Color(0x4DFFFFFF), width: 1),
+                    ),
+                    child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.white70,
+                      indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: const Color(0xFFFF0055).withOpacity(0.5),
+                        border: Border.all(color: const Color(0xFFFF0055), width: 2),
+                      ),
+                      dividerColor: Colors.transparent,
+                      tabs: [
+                        Tab(text: Provider.of<LanguageService>(context).translate('players_tab')),
+                        Tab(text: Provider.of<LanguageService>(context).translate('packs_tab')),
+                      ],
+                    ),
+                  ),
+                ),
+
                 Expanded(
-                  child: SingleChildScrollView(
+                  child: TabBarView(
+                    children: [
+                      // Pestaña 1: Jugadores
+                      SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -104,7 +139,12 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                       ],
                     ),
                   ),
-                ),
+                  
+                  // Pestaña 2: Packs
+                  const QuickGamePacksTab(),
+                ],
+              ),
+            ),
 
                 // Button Area
                 Padding(
@@ -142,15 +182,24 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                             listen: false,
                           );
                           if (viewModel.players.isNotEmpty) {
-                            await _interstitial.showIfReady();
+                            final adShown = await _interstitial.showIfReady();
                             if (!context.mounted) return;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    QuickGameScreen(players: viewModel.players),
-                              ),
+
+                            final isPremium = context.read<PackService>().isPremium;
+                            final nextRoute = MaterialPageRoute(
+                              builder: (context) => QuickGameScreen(players: viewModel.players),
                             );
+
+                            if (adShown && !isPremium) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PremiumOfferScreen(nextRoute: nextRoute),
+                                ),
+                              );
+                            } else {
+                              Navigator.push(context, nextRoute);
+                            }
                           }
                         },
                         child: Center(
@@ -187,6 +236,7 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
               ],
             ),
           ),
+        ),
       ),
     );
   }

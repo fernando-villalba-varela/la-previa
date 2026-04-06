@@ -8,6 +8,7 @@ import '../../../../core/services/language_service.dart';
 
 import '../../../../core/services/database_service_v2.dart';
 import '../../../../core/presentation/components/neon_background_layer.dart';
+import '../../../../core/services/pack_service.dart';
 
 import '../viewmodels/league_game_viewmodel.dart';
 import '../widgets/game/game_card_widget.dart';
@@ -80,7 +81,8 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       if (mounted) setState(() => _showOrientationOverlay = false);
 
       await _viewModel.loadCustomQuestions(db, widget.leagueId);
-      await _viewModel.initializeFirstChallenge(lang);
+      final activePackIds = context.read<PackService>().activePackIds.toList();
+      await _viewModel.initializeFirstChallenge(lang, activePackIds);
     });
 
   }
@@ -133,7 +135,8 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
     _tapAnimationController.forward().then((_) => _tapAnimationController.reverse());
 
     final lang = context.read<LanguageService>();
-    final gameEnded = await _viewModel.nextChallenge(lang, widget.maxRounds);
+    final activePackIds = context.read<PackService>().activePackIds.toList();
+    final gameEnded = await _viewModel.nextChallenge(lang, activePackIds, widget.maxRounds);
     if (gameEnded && mounted) _endGame();
   }
 

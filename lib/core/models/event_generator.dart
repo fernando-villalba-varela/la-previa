@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'event.dart';
@@ -63,35 +63,50 @@ class EventGenerator {
   static final Random _random = Random();
   static List<EventTemplate>? _templates;
   static String _currentLanguage = 'es';
+  static List<String> _currentPacks = ['classic'];
 
   /// Load event templates from JSON
-  static Future<void> loadTemplates({String language = 'es'}) async {
-    if (_templates != null && _currentLanguage == language) return;
+  static Future<void> loadTemplates({String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    bool hasSamePacks = _currentPacks.length == activePackIds.length && _currentPacks.toSet().containsAll(activePackIds);
+    if (_templates != null && _currentLanguage == language && hasSamePacks) return;
 
-     _currentLanguage = language;
-    _templates = null;
+    _currentLanguage = language;
+    _currentPacks = List.from(activePackIds);
+    _templates = [];
 
-    try {
-       final String jsonPath = language == 'es' 
-          ? 'assets/events.json' 
-          : 'assets/events_$language.json';
+    for (final packId in activePackIds) {
+      try {
+        String jsonPath;
+        if (packId == 'classic') {
+          jsonPath = language == 'es' 
+              ? 'assets/events.json' 
+              : 'assets/events_$language.json';
+        } else {
+          jsonPath = language == 'es' 
+              ? 'assets/events_$packId.json' 
+              : 'assets/events_${packId}_$language.json';
+        }
 
-      final String jsonString = await rootBundle.loadString(jsonPath);
-      final Map<String, dynamic> jsonData = json.decode(jsonString);
+        final String jsonString = await rootBundle.loadString(jsonPath);
+        final Map<String, dynamic> jsonData = json.decode(jsonString);
 
-      _templates = (jsonData['templates'] as List).map((template) => EventTemplate.fromJson(template)).toList();
-    } catch (e) {
-      if (language != 'es') {
-         await loadTemplates(language: 'es');
-      } else {
-         _templates = [];
+        final packTemplates = (jsonData['templates'] as List)
+            .map((template) => EventTemplate.fromJson(template))
+            .toList();
+        _templates!.addAll(packTemplates);
+      } catch (e) {
+        // Ignoramos si no encuentra el archivo del pack, ya que puede que no exista aún
       }
+    }
+
+    if (_templates!.isEmpty && language != 'es') {
+      await loadTemplates(language: 'es', activePackIds: activePackIds);
     }
   }
 
   /// Generate a random event
-  static Future<Event> generateRandomEvent(int currentRound, {String language = 'es'}) async {
-    await loadTemplates(language: language);
+  static Future<Event> generateRandomEvent(int currentRound, {String language = 'es', List<String> activePackIds = const ['classic']}) async {
+    await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
       // Multiple fallback events to provide variety

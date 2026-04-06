@@ -7,6 +7,7 @@ import 'core/services/database_service_v2.dart';
 import 'core/services/consent_and_ad_service.dart';
 import 'core/services/language_service.dart';
 import 'core/services/league_storage_service.dart';
+import 'core/services/pack_service.dart'; // ANADIR
 import 'core/presentation/transitions/custom_page_transitions.dart';
 import 'features/league/presentation/viewmodels/league_list_viewmodel.dart';
 import 'features/home/presentation/screens/home_screen.dart';
@@ -26,6 +27,10 @@ void main() async {
   final languageService = LanguageService();
   await languageService.loadLanguage();
 
+  // Inicializar PackService
+  final packService = PackService();
+  await packService.initialize();
+
   // ANADIR: consentimiento GDPR + inicializacion AdMob
   // unawaited para no bloquear el arranque de la app
   unawaited(ConsentService().initialize());
@@ -35,6 +40,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider.value(value: leagueListVM),
         ChangeNotifierProvider.value(value: languageService),
+        ChangeNotifierProvider.value(value: packService), // ANADIR
         Provider<DatabaseService>(create: (_) => DatabaseService()), // ANADIR
       ],
       child: const MyApp(),

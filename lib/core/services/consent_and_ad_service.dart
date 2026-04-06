@@ -173,20 +173,6 @@ class InterstitialAdManager {
         onAdLoaded: (ad) {
           _ad = ad;
           _loaded = true;
-          _ad!.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              ad.dispose();
-              _ad = null;
-              _loaded = false;
-              loadAd();
-            },
-            onAdFailedToShowFullScreenContent: (ad, err) {
-              ad.dispose();
-              _ad = null;
-              _loaded = false;
-              loadAd();
-            },
-          );
         },
         onAdFailedToLoad: (err) {
           debugPrint('InterstitialAd error: ${err.code}');
@@ -196,12 +182,33 @@ class InterstitialAdManager {
     );
   }
 
-  Future<bool> showIfReady() async {
+  Future<bool> showIfReady({bool isPremium = false}) async {
+    if (isPremium) return false;
     if (!_loaded || _ad == null) {
       loadAd();
       return false;
     }
+    
+    final completer = Completer<void>();
+    _ad!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        ad.dispose();
+        _ad = null;
+        _loaded = false;
+        loadAd();
+        if (!completer.isCompleted) completer.complete();
+      },
+      onAdFailedToShowFullScreenContent: (ad, err) {
+        ad.dispose();
+        _ad = null;
+        _loaded = false;
+        loadAd();
+        if (!completer.isCompleted) completer.complete();
+      },
+    );
+
     await _ad!.show();
+    await completer.future;
     return true;
   }
 
@@ -209,12 +216,16 @@ class InterstitialAdManager {
     await showIfReady();
   }
 
-  Future<void> onRoundCompleted() async {
+  Future<bool> onRoundCompleted({bool isPremium = false}) async {
     _roundsSince++;
     if (_roundsSince >= _adFrequency) {
-      final shown = await showIfReady();
-      if (shown) _roundsSince = 0;
+      final shown = await showIfReady(isPremium: isPremium);
+      if (shown) {
+        _roundsSince = 0;
+        return true;
+      }
     }
+    return false;
   }
 
   void dispose() {
