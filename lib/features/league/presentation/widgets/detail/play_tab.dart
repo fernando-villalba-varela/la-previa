@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/services/language_service.dart';
+import '../../../../../core/services/pack_service.dart';
 import '../../../presentation/viewmodels/league_detail_viewmodel.dart';
 import '../../../../../core/models/player.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_game_screen.dart';
@@ -92,9 +93,100 @@ class _PlayTabState extends State<PlayTab> {
         Expanded(
           child: ListView.builder(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-            itemCount: players.length,
+            itemCount: players.length + 1, // +1 para la sección de packs
             itemBuilder: (_, i) {
-              final p = players[i];
+              if (i == 0) {
+                return Consumer<PackService>(
+                  builder: (context, packService, _) {
+                    final languageService = Provider.of<LanguageService>(context);
+                    final availablePacks = packService.availablePacks;
+                    
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12, left: 4),
+                          child: Text(
+                            languageService.translate('packs_tab').toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                              color: Color(0xFF00C9FF),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 100,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: availablePacks.length,
+                            itemBuilder: (context, index) {
+                              final pack = availablePacks[index];
+                              final isActive = packService.activePackIds.contains(pack.id);
+                              
+                              return GestureDetector(
+                                onTap: () => packService.togglePackActive(pack.id, !isActive, bypassPurchase: true),
+                                child: Container(
+                                  width: 100,
+                                  margin: const EdgeInsets.only(right: 12, bottom: 8),
+                                  decoration: BoxDecoration(
+                                    color: isActive 
+                                        ? const Color(0xFF00C9FF).withOpacity(0.15)
+                                        : Colors.white.withOpacity(0.05),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: isActive 
+                                          ? const Color(0xFF00C9FF) 
+                                          : Colors.white10,
+                                      width: isActive ? 1.5 : 1,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        pack.icon,
+                                        color: isActive ? const Color(0xFF00C9FF) : Colors.white38,
+                                        size: 28,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        languageService.translate(pack.nameKey),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                                          color: isActive ? Colors.white : Colors.white54,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12, left: 4),
+                          child: Text(
+                            languageService.translate('players_tab').toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                              color: Color(0xFF00C9FF),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                );
+              }
+              
+              final p = players[i - 1]; // Ajuste por la sección de packs
               final selected = _selected.contains(p.playerId);
               final img = _avatar(p.avatarPath);
               return Card(
@@ -106,14 +198,14 @@ class _PlayTabState extends State<PlayTab> {
                   borderRadius: BorderRadius.circular(16),
                   side: BorderSide(
                     color: selected ? const Color(0xFF00C9FF) : const Color(0x40808080),
-                    width: 1.2,
+                    width: selected ? 1.5 : 1.2,
                   ),
                 ),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(16),
                   onTap: () => _toggle(p.playerId),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     child: Row(
                       children: [
                         CircleAvatar(
@@ -134,11 +226,6 @@ class _PlayTabState extends State<PlayTab> {
                               color: selected ? const Color(0xFF00C9FF) : null,
                             ),
                           ),
-                        ),
-                        Checkbox.adaptive(
-                          value: selected,
-                          onChanged: (_) => _toggle(p.playerId),
-                          activeColor: const Color(0xFF00C9FF),
                         ),
                       ],
                     ),
