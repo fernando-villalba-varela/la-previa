@@ -10,7 +10,7 @@ import 'core/services/league_storage_service.dart';
 import 'core/services/pack_service.dart'; // ANADIR
 import 'core/presentation/transitions/custom_page_transitions.dart';
 import 'features/league/presentation/viewmodels/league_list_viewmodel.dart';
-import 'features/home/presentation/screens/home_screen.dart';
+import 'features/home/presentation/screens/disclaimer_screen.dart';
 
 void main() async {
   // Asegurar que Flutter esté inicializado
@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
               },
             ),
           ),
-          home: HomeScreen(),
+          home: const DisclaimerScreen(),
         );
       },
     );

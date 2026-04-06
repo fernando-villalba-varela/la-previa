@@ -317,6 +317,19 @@ class LanguageService extends ChangeNotifier {
       },
       'buy_premium_button': {'es': 'COMPRAR PREMIUM', 'en': 'BUY PREMIUM'},
       'continue_with_ads': {'es': 'Continuar con anuncios', 'en': 'Continue with ads'},
+      
+      // Disclaimer Screen
+      'disclaimer_title': {'es': '¡AVISO DE SEGURIDAD!', 'en': 'SAFETY NOTICE!'},
+      'disclaimer_content': {
+        'es': 'El equipo de La Previa no se hace responsable del mal uso de esta aplicación, incluyendo el consumo excesivo de alcohol o cualquier acto imprudente derivado del juego.',
+        'en': 'The La Previa team is not responsible for the misuse of this application, including excessive alcohol consumption or any imprudent acts resulting from the game.'
+      },
+      'disclaimer_rules_title': {'es': 'Recuerda jugar de forma segura:', 'en': 'Remember to play safely:'},
+      'disclaimer_rule_1': {'es': 'Bebe de forma responsable.', 'en': 'Drink responsibly.'},
+      'disclaimer_rule_2': {'es': 'Si bebes, no conduzcas.', 'en': 'Don\'t drink and drive.'},
+      'disclaimer_rule_3': {'es': 'Respeta a los demás jugadores.', 'en': 'Respect other players.'},
+      'disclaimer_rule_4': {'es': 'Cualquier reto es opcional.', 'en': 'All challenges are optional.'},
+      'disclaimer_accept': {'es': 'ACEPTO Y ENTIENDO', 'en': 'I ACCEPT & UNDERSTAND'},
     };
 
     if (localizedValues.containsKey(key)) {

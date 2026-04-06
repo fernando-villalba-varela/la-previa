@@ -36,12 +36,20 @@ class LeaderboardTab extends StatelessWidget {
             Icon(Icons.people_outline, size: 64, color: Colors.white54),
             SizedBox(height: 16),
             Text(
-              Provider.of<LanguageService>(context).translate('no_players_title'),
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
+              Provider.of<LanguageService>(
+                context,
+              ).translate('no_players_title'),
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
-              Provider.of<LanguageService>(context).translate('add_players_hint'),
+              Provider.of<LanguageService>(
+                context,
+              ).translate('add_players_hint'),
               style: const TextStyle(fontSize: 16, color: Colors.white70),
               textAlign: TextAlign.center,
             ),
@@ -57,14 +65,23 @@ class LeaderboardTab extends StatelessWidget {
         final img = _avatar(p.avatarPath);
         final pos = i + 1;
         final league = vm.league;
-        final isMvpStreak = league.currentMvpStreak == p.playerId && league.mvpStreakCount >= 2;
-        final isRatitaStreak = league.currentRatitaStreak == p.playerId && league.ratitaStreakCount >= 2;
+        final isMvpStreak =
+            league.currentMvpStreak == p.playerId && league.mvpStreakCount >= 2;
+        final isRatitaStreak =
+            league.currentRatitaStreak == p.playerId &&
+            league.ratitaStreakCount >= 2;
 
         return DrinkaholicCard(
-          padding: EdgeInsets.zero,
+          padding: const EdgeInsets.only(
+            top: 20,
+            bottom: 8,
+          ), // Reducido de 40 a 35 para ser más compacto
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
           child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 4,
+            ),
             leading: SizedBox(
               width: 84,
               child: Row(
@@ -74,7 +91,7 @@ class LeaderboardTab extends StatelessWidget {
                     '#$pos',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: pos == 1 ? Colors.amber : Colors.white, // ← cambiado
+                      color: pos == 1 ? Colors.amber : Colors.white,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -85,14 +102,19 @@ class LeaderboardTab extends StatelessWidget {
                         backgroundImage: img,
                         child: img == null
                             ? Text(
-                                p.name.isNotEmpty ? p.name[0].toUpperCase() : '?',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                p.name.isNotEmpty
+                                    ? p.name[0].toUpperCase()
+                                    : '?',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               )
                             : null,
                       ),
                       if (pos == 1)
                         Positioned(
-                          top: -30,
+                          top:
+                              -35, // Ajustado para mantener separación sin ser excesivo
                           left: 0,
                           right: 0,
                           child: Center(
@@ -100,14 +122,20 @@ class LeaderboardTab extends StatelessWidget {
                               '🏆',
                               style: TextStyle(
                                 fontSize: 24,
-                                shadows: const [Shadow(color: Colors.black45, blurRadius: 4, offset: Offset(0, 2))],
+                                shadows: const [
+                                  Shadow(
+                                    color: Colors.black45,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
                       if (pos == lastPos && lastPos > 1)
                         Positioned(
-                          top: -23,
+                          top: -26, // Ajustado para la ratita
                           left: 0,
                           right: 0,
                           child: Center(
@@ -115,7 +143,13 @@ class LeaderboardTab extends StatelessWidget {
                               '🐭',
                               style: TextStyle(
                                 fontSize: 20,
-                                shadows: const [Shadow(color: Colors.black45, blurRadius: 4, offset: Offset(0, 2))],
+                                shadows: const [
+                                  Shadow(
+                                    color: Colors.black45,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 2),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -130,7 +164,10 @@ class LeaderboardTab extends StatelessWidget {
                 Expanded(
                   child: Text(
                     p.name,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 if (isMvpStreak)
@@ -139,11 +176,19 @@ class LeaderboardTab extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.local_fire_department, size: 12, color: Colors.redAccent),
+                        const Icon(
+                          Icons.local_fire_department,
+                          size: 12,
+                          color: Colors.redAccent,
+                        ),
                         const SizedBox(width: 2),
                         Text(
                           '${league.mvpStreakCount}',
-                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -158,7 +203,11 @@ class LeaderboardTab extends StatelessWidget {
                         const SizedBox(width: 2),
                         Text(
                           '${league.ratitaStreakCount}',
-                          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -174,14 +223,19 @@ class LeaderboardTab extends StatelessWidget {
               decoration: BoxDecoration(
                 color: theme.colorScheme.primary.withAlpha(0x14),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: theme.colorScheme.primary.withAlpha(0x59)),
+                border: Border.all(
+                  color: theme.colorScheme.primary.withAlpha(0x59),
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '${p.points} pts',
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700), // ← cambiado
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ), // ← cambiado
                   ),
                 ],
               ),
