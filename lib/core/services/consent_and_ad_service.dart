@@ -257,7 +257,7 @@ class _PrivacyOptionsButtonState extends State<PrivacyOptionsButton> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_required) return const SizedBox.shrink();
+    if (!_required && !kDebugMode) return const SizedBox.shrink();
     return TextButton.icon(
       onPressed: () =>
           ConsentService().showPrivacyOptionsForm(onDismiss: (_) => _check()),

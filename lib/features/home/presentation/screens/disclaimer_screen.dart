@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/services/language_service.dart';
 import '../../../../core/presentation/components/neon_background_layer.dart';
 import 'home_screen.dart';
@@ -78,7 +79,7 @@ class DisclaimerScreen extends StatelessWidget {
                                 color: const Color(0xFFFF0055).withOpacity(0.3),
                                 blurRadius: 30,
                                 spreadRadius: 5,
-                              ),
+                                ),
                             ],
                           ),
                           child: Icon(
@@ -112,7 +113,25 @@ class DisclaimerScreen extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 40.h),
+                        SizedBox(height: 16.h),
+                        // Privacy Policy Link
+                        TextButton(
+                          onPressed: () async {
+                            final Uri url = Uri.parse('https://drinkaholic-app.web.app/privacy-policy');
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
+                          child: Text(
+                            languageService.translate('view_privacy_policy'),
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.5),
+                              fontSize: 12.sp,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 24.h),
                         // Rules Section
                         Container(
                           padding: EdgeInsets.all(20.w),

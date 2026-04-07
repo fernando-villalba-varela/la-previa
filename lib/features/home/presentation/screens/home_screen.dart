@@ -12,6 +12,7 @@ import 'package:drinkaholic/features/league/presentation/screens/participants_sc
 import '../../../../features/home/presentation/screens/premium_offer_screen.dart';
 import '../widgets/loading_overlay.dart';
 import '../widgets/error_banner.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -101,19 +102,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<void> _navigateToElixirs() async {
-    final msg = Provider.of<LanguageService>(context, listen: false).isSpanish
-        ? 'Recarga de elixires próximamente'
-        : 'Elixir refill coming soon';
-
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(msg)),
-    );
+    final Uri url = Uri.parse('https://shotest.es/productos/33-pack-degustaci%C3%B3n-2-botellas.html');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No se pudo abrir el enlace')),
+        );
+      }
+    } catch (e) {
+      debugPrint('Error launching URL: $e');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -132,10 +137,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       SliverFillRemaining(
                         hasScrollBody: false,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(height: 20.h),
                             HomeHeader(screenWidth: screenWidth),
+                            SizedBox(height: 30.h),
                             HomeButtonsSection(
                               onQuickGamePressed: () => _handleNavigation(
                                 HomeViewModel.quickGameGradient,
@@ -170,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  SizedBox(height: 16.h),
+                                  SizedBox(height: 12.h),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -204,6 +209,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   right: 20,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Mini Logo
                       Row(
@@ -232,79 +238,87 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ),
                         ],
                       ),
-                      // Premium Button
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PremiumOfferScreen(
-                                nextRoute: MaterialPageRoute(builder: (context) => const HomeScreen()),
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFCC00).withOpacity(0.1),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: const Color(0xFFFFCC00).withOpacity(0.5),
-                              width: 1.5,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color(0xFFFFCC00).withOpacity(0.2),
-                                blurRadius: 10,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                          ),
-                          child: const Icon(
-                            Icons.workspace_premium,
-                            color: Color(0xFFFFCC00),
-                            size: 24,
-                          ),
-                        ),
-                      ),
-                      // Language Toggle
-                      Consumer<LanguageService>(
-                        builder: (context, languageService, child) {
-                          return GestureDetector(
-                            onTap: () => languageService.toggleLanguage(),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: Colors.white.withOpacity(0.2),
-                                ),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    languageService.isSpanish ? '🇪🇸' : '🇬🇧',
-                                    style: const TextStyle(fontSize: 24),
+                      
+                      // Right section: Language + Premium
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Premium Button
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PremiumOfferScreen(
+                                    nextRoute: MaterialPageRoute(builder: (context) => const HomeScreen()),
                                   ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    languageService.isSpanish ? 'ES' : 'EN',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFFFCC00).withOpacity(0.1),
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(0xFFFFCC00).withOpacity(0.5),
+                                  width: 1.5,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0xFFFFCC00).withOpacity(0.2),
+                                    blurRadius: 10,
+                                    spreadRadius: 1,
                                   ),
                                 ],
                               ),
+                              child: const Icon(
+                                Icons.workspace_premium,
+                                color: Color(0xFFFFCC00),
+                                size: 24,
+                              ),
                             ),
-                          );
-                        },
+                          ),
+                          const SizedBox(width: 12),
+                          // Language Selector
+                          Consumer<LanguageService>(
+                            builder: (context, languageService, child) {
+                              return GestureDetector(
+                                onTap: () => languageService.toggleLanguage(),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                      color: Colors.white.withOpacity(0.2),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        languageService.isSpanish ? '🇪🇸' : '🇬🇧',
+                                        style: const TextStyle(fontSize: 24),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        languageService.isSpanish ? 'ES' : 'EN',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
