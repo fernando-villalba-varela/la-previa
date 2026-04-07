@@ -20,7 +20,12 @@ class HomeButtonsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 20.h),
+      padding: EdgeInsets.only(
+        left: 32.w,
+        right: 32.w,
+        top: 20.h,
+        bottom: 0,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
@@ -30,7 +35,7 @@ class HomeButtonsSection extends StatelessWidget {
           _buildLeagueButton(context),
           SizedBox(height: 18.h),
           _buildElixirsButton(context),
-          SizedBox(height: 24.h),
+          SizedBox(height: 12.h),
           const PrivacyOptionsButton(),
         ],
       ),

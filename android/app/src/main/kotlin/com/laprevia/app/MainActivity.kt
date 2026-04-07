@@ -1,4 +1,4 @@
-package com.example.drinkaholic
+package com.laprevia.app
 
 import io.flutter.embedding.android.FlutterActivity
 

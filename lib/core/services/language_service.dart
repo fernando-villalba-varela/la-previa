@@ -318,6 +318,10 @@ class LanguageService extends ChangeNotifier {
       'buy_premium_button': {'es': 'COMPRAR PREMIUM', 'en': 'BUY PREMIUM'},
       'continue_with_ads': {'es': 'Continuar con anuncios', 'en': 'Continue with ads'},
       
+      'view_privacy_policy': {
+        'es': 'Ver Política de Privacidad',
+        'en': 'View Privacy Policy',
+      },
       // Disclaimer Screen
       'disclaimer_title': {'es': '¡AVISO DE SEGURIDAD!', 'en': 'SAFETY NOTICE!'},
       'disclaimer_content': {
