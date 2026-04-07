@@ -34,7 +34,6 @@ class LeagueGameViewModel extends ChangeNotifier {
   ConstantChallengeEnd? currentChallengeEnd;
   final List<Event> events = [];
   EventEnd? currentEventEnd;
-  final Set<String> _usedQuestions = <String>{};
   // Cola sin repetición para preguntas personalizadas
   final List<CustomQuestion> _pendingCustomQuestions = [];
   int _maxRounds = 40; // se actualiza en nextChallenge
@@ -121,13 +120,11 @@ class LeagueGameViewModel extends ChangeNotifier {
       final selectedPlayerIndex = Random().nextInt(players.length);
       final selectedPlayer = players[selectedPlayerIndex];
 
-      var attempts = 0;
-      GeneratedQuestion question;
-      do {
-        question = await QuestionGenerator.generateRandomQuestionForPlayer(selectedPlayer.nombre, activePackIds: activePackIds);
-        attempts++;
-      } while (_usedQuestions.contains(question.question) && attempts < 30);
-      _usedQuestions.add(question.question);
+      final question = await QuestionGenerator.generateRandomQuestionForPlayer(
+        selectedPlayer.nombre, 
+        activePackIds: activePackIds,
+        currentRound: _currentRound,
+      );
 
       _currentChallenge = question.question;
       _currentAnswer = question.answer;
@@ -135,13 +132,10 @@ class LeagueGameViewModel extends ChangeNotifier {
       _currentPlayerIndex = selectedPlayerIndex;
       notifyListeners();
     } else {
-      var attempts = 0;
-      GeneratedQuestion question;
-      do {
-        question = await QuestionGenerator.generateRandomQuestion(activePackIds: activePackIds);
-        attempts++;
-      } while (_usedQuestions.contains(question.question) && attempts < 30);
-      _usedQuestions.add(question.question);
+      final question = await QuestionGenerator.generateRandomQuestion(
+        activePackIds: activePackIds,
+        currentRound: _currentRound,
+      );
 
       _currentChallenge = question.question;
       _currentAnswer = question.answer;
@@ -198,13 +192,12 @@ class LeagueGameViewModel extends ChangeNotifier {
     final player1 = selectedPlayers[0];
     final player2 = selectedPlayers[1];
 
-    var attempts = 0;
-    GeneratedQuestion question;
-    do {
-      question = await QuestionGenerator.generateRandomDualQuestion(player1.nombre, player2.nombre, activePackIds: activePackIds);
-      attempts++;
-    } while (_usedQuestions.contains(question.question) && attempts < 30);
-    _usedQuestions.add(question.question);
+    final question = await QuestionGenerator.generateRandomDualQuestion(
+      player1.nombre, 
+      player2.nombre, 
+      activePackIds: activePackIds,
+      currentRound: _currentRound,
+    );
 
     final player1Index = players.indexOf(player1);
     final player2Index = players.indexOf(player2);
@@ -249,7 +242,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     final activeEvents = events.where((e) => e.isActiveAtRound(_currentRound)).toList();
 
     for (final event in activeEvents) {
-      if (EventGenerator.shouldEndEvent(event, _currentRound)) {
+      if (EventGenerator.shouldEndEvent(event, _currentRound, totalRounds: _maxRounds)) {
         final eventEnd = EventGenerator.generateEventEnd(event, _currentRound);
 
         for (int i = 0; i < events.length; i++) {
@@ -272,7 +265,7 @@ class LeagueGameViewModel extends ChangeNotifier {
         constantChallenges.where((c) => c.isActiveAtRound(_currentRound)).toList();
 
     for (final challenge in activeChallenges) {
-      if (ConstantChallengeGenerator.shouldEndConstantChallenge(challenge, _currentRound)) {
+      if (ConstantChallengeGenerator.shouldEndConstantChallenge(challenge, _currentRound, totalRounds: _maxRounds)) {
         final challengeEnd =
             ConstantChallengeGenerator.generateChallengeEnd(challenge, _currentRound);
 

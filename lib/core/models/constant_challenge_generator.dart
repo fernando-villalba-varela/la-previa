@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'generator_utils.dart';
 import 'constant_challenge.dart';
 import 'player.dart';
 
@@ -62,6 +64,8 @@ class ConstantChallengeGenerator {
   static List<ConstantChallengeTemplate>? _templates;
   static String _currentLanguage = 'es';
   static List<String> _currentPacks = ['classic'];
+  // Historial compartido
+  static GeneratorHistory get _history => GeneratorHistory.shared;
 
   /// Load constant challenge templates from JSON
   static Future<void> loadTemplates({String language = 'es', List<String> activePackIds = const ['classic']}) async {
@@ -131,8 +135,33 @@ class ConstantChallengeGenerator {
       return _generateChallengeFromTemplate(_templates!.first, targetPlayer, currentRound);
     }
 
-    final template = singlePlayerTemplates[_random.nextInt(singlePlayerTemplates.length)];
-    return _generateChallengeFromTemplate(template, targetPlayer, currentRound);
+    // Usar historial para evitar duplicados recientes
+    int attempts = 0;
+    ConstantChallengeTemplate template;
+    ConstantChallenge challenge;
+
+    do {
+      template = singlePlayerTemplates[_random.nextInt(singlePlayerTemplates.length)];
+      challenge = _generateChallengeFromTemplate(template, targetPlayer, currentRound);
+      attempts++;
+
+      bool isDuplicate = _history.isContentRecent(template.id, challenge.description);
+      bool isTemplateRecent = _history.isTemplateRecent(template.id, limit: 15);
+      
+      if (attempts > 10) isTemplateRecent = false;
+      if (attempts > 25) isDuplicate = false;
+
+      if (!isDuplicate && !isTemplateRecent) break;
+    } while (attempts < 30);
+
+    _history.add(template.id, challenge.description);
+    
+    if (kDebugMode) {
+      print('--- RONDA $currentRound ---');
+      print('RETO [${template.id}]: ${challenge.description}');
+    }
+    
+    return challenge;
   }
 
   /// Generate a random dual constant challenge for two specific players
@@ -170,8 +199,33 @@ class ConstantChallengeGenerator {
       return generateRandomConstantChallenge(player1, currentRound, language: language, activePackIds: activePackIds);
     }
 
-    final template = dualTemplates[_random.nextInt(dualTemplates.length)];
-    return _generateDualChallengeFromTemplate(template, player1, player2, currentRound);
+    // Usar historial para evitar duplicados recientes
+    int attempts = 0;
+    ConstantChallengeTemplate template;
+    ConstantChallenge challenge;
+
+    do {
+      template = dualTemplates[_random.nextInt(dualTemplates.length)];
+      challenge = _generateDualChallengeFromTemplate(template, player1, player2, currentRound);
+      attempts++;
+
+      bool isDuplicate = _history.isContentRecent(template.id, challenge.description);
+      bool isTemplateRecent = _history.isTemplateRecent(template.id, limit: 10);
+      
+      if (attempts > 10) isTemplateRecent = false;
+      if (attempts > 25) isDuplicate = false;
+
+      if (!isDuplicate && !isTemplateRecent) break;
+    } while (attempts < 30);
+
+    _history.add(template.id, challenge.description);
+    
+    if (kDebugMode) {
+      print('--- RONDA $currentRound ---');
+      print('RETO DUAL [${template.id}]: ${challenge.description}');
+    }
+    
+    return challenge;
   }
 
   /// Generate a challenge to end an existing constant challenge
@@ -326,23 +380,40 @@ class ConstantChallengeGenerator {
   }
 
   /// Determines if a constant challenge should be ended this round
-  static bool shouldEndConstantChallenge(ConstantChallenge challenge, int currentRound) {
+  static bool shouldEndConstantChallenge(ConstantChallenge challenge, int currentRound, {int? totalRounds}) {
     if (!challenge.canBeEndedAtRound(currentRound)) return false;
 
     // Base probability grows with rounds active (older challenges more likely to end)
     final roundsActive = currentRound - challenge.startRound;
+    
+    // Adapt thresholds based on total game rounds
+    final isShortGame = totalRounds != null && totalRounds < 60;
 
     double baseProbability;
-    if (roundsActive >= 15) {
-      baseProbability = 0.25; // 25% chance after 15 rounds
-    } else if (roundsActive >= 12) {
-      baseProbability = 0.15; // 15% chance after 12 rounds
-    } else if (roundsActive >= 10) {
-      baseProbability = 0.08; // 8% chance after 10 rounds
-    } else if (roundsActive >= 8) {
-      baseProbability = 0.05; // 5% chance after 8 rounds
+    if (isShortGame) {
+      // Curve for shorter games
+      if (roundsActive >= 15) {
+        baseProbability = 0.30;
+      } else if (roundsActive >= 10) {
+        baseProbability = 0.12;
+      } else if (roundsActive >= 7) {
+        baseProbability = 0.04;
+      } else {
+        baseProbability = 0.0; // Inmunidad total inicial
+      }
     } else {
-      baseProbability = 0.02; // 2% chance after minimum 5 rounds
+      // Curve for longer/endless games
+      if (roundsActive >= 25) {
+        baseProbability = 0.25;
+      } else if (roundsActive >= 18) {
+        baseProbability = 0.12;
+      } else if (roundsActive >= 12) {
+        baseProbability = 0.06;
+      } else if (roundsActive >= 8) {
+        baseProbability = 0.02;
+      } else {
+        baseProbability = 0.0; // Inmunidad total inicial
+      }
     }
 
     // Difficulty-aware adjustment: retos con castigos más altos terminan antes

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'generator_utils.dart';
 
 class QuestionTemplate {
   final String id;
@@ -62,6 +63,8 @@ class QuestionGenerator {
   static List<QuestionTemplate>? _templates;
   static String _currentLanguage = 'es';
   static List<String> _currentPacks = ['classic'];
+  // Historial compartido para evitar duplicados
+  static GeneratorHistory get _history => GeneratorHistory.shared;
 
   /// Cargar las plantillas desde múltiples JSONs según los packs activos
   static Future<void> loadTemplates({String language = 'es', List<String> activePackIds = const ['classic']}) async {
@@ -144,7 +147,11 @@ class QuestionGenerator {
   }
 
   /// Generar una pregunta aleatoria (excluyendo templates con PLAYER)
-  static Future<GeneratedQuestion> generateRandomQuestion({String language = 'es', List<String> activePackIds = const ['classic']}) async {
+  static Future<GeneratedQuestion> generateRandomQuestion({
+    String language = 'es',
+    List<String> activePackIds = const ['classic'],
+    int? currentRound,
+  }) async {
     await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
@@ -173,15 +180,45 @@ class QuestionGenerator {
       return _generateQuestionFromTemplate(template);
     }
 
-    final template = nonPlayerTemplates[_random.nextInt(nonPlayerTemplates.length)];
+    // Usar historial para evitar duplicados recientes
+    int attempts = 0;
+    QuestionTemplate template;
+    GeneratedQuestion question;
+    
+    do {
+      template = nonPlayerTemplates[_random.nextInt(nonPlayerTemplates.length)];
+      question = _generateQuestionFromTemplate(template);
+      attempts++;
+      
+      // Doble comprobación:
+      // 1. ¿Salió esta plantilla muy recientemente (últimos 20)?
+      // 2. ¿Salió este contenido exacto recientemente (últimos 50)?
+      bool isDuplicate = _history.isContentRecent(template.id, question.question, limit: 50);
+      bool isTemplateRecent = _history.isTemplateRecent(template.id, limit: 20);
+      
+      // Si llevamos muchos intentos (pool pequeño o mala suerte), relajamos las condiciones
+      if (attempts > 10) isTemplateRecent = false; 
+      if (attempts > 25) isDuplicate = false; 
+
+      if (!isDuplicate && !isTemplateRecent) break;
+    } while (attempts < 30);
+
+    _history.add(template.id, question.question);
+
     if (kDebugMode) {
-      print('Generando pregunta de la categoría: ${template.template}');
+      print('--- RONDA ${currentRound ?? "?"} ---');
+      print('PREGUNTA [${template.id}]: ${question.question}');
     }
-    return _generateQuestionFromTemplate(template);
+    return question;
   }
 
   /// Generar una pregunta aleatoria con un jugador específico
-  static Future<GeneratedQuestion> generateRandomQuestionForPlayer(String playerName, {String language = 'es', List<String> activePackIds = const ['classic']}) async {
+  static Future<GeneratedQuestion> generateRandomQuestionForPlayer(
+    String playerName, {
+    String language = 'es',
+    List<String> activePackIds = const ['classic'],
+    int? currentRound,
+  }) async {
     await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
@@ -203,21 +240,46 @@ class QuestionGenerator {
 
     if (playerTemplates.isEmpty) {
       // Si no hay templates con PLAYER, usar uno normal
-      final template = _templates![_random.nextInt(_templates!.length)];
-      return _generateQuestionFromTemplate(template);
-      return GeneratedQuestion(
-        question: '$playerName bebe 1 trago (Fallback)',
-        categoria: 'Genérico',
-        usedVariables: {'PLAYER': playerName},
-      );
+      return generateRandomQuestion(language: language, activePackIds: activePackIds, currentRound: currentRound);
     }
 
-    final template = playerTemplates[_random.nextInt(playerTemplates.length)];
-    return _generateQuestionFromTemplate(template, playerName: playerName);
+    // Usar historial para evitar duplicados recientes
+    int attempts = 0;
+    QuestionTemplate template;
+    GeneratedQuestion question;
+
+    do {
+      template = playerTemplates[_random.nextInt(playerTemplates.length)];
+      question = _generateQuestionFromTemplate(template, playerName: playerName);
+      attempts++;
+
+      bool isDuplicate = _history.isContentRecent(template.id, question.question, limit: 50);
+      bool isTemplateRecent = _history.isTemplateRecent(template.id, limit: 15); // Menos restrictivo para jugador
+      
+      if (attempts > 10) isTemplateRecent = false;
+      if (attempts > 25) isDuplicate = false;
+
+      if (!isDuplicate && !isTemplateRecent) break;
+    } while (attempts < 30);
+
+    _history.add(template.id, question.question);
+    
+    if (kDebugMode) {
+      print('--- RONDA ${currentRound ?? "?"} ---');
+      print('PREGUNTA JUGADOR [${template.id}]: ${question.question}');
+    }
+    
+    return question;
   }
 
   /// Generar una pregunta dual aleatoria (para 2 jugadores)
-  static Future<GeneratedQuestion> generateRandomDualQuestion(String player1Name, String player2Name, {String language = 'es', List<String> activePackIds = const ['classic']}) async {
+  static Future<GeneratedQuestion> generateRandomDualQuestion(
+    String player1Name,
+    String player2Name, {
+    String language = 'es',
+    List<String> activePackIds = const ['classic'],
+    int? currentRound,
+  }) async {
     await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
@@ -237,8 +299,33 @@ class QuestionGenerator {
       return generateRandomQuestion(language: language, activePackIds: activePackIds);
     }
 
-    final template = dualTemplates[_random.nextInt(dualTemplates.length)];
-    return _generateQuestionFromTemplate(template, playerName: player1Name, dualPlayerName: player2Name);
+    // Usar historial para evitar duplicados recientes
+    int attempts = 0;
+    QuestionTemplate template;
+    GeneratedQuestion question;
+
+    do {
+      template = dualTemplates[_random.nextInt(dualTemplates.length)];
+      question = _generateQuestionFromTemplate(template, playerName: player1Name, dualPlayerName: player2Name);
+      attempts++;
+
+      bool isDuplicate = _history.isContentRecent(template.id, question.question, limit: 50);
+      bool isTemplateRecent = _history.isTemplateRecent(template.id, limit: 15);
+      
+      if (attempts > 10) isTemplateRecent = false;
+      if (attempts > 25) isDuplicate = false;
+
+      if (!isDuplicate && !isTemplateRecent) break;
+    } while (attempts < 30);
+
+    _history.add(template.id, question.question);
+    
+    if (kDebugMode) {
+      print('--- RONDA ${currentRound ?? "?"} ---');
+      print('PREGUNTA DUAL [${template.id}]: ${question.question}');
+    }
+    
+    return question;
   }
 
   /// Generar una pregunta de una categoría específica
@@ -256,7 +343,9 @@ class QuestionGenerator {
     }
 
     final template = categoryTemplates[_random.nextInt(categoryTemplates.length)];
-    return _generateQuestionFromTemplate(template, playerName: playerName);
+    final question = _generateQuestionFromTemplate(template, playerName: playerName);
+    _history.add(template.id, question.question);
+    return question;
   }
 
   /// Obtener todas las categorías disponibles
@@ -323,7 +412,7 @@ class QuestionGenerator {
       categoria: template.categoria,
       usedVariables: usedVariables,
       answer: answer,
-      templateId: template.id, // <-- ANADIR
+      templateId: template.id,
     );
   }
 
