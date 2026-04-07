@@ -65,18 +65,19 @@ class GameResultsViewModel extends ChangeNotifier {
 
     int minDrinks = playerDrinks.values.reduce((a, b) => a < b ? a : b);
 
-    // Filtrar candidatos a Ratita excluyendo al MVP si ya fue resuelto
+    // Obtener el MVP resuelto (manual o automático) para excluirlo siempre
+    final mvp = getMVPPlayer(players, playerDrinks);
+
     List<Player> ratitaCandidates = players.where((p) {
       bool hasMinDrinks = playerDrinks[p.id] == minDrinks;
-      bool isNotResolvedMVP =
-          !(_mvpTieResolved && _resolvedMVP != null && p.id == _resolvedMVP!.id);
-      return hasMinDrinks && isNotResolvedMVP;
+      bool isNotMVP = mvp == null || p.id != mvp.id;
+      return hasMinDrinks && isNotMVP;
     }).toList();
 
     return ratitaCandidates.isNotEmpty
         ? ratitaCandidates.first
         : players.firstWhere(
-            (p) => playerDrinks[p.id] == minDrinks,
+            (p) => playerDrinks[p.id] == minDrinks && (mvp == null || p.id != mvp.id),
             orElse: () => players.first,
           );
   }

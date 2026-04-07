@@ -206,7 +206,9 @@ class EventGenerator {
 
     // Find the template using the templateId stored in metadata
     final templateId = event.metadata['templateId'] as String?;
-    final template = _templates?.firstWhere((t) => t.id == templateId, orElse: () => _templates!.first);
+    final template = _templates?.isNotEmpty == true
+        ? _templates!.firstWhere((t) => t.id == templateId, orElse: () => _templates!.first)
+        : null;
 
     if (template != null) {
       endDescription = template.endTemplate;

@@ -19,6 +19,7 @@ class LeagueGameViewModel extends ChangeNotifier {
   String _currentChallenge = '';
   String? _currentAnswer;
   String? _currentTemplateId;
+  String? _currentCategoria;
   bool _gameStarted = false;
   int _currentRound = 1;
   bool _isCurrentChallengeConstant = false;
@@ -44,6 +45,7 @@ class LeagueGameViewModel extends ChangeNotifier {
   String get currentChallenge => _currentChallenge;
   String? get currentAnswer => _currentAnswer;
   String? get currentTemplateId => _currentTemplateId;
+  String? get currentCategoria => _currentCategoria;
   bool get gameStarted => _gameStarted;
   int get currentRound => _currentRound;
   bool get isCurrentChallengeConstant => _isCurrentChallengeConstant;
@@ -110,6 +112,7 @@ class LeagueGameViewModel extends ChangeNotifier {
         _currentChallenge = '${cq.text}\n\n[🍻 ${cq.drinks} $drinkText]';
         _currentAnswer = null;
         _currentTemplateId = cq.id;
+        _currentCategoria = null;
         _currentPlayerIndex = -1;
         notifyListeners();
         return;
@@ -129,6 +132,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       _currentChallenge = question.question;
       _currentAnswer = question.answer;
       _currentTemplateId = question.templateId;
+      _currentCategoria = question.categoria;
       _currentPlayerIndex = selectedPlayerIndex;
       notifyListeners();
     } else {
@@ -140,6 +144,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       _currentChallenge = question.question;
       _currentAnswer = question.answer;
       _currentTemplateId = question.templateId;
+      _currentCategoria = question.categoria;
       _currentPlayerIndex = -1;
       notifyListeners();
     }
@@ -152,6 +157,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     _currentChallenge = '${event.typeIcon} ${event.title}: ${event.description}';
     _currentTemplateId = event.metadata['templateId'] as String?;
     _currentAnswer = null;
+    _currentCategoria = null;
     _currentPlayerIndex = -1;
     notifyListeners();
   }
@@ -177,6 +183,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     _currentChallenge = constantChallenge.description;
     _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
     _currentAnswer = null;
+    _currentCategoria = null;
     _currentPlayerIndex = players.indexWhere((p) => p.id == eligiblePlayer.id);
     _isCurrentChallengeConstant = true;
     notifyListeners();
@@ -205,6 +212,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     _currentChallenge = question.question;
     _currentAnswer = question.answer;
     _currentTemplateId = question.templateId;
+    _currentCategoria = question.categoria;
     _currentPlayerIndex = player1Index;
     _dualPlayerIndex = player2Index;
 
@@ -233,6 +241,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     constantChallenges.add(constantChallenge);
     _currentChallenge = constantChallenge.description;
     _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
+    _currentCategoria = null;
     _currentPlayerIndex = players.indexOf(player1);
     _dualPlayerIndex = players.indexOf(player2);
     notifyListeners();
@@ -298,6 +307,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     currentEventEnd = null;
     _dualPlayerIndex = null;
     _currentAnswer = null;
+    _currentCategoria = null;
     _isCurrentChallengeConstant = false;
     notifyListeners();
 
@@ -552,6 +562,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       dualPlayer2Name: dualPlayer2Name,
       isCurrentChallengeConstant: _isCurrentChallengeConstant,
       currentTemplateId: _currentTemplateId,
+      currentCategoria: _currentCategoria,
     );
   }
 }

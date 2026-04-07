@@ -47,17 +47,12 @@ class _PlayTabState extends State<PlayTab> {
     });
   }
 
-  Map<int, String> _saveGameResults(Map<int, int> playerDrinks) {
+  void _saveGameResults(Map<int, int> playerDrinks, int mvpId, int ratitaId) {
     final vm = context.read<LeagueDetailViewModel>();
-
-    // Usar el método correcto del ViewModel que maneja toda la lógica de puntuación
-    final streakMessages = vm.recordMatch(playerDrinks, Provider.of<LanguageService>(context, listen: false));
-
+    vm.recordMatch(playerDrinks, Provider.of<LanguageService>(context, listen: false), mvpId: mvpId, ratitaId: ratitaId);
     setState(() {
-      _selected.clear(); // Limpiar selección después de guardar
+      _selected.clear();
     });
-
-    return streakMessages;
   }
 
   @override
@@ -311,10 +306,8 @@ class _PlayTabState extends State<PlayTab> {
                               if (_isProcessingGameEnd) return;
                               _isProcessingGameEnd = true;
 
-                              // Procesar resultados y obtener mensajes de rachas
-                              final streakMessages = _saveGameResults(playerDrinks);
-
-                              // Navegar a GameResultsScreen con los mensajes de rachas
+                              // Navegar a GameResultsScreen — recordMatch se llama en onConfirm
+                              // con los IDs ya resueltos (incluyendo desempates manuales)
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -322,8 +315,9 @@ class _PlayTabState extends State<PlayTab> {
                                     players: selectedPlayers,
                                     playerDrinks: playerDrinks,
                                     maxRounds: maxRounds,
-                                    streakMessages: streakMessages,
-                                    onConfirm: () {
+                                    onConfirm: (mvpId, ratitaId) {
+                                      // Guardar resultado con los IDs resueltos por la pantalla
+                                      _saveGameResults(playerDrinks, mvpId, ratitaId);
                                       // Cerrar GameResultsScreen
                                       Navigator.pop(context);
                                       // Cerrar también LeagueGameScreen para volver a PlayTab

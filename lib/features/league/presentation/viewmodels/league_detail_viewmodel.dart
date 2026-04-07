@@ -26,22 +26,13 @@ class LeagueDetailViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<int, String> recordMatch(Map<int, int> drinksMap, LanguageService languageService) {
+  Map<int, String> recordMatch(Map<int, int> drinksMap, LanguageService languageService, {required int mvpId, required int ratitaId}) {
     final Map<int, String> streakMessages = {};
 
     if (drinksMap.isEmpty) return streakMessages;
 
-    final maxVal = drinksMap.values.reduce((a, b) => a > b ? a : b);
-    final minVal = drinksMap.values.reduce((a, b) => a < b ? a : b);
-
-    List<int> mvpIds = drinksMap.entries.where((e) => e.value == maxVal).map((e) => e.key).toList();
-    List<int> ratitaIds = drinksMap.entries.where((e) => e.value == minVal).map((e) => e.key).toList();
-
-    if (mvpIds.length > 1) mvpIds = [_tieBreaker(mvpIds)];
-    if (ratitaIds.length > 1) ratitaIds = [_tieBreaker(ratitaIds)];
-
-    final mvpId = mvpIds.first;
-    final ratitaId = ratitaIds.first;
+    final mvpIds = [mvpId];
+    final ratitaIds = [ratitaId];
 
     // Detectar rachas de MVP consecutivos
     if (league.currentMvpStreak == mvpId) {
@@ -116,11 +107,6 @@ class LeagueDetailViewModel extends ChangeNotifier {
     notifyListeners();
 
     return streakMessages;
-  }
-
-  int _tieBreaker(List<int> ids) {
-    ids.shuffle();
-    return ids.first;
   }
 
   // === AVATAR / FOTO ===

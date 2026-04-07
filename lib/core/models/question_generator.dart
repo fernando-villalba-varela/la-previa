@@ -283,7 +283,7 @@ class QuestionGenerator {
     await loadTemplates(language: language, activePackIds: activePackIds);
 
     if (_templates == null || _templates!.isEmpty) {
-      return generateRandomQuestion(language: language, activePackIds: activePackIds);
+      return generateRandomQuestion(language: language, activePackIds: activePackIds, currentRound: currentRound);
     }
 
     // Filtrar solo templates duales
@@ -296,7 +296,7 @@ class QuestionGenerator {
 
     if (dualTemplates.isEmpty) {
       // Si no hay templates duales, generar uno normal
-      return generateRandomQuestion(language: language, activePackIds: activePackIds);
+      return generateRandomQuestion(language: language, activePackIds: activePackIds, currentRound: currentRound);
     }
 
     // Usar historial para evitar duplicados recientes

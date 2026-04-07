@@ -57,6 +57,8 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
 
   DateTime? _lastTapTime;
   Timer? _toastTimer;
+  bool _ratingHintShown = false;
+  int _challengeCount = 0;
 
   @override
   void initState() {
@@ -83,6 +85,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       await _viewModel.loadCustomQuestions(db, widget.leagueId);
       final activePackIds = context.read<PackService>().activePackIds.toList();
       await _viewModel.initializeFirstChallenge(lang, activePackIds);
+
     });
 
   }
@@ -137,7 +140,33 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
     final lang = context.read<LanguageService>();
     final activePackIds = context.read<PackService>().activePackIds.toList();
     final gameEnded = await _viewModel.nextChallenge(lang, activePackIds, widget.maxRounds);
-    if (gameEnded && mounted) _endGame();
+    if (gameEnded && mounted) { _endGame(); return; }
+
+    _challengeCount++;
+    if (_challengeCount == 1 && !_ratingHintShown && mounted) {
+      _ratingHintShown = true;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.thumb_up_alt_outlined, color: Colors.white, size: 16),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  lang.translate('rating_hint'),
+                  style: const TextStyle(color: Colors.white, fontSize: 13),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: const Color(0xFF1A1A2E),
+          duration: const Duration(seconds: 3),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.only(bottom: 80, left: 16, right: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+      );
+    }
   }
 
   void _endGame() async {
@@ -319,7 +348,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                 Positioned.fill(
                   child: AnimatedBuilder(
                     animation: _orientationFade,
-                    builder: (_, __) => Container(
+                    builder: (_, _) => Container(
                       color: Colors.black.withOpacity(_orientationFade.value),
                     ),
                   ),
@@ -337,10 +366,13 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       builder: (context, constraints) {
         return Consumer<LeagueGameViewModel>(
           builder: (ctx, vm, _) {
-            final hasActiveSelector = vm.isConditionalQuestion() &&
+            final gs = vm.createGameState(_glowAnimation);
+            final isEnding = gs.isEndingConstantChallenge || gs.isEndingEvent;
+            final hasActiveSelector = !isEnding &&
+                vm.isConditionalQuestion() &&
                 !vm.showingPlayerSelector &&
                 !vm.showingLetterCounter;
-            final isMoreLikelyAndNotSelected =
+            final isMoreLikelyAndNotSelected = !isEnding &&
                 vm.isMoreLikelyQuestion() && !vm.showingPlayerSelector;
 
             final iconSize =
@@ -364,7 +396,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                       : _handleTap),
               child: AnimatedBuilder(
                 animation: _tapAnimation,
-                builder: (_, __) => Transform.scale(
+                builder: (_, _) => Transform.scale(
                   scale: _tapAnimation.value,
                   child: Stack(
                     children: [

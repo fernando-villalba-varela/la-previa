@@ -18,8 +18,8 @@ class LeaderboardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final vm = context.watch<LeagueDetailViewModel>();
+    final lang = Provider.of<LanguageService>(context, listen: false);
     final players = [...vm.league.players]
       ..sort((a, b) {
         final pointsComparison = b.points.compareTo(a.points);
@@ -33,23 +33,15 @@ class LeaderboardTab extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.people_outline, size: 64, color: Colors.white54),
-            SizedBox(height: 16),
+            const Icon(Icons.people_outline, size: 64, color: Colors.white54),
+            const SizedBox(height: 16),
             Text(
-              Provider.of<LanguageService>(
-                context,
-              ).translate('no_players_title'),
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+              lang.translate('no_players_title'),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: Colors.white),
             ),
             const SizedBox(height: 8),
             Text(
-              Provider.of<LanguageService>(
-                context,
-              ).translate('add_players_hint'),
+              lang.translate('add_players_hint'),
               style: const TextStyle(fontSize: 16, color: Colors.white70),
               textAlign: TextAlign.center,
             ),
@@ -58,191 +50,246 @@ class LeaderboardTab extends StatelessWidget {
       );
     }
 
-    return ListView.builder(
-      itemCount: players.length,
-      itemBuilder: (_, i) {
-        final p = players[i];
-        final img = _avatar(p.avatarPath);
-        final pos = i + 1;
-        final league = vm.league;
-        final isMvpStreak =
-            league.currentMvpStreak == p.playerId && league.mvpStreakCount >= 2;
-        final isRatitaStreak =
-            league.currentRatitaStreak == p.playerId &&
-            league.ratitaStreakCount >= 2;
-
-        return DrinkaholicCard(
-          padding: const EdgeInsets.only(
-            top: 20,
-            bottom: 8,
-          ), // Reducido de 40 a 35 para ser más compacto
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-          child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 4,
-            ),
-            leading: SizedBox(
-              width: 84,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '#$pos',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: pos == 1 ? Colors.amber : Colors.white,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: img,
-                        child: img == null
-                            ? Text(
-                                p.name.isNotEmpty
-                                    ? p.name[0].toUpperCase()
-                                    : '?',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            : null,
-                      ),
-                      if (pos == 1)
-                        Positioned(
-                          top:
-                              -35, // Ajustado para mantener separación sin ser excesivo
-                          left: 0,
-                          right: 0,
-                          child: Center(
-                            child: Text(
-                              '🏆',
-                              style: TextStyle(
-                                fontSize: 24,
-                                shadows: const [
-                                  Shadow(
-                                    color: Colors.black45,
-                                    blurRadius: 4,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      if (pos == lastPos && lastPos > 1)
-                        Positioned(
-                          top: -26, // Ajustado para la ratita
-                          left: 0,
-                          right: 0,
-                          child: Center(
-                            child: Text(
-                              '🐭',
-                              style: TextStyle(
-                                fontSize: 20,
-                                shadows: const [
-                                  Shadow(
-                                    color: Colors.black45,
-                                    blurRadius: 4,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            title: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    p.name,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                if (isMvpStreak)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.local_fire_department,
-                          size: 12,
-                          color: Colors.redAccent,
-                        ),
-                        const SizedBox(width: 2),
-                        Text(
-                          '${league.mvpStreakCount}',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                if (isRatitaStreak)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.pets, size: 12, color: Colors.pink),
-                        const SizedBox(width: 2),
-                        Text(
-                          '${league.ratitaStreakCount}',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            subtitle: Text(
-              '${Provider.of<LanguageService>(context).translate('stats_mvdp')}: ${p.mvdpCount} | ${Provider.of<LanguageService>(context).translate('stats_drinks')}: ${p.totalDrinks} | ${Provider.of<LanguageService>(context).translate('stats_ratita')}: ${p.ratitaCount} | ${Provider.of<LanguageService>(context).translate('stats_matches')}: ${p.gamesPlayed}',
-              style: const TextStyle(color: Colors.white70), // ← cambiado
-            ),
-            trailing: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withAlpha(0x14),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: theme.colorScheme.primary.withAlpha(0x59),
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${p.points} pts',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ), // ← cambiado
-                  ),
-                ],
-              ),
-            ),
+    return Column(
+      children: [
+        // Leyenda de iconos
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 6),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _LegendItem(icon: Icons.emoji_events, color: Colors.amber, label: lang.translate('stats_mvdp')),
+              const SizedBox(width: 16),
+              _LegendItem(icon: Icons.local_bar, color: Colors.cyanAccent, label: lang.translate('stats_drinks')),
+              const SizedBox(width: 16),
+              _LegendItem(emoji: '💩', color: Colors.pinkAccent, label: lang.translate('stats_ratita')),
+              const SizedBox(width: 16),
+              _LegendItem(icon: Icons.sports_esports, color: Colors.white70, label: lang.translate('stats_matches')),
+            ],
           ),
-        );
-      },
+        ),
+        const Divider(color: Colors.white12, height: 1),
+        const SizedBox(height: 4),
+        // Lista de jugadores
+        Expanded(
+          child: ListView.builder(
+            itemCount: players.length,
+            itemBuilder: (_, i) {
+              final p = players[i];
+              final img = _avatar(p.avatarPath);
+              final pos = i + 1;
+              final league = vm.league;
+              final isMvpStreak = league.currentMvpStreak == p.playerId && league.mvpStreakCount >= 2;
+              final isRatitaStreak = league.currentRatitaStreak == p.playerId && league.ratitaStreakCount >= 2;
+              final hasBadge = pos == 1 || (pos == lastPos && lastPos > 1);
+
+              final glowColor = pos == 1
+                  ? Colors.amber
+                  : (pos == lastPos && lastPos > 1)
+                      ? const Color(0xFF8B5523)
+                      : null;
+
+              return DrinkaholicCard(
+                padding: hasBadge
+                    ? const EdgeInsets.fromLTRB(12, 16, 12, 10)
+                    : const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                glowColor: glowColor,
+                child: Row(
+                  children: [
+                    // Posición + Avatar
+                    SizedBox(
+                      width: 76,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '#$pos',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: pos == 1 ? Colors.amber : Colors.white60,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              CircleAvatar(
+                                radius: 22,
+                                backgroundImage: img,
+                                child: img == null
+                                    ? Text(
+                                        p.name.isNotEmpty ? p.name[0].toUpperCase() : '?',
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      )
+                                    : null,
+                              ),
+                              if (pos == 1)
+                                const Positioned(
+                                  top: -16,
+                                  left: 0,
+                                  right: 0,
+                                  child: Center(
+                                    child: Text('🏆', style: TextStyle(fontSize: 14)),
+                                  ),
+                                ),
+                              if (pos == lastPos && lastPos > 1)
+                                const Positioned(
+                                  top: -16,
+                                  left: 0,
+                                  right: 0,
+                                  child: Center(
+                                    child: Text('🐭', style: TextStyle(fontSize: 14)),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(width: 10),
+
+                    // Nombre + stats
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  p.name,
+                                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              if (isMvpStreak) ...[
+                                const SizedBox(width: 4),
+                                const Icon(Icons.local_fire_department, size: 13, color: Colors.redAccent),
+                                Text('${league.mvpStreakCount}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
+                              ],
+                              if (isRatitaStreak) ...[
+                                const SizedBox(width: 4),
+                                const Icon(Icons.pets, size: 13, color: Colors.pinkAccent),
+                                Text('${league.ratitaStreakCount}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
+                              ],
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          Row(
+                            children: [
+                              _StatItem(icon: Icons.emoji_events, color: Colors.amber, value: p.mvdpCount),
+                              const SizedBox(width: 14),
+                              _StatItem(icon: Icons.local_bar, color: Colors.cyanAccent, value: p.totalDrinks),
+                              const SizedBox(width: 14),
+                              _StatItem(emoji: '💩', color: Colors.pinkAccent, value: p.ratitaCount),
+                              const SizedBox(width: 14),
+                              _StatItem(icon: Icons.sports_esports, color: Colors.white70, value: p.gamesPlayed),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(width: 10),
+
+                    _PointsBadge(points: p.points),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LegendItem extends StatelessWidget {
+  final IconData? icon;
+  final String? emoji;
+  final Color color;
+  final String label;
+
+  const _LegendItem({this.icon, this.emoji, required this.color, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (emoji != null)
+          Text(emoji!, style: const TextStyle(fontSize: 13))
+        else
+          Icon(icon, size: 13, color: color),
+        const SizedBox(width: 4),
+        Text(label, style: TextStyle(fontSize: 12, color: color, fontWeight: FontWeight.w600)),
+      ],
+    );
+  }
+}
+
+class _StatItem extends StatelessWidget {
+  final IconData? icon;
+  final String? emoji;
+  final Color color;
+  final int value;
+
+  const _StatItem({this.icon, this.emoji, required this.color, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (emoji != null)
+          Text(emoji!, style: const TextStyle(fontSize: 14))
+        else
+          Icon(icon, size: 14, color: color),
+        const SizedBox(width: 3),
+        Text('$value', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: color)),
+      ],
+    );
+  }
+}
+
+class _PointsBadge extends StatelessWidget {
+  final int points;
+
+  const _PointsBadge({required this.points});
+
+  @override
+  Widget build(BuildContext context) {
+    final isNegative = points < 0;
+    final isZero = points == 0;
+    final color = isNegative ? Colors.redAccent : isZero ? Colors.amber : const Color(0xFF00C9FF);
+    final sign = isNegative || isZero ? '' : '+';
+
+    return Container(
+      width: 62,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.18),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: color.withOpacity(0.7), width: 1.5),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '$sign$points',
+            style: TextStyle(color: color, fontWeight: FontWeight.w900, fontSize: 17),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            'pts',
+            style: TextStyle(color: color.withOpacity(0.7), fontSize: 11, fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
     );
   }
 }

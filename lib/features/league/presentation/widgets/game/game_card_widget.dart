@@ -7,6 +7,11 @@ import 'package:provider/provider.dart';
 import '../../../../../core/services/database_service_v2.dart';
 import '../../../../../core/presentation/components/question_voting_widget.dart';
 
+bool _isTrivia(String? categoria) {
+  if (categoria == null) return false;
+  return categoria.contains('Trivial') || categoria.contains('Trivia');
+}
+
 double getResponsiveSize(BuildContext context, {required double small, required double medium, required double large}) {
   final width = MediaQuery.of(context).size.width;
 
@@ -424,7 +429,8 @@ class GameCard extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
-                                AnswerInfoButton(answer: gameState.currentAnswer),
+                                if (!gameState.isChallengeForAll && !gameState.isCurrentChallengeConstant && _isTrivia(gameState.currentCategoria))
+                                  AnswerInfoButton(answer: gameState.currentAnswer),
                               ],
                             ),
                           ],

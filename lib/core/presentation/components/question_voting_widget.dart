@@ -27,6 +27,7 @@ class QuestionVotingWidget extends StatefulWidget {
     required this.db,
   });
 
+
   @override
   State<QuestionVotingWidget> createState() =>
       _QuestionVotingWidgetState();
@@ -34,7 +35,6 @@ class QuestionVotingWidget extends StatefulWidget {
 
 class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
   VoteCount? _voteCount;
-  bool _justSuppressed = false;
   bool _loading = false;
   VoteType? _localVote; // Track chosen vote for visual feedback
 
@@ -47,11 +47,9 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
   @override
   void didUpdateWidget(QuestionVotingWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Recargar cuando cambia el template (nuevo turno)
     if (oldWidget.templateId != widget.templateId) {
       setState(() {
         _voteCount = null;
-        _justSuppressed = false;
         _localVote = null;
       });
       _loadVoteCount();
@@ -66,29 +64,32 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
   Future<void> _handleVote(VoteType type) async {
     if (_loading) return;
     HapticFeedback.lightImpact();
-    setState(() => _loading = true);
+
+    if (_localVote == type) {
+      // Mismo botón pulsado → deseleccionar (volver a gris), sin tocar la BD
+      setState(() => _localVote = null);
+      return;
+    }
+
+    setState(() {
+      _loading = true;
+      _localVote = type; // feedback visual inmediato
+    });
 
     await widget.db.vote(widget.templateId, type);
     final updated = await widget.db.getVoteCount(widget.templateId);
-    final suppressed =
-        await widget.db.isSuppressed(widget.templateId);
 
     if (mounted) {
       setState(() {
         _voteCount = updated;
         _loading = false;
-        _justSuppressed = suppressed;
-        _localVote = type;
       });
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
-    if (_justSuppressed) {
-      return _SuppressedBadge();
-    }
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -121,31 +122,6 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
   }
 }
 
-class _SuppressedBadge extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding:
-          const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.red.withOpacity(0.5)),
-      ),
-      child: const Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.block, size: 13, color: Colors.redAccent),
-          SizedBox(width: 5),
-          Text(
-            'No volverá a aparecer',
-            style: TextStyle(fontSize: 11, color: Colors.redAccent),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _VoteButton extends StatelessWidget {
   final IconData icon;

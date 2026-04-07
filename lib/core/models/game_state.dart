@@ -23,6 +23,7 @@ class GameState {
   final String? dualPlayer2Name; // Name of second player for dual challenges
   final bool isCurrentChallengeConstant; // Flag para marcar si el reto actual es constante
   final String? currentTemplateId; // <-- ANADIR
+  final String? currentCategoria; // Categoría de la pregunta actual
 
   const GameState({
     required this.players,
@@ -43,6 +44,7 @@ class GameState {
     this.dualPlayer2Name,
     this.isCurrentChallengeConstant = false,
     this.currentTemplateId, // <-- ANADIR
+    this.currentCategoria,
   });
 
   /// Creates a copy of this GameState with the given fields replaced with new values
@@ -65,6 +67,7 @@ class GameState {
     String? dualPlayer2Name,
     bool? isCurrentChallengeConstant,
     String? currentTemplateId, // <-- ANADIR
+    String? currentCategoria,
   }) {
     return GameState(
       players: players ?? this.players,
@@ -85,6 +88,7 @@ class GameState {
       dualPlayer2Name: dualPlayer2Name ?? this.dualPlayer2Name,
       isCurrentChallengeConstant: isCurrentChallengeConstant ?? this.isCurrentChallengeConstant,
       currentTemplateId: currentTemplateId ?? this.currentTemplateId, // <-- ANADIR
+      currentCategoria: currentCategoria ?? this.currentCategoria,
     );
   }
 

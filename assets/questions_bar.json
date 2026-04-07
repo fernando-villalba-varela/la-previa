@@ -347,10 +347,10 @@
     },
     {
       "id": "bar_q43",
-      "template": "{X} debe intentar adivinar qué es lo siguiente que va a pedir {PLAYER2} o bebe {Y} tragos",
+      "template": "{PLAYER1} debe intentar adivinar qué es lo siguiente que va a pedir {PLAYER2} o bebe {Y} tragos",
       "variables": {
-        "X": ["PLAYER1"],
-        "PLAYER2": ["PLAYER"],
+        "PLAYER1": ["DUAL_PLAYER1"],
+        "PLAYER2": ["DUAL_PLAYER2"],
         "Y": ["3", "4"]
       },
       "categoria": "Duelos y Batallas"

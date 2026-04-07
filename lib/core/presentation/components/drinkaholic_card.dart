@@ -6,6 +6,7 @@ class DrinkaholicCard extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry? margin;
   final double borderRadius;
+  final Color? glowColor;
 
   const DrinkaholicCard({
     super.key,
@@ -13,10 +14,16 @@ class DrinkaholicCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(20),
     this.margin,
     this.borderRadius = 20,
+    this.glowColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final borderColor = glowColor != null
+        ? glowColor!.withOpacity(0.75)
+        : Colors.white.withOpacity(0.15);
+    final borderWidth = glowColor != null ? 1.8 : 1.2;
+
     return Container(
       margin: margin,
       decoration: BoxDecoration(
@@ -29,13 +36,13 @@ class DrinkaholicCard extends StatelessWidget {
           ],
         ),
         borderRadius: BorderRadius.circular(borderRadius),
-        border: Border.all(color: Colors.white.withOpacity(0.15), width: 1.2),
+        border: Border.all(color: borderColor, width: borderWidth),
         boxShadow: [
           BoxShadow(
             color: const Color(0xFF8A2BE2).withOpacity(0.25),
             blurRadius: 24,
             offset: const Offset(0, 6),
-          )
+          ),
         ],
       ),
       child: ClipRRect(
@@ -48,4 +55,3 @@ class DrinkaholicCard extends StatelessWidget {
     );
   }
 }
-

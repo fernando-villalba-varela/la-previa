@@ -12,8 +12,7 @@ class GameResultsScreen extends StatefulWidget {
   final List<Player> players;
   final Map<int, int> playerDrinks;
   final int maxRounds;
-  final VoidCallback onConfirm;
-  final Map<int, String>? streakMessages;
+  final void Function(int mvpId, int ratitaId) onConfirm;
 
   const GameResultsScreen({
     super.key,
@@ -21,7 +20,6 @@ class GameResultsScreen extends StatefulWidget {
     required this.playerDrinks,
     required this.maxRounds,
     required this.onConfirm,
-    this.streakMessages,
   });
 
   @override
@@ -170,7 +168,9 @@ class _GameResultsScreenState extends State<GameResultsScreen>
   void _handleConfirm() {
     if (_isConfirming) return;
     setState(() => _isConfirming = true);
-    widget.onConfirm();
+    final mvpPlayer = _viewModel.getMVPPlayer(widget.players, widget.playerDrinks);
+    final ratitaPlayer = _viewModel.getRatitaPlayer(widget.players, widget.playerDrinks);
+    widget.onConfirm(mvpPlayer!.id, ratitaPlayer!.id);
   }
 
   @override
@@ -238,15 +238,6 @@ class _GameResultsScreenState extends State<GameResultsScreen>
                                 players: widget.players,
                                 maxRounds: widget.maxRounds,
                                 ratitaPlayer: ratitaPlayer,
-                                glowAnimation: _glowController,
-                                isSmallScreen: isSmallScreen,
-                              ),
-                            // Streak Messages
-                            if (widget.streakMessages != null &&
-                                widget.streakMessages!.isNotEmpty)
-                              StreakMessagesSection(
-                                players: widget.players,
-                                streakMessages: widget.streakMessages!,
                                 glowAnimation: _glowController,
                                 isSmallScreen: isSmallScreen,
                               ),

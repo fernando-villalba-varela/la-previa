@@ -349,10 +349,10 @@
     },
     {
       "id": "val_q43",
-      "template": "{X} debe intentar adivinar cuál es el tipo ideal de {PLAYER2} o beber {Y} tragos",
+      "template": "{PLAYER1} debe intentar adivinar cuál es el tipo ideal de {PLAYER2} o beber {Y} tragos",
       "variables": {
-        "X": ["PLAYER1"],
-        "PLAYER2": ["PLAYER"],
+        "PLAYER1": ["DUAL_PLAYER1"],
+        "PLAYER2": ["DUAL_PLAYER2"],
         "Y": ["3", "4"]
       },
       "categoria": "Duelos y Batallas"

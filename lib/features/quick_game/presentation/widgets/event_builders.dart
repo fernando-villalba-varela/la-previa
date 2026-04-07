@@ -194,18 +194,16 @@ Widget buildEventContent(GameState gameState) {
                             ],
                           ),
                           const SizedBox(height: 25),
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                isEndingEvent ? gameState.currentEventEnd!.endDescription : gameState.currentChallenge!,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.4,
-                                  shadows: [Shadow(color: Colors.black.withOpacity(0.5), offset: const Offset(2, 2), blurRadius: 4)],
-                                ),
+                          Center(
+                            child: Text(
+                              isEndingEvent ? gameState.currentEventEnd!.endDescription : gameState.currentChallenge!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: fontSize,
+                                fontWeight: FontWeight.bold,
+                                height: 1.4,
+                                shadows: [Shadow(color: Colors.black.withOpacity(0.5), offset: const Offset(2, 2), blurRadius: 4)],
                               ),
                             ),
                           ),
