@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'generator_utils.dart';
 import 'event.dart';
 
 class EventTemplate {
@@ -64,6 +66,8 @@ class EventGenerator {
   static List<EventTemplate>? _templates;
   static String _currentLanguage = 'es';
   static List<String> _currentPacks = ['classic'];
+  // Historial compartido
+  static GeneratorHistory get _history => GeneratorHistory.shared;
 
   /// Load event templates from JSON
   static Future<void> loadTemplates({String language = 'es', List<String> activePackIds = const ['classic']}) async {
@@ -144,7 +148,7 @@ class EventGenerator {
 
       final selectedFallback = fallbackEvents[_random.nextInt(fallbackEvents.length)];
 
-      return Event(
+      final event = Event(
         id: 'fallback_${selectedFallback['title']}_${_random.nextInt(10000)}',
         title: selectedFallback['title'] as String,
         description: selectedFallback['description'] as String,
@@ -157,10 +161,43 @@ class EventGenerator {
           'minDuration': selectedFallback['duration'], // Use the duration as minimum
         },
       );
+
+      if (kDebugMode) {
+        print('--- RONDA $currentRound ---');
+        print('EVENTO (Fallback): ${event.title}');
+      }
+
+      return event;
     }
 
-    final template = _templates![_random.nextInt(_templates!.length)];
-    return _generateEventFromTemplate(template, currentRound);
+    // Usar historial para evitar duplicados recientes
+    int attempts = 0;
+    EventTemplate template;
+    Event event;
+
+    do {
+      template = _templates![_random.nextInt(_templates!.length)];
+      event = _generateEventFromTemplate(template, currentRound);
+      attempts++;
+
+      // Doble comprobación: plantilla (ID) y contenido (título + descripción)
+      bool isDuplicate = _history.isContentRecent(template.id, '${event.title} ${event.description}');
+      bool isTemplateRecent = _history.isTemplateRecent(template.id, limit: 15);
+      
+      if (attempts > 10) isTemplateRecent = false;
+      if (attempts > 25) isDuplicate = false;
+
+      if (!isDuplicate && !isTemplateRecent) break;
+    } while (attempts < 30);
+
+    _history.add(template.id, '${event.title} ${event.description}');
+    
+    if (kDebugMode) {
+      print('--- RONDA $currentRound ---');
+      print('EVENTO [${template.id}]: ${event.title}');
+    }
+    
+    return event;
   }
 
   /// Generate an event to end an existing event
@@ -245,23 +282,42 @@ class EventGenerator {
   }
 
   /// Determines if an event should be ended this round
-  static bool shouldEndEvent(Event event, int currentRound) {
+  static bool shouldEndEvent(Event event, int currentRound, {int? totalRounds}) {
     if (!event.canBeEndedAtRound(currentRound)) return false;
 
     // Base probability grows with rounds active (older events more likely to end)
     final roundsActive = currentRound - event.startRound;
-
+    
+    // Adapt thresholds based on total game rounds (e.g., 45 for League)
+    final isShortGame = totalRounds != null && totalRounds < 60;
+    
     double baseProbability;
-    if (roundsActive >= 10) {
-      baseProbability = 0.25; // 25% chance after 10 rounds
-    } else if (roundsActive >= 8) {
-      baseProbability = 0.15; // 15% chance after 8 rounds
-    } else if (roundsActive >= 6) {
-      baseProbability = 0.08; // 8% chance after 6 rounds
-    } else if (roundsActive >= 4) {
-      baseProbability = 0.05; // 5% chance after 4 rounds
+    if (isShortGame) {
+      // Curve for shorter games (League ~45 rounds)
+      // Goal: Duration 6-12 rounds
+      if (roundsActive >= 12) {
+        baseProbability = 0.30;
+      } else if (roundsActive >= 8) {
+        baseProbability = 0.15;
+      } else if (roundsActive >= 5) {
+        baseProbability = 0.05;
+      } else {
+        baseProbability = 0.0; // Inmunidad total inicial
+      }
     } else {
-      baseProbability = 0.02; // 2% chance after minimum duration (3 rounds)
+      // Curve for longer/endless games
+      // Goal: Duration 12-20 rounds
+      if (roundsActive >= 20) {
+        baseProbability = 0.25;
+      } else if (roundsActive >= 15) {
+        baseProbability = 0.12;
+      } else if (roundsActive >= 10) {
+        baseProbability = 0.05;
+      } else if (roundsActive >= 8) {
+        baseProbability = 0.02;
+      } else {
+        baseProbability = 0.0; // Inmunidad total inicial
+      }
     }
 
     // Difficulty-aware adjustment: eventos más duros (p.ej. x3) terminan antes que x2

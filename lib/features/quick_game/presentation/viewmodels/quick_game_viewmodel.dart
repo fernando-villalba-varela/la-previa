@@ -23,7 +23,6 @@ class QuickGameViewModel extends ChangeNotifier {
   // Estado de jugadores
   late List<Player> _players;
   final Map<int, int> _playerWeights = {}; // Pesos por playerId
-  final Set<String> _usedQuestions = <String>{};
 
   // Estado del juego
   int _currentPlayerIndex = -1;
@@ -178,17 +177,12 @@ class QuickGameViewModel extends ChangeNotifier {
       final selectedPlayerIndex = Random().nextInt(_players.length);
       final selectedPlayer = _players[selectedPlayerIndex];
 
-      var attempts = 0;
-      GeneratedQuestion question;
-      do {
-        question = await QuestionGenerator.generateRandomQuestionForPlayer(
-          selectedPlayer.nombre,
-          language: languageCode,
-          activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
-        );
-        attempts++;
-      } while (_usedQuestions.contains(question.question) && attempts < 30);
-      _usedQuestions.add(question.question);
+      final question = await QuestionGenerator.generateRandomQuestionForPlayer(
+        selectedPlayer.nombre,
+        language: languageCode,
+        activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
+        currentRound: _currentRound,
+      );
 
       _currentChallenge = appendModifierText(question.question);
       _currentAnswer = question.answer;
@@ -196,16 +190,11 @@ class QuickGameViewModel extends ChangeNotifier {
       _currentPlayerIndex = selectedPlayerIndex;
     } else {
       // Pregunta normal
-      var attempts = 0;
-      GeneratedQuestion question;
-      do {
-        question = await QuestionGenerator.generateRandomQuestion(
-          language: languageCode,
-          activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
-        );
-        attempts++;
-      } while (_usedQuestions.contains(question.question) && attempts < 30);
-      _usedQuestions.add(question.question);
+      final question = await QuestionGenerator.generateRandomQuestion(
+        language: languageCode,
+        activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
+        currentRound: _currentRound,
+      );
 
       _currentChallenge = appendModifierText(question.question);
       _currentAnswer = question.answer;
@@ -289,22 +278,18 @@ class QuickGameViewModel extends ChangeNotifier {
     final player1 = selectedPlayers[0];
     final player2 = selectedPlayers[1];
 
-    var attempts = 0;
-    GeneratedQuestion question;
     final languageCode = Provider.of<LanguageService>(
       context,
       listen: false,
     ).currentLocale.languageCode;
-    do {
-      question = await QuestionGenerator.generateRandomDualQuestion(
-        player1.nombre,
-        player2.nombre,
-        language: languageCode,
-        activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
-      );
-      attempts++;
-    } while (_usedQuestions.contains(question.question) && attempts < 30);
-    _usedQuestions.add(question.question);
+    
+    final question = await QuestionGenerator.generateRandomDualQuestion(
+      player1.nombre,
+      player2.nombre,
+      language: languageCode,
+      activePackIds: Provider.of<PackService>(context, listen: false).activePackIds.toList(),
+      currentRound: _currentRound,
+    );
 
     final player1Index = _players.indexOf(player1);
     final player2Index = _players.indexOf(player2);
@@ -421,7 +406,7 @@ class QuickGameViewModel extends ChangeNotifier {
         .toList();
 
     for (final event in activeEvents) {
-      if (EventGenerator.shouldEndEvent(event, _currentRound)) {
+      if (EventGenerator.shouldEndEvent(event, _currentRound, totalRounds: null)) {
         final eventEnd = EventGenerator.generateEventEnd(event, _currentRound);
 
         _events = _events.map((e) {
@@ -454,6 +439,7 @@ class QuickGameViewModel extends ChangeNotifier {
       if (ConstantChallengeGenerator.shouldEndConstantChallenge(
         challenge,
         _currentRound,
+        totalRounds: null, // Modo juego rápido / infinito
       )) {
         final challengeEnd = ConstantChallengeGenerator.generateChallengeEnd(
           challenge,
