@@ -23,20 +23,26 @@ class FirebaseService {
       final docRef = _firestore.collection('shared_leagues').doc(code);
 
       try {
-        final existing = await docRef.get();
+        final existing = await docRef.get().timeout(
+          const Duration(seconds: 10),
+          onTimeout: () => throw Exception('Tiempo de espera agotado. Comprueba tu conexión a internet.'),
+        );
         if (existing.exists) {
           attempts++;
           continue; // Code collision, try a new one
         }
 
         final dynamic dataJson = data.toJson();
-        
+
         await docRef.set({
           'data': jsonEncode(dataJson), // Store as string for flexibility
           'createdAt': FieldValue.serverTimestamp(),
           'expiresAt': DateTime.now().add(const Duration(days: 7)).toIso8601String(), // Optional for cleanup
-        });
-        
+        }).timeout(
+          const Duration(seconds: 10),
+          onTimeout: () => throw Exception('Tiempo de espera agotado al guardar la liga.'),
+        );
+
         return code;
       } catch (e) {
         throw Exception('Error de conexión al compartir liga. (Asegurate de que las reglas de Firebase estén correctas): $e');
@@ -49,7 +55,10 @@ class FirebaseService {
   Future<LeagueExportData?> downloadLeague(String code) async {
     try {
       final codeUpper = code.trim().toUpperCase();
-      final docSnapshot = await _firestore.collection('shared_leagues').doc(codeUpper).get();
+      final docSnapshot = await _firestore.collection('shared_leagues').doc(codeUpper).get().timeout(
+        const Duration(seconds: 10),
+        onTimeout: () => throw Exception('Tiempo de espera agotado. Comprueba tu conexión a internet.'),
+      );
 
       if (!docSnapshot.exists) {
         return null; // Return null if not found
@@ -62,6 +71,9 @@ class FirebaseService {
 
       final jsonString = docData['data'] as String;
       final j = jsonDecode(jsonString) as Map<String, dynamic>;
+
+      // Borrar el documento tras importar — código de un solo uso
+      await docSnapshot.reference.delete();
 
       return LeagueExportData.fromJson(j);
     } catch (e) {

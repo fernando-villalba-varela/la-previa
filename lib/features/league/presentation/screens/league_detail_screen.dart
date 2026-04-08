@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/services/language_service.dart';
 import '../viewmodels/league_detail_viewmodel.dart';
@@ -292,20 +293,21 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
     BuildContext context,
     String leagueId,
   ) async {
+    final lang = Provider.of<LanguageService>(context, listen: false);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF0B0B1A),
-        title: const Text(
-          'COMPARTIR LIGA',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+        title: Text(
+          lang.translate('share_league_title'),
+          style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ElevatedButton.icon(
               icon: const Icon(Icons.cloud_upload_outlined),
-              label: const Text('Generar código de 6 dígitos'),
+              label: Text(lang.translate('share_generate_code')),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF8A2BE2),
                 foregroundColor: Colors.white,
@@ -327,6 +329,8 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
     String leagueId,
   ) async {
     final firebaseService = FirebaseService();
+    final navigator = Navigator.of(context);
+    final lang = Provider.of<LanguageService>(context, listen: false);
 
     // Show loading
     showDialog(
@@ -353,49 +357,63 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
       // 2. Upload to Firebase
       final code = await firebaseService.uploadLeague(exportData);
 
-      if (context.mounted) Navigator.pop(context); // remove loading
+      navigator.pop(); // remove loading
 
-      if (context.mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
+      showDialog(
+        context: navigator.context,
+        builder: (context) => AlertDialog(
             backgroundColor: const Color(0xFF0B0B1A),
-            title: const Text(
-              'CÓDIGO GENERADO',
-              style: TextStyle(color: Colors.white),
+            title: Text(
+              lang.translate('share_code_generated_title'),
+              style: const TextStyle(color: Colors.white),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Dale este código a tus amigos:',
-                  style: TextStyle(color: Colors.white70),
+                Text(
+                  lang.translate('share_code_generated_subtitle'),
+                  style: const TextStyle(color: Colors.white70),
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF00FFFF)),
-                  ),
-                  child: Text(
-                    code,
-                    style: const TextStyle(
-                      color: Color(0xFF00FFFF),
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 4,
+                GestureDetector(
+                  onTap: () {
+                    Clipboard.setData(ClipboardData(text: code));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Código copiado')),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF00FFFF)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          code,
+                          style: const TextStyle(
+                            color: Color(0xFF00FFFF),
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 4,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        const Icon(Icons.copy, color: Color(0xFF00FFFF), size: 18),
+                      ],
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'Válido por tiempo limitado',
-                  style: TextStyle(color: Colors.white38, fontSize: 12),
+                Text(
+                  lang.translate('share_code_valid'),
+                  style: const TextStyle(color: Colors.white38, fontSize: 12),
                 ),
               ],
             ),
@@ -406,25 +424,26 @@ class _LeagueDetailScreenState extends State<LeagueDetailScreen>
                     '¡Únete a mi liga de La Previa! Código de acceso: $code',
                   );
                 },
-                child: const Text('COMPARTIR'),
+                child: Text(lang.translate('share_btn')),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  'CERRAR',
-                  style: TextStyle(color: Colors.white54),
+                child: Text(
+                  lang.translate('close_btn'),
+                  style: const TextStyle(color: Colors.white54),
                 ),
               ),
             ],
           ),
         );
-      }
     } catch (e) {
-      if (context.mounted) Navigator.pop(context); // remove loading
-      _showError(
-        context,
-        'Error al conectar con Firebase. ¿Has configurado los archivos google-services.json? \n\nDetalle: $e',
-      );
+      navigator.pop(); // remove loading
+      if (context.mounted) {
+        _showError(
+          context,
+          '${lang.translate('share_firebase_error')}\n\n$e',
+        );
+      }
     }
   }
 

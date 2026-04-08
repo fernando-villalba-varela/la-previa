@@ -49,6 +49,14 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                       title: Provider.of<LanguageService>(context).translate('play_league').toUpperCase(),
                       subtitle: Provider.of<LanguageService>(context).translate('leagues_title').toUpperCase(),
                       themeColor: const Color(0xFF00C9FF),
+                      trailing: TextButton.icon(
+                        onPressed: () => _showImportDialog(context),
+                        icon: const Icon(Icons.download_rounded, color: Color(0xFF00C9FF), size: 18),
+                        label: Text(
+                          Provider.of<LanguageService>(context, listen: false).translate('import_league_btn'),
+                          style: const TextStyle(color: Color(0xFF00C9FF), fontWeight: FontWeight.w700, fontSize: 13),
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: vm.leagues.isEmpty
@@ -76,21 +84,6 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                     label: Text(
                       Provider.of<LanguageService>(context, listen: false).translate('league_rules_btn'),
                       style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-                // FAB Centro - Importar liga
-                Positioned(
-                  bottom: 24,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: FloatingActionButton(
-                      heroTag: 'import',
-                      backgroundColor: const Color(0xFF1A0A2E),
-                      elevation: 4,
-                      onPressed: () => _showImportDialog(context),
-                      child: const Icon(Icons.download_rounded, color: Color(0xFF00C9FF)),
                     ),
                   ),
                 ),
@@ -305,84 +298,85 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: Container(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Handle
-              Container(
-                width: 40, height: 4,
-                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'IMPORTAR LIGA',
-                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 1.2),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Introduce el código que te envió tu amigo',
-                style: TextStyle(color: Colors.white54, fontSize: 13),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 24),
-              // 6-digit code entry
-              ListTile(
-                leading: Container(
-                  width: 44, height: 44,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF8A2BE2).withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.tag_rounded, color: Color(0xFF8A2BE2)),
+      builder: (context) {
+        final lang = Provider.of<LanguageService>(context, listen: false);
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 40, height: 4,
+                  decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
                 ),
-                title: const Text('Código de 6 dígitos', style: TextStyle(color: Colors.white)),
-                subtitle: const Text('Requiere conexión a internet', style: TextStyle(color: Colors.white38, fontSize: 12)),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showSixDigitImport(context);
-                },
-              ),
-              const Divider(color: Colors.white12),
-              // Scan QR code
-              ListTile(
-                leading: Container(
-                  width: 44, height: 44,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF00C9FF).withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(Icons.qr_code_scanner_rounded, color: Color(0xFF00C9FF)),
+                const SizedBox(height: 20),
+                Text(
+                  lang.translate('share_import_title'),
+                  style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 1.2),
                 ),
-                title: const Text('Escanear QR', style: TextStyle(color: Colors.white)),
-                subtitle: const Text('Usa tu cámara para escanear', style: TextStyle(color: Colors.white38, fontSize: 12)),
-                onTap: () {
-                  Navigator.pop(context);
-                  _scanQrCode(context);
-                },
-              ),
-              const SizedBox(height: 16),
-            ],
+                const SizedBox(height: 8),
+                Text(
+                  lang.translate('share_import_subtitle'),
+                  style: const TextStyle(color: Colors.white54, fontSize: 13),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                ListTile(
+                  leading: Container(
+                    width: 44, height: 44,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF8A2BE2).withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.tag_rounded, color: Color(0xFF8A2BE2)),
+                  ),
+                  title: Text(lang.translate('share_code_6_title'), style: const TextStyle(color: Colors.white)),
+                  subtitle: Text(lang.translate('share_code_6_subtitle'), style: const TextStyle(color: Colors.white38, fontSize: 12)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _showSixDigitImport(context);
+                  },
+                ),
+                const Divider(color: Colors.white12),
+                ListTile(
+                  leading: Container(
+                    width: 44, height: 44,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF00C9FF).withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.qr_code_scanner_rounded, color: Color(0xFF00C9FF)),
+                  ),
+                  title: Text(lang.translate('share_scan_qr_title'), style: const TextStyle(color: Colors.white)),
+                  subtitle: Text(lang.translate('share_scan_qr_subtitle'), style: const TextStyle(color: Colors.white38, fontSize: 12)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    _scanQrCode(context);
+                  },
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
   void _showSixDigitImport(BuildContext context) {
     final codeCtrl = TextEditingController();
+    final lang = Provider.of<LanguageService>(context, listen: false);
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         backgroundColor: const Color(0xFF0B0B1A),
-        title: const Text('Código de 6 dígitos', style: TextStyle(color: Colors.white)),
+        title: Text(lang.translate('share_code_6_title'), style: const TextStyle(color: Colors.white)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('Escribe el código que te envió tu amigo:', style: TextStyle(color: Colors.white70)),
+            Text(lang.translate('share_code_6_hint'), style: const TextStyle(color: Colors.white70)),
             const SizedBox(height: 16),
             TextField(
               controller: codeCtrl,
@@ -415,18 +409,18 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(lang.translate('cancel_btn'), style: const TextStyle(color: Colors.white54)),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: const Color(0xFF8A2BE2)),
             onPressed: () async {
               final code = codeCtrl.text.trim().toUpperCase();
               if (code.length != 6) return;
-              Navigator.pop(context);
-              _importFromFirebase(context, code);
+              Navigator.pop(dialogContext);
+              _importFromFirebase(code);
             },
-            child: const Text('IMPORTAR'),
+            child: Text(lang.translate('import_btn')),
           ),
         ],
       ),
@@ -446,7 +440,12 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     }
   }
 
-  Future<void> _importFromFirebase(BuildContext context, String code) async {
+  Future<void> _importFromFirebase(String code) async {
+    final navigator = Navigator.of(context);
+    final scaffold = ScaffoldMessenger.of(context);
+    final leagueVM = context.read<LeagueListViewModel>();
+    final lang = Provider.of<LanguageService>(context, listen: false);
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -455,19 +454,37 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     try {
       final firebaseService = FirebaseService();
       final exportService = LeagueExportService();
+      debugPrint('>>> Descargando liga con código: $code');
       final data = await firebaseService.downloadLeague(code);
-      if (data == null) throw Exception('No se encontró ninguna liga con ese código.');
+      if (data == null) throw Exception(lang.translate('share_not_found'));
+      debugPrint('>>> Liga descargada: ${data.league.name}');
       await exportService.importLeagueData(data);
-      if (context.mounted) {
-        Navigator.pop(context); // remove loading
-        context.read<LeagueListViewModel>().reload();
-        _showSuccessSnackbar(context, '¡Liga importada con éxito!');
-      }
+      debugPrint('>>> Liga guardada en storage');
+      navigator.pop();
+      await leagueVM.reload();
+      debugPrint('>>> ViewModel recargado');
+      scaffold.showSnackBar(SnackBar(
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.check_circle_rounded, color: Color(0xFF00FFAA), size: 20),
+            const SizedBox(width: 10),
+            Text(lang.translate('share_success'), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+          ],
+        ),
+        backgroundColor: const Color(0xFF0D2D1A),
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.only(bottom: 400, left: 32, right: 32),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14),
+          side: const BorderSide(color: Color(0xFF00FFAA), width: 1),
+        ),
+        duration: const Duration(seconds: 3),
+      ));
     } catch (e) {
-      if (context.mounted) {
-        Navigator.pop(context); // remove loading
-        _showErrorDialog(context, e.toString());
-      }
+      debugPrint('>>> ERROR importando: $e');
+      navigator.pop();
+      if (context.mounted) _showErrorDialog(context, e.toString());
     }
   }
 
@@ -505,11 +522,12 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
   }
 
   void _showErrorDialog(BuildContext context, String message) {
+    final lang = Provider.of<LanguageService>(context, listen: false);
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: const Color(0xFF1A0A2E),
-        title: const Text('Error al importar', style: TextStyle(color: Colors.white)),
+        title: Text(lang.translate('share_error_title'), style: const TextStyle(color: Colors.white)),
         content: Text(message, style: const TextStyle(color: Colors.white70)),
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),

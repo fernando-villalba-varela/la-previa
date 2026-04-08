@@ -37,7 +37,7 @@ dependencies:
   path: ^1.9.0
 
   # ANADIR — Compartir y QR
-  share_plus: ^6.3.1
+  share_plus: ^10.0.0
   qr_flutter: ^4.1.0
   archive: ^3.6.1
   mobile_scanner: ^5.2.0

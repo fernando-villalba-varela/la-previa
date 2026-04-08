@@ -6,6 +6,7 @@ class NeonHeader extends StatelessWidget {
   final Color themeColor;
   final VoidCallback? onBack;
   final EdgeInsetsGeometry padding;
+  final Widget? trailing;
 
   const NeonHeader({
     super.key,
@@ -14,6 +15,7 @@ class NeonHeader extends StatelessWidget {
     required this.themeColor,
     this.onBack,
     this.padding = const EdgeInsets.all(20.0),
+    this.trailing,
   });
 
   @override
@@ -52,6 +54,7 @@ class NeonHeader extends StatelessWidget {
                   ),
                 ),
               ),
+              if (trailing != null) trailing!,
             ],
           ),
         ),
