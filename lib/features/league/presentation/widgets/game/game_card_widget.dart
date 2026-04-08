@@ -124,6 +124,7 @@ class GameCard extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 12),
                       child: QuestionVotingWidget(
                         templateId: gameState.currentTemplateId!,
+                        challengeText: gameState.currentChallenge ?? 'Reto no disponible',
                         db: context.read<DatabaseService>(),
                       ),
                     ),

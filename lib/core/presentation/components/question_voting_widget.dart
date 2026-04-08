@@ -19,11 +19,13 @@ import '../../../../core/services/database_service_v2.dart';
 
 class QuestionVotingWidget extends StatefulWidget {
   final String templateId;
+  final String challengeText;
   final DatabaseService db;
 
   const QuestionVotingWidget({
     super.key,
     required this.templateId,
+    required this.challengeText,
     required this.db,
   });
 
@@ -76,7 +78,7 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
       _localVote = type; // feedback visual inmediato
     });
 
-    await widget.db.vote(widget.templateId, type);
+    await widget.db.vote(widget.templateId, widget.challengeText, type);
     final updated = await widget.db.getVoteCount(widget.templateId);
 
     if (mounted) {

@@ -3,6 +3,7 @@ import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 import '../models/custom_question.dart';
+import 'firebase_service.dart';
 
 class DatabaseService {
   static const String _dbName = 'la_previa.db';
@@ -85,7 +86,7 @@ class DatabaseService {
 
   // ─── VOTES ────────────────────────────────────────────────────────────────
 
-  Future<void> vote(String templateId, VoteType type) async {
+  Future<void> vote(String templateId, String challengeText, VoteType type) async {
     if (kIsWeb) return;
     final db = await database;
     final rows = await db.query('votes',
@@ -116,6 +117,13 @@ class DatabaseService {
       );
     }
     await _evaluateSuppression(templateId);
+    
+    // Fire and forget a Firebase Analytics vote
+    FirebaseService().sendVoteAnalytics(
+      templateId, 
+      challengeText, 
+      type == VoteType.up ? 'up' : 'down',
+    );
   }
 
   Future<VoteCount?> getVoteCount(String templateId) async {
