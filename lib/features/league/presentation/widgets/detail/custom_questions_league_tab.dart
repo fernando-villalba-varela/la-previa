@@ -4,6 +4,7 @@ import '../../../../../core/services/database_service_v2.dart';
 import '../../../../../core/services/language_service.dart';
 import '../../../presentation/viewmodels/league_detail_viewmodel.dart';
 import 'custom_question_form_screen.dart';
+import '../../../../../core/models/custom_question.dart';
 import 'package:drinkaholic/core/presentation/components/drinkaholic_card.dart';
 
 class CustomQuestionsLeagueTab extends StatefulWidget {

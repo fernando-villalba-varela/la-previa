@@ -1,2 +1,2 @@
 export 'tiebreaker_type.dart';
-export 'custom_question.dart';
+export '../../../core/models/custom_question.dart';

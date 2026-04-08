@@ -36,6 +36,16 @@ dependencies:
   sqflite: ^2.3.3
   path: ^1.9.0
 
+  # ANADIR — Compartir y QR
+  share_plus: ^6.3.1
+  qr_flutter: ^4.1.0
+  archive: ^3.6.1
+  mobile_scanner: ^5.2.0
+
+  # Firebase — configurado con google-services.json
+  firebase_core: ^3.11.0
+  cloud_firestore: ^5.6.3
+
   # ANADIR — AdMob + UMP SDK (GDPR)
   google_mobile_ads: ^5.3.0
   sqflite_common_ffi_web: ^1.0.2

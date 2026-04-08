@@ -9,6 +9,9 @@ import '../../../../core/presentation/components/neon_header.dart';
 import '../widgets/league_card.dart';
 import '../widgets/league_empty_state.dart';
 import '../widgets/fab_new_league.dart';
+import '../../../../core/services/league_export_service.dart';
+import '../../../../core/services/firebase_service.dart';
+import 'league_qr_scanner_screen.dart';
 
 class LeagueListScreen extends StatefulWidget {
   const LeagueListScreen({super.key});
@@ -59,6 +62,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                     ),
                   ],
                 ),
+                // FAB Izquierda - Reglas de liga
                 Positioned(
                   bottom: 24,
                   left: 16,
@@ -75,6 +79,22 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
                     ),
                   ),
                 ),
+                // FAB Centro - Importar liga
+                Positioned(
+                  bottom: 24,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: FloatingActionButton(
+                      heroTag: 'import',
+                      backgroundColor: const Color(0xFF1A0A2E),
+                      elevation: 4,
+                      onPressed: () => _showImportDialog(context),
+                      child: const Icon(Icons.download_rounded, color: Color(0xFF00C9FF)),
+                    ),
+                  ),
+                ),
+                // FAB Derecha - Nueva liga
                 Positioned(
                   bottom: 24,
                   right: 16,
@@ -275,5 +295,226 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
       context.read<LeagueListViewModel>().createLeague(name);
     }
     Navigator.pop(context);
+  }
+
+  void _showImportDialog(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF0B0B1A),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Handle
+              Container(
+                width: 40, height: 4,
+                decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'IMPORTAR LIGA',
+                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Introduce el código que te envió tu amigo',
+                style: TextStyle(color: Colors.white54, fontSize: 13),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              // 6-digit code entry
+              ListTile(
+                leading: Container(
+                  width: 44, height: 44,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF8A2BE2).withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.tag_rounded, color: Color(0xFF8A2BE2)),
+                ),
+                title: const Text('Código de 6 dígitos', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Requiere conexión a internet', style: TextStyle(color: Colors.white38, fontSize: 12)),
+                onTap: () {
+                  Navigator.pop(context);
+                  _showSixDigitImport(context);
+                },
+              ),
+              const Divider(color: Colors.white12),
+              // Scan QR code
+              ListTile(
+                leading: Container(
+                  width: 44, height: 44,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF00C9FF).withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.qr_code_scanner_rounded, color: Color(0xFF00C9FF)),
+                ),
+                title: const Text('Escanear QR', style: TextStyle(color: Colors.white)),
+                subtitle: const Text('Usa tu cámara para escanear', style: TextStyle(color: Colors.white38, fontSize: 12)),
+                onTap: () {
+                  Navigator.pop(context);
+                  _scanQrCode(context);
+                },
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showSixDigitImport(BuildContext context) {
+    final codeCtrl = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFF0B0B1A),
+        title: const Text('Código de 6 dígitos', style: TextStyle(color: Colors.white)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Escribe el código que te envió tu amigo:', style: TextStyle(color: Colors.white70)),
+            const SizedBox(height: 16),
+            TextField(
+              controller: codeCtrl,
+              maxLength: 6,
+              textCapitalization: TextCapitalization.characters,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Color(0xFF00FFFF),
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 6,
+              ),
+              decoration: InputDecoration(
+                counterText: '',
+                filled: true,
+                fillColor: Colors.white.withOpacity(0.05),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Color(0xFF00FFFF)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(color: Color(0xFF00FFFF), width: 2),
+                ),
+                hintText: 'ABC12X',
+                hintStyle: TextStyle(color: Colors.white.withOpacity(0.2), fontSize: 22, letterSpacing: 4),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancelar', style: TextStyle(color: Colors.white54)),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: const Color(0xFF8A2BE2)),
+            onPressed: () async {
+              final code = codeCtrl.text.trim().toUpperCase();
+              if (code.length != 6) return;
+              Navigator.pop(context);
+              _importFromFirebase(context, code);
+            },
+            child: const Text('IMPORTAR'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _scanQrCode(BuildContext context) async {
+    final result = await Navigator.push<String>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LeagueQrScannerScreen(),
+      ),
+    );
+
+    if (result != null && result.isNotEmpty && context.mounted) {
+      _importFromBase64(context, result);
+    }
+  }
+
+  Future<void> _importFromFirebase(BuildContext context, String code) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator(color: Color(0xFF00FFFF))),
+    );
+    try {
+      final firebaseService = FirebaseService();
+      final exportService = LeagueExportService();
+      final data = await firebaseService.downloadLeague(code);
+      if (data == null) throw Exception('No se encontró ninguna liga con ese código.');
+      await exportService.importLeagueData(data);
+      if (context.mounted) {
+        Navigator.pop(context); // remove loading
+        context.read<LeagueListViewModel>().reload();
+        _showSuccessSnackbar(context, '¡Liga importada con éxito!');
+      }
+    } catch (e) {
+      if (context.mounted) {
+        Navigator.pop(context); // remove loading
+        _showErrorDialog(context, e.toString());
+      }
+    }
+  }
+
+  Future<void> _importFromBase64(BuildContext context, String code) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator(color: Color(0xFF00FFFF))),
+    );
+    try {
+      final exportService = LeagueExportService();
+      await exportService.importLeagueFromBase64(code);
+      if (context.mounted) {
+        Navigator.pop(context); // remove loading
+        context.read<LeagueListViewModel>().reload();
+        _showSuccessSnackbar(context, '¡Liga importada con éxito!');
+      }
+    } catch (e) {
+      if (context.mounted) {
+        Navigator.pop(context); // remove loading
+        _showErrorDialog(context, e.toString());
+      }
+    }
+  }
+
+  void _showSuccessSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: const Color(0xFF1A3A1A),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFF1A0A2E),
+        title: const Text('Error al importar', style: TextStyle(color: Colors.white)),
+        content: Text(message, style: const TextStyle(color: Colors.white70)),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK')),
+        ],
+      ),
+    );
   }
 }

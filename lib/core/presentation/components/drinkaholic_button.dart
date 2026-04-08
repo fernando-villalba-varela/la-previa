@@ -152,24 +152,30 @@ class _DrinkaholicButtonState extends State<DrinkaholicButton> with SingleTicker
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.icon != null) ...[
-              Icon(widget.icon, color: iconColor, size: 24), 
-              const SizedBox(width: 16),
+        Flexible(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.icon != null) ...[
+                Icon(widget.icon, color: iconColor, size: 24), 
+                const SizedBox(width: 16),
+              ],
+              Flexible(
+                child: Text(
+                  widget.label.toUpperCase(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: textStyle,
+                ),
+              ),
             ],
-            Text(
-              widget.label.toUpperCase(),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-              style: textStyle,
-            ),
-          ],
+          ),
         ),
-        if (hasArrow)
+        if (hasArrow) ...[
+          const SizedBox(width: 8),
           Icon(Icons.arrow_forward_ios, color: iconColor, size: 18),
+        ],
       ],
     );
 

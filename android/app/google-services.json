@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43336537593",
+    "project_id": "la-previa-cfe60",
+    "storage_bucket": "la-previa-cfe60.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43336537593:android:e2d00caee36b88430c1928",
+        "android_client_info": {
+          "package_name": "com.laprevia.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5g_dgxYu33PjB39PF0ozDJt5yElB3MFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

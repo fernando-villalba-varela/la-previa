@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'core/services/database_service_v2.dart';
 import 'core/services/consent_and_ad_service.dart';
@@ -15,6 +16,12 @@ import 'features/home/presentation/screens/disclaimer_screen.dart';
 void main() async {
   // Asegurar que Flutter esté inicializado
   WidgetsFlutterBinding.ensureInitialized();
+  
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    debugPrint('Firebase init failed (maybe no config): $e');
+  }
 
   // Servicio de almacenamiento (Inyección de Dependencias manual sencilla)
   final storageService = LeagueStorageService();

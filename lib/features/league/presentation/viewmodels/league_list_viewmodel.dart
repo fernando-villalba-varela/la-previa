@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import '../../../../core/models/league.dart';
 import '../../../../core/services/league_storage_service.dart';
@@ -50,6 +50,14 @@ class LeagueListViewModel extends ChangeNotifier {
 
   void refresh() {
     _saveLeagues(); // Guardar cuando se actualice
+    notifyListeners();
+  }
+
+  /// Fuerza recarga desde storage (útil tras importar una liga externa)
+  Future<void> reload() async {
+    final loadedLeagues = await _storageService.loadLeagues();
+    _leagues.clear();
+    _leagues.addAll(loadedLeagues);
     notifyListeners();
   }
 

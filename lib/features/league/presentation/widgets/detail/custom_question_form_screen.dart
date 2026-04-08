@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/services/database_service_v2.dart';
 import '../../../../../core/services/language_service.dart';
+import '../../../../../core/models/custom_question.dart';
 
 class CustomQuestionFormScreen extends StatefulWidget {
   final CustomQuestion? editing;

@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+import '../models/custom_question.dart';
 
 class DatabaseService {
   static const String _dbName = 'la_previa.db';
@@ -215,6 +216,34 @@ class DatabaseService {
     );
   }
 
+  Future<void> savePersonalizedQuestions(List<CustomQuestion> questions) async {
+    if (kIsWeb) {
+      for (var q in questions) {
+        _memoryQuestions.add(q);
+      }
+      return;
+    }
+    final db = await database;
+    await db.transaction((txn) async {
+      for (final q in questions) {
+        await txn.insert(
+          'personalized',
+          {
+            'id':            q.id,
+            'text':          q.text,
+            'drinks':        q.drinks,
+            'timer_seconds': q.timerSeconds,
+            'league_id':     q.leagueId,
+            'is_active':     q.isActive ? 1 : 0,
+            'created_at':    DateTime.now().toIso8601String(),
+            'used_count':    0,
+          },
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
+    });
+  }
+
   Future<List<CustomQuestion>> getPersonalizedQuestions(String leagueId) async {
     if (kIsWeb) return _memoryQuestions.where((q) => q.leagueId == leagueId).toList();
     final db = await database;
@@ -342,32 +371,4 @@ class VoteCount {
     if (total == 0) return 0.5;
     return upCount / total;
   }
-}
-
-class CustomQuestion {
-  final String id;
-  final String text;
-  final int drinks;
-  final int? timerSeconds;
-  final String? leagueId;
-  final bool isActive;
-
-  const CustomQuestion({
-    required this.id,
-    required this.text,
-    required this.drinks,
-    this.timerSeconds,
-    this.leagueId,
-    this.isActive = true,
-  });
-
-  factory CustomQuestion.fromRow(Map<String, dynamic> row) =>
-      CustomQuestion(
-        id:           row['id']            as String,
-        text:         row['text']          as String,
-        drinks:       row['drinks']        as int,
-        timerSeconds: row['timer_seconds'] as int?,
-        leagueId:     row['league_id']     as String?,
-        isActive:     (row['is_active']    as int? ?? 1) == 1,
-      );
 }

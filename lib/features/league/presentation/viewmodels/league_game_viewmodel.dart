@@ -10,6 +10,7 @@ import '../../../../core/models/event_generator.dart';
 import '../../../../core/models/question_generator.dart';
 import '../../../../core/services/language_service.dart';
 import '../../../../core/services/database_service_v2.dart';
+import '../../../../core/models/custom_question.dart';
 import 'game_query_validator.dart';
 
 class LeagueGameViewModel extends ChangeNotifier {
