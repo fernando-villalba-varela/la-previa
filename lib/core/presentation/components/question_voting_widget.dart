@@ -68,15 +68,25 @@ class _QuestionVotingWidgetState extends State<QuestionVotingWidget> {
     HapticFeedback.lightImpact();
 
     if (_localVote == type) {
-      // Mismo botón pulsado → deseleccionar (volver a gris), sin tocar la BD
+      // Mismo botón pulsado → deshacer voto
       setState(() => _localVote = null);
+      await widget.db.unvote(widget.templateId, widget.challengeText, type);
+      final updated = await widget.db.getVoteCount(widget.templateId);
+      if (mounted) setState(() => _voteCount = updated);
       return;
     }
+
+    final previousVote = _localVote;
 
     setState(() {
       _loading = true;
       _localVote = type; // feedback visual inmediato
     });
+
+    // Si tenía el otro botón votado, deshacerlo primero
+    if (previousVote != null && previousVote != type) {
+      await widget.db.unvote(widget.templateId, widget.challengeText, previousVote);
+    }
 
     await widget.db.vote(widget.templateId, widget.challengeText, type);
     final updated = await widget.db.getVoteCount(widget.templateId);

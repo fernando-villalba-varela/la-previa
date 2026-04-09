@@ -86,6 +86,35 @@ class DatabaseService {
 
   // ─── VOTES ────────────────────────────────────────────────────────────────
 
+  Future<void> unvote(String templateId, String challengeText, VoteType type) async {
+    if (kIsWeb) return;
+    final db = await database;
+    final rows = await db.query('votes',
+        where: 'template_id = ?', whereArgs: [templateId]);
+    if (rows.isEmpty) return;
+    final current = rows.first;
+    await db.update(
+      'votes',
+      {
+        'up_count':   type == VoteType.up
+            ? ((current['up_count'] as int) - 1).clamp(0, 9999)
+            : current['up_count'],
+        'down_count': type == VoteType.down
+            ? ((current['down_count'] as int) - 1).clamp(0, 9999)
+            : current['down_count'],
+        'last_voted_at': DateTime.now().toIso8601String(),
+      },
+      where: 'template_id = ?',
+      whereArgs: [templateId],
+    );
+    FirebaseService().sendVoteAnalytics(
+      templateId,
+      challengeText,
+      type == VoteType.up ? 'up' : 'down',
+      delta: -1,
+    );
+  }
+
   Future<void> vote(String templateId, String challengeText, VoteType type) async {
     if (kIsWeb) return;
     final db = await database;

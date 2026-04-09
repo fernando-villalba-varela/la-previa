@@ -9,6 +9,7 @@ import '../../../../core/presentation/components/neon_header.dart';
 import '../widgets/league_card.dart';
 import '../widgets/league_empty_state.dart';
 import '../widgets/fab_new_league.dart';
+import '../../../../core/services/analytics_service.dart';
 import '../../../../core/services/league_export_service.dart';
 import '../../../../core/services/firebase_service.dart';
 import 'league_qr_scanner_screen.dart';
@@ -286,6 +287,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     final name = c.text.trim();
     if (name.isNotEmpty) {
       context.read<LeagueListViewModel>().createLeague(name);
+      AnalyticsService().logLeagueCreated();
     }
     Navigator.pop(context);
   }

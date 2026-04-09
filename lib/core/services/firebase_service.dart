@@ -84,15 +84,15 @@ class FirebaseService {
     }
   }
 
-  /// Envía un voto (Like o Dislike) a las analíticas de Firebase, acumulándolo en el template
-  Future<void> sendVoteAnalytics(String templateId, String challengeText, String typeStr) async {
+  /// Envía un voto o desvoto a Firebase. delta = 1 (votar) o -1 (deshacer).
+  Future<void> sendVoteAnalytics(String templateId, String challengeText, String typeStr, {int delta = 1}) async {
     try {
       final docRef = _firestore.collection('question_votes').doc(templateId);
       await docRef.set({
         'templateId': templateId,
         'text': challengeText,
-        'upvotes': typeStr == 'up' ? FieldValue.increment(1) : FieldValue.increment(0),
-        'downvotes': typeStr == 'down' ? FieldValue.increment(1) : FieldValue.increment(0),
+        'upvotes': typeStr == 'up' ? FieldValue.increment(delta) : FieldValue.increment(0),
+        'downvotes': typeStr == 'down' ? FieldValue.increment(delta) : FieldValue.increment(0),
         'lastVotedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
     } catch (e) {

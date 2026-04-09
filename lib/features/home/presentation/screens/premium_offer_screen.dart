@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/services/analytics_service.dart';
 import '../../../../core/services/language_service.dart';
 import '../../../../core/services/pack_service.dart';
 import '../../../../core/presentation/components/neon_background_layer.dart';
 import '../../../../core/presentation/components/neon_header.dart';
 
-class PremiumOfferScreen extends StatelessWidget {
+class PremiumOfferScreen extends StatefulWidget {
   final Route nextRoute;
   final bool isModal;
+  final String source;
 
   const PremiumOfferScreen({
     super.key,
     required this.nextRoute,
     this.isModal = false,
+    this.source = 'unknown',
   });
+
+  @override
+  State<PremiumOfferScreen> createState() => _PremiumOfferScreenState();
+}
+
+class _PremiumOfferScreenState extends State<PremiumOfferScreen> {
+  @override
+  void initState() {
+    super.initState();
+    AnalyticsService().logPaywallViewed(source: widget.source);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +74,11 @@ class PremiumOfferScreen extends StatelessWidget {
                       const SizedBox(height: 20),
                       TextButton(
                         onPressed: () {
-                          if (isModal) {
+                          AnalyticsService().logPaywallSkipped(source: widget.source);
+                          if (widget.isModal) {
                             Navigator.pop(context);
                           } else {
-                            Navigator.pushReplacement(context, nextRoute);
+                            Navigator.pushReplacement(context, widget.nextRoute);
                           }
                         },
                         child: Text(
@@ -111,13 +126,13 @@ class PremiumOfferScreen extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: () async {
-            // Simulate premium purchase
             await context.read<PackService>().simulatePurchase('premium_global');
+            AnalyticsService().logPremiumPurchased();
             if (context.mounted) {
-              if (isModal) {
+              if (widget.isModal) {
                 Navigator.pop(context);
               } else {
-                Navigator.pushReplacement(context, nextRoute);
+                Navigator.pushReplacement(context, widget.nextRoute);
               }
             }
           },

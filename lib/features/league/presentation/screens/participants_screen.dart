@@ -194,7 +194,7 @@ class _ParticipantsScreenBodyState extends State<_ParticipantsScreenBody>
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PremiumOfferScreen(nextRoute: nextRoute),
+                                  builder: (context) => PremiumOfferScreen(nextRoute: nextRoute, source: 'league'),
                                 ),
                               );
                             } else {

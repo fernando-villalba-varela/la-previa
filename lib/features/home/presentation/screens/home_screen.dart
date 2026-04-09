@@ -251,6 +251,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 MaterialPageRoute(
                                   builder: (context) => PremiumOfferScreen(
                                     nextRoute: MaterialPageRoute(builder: (context) => const HomeScreen()),
+                                    source: 'home',
                                   ),
                                 ),
                               );

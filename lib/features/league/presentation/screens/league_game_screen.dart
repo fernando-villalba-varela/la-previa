@@ -9,6 +9,7 @@ import '../../../../core/services/language_service.dart';
 import '../../../../core/services/database_service_v2.dart';
 import '../../../../core/presentation/components/neon_background_layer.dart';
 import '../../../../core/services/pack_service.dart';
+import '../../../../core/services/analytics_service.dart';
 
 import '../viewmodels/league_game_viewmodel.dart';
 import '../widgets/game/game_card_widget.dart';
@@ -73,6 +74,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       // Capture services before any await
       final db = context.read<DatabaseService>();
       final lang = context.read<LanguageService>();
+      final packService = context.read<PackService>();
 
       await _orientationFadeController.forward();
       await SystemChrome.setPreferredOrientations(
@@ -83,8 +85,13 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       if (mounted) setState(() => _showOrientationOverlay = false);
 
       await _viewModel.loadCustomQuestions(db, widget.leagueId);
-      final activePackIds = context.read<PackService>().activePackIds.toList();
+      final activePackIds = packService.activePackIds.toList();
       await _viewModel.initializeFirstChallenge(lang, activePackIds);
+      AnalyticsService().logGameStarted(
+        mode: 'league',
+        packs: activePackIds.join(','),
+        isPremium: packService.isPremium,
+      );
 
     });
 
@@ -170,6 +177,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
   }
 
   void _endGame() async {
+    AnalyticsService().logGameCompleted(mode: 'league', roundsPlayed: _viewModel.currentRound);
     await SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     await Future.delayed(const Duration(milliseconds: 300));

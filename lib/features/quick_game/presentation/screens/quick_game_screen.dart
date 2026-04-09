@@ -13,6 +13,7 @@ import '../../../../core/models/event.dart';
 import '../../../../core/services/language_service.dart';
 import '../../../../core/services/pack_service.dart';
 import '../../../../features/home/presentation/screens/premium_offer_screen.dart';
+import '../../../../core/services/analytics_service.dart';
 
 class QuickGameScreen extends StatelessWidget {
   final List<Player> players;
@@ -111,8 +112,13 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
     _pulseAnimationController.repeat(reverse: true);
 
     // Inicializar primer desafío
+    final packService = context.read<PackService>();
+    final packs = packService.activePackIds.join(',');
+    final isPremium = packService.isPremium;
+    final quickGameVM = context.read<QuickGameViewModel>();
     Future.microtask(() {
-      context.read<QuickGameViewModel>().initializeFirstChallenge();
+      quickGameVM.initializeFirstChallenge();
+      AnalyticsService().logGameStarted(mode: 'quick', packs: packs, isPremium: isPremium);
     });
   }
 
@@ -172,6 +178,7 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
       if (shouldContinue == true) {
         viewModel.activateEndlessMode();
       } else {
+        AnalyticsService().logGameCompleted(mode: 'quick', roundsPlayed: viewModel.currentRound);
         if (mounted) Navigator.of(context).pop();
         return;
       }
@@ -187,7 +194,8 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
           MaterialPageRoute(
             builder: (context) => PremiumOfferScreen(
               nextRoute: MaterialPageRoute(builder: (context) => const SizedBox.shrink()),
-              isModal: true, 
+              isModal: true,
+              source: 'quick_game',
             ),
           ),
         );
