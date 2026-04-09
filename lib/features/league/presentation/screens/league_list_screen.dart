@@ -486,7 +486,7 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
     } catch (e) {
       debugPrint('>>> ERROR importando: $e');
       navigator.pop();
-      if (context.mounted) _showErrorDialog(context, e.toString());
+      if (context.mounted) _showErrorDialog(context, lang.translate('unexpected_error'));
     }
   }
 
@@ -502,12 +502,12 @@ class _LeagueListScreenState extends State<LeagueListScreen> with TickerProvider
       if (context.mounted) {
         Navigator.pop(context); // remove loading
         context.read<LeagueListViewModel>().reload();
-        _showSuccessSnackbar(context, '¡Liga importada con éxito!');
+        _showSuccessSnackbar(context, Provider.of<LanguageService>(context, listen: false).translate('import_success'));
       }
     } catch (e) {
       if (context.mounted) {
         Navigator.pop(context); // remove loading
-        _showErrorDialog(context, e.toString());
+        _showErrorDialog(context, Provider.of<LanguageService>(context, listen: false).translate('unexpected_error'));
       }
     }
   }

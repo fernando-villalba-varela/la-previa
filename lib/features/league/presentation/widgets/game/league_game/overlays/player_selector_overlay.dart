@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../../../../core/services/language_service.dart';
 
 class PlayerSelectorOverlay extends StatefulWidget {
   final List<dynamic> players;
@@ -106,9 +108,9 @@ class _PlayerSelectorOverlayState extends State<PlayerSelectorOverlay>
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          '¿Quién es más probable que...?',
-          style: TextStyle(
+        Text(
+          context.read<LanguageService>().translate('who_most_likely'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -189,7 +191,7 @@ class _PlayerSelectorOverlayState extends State<PlayerSelectorOverlay>
                   ),
                   child: Center(
                     child: Text(
-                      'P',
+                      (player?.name?.isNotEmpty == true) ? player.name[0].toUpperCase() : '?',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -203,17 +205,17 @@ class _PlayerSelectorOverlayState extends State<PlayerSelectorOverlay>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Jugador',
-                        style: TextStyle(
+                      Text(
+                        player?.name ?? context.read<LanguageService>().translate('player_label'),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const Text(
-                        'Tragos: 0',
-                        style: TextStyle(
+                      Text(
+                        context.read<LanguageService>().translate('drinks_count_label').replaceAll('{count}', '${player?.drinks ?? 0}'),
+                        style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 12,
                         ),
@@ -243,9 +245,9 @@ class _PlayerSelectorOverlayState extends State<PlayerSelectorOverlay>
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        child: const Text(
-          'Cancelar',
-          style: TextStyle(color: Colors.white70, fontSize: 14),
+        child: Text(
+          context.read<LanguageService>().translate('cancel'),
+          style: const TextStyle(color: Colors.white70, fontSize: 14),
         ),
       ),
     );

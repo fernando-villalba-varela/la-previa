@@ -10,6 +10,7 @@ import '../../../../core/presentation/components/neon_background_layer.dart';
 import 'package:drinkaholic/features/league/presentation/screens/league_list_screen.dart';
 import 'package:drinkaholic/features/league/presentation/screens/participants_screen.dart';
 import '../../../../features/home/presentation/screens/premium_offer_screen.dart';
+import '../../../../core/services/pack_service.dart';
 import '../widgets/loading_overlay.dart';
 import '../widgets/error_banner.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -92,6 +93,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     try {
       _viewModel.clearError();
       if (!mounted) return;
+      final isPremium = Provider.of<PackService>(context, listen: false).isPremium;
+      if (!isPremium) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PremiumOfferScreen(
+              nextRoute: MaterialPageRoute(builder: (context) => const LeagueListScreen()),
+              source: 'league_gate',
+            ),
+          ),
+        );
+        return;
+      }
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const LeagueListScreen()),

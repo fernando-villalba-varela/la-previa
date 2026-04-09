@@ -1,4 +1,5 @@
 ﻿import 'dart:convert';
+import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -52,18 +53,22 @@ class LeagueDetailViewModel extends ChangeNotifier {
 
     // Generar mensajes para rachas de MVP (2 o más victorias consecutivas)
     if (league.mvpStreakCount >= 2) {
-      final mvpPlayer = league.players.firstWhere((p) => p.playerId == mvpId);
-      streakMessages[mvpId] = languageService.translate('mvp_streak_message')
-          .replaceAll('{name}', mvpPlayer.name)
-          .replaceAll('{count}', league.mvpStreakCount.toString());
+      final mvpPlayer = league.players.firstWhereOrNull((p) => p.playerId == mvpId);
+      if (mvpPlayer != null) {
+        streakMessages[mvpId] = languageService.translate('mvp_streak_message')
+            .replaceAll('{name}', mvpPlayer.name)
+            .replaceAll('{count}', league.mvpStreakCount.toString());
+      }
     }
 
     // Generar mensajes para rachas de Ratita (2 o más derrotas consecutivas)
     if (league.ratitaStreakCount >= 2) {
-      final ratitaPlayer = league.players.firstWhere((p) => p.playerId == ratitaId);
-      streakMessages[ratitaId] = languageService.translate('ratita_streak_message')
-          .replaceAll('{name}', ratitaPlayer.name)
-          .replaceAll('{count}', league.ratitaStreakCount.toString());
+      final ratitaPlayer = league.players.firstWhereOrNull((p) => p.playerId == ratitaId);
+      if (ratitaPlayer != null) {
+        streakMessages[ratitaId] = languageService.translate('ratita_streak_message')
+            .replaceAll('{name}', ratitaPlayer.name)
+            .replaceAll('{count}', league.ratitaStreakCount.toString());
+      }
     }
 
     for (final p in league.players) {

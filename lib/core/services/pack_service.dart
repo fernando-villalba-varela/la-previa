@@ -69,8 +69,9 @@ class PackService extends ChangeNotifier {
     
     _isPremium = prefs.getBool('is_premium_user') ?? false;
     
-    final savedActive = prefs.getStringList('active_packs') ?? ['classic'];
+    final savedActive = prefs.getStringList('active_packs') ?? [];
     _activePackIds = savedActive.toSet();
+    _activePackIds.add('classic'); // el clásico siempre está activo
 
     notifyListeners();
   }
@@ -101,12 +102,10 @@ class PackService extends ChangeNotifier {
         _activePackIds.add(packId);
       }
     } else {
-      // El clásico no se puede desactivar si es el único
-      if (_activePackIds.length > 1 || packId != 'classic') {
-        _activePackIds.remove(packId);
-      }
+      if (packId == 'classic') return; // el clásico no se puede desactivar
+      _activePackIds.remove(packId);
       if (_activePackIds.isEmpty) {
-        _activePackIds.add('classic'); // Fallback seguro
+        _activePackIds.add('classic');
       }
     }
     
@@ -114,6 +113,11 @@ class PackService extends ChangeNotifier {
     notifyListeners();
   }
 
-  // En el modo Liga, permitimos que el usuario elija temporalmente packs 
-  // para esa partida en específico o que los seleccione directamente aquí.
+  /// Canjea un código de desarrollador. Devuelve true si el código es válido.
+  Future<bool> redeemDevCode(String code) async {
+    const validCodes = ['DUENDEBORRACHO_3'];
+    if (!validCodes.contains(code.toUpperCase().trim())) return false;
+    await simulatePurchase('premium_global');
+    return true;
+  }
 }

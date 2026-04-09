@@ -373,8 +373,8 @@ class LanguageService extends ChangeNotifier {
       // Disclaimer Screen
       'disclaimer_title': {'es': '¡AVISO DE SEGURIDAD!', 'en': 'SAFETY NOTICE!'},
       'disclaimer_content': {
-        'es': 'El equipo de La Previa no se hace responsable del mal uso de esta aplicación, incluyendo el consumo excesivo de alcohol o cualquier acto imprudente derivado del juego.',
-        'en': 'The La Previa team is not responsible for the misuse of this application, including excessive alcohol consumption or any imprudent acts resulting from the game.'
+        'es': 'Esta aplicación está destinada exclusivamente a mayores de 18 años. El equipo de La Previa no se hace responsable del mal uso de esta aplicación, incluyendo el consumo excesivo de alcohol o cualquier acto imprudente derivado del juego.',
+        'en': 'This application is intended exclusively for users aged 18 and over. The La Previa team is not responsible for the misuse of this application, including excessive alcohol consumption or any imprudent acts resulting from the game.'
       },
       'disclaimer_rules_title': {'es': 'Recuerda jugar de forma segura:', 'en': 'Remember to play safely:'},
       'disclaimer_rule_1': {'es': 'Bebe de forma responsable.', 'en': 'Drink responsibly.'},
@@ -382,6 +382,24 @@ class LanguageService extends ChangeNotifier {
       'disclaimer_rule_3': {'es': 'Respeta a los demás jugadores.', 'en': 'Respect other players.'},
       'disclaimer_rule_4': {'es': 'Cualquier reto es opcional.', 'en': 'All challenges are optional.'},
       'disclaimer_accept': {'es': 'ACEPTO Y ENTIENDO', 'en': 'I ACCEPT & UNDERSTAND'},
+
+      // Pack purchase dialog
+      'unlock_pack_title': {'es': 'Desbloquear {name}', 'en': 'Unlock {name}'},
+      'unlock_pack_content': {'es': '¿Deseas añadir este pack a tu cuenta?', 'en': 'Do you want to add this pack to your account?'},
+      'buy_button': {'es': 'Comprar', 'en': 'Buy'},
+
+      // Letter counter overlay
+      'count_occasions': {'es': 'Contar ocasiones', 'en': 'Count occasions'},
+      'find_letter': {'es': 'Buscar la letra: "{letter}"', 'en': 'Find the letter: "{letter}"'},
+
+      // Player selector overlay
+      'who_most_likely': {'es': '¿Quién es más probable que...?', 'en': 'Who is most likely to...?'},
+      'player_label': {'es': 'Jugador', 'en': 'Player'},
+      'drinks_count_label': {'es': 'Tragos: {count}', 'en': 'Drinks: {count}'},
+
+      // Import
+      'import_success': {'es': '¡Liga importada con éxito!', 'en': 'League imported successfully!'},
+      'unexpected_error': {'es': 'Ocurrió un error inesperado', 'en': 'An unexpected error occurred'},
     };
 
     if (localizedValues.containsKey(key)) {

@@ -88,9 +88,9 @@ class AdIds {
       'ca-app-pub-3940256099942544/1033173712';
 
   static const String _prodBannerId =
-      'ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY';
+      'ca-app-pub-5219310667296097/7363902192';
   static const String _prodInterstitialId =
-      'ca-app-pub-XXXXXXXXXXXXXXXX/ZZZZZZZZZZ';
+      'ca-app-pub-5219310667296097/5993213840';
 
   static String get bannerId =>
       kDebugMode ? _testBannerId : _prodBannerId;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../../../../../core/models/pack.dart';
 import '../../../../../core/services/language_service.dart';
 import '../../../../../core/services/pack_service.dart';
 
@@ -18,9 +20,19 @@ class PacksTab extends StatelessWidget {
           itemBuilder: (context, index) {
             final pack = packs[index];
             final isActive = packService.activePackIds.contains(pack.id);
+            final isPurchased = packService.isPackPurchased(pack.id);
+
+            if (!isPurchased) {
+              return _LockedPackCard(
+                pack: pack,
+                languageService: languageService,
+              );
+            }
 
             return Card(
-              color: isActive ? Colors.white.withOpacity(0.2) : Colors.black.withOpacity(0.5),
+              color: isActive
+                  ? Colors.white.withOpacity(0.2)
+                  : Colors.black.withOpacity(0.5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
                 side: BorderSide(
@@ -30,7 +42,8 @@ class PacksTab extends StatelessWidget {
               ),
               margin: const EdgeInsets.only(bottom: 16),
               child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 leading: Icon(
                   pack.icon,
                   color: isActive ? const Color(0xFF00FFFF) : Colors.white54,
@@ -60,18 +73,150 @@ class PacksTab extends StatelessWidget {
                   checkColor: Colors.black,
                   onChanged: (value) {
                     if (value != null) {
-                      packService.togglePackActive(pack.id, value, bypassPurchase: true);
+                      packService.togglePackActive(pack.id, value);
                     }
                   },
                 ),
-                onTap: () {
-                  packService.togglePackActive(pack.id, !isActive, bypassPurchase: true);
-                },
+                onTap: () => packService.togglePackActive(pack.id, !isActive),
               ),
             );
           },
         );
       },
+    );
+  }
+}
+
+class _LockedPackCard extends StatefulWidget {
+  final Pack pack;
+  final LanguageService languageService;
+
+  const _LockedPackCard({
+    required this.pack,
+    required this.languageService,
+  });
+
+  @override
+  State<_LockedPackCard> createState() => _LockedPackCardState();
+}
+
+class _LockedPackCardState extends State<_LockedPackCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _shakeController;
+  late Animation<double> _shakeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _shakeController = AnimationController(
+      duration: const Duration(milliseconds: 400),
+      vsync: this,
+    );
+    _shakeAnimation = TweenSequence([
+      TweenSequenceItem(tween: Tween(begin: 0.0, end: -8.0), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: -8.0, end: 8.0), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: 8.0, end: -6.0), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: -6.0, end: 6.0), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: 6.0, end: 0.0), weight: 1),
+    ]).animate(CurvedAnimation(
+      parent: _shakeController,
+      curve: Curves.easeInOut,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _shakeController.dispose();
+    super.dispose();
+  }
+
+  void _onTap() {
+    HapticFeedback.mediumImpact();
+    _shakeController.forward(from: 0);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _shakeAnimation,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(_shakeAnimation.value, 0),
+          child: child,
+        );
+      },
+      child: GestureDetector(
+        onTap: _onTap,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.6),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.white12, width: 1),
+          ),
+          child: Stack(
+            children: [
+              // Contenido desaturado
+              Opacity(
+                opacity: 0.35,
+                child: ListTile(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  leading: Icon(
+                    widget.pack.icon,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  title: Text(
+                    widget.languageService.translate(widget.pack.nameKey),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      widget.languageService
+                          .translate(widget.pack.descriptionKey),
+                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ),
+                  trailing: const SizedBox(width: 32),
+                ),
+              ),
+              // Overlay de candado centrado
+              Positioned.fill(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white24,
+                            width: 1,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.lock,
+                          color: Colors.white70,
+                          size: 22,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

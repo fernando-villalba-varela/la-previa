@@ -23,10 +23,48 @@ class PremiumOfferScreen extends StatefulWidget {
 }
 
 class _PremiumOfferScreenState extends State<PremiumOfferScreen> {
+  int _tapCount = 0;
+  bool _showDevField = false;
+  final TextEditingController _codeController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     AnalyticsService().logPaywallViewed(source: widget.source);
+  }
+
+  @override
+  void dispose() {
+    _codeController.dispose();
+    super.dispose();
+  }
+
+  void _onIconTap() {
+    _tapCount++;
+    if (_tapCount >= 5) {
+      setState(() => _showDevField = true);
+    }
+  }
+
+  Future<void> _redeemCode() async {
+    final success = await context.read<PackService>().redeemDevCode(_codeController.text);
+    if (!mounted) return;
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Código válido. ¡Todo desbloqueado!'), backgroundColor: Colors.green),
+      );
+      await Future.delayed(const Duration(milliseconds: 800));
+      if (!mounted) return;
+      if (widget.isModal) {
+        Navigator.pop(context);
+      } else {
+        Navigator.pushReplacement(context, widget.nextRoute);
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Código incorrecto'), backgroundColor: Colors.red),
+      );
+    }
   }
 
   @override
@@ -45,10 +83,14 @@ class _PremiumOfferScreenState extends State<PremiumOfferScreen> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.star, color: Color(0xFFFF0055), size: 100),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      GestureDetector(
+                        onTap: _onIconTap,
+                        child: const Icon(Icons.star, color: Color(0xFFFF0055), size: 100),
+                      ),
                       const SizedBox(height: 30),
                       Text(
                         context.read<LanguageService>().translate('premium_headline'),
@@ -70,27 +112,68 @@ class _PremiumOfferScreenState extends State<PremiumOfferScreen> {
                         ),
                       ),
                       const SizedBox(height: 50),
+                      if (_showDevField) ...[
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _codeController,
+                                style: const TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  hintText: 'Código de desarrollador',
+                                  hintStyle: const TextStyle(color: Colors.white38),
+                                  filled: true,
+                                  fillColor: Colors.white10,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            IconButton(
+                              onPressed: _redeemCode,
+                              icon: const Icon(Icons.check_circle, color: Color(0xFFFF0055), size: 32),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                       _buildBuyButton(context),
                       const SizedBox(height: 20),
-                      TextButton(
-                        onPressed: () {
-                          AnalyticsService().logPaywallSkipped(source: widget.source);
-                          if (widget.isModal) {
-                            Navigator.pop(context);
-                          } else {
-                            Navigator.pushReplacement(context, widget.nextRoute);
-                          }
-                        },
-                        child: Text(
-                          context.read<LanguageService>().translate('continue_with_ads'),
-                          style: const TextStyle(
-                            color: Colors.white54,
-                            decoration: TextDecoration.underline,
-                            fontSize: 16,
+                      if (widget.source == 'league_gate')
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            'Volver',
+                            style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      else
+                        TextButton(
+                          onPressed: () {
+                            AnalyticsService().logPaywallSkipped(source: widget.source);
+                            if (widget.isModal) {
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pushReplacement(context, widget.nextRoute);
+                            }
+                          },
+                          child: Text(
+                            context.read<LanguageService>().translate('continue_with_ads'),
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              decoration: TextDecoration.underline,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
-                      ),
                     ],
+                    ),
                   ),
                 ),
               ),

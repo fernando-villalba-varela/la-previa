@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../../../../../core/services/language_service.dart';
 
 class LetterCounterOverlay extends StatefulWidget {
   final String question;
@@ -101,9 +103,9 @@ class _LetterCounterOverlayState extends State<LetterCounterOverlay>
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Contar ocasiones',
-          style: TextStyle(
+        Text(
+          context.read<LanguageService>().translate('count_occasions'),
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -152,7 +154,7 @@ class _LetterCounterOverlayState extends State<LetterCounterOverlay>
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              'Buscar la letra: "${widget.letterToFind.toUpperCase()}"',
+              context.read<LanguageService>().translate('find_letter').replaceAll('{letter}', widget.letterToFind.toUpperCase()),
               style: const TextStyle(
                 color: Colors.orange,
                 fontSize: 13,
@@ -253,9 +255,9 @@ class _LetterCounterOverlayState extends State<LetterCounterOverlay>
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
-              'Cancelar',
-              style: TextStyle(color: Colors.white70),
+            child: Text(
+              context.read<LanguageService>().translate('cancel'),
+              style: const TextStyle(color: Colors.white70),
             ),
           ),
         ),
@@ -270,8 +272,8 @@ class _LetterCounterOverlayState extends State<LetterCounterOverlay>
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text(
-              'Confirmar',
+            child: Text(
+              context.read<LanguageService>().translate('confirm'),
               style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),

@@ -119,20 +119,25 @@ class _PlayTabState extends State<PlayTab> {
                             itemBuilder: (context, index) {
                               final pack = availablePacks[index];
                               final isActive = packService.activePackIds.contains(pack.id);
-                              
+                              final isPurchased = packService.isPackPurchased(pack.id);
+
                               return GestureDetector(
-                                onTap: () => packService.togglePackActive(pack.id, !isActive, bypassPurchase: true),
+                                onTap: () {
+                                  if (isPurchased) {
+                                    packService.togglePackActive(pack.id, !isActive);
+                                  }
+                                },
                                 child: Container(
                                   width: 100,
                                   margin: const EdgeInsets.only(right: 12, bottom: 8),
                                   decoration: BoxDecoration(
-                                    color: isActive 
+                                    color: isActive
                                         ? const Color(0xFF00C9FF).withOpacity(0.15)
                                         : Colors.white.withOpacity(0.05),
                                     borderRadius: BorderRadius.circular(16),
                                     border: Border.all(
-                                      color: isActive 
-                                          ? const Color(0xFF00C9FF) 
+                                      color: isActive
+                                          ? const Color(0xFF00C9FF)
                                           : Colors.white10,
                                       width: isActive ? 1.5 : 1,
                                     ),
@@ -141,7 +146,7 @@ class _PlayTabState extends State<PlayTab> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
-                                        pack.icon,
+                                        isPurchased ? pack.icon : Icons.lock,
                                         color: isActive ? const Color(0xFF00C9FF) : Colors.white38,
                                         size: 28,
                                       ),

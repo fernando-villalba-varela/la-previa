@@ -117,7 +117,7 @@ class DisclaimerScreen extends StatelessWidget {
                         // Privacy Policy Link
                         TextButton(
                           onPressed: () async {
-                            final Uri url = Uri.parse('https://drinkaholic-app.web.app/privacy-policy');
+                            final Uri url = Uri.parse('https://sites.google.com/view/laprevia-mixaholicteam');
                             if (await canLaunchUrl(url)) {
                               await launchUrl(url, mode: LaunchMode.externalApplication);
                             }
