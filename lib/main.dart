@@ -1,10 +1,11 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'core/services/database_service_v2.dart';
 import 'core/services/consent_and_ad_service.dart';
@@ -18,14 +19,18 @@ import 'features/home/presentation/screens/disclaimer_screen.dart';
 void main() async {
   // Asegurar que Flutter esté inicializado
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   try {
     await Firebase.initializeApp();
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      return true;
-    };
+    
+    // Activar Firebase App Check para evitar abusos o scripts
+    await FirebaseAppCheck.instance.activate(
+      androidProvider: kReleaseMode ? AndroidProvider.playIntegrity : AndroidProvider.debug,
+      appleProvider: kReleaseMode ? AppleProvider.appAttest : AppleProvider.debug,
+    );
+
+    // Inicio de sesión anónimo automático para que coincida con las reglas seguras
+    await FirebaseAuth.instance.signInAnonymously();
   } catch (e) {
     debugPrint('Firebase init failed (maybe no config): $e');
   }
@@ -83,15 +88,36 @@ class MyApp extends StatelessWidget {
               secondary: Color(0xFF8A2BE2),
             ),
             textTheme: TextTheme(
-              displayLarge: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
-              displayMedium: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
-              displaySmall: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
-              headlineMedium: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w700),
-              headlineSmall: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
-              titleLarge: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
+              displayLarge: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              displayMedium: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              displaySmall: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              headlineMedium: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+              headlineSmall: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+              titleLarge: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
               bodyLarge: GoogleFonts.inter(color: Colors.white),
               bodyMedium: GoogleFonts.inter(color: Colors.white70),
-              labelLarge: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.w600),
+              labelLarge: GoogleFonts.poppins(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -110,9 +136,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
