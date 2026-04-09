@@ -102,7 +102,8 @@ class PackService extends ChangeNotifier {
         _activePackIds.add(packId);
       }
     } else {
-      if (packId == 'classic') return; // el clásico no se puede desactivar
+      // El clásico no se puede desactivar si es el único pack disponible/activo
+      if (packId == 'classic' && _activePackIds.length == 1) return;
       _activePackIds.remove(packId);
       if (_activePackIds.isEmpty) {
         _activePackIds.add('classic');
