@@ -377,7 +377,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
             final gs = vm.createGameState(_glowAnimation);
             final isEnding = gs.isEndingConstantChallenge || gs.isEndingEvent;
             final hasActiveSelector = !isEnding &&
-                vm.isConditionalQuestion() &&
+                vm.shouldCountDrinks() &&
                 !vm.showingPlayerSelector &&
                 !vm.showingLetterCounter;
             final isMoreLikelyAndNotSelected = !isEnding &&
