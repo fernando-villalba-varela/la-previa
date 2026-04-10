@@ -17,33 +17,36 @@ class WinnerDisplayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final accentColor = isQuestionTiebreaker
+        ? const Color(0xFF00C9FF)
+        : (isMVP ? const Color(0xFFFFD700) : const Color(0xFFFF0055));
+
     return ScaleTransition(
       scale: winnerScale,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         decoration: BoxDecoration(
-          color: (isQuestionTiebreaker
-                  ? Colors.purple
-                  : (isMVP ? const Color(0xFFFFD700) : const Color(0xFF8B4513)))
-              .withOpacity(0.2),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isQuestionTiebreaker
-                ? Colors.purple
-                : (isMVP ? const Color(0xFFFFD700) : const Color(0xFF8B4513)),
-            width: 2,
-          ),
+          color: const Color(0xFF1A1A2E),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: accentColor.withOpacity(0.6), width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: accentColor.withOpacity(0.25),
+              blurRadius: 20,
+              spreadRadius: 2,
+            ),
+          ],
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildPlayerAvatar(winner, size: 50),
-            const SizedBox(width: 16),
+            _buildPlayerAvatar(winner, size: 48),
+            const SizedBox(width: 14),
             Text(
               winner.nombre,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 24,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
