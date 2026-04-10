@@ -4,7 +4,7 @@
       "id": "home_e1",
       "type": "global_rule",
       "title": "Housewarming Party",
-      "template": "EVENT: 🏠 Welcome to my humble abode! All players must praise something about the house or drink 2 sips.",
+      "template": "🏠 Welcome to my humble abode! All players must praise something about the house or drink 2 sips.",
       "endTemplate": "The housewarming is over.",
       "categoria": "Global",
       "minRounds": 1,
@@ -15,7 +15,7 @@
       "id": "home_e2",
       "type": "multiplier",
       "title": "Host's Open Bar",
-      "template": "EVENT: 🍷 The host is feeling generous. All sips distributed by the host are worth double (x2).",
+      "template": "🍷 The host is feeling generous. All sips distributed by the host are worth double (x2).",
       "endTemplate": "The host has closed the tap. Normal drinks again.",
       "variables": {},
       "categoria": "Multipliers",
@@ -29,10 +29,13 @@
       "id": "home_e3",
       "type": "global_rule",
       "title": "Shoes Off",
-      "template": "EVENT: 👟 Watch the floor! No one can wear shoes (or they can't touch the floor with them). Fail = {PUNISHMENT} sips.",
+      "template": "👟 Watch the floor! No one can wear shoes (or they can't touch the floor with them). Fail = {PUNISHMENT} sips.",
       "endTemplate": "You can step normally now.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Behavior",
       "minRounds": 4,
@@ -43,10 +46,12 @@
       "id": "home_e4",
       "type": "special_condition",
       "title": "The House Chef",
-      "template": "EVENT: 🍳 Before drinking, you must name a dish you know how to cook. If you repeat one already said, drink {PUNISHMENT} extra sips.",
+      "template": "🍳 Before drinking, you must name a dish you know how to cook. If you repeat one already said, drink {PUNISHMENT} extra sips.",
       "endTemplate": "The kitchen is closed.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -57,10 +62,12 @@
       "id": "home_e5",
       "type": "global_rule",
       "title": "No Sofa Allowed",
-      "template": "EVENT: 🚫 No one can sit on the sofa. If someone does, they drink {PUNISHMENT} sips for every minute.",
+      "template": "🚫 No one can sit on the sofa. If someone does, they drink {PUNISHMENT} sips for every minute.",
       "endTemplate": "The sofa is a safe zone again.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 4,
@@ -71,7 +78,7 @@
       "id": "home_e6",
       "type": "multiplier",
       "title": "Game Night",
-      "template": "EVENT: 🎲 All or nothing! If you fail a challenge, drink triple (x3). If you succeed, distribute triple.",
+      "template": "🎲 All or nothing! If you fail a challenge, drink triple (x3). If you succeed, distribute triple.",
       "endTemplate": "Intense game night is over.",
       "variables": {},
       "categoria": "Multipliers",
@@ -85,10 +92,13 @@
       "id": "home_e7",
       "type": "global_rule",
       "title": "Annoying Neighbors",
-      "template": "EVENT: 🤫 Shhh! You can only speak in whispers so as not to wake the neighbors. Anyone who speaks normally drinks {PUNISHMENT} sips.",
+      "template": "🤫 Shhh! You can only speak in whispers so as not to wake the neighbors. Anyone who speaks normally drinks {PUNISHMENT} sips.",
       "endTemplate": "The neighbors have gone to work. You can shout now.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Behavior",
       "minRounds": 3,
@@ -99,10 +109,12 @@
       "id": "home_e8",
       "type": "special_condition",
       "title": "Health Inspector",
-      "template": "EVENT: 🧼 The host can order anyone to clean something (or make a cleaning gesture) before they drink. If they don't, drink {PUNISHMENT} extra sips.",
+      "template": "🧼 The host can order anyone to clean something (or make a cleaning gesture) before they drink. If they don't, drink {PUNISHMENT} extra sips.",
       "endTemplate": "The inspector has left.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Rules",
       "minRounds": 3,
@@ -113,10 +125,13 @@
       "id": "home_e9",
       "type": "global_rule",
       "title": "House Pet",
-      "template": "EVENT: 🐱 Every time someone drinks, they must make a house pet sound. Fail = {PUNISHMENT} sips.",
+      "template": "🐱 Every time someone drinks, they must make a house pet sound. Fail = {PUNISHMENT} sips.",
       "endTemplate": "House zoo is over.",
       "variables": {
-        "PUNISHMENT": ["1", "2"]
+        "PUNISHMENT": [
+          "1",
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 4,
@@ -127,7 +142,7 @@
       "id": "home_e10",
       "type": "global_rule",
       "title": "Empty Fridge",
-      "template": "EVENT: 🧊 No ice left! All warm drinks (without ice) are worth x2.",
+      "template": "🧊 No ice left! All warm drinks (without ice) are worth x2.",
       "endTemplate": "We bought ice! Normal drinks.",
       "variables": {},
       "categoria": "Modifiers",
@@ -139,10 +154,12 @@
       "id": "home_e11",
       "type": "special_condition",
       "title": "Wi-Fi Password",
-      "template": "EVENT: 📶 Before speaking, you must say the 3-word 'password' chosen by the host right now. If you forget it, drink {PUNISHMENT} sips.",
+      "template": "📶 Before speaking, you must say the 3-word 'password' chosen by the host right now. If you forget it, drink {PUNISHMENT} sips.",
       "endTemplate": "Wi-Fi no longer has a password.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Behavior",
       "minRounds": 4,
@@ -153,7 +170,7 @@
       "id": "home_e12",
       "type": "global_rule",
       "title": "TV Remote Owner",
-      "template": "EVENT: 📺 Whoever has the remote (or is closest to the TV) decides who drinks every time there is a general drink.",
+      "template": "📺 Whoever has the remote (or is closest to the TV) decides who drinks every time there is a general drink.",
       "endTemplate": "TV power is over.",
       "variables": {},
       "categoria": "Rules",
@@ -165,10 +182,13 @@
       "id": "home_e13",
       "type": "global_rule",
       "title": "No Phones Allowed",
-      "template": "EVENT: 🚫 Disconnect night! The first person to touch their phone drinks {PUNISHMENT} punishment sips.",
+      "template": "🚫 Disconnect night! The first person to touch their phone drinks {PUNISHMENT} punishment sips.",
       "endTemplate": "You can check Instagram now.",
       "variables": {
-        "PUNISHMENT": ["4", "5"]
+        "PUNISHMENT": [
+          "4",
+          "5"
+        ]
       },
       "categoria": "Social",
       "minRounds": 5,
@@ -179,7 +199,7 @@
       "id": "home_e14",
       "type": "multiplier",
       "title": "Heating Broken",
-      "template": "EVENT: 🥶 It's so cold! Those not wearing a jacket or warm clothing drink double to warm up.",
+      "template": "🥶 It's so cold! Those not wearing a jacket or warm clothing drink double to warm up.",
       "endTemplate": "The heating is working now.",
       "variables": {},
       "categoria": "Multipliers",
@@ -193,10 +213,12 @@
       "id": "home_e15",
       "type": "global_rule",
       "title": "House Language",
-      "template": "EVENT: 🌎 In this house, only an invented language (or a foreign one you choose) is spoken. Speaking the local language = {PUNISHMENT} sips.",
+      "template": "🌎 In this house, only an invented language (or a foreign one you choose) is spoken. Speaking the local language = {PUNISHMENT} sips.",
       "endTemplate": "Back to the local language.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 2,
@@ -207,10 +229,13 @@
       "id": "home_e16",
       "type": "special_condition",
       "title": "Vacuuming",
-      "template": "EVENT: 🧹 You must spin around your chair once before sitting down after each drink. Fail = {PUNISHMENT} sips.",
+      "template": "🧹 You must spin around your chair once before sitting down after each drink. Fail = {PUNISHMENT} sips.",
       "endTemplate": "The house is clean now.",
       "variables": {
-        "PUNISHMENT": ["1", "2"]
+        "PUNISHMENT": [
+          "1",
+          "2"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 3,
@@ -221,10 +246,13 @@
       "id": "home_e17",
       "type": "global_rule",
       "title": "Manual Labor",
-      "template": "EVENT: ✋ You can only use your non-dominant hand to drink. If you're right-handed, use the left. Fail = {PUNISHMENT} sips.",
+      "template": "✋ You can only use your non-dominant hand to drink. If you're right-handed, use the left. Fail = {PUNISHMENT} sips.",
       "endTemplate": "You can use your good hand again.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 4,
@@ -235,7 +263,7 @@
       "id": "home_e18",
       "type": "multiplier",
       "title": "Nap Time",
-      "template": "EVENT: 😴 Everyone to sleep! Whoever laughs or speaks loudly drinks triple.",
+      "template": "😴 Everyone to sleep! Whoever laughs or speaks loudly drinks triple.",
       "endTemplate": "Nap time is over.",
       "variables": {},
       "categoria": "Multipliers",
@@ -249,10 +277,12 @@
       "id": "home_e19",
       "type": "global_rule",
       "title": "No 'P' Words",
-      "template": "EVENT: 🚫 Forbidden to say words starting with 'P'. Fail = {PUNISHMENT} sips.",
+      "template": "🚫 Forbidden to say words starting with 'P'. Fail = {PUNISHMENT} sips.",
       "endTemplate": "You can use the 'P' again.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Verbal",
       "minRounds": 3,
@@ -263,10 +293,12 @@
       "id": "home_e20",
       "type": "special_condition",
       "title": "The House Ghost",
-      "template": "EVENT: 👻 Choose a player to be the 'Ghost'. No one can speak to or look at them. Anyone who does, drinks {PUNISHMENT} sips.",
+      "template": "👻 Choose a player to be the 'Ghost'. No one can speak to or look at them. Anyone who does, drinks {PUNISHMENT} sips.",
       "endTemplate": "The ghost has left.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -277,10 +309,13 @@
       "id": "home_e21",
       "type": "global_rule",
       "title": "Guest Protocol",
-      "template": "EVENT: 🤵 You must say 'Please' and 'Thank you' in every interaction. Fail = {PUNISHMENT} sips for being rude.",
+      "template": "🤵 You must say 'Please' and 'Thank you' in every interaction. Fail = {PUNISHMENT} sips for being rude.",
       "endTemplate": "You can be informal again.",
       "variables": {
-        "PUNISHMENT": ["1", "2"]
+        "PUNISHMENT": [
+          "1",
+          "2"
+        ]
       },
       "categoria": "Behavior",
       "minRounds": 5,
@@ -291,7 +326,7 @@
       "id": "home_e22",
       "type": "multiplier",
       "title": "Cleaning Day",
-      "template": "EVENT: ✨ The player with the emptiest glass must drink double to 'clean' its bottom.",
+      "template": "✨ The player with the emptiest glass must drink double to 'clean' its bottom.",
       "endTemplate": "Cleaning is over.",
       "variables": {},
       "categoria": "Multipliers",
@@ -305,10 +340,12 @@
       "id": "home_e23",
       "type": "global_rule",
       "title": "Knock on the Door",
-      "template": "EVENT: 🚪 You must knock on the table twice before drinking, as if you were knocking on a door. Fail = {PUNISHMENT} sips.",
+      "template": "🚪 You must knock on the table twice before drinking, as if you were knocking on a door. Fail = {PUNISHMENT} sips.",
       "endTemplate": "The door is open.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 4,
@@ -319,10 +356,13 @@
       "id": "home_e24",
       "type": "special_condition",
       "title": "Crazy Move",
-      "template": "EVENT: 📦 Everyone change places! The last one to sit in their new chair drinks {PUNISHMENT} sips.",
+      "template": "📦 Everyone change places! The last one to sit in their new chair drinks {PUNISHMENT} sips.",
       "endTemplate": "Settle into your new spots.",
       "variables": {
-        "PUNISHMENT": ["3", "4"]
+        "PUNISHMENT": [
+          "3",
+          "4"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 1,
@@ -333,10 +373,12 @@
       "id": "home_e25",
       "type": "global_rule",
       "title": "Butler Mode",
-      "template": "EVENT: 💂 You must serve drinks to others when they need it. Anyone who won't let themselves be served drinks {PUNISHMENT} sips.",
+      "template": "💂 You must serve drinks to others when they need it. Anyone who won't let themselves be served drinks {PUNISHMENT} sips.",
       "endTemplate": "Service is over.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -347,7 +389,7 @@
       "id": "home_e26",
       "type": "global_rule",
       "title": "Water for Everyone",
-      "template": "EVENT: 💧 For every sip you drink, you must take a sip of water. If you don't have water, drink double the alcohol.",
+      "template": "💧 For every sip you drink, you must take a sip of water. If you don't have water, drink double the alcohol.",
       "endTemplate": "Mandatory hydration is over.",
       "variables": {},
       "categoria": "Modifiers",
@@ -359,7 +401,7 @@
       "id": "home_e27",
       "type": "multiplier",
       "title": "Gala Dinner",
-      "template": "EVENT: 🍴 Anyone who uses cutlery (if there's food) distributes double. Anyone eating with their hands drinks double.",
+      "template": "🍴 Anyone who uses cutlery (if there's food) distributes double. Anyone eating with their hands drinks double.",
       "endTemplate": "The gala dinner is over.",
       "variables": {},
       "categoria": "Multipliers",
@@ -373,10 +415,12 @@
       "id": "home_e28",
       "type": "global_rule",
       "title": "Home Security",
-      "template": "EVENT: 👮 No one can enter or leave the room you're in. Anyone who does drinks {PUNISHMENT} sips.",
+      "template": "👮 No one can enter or leave the room you're in. Anyone who does drinks {PUNISHMENT} sips.",
       "endTemplate": "You can move through the whole house now.",
       "variables": {
-        "PUNISHMENT": ["4"]
+        "PUNISHMENT": [
+          "4"
+        ]
       },
       "categoria": "Rules",
       "minRounds": 4,
@@ -387,7 +431,7 @@
       "id": "home_e29",
       "type": "special_condition",
       "title": "Vacation Rental",
-      "template": "EVENT: 🏨 Every time you drink on your turn, you must choose someone to 'pay' you an extra sip (they drink it).",
+      "template": "🏨 Every time you drink on your turn, you must choose someone to 'pay' you an extra sip (they drink it).",
       "endTemplate": "The rental has expired.",
       "variables": {},
       "categoria": "Modifiers",
@@ -399,10 +443,13 @@
       "id": "home_e30",
       "type": "global_rule",
       "title": "Pajama Party",
-      "template": "EVENT: 🛌 Everyone to the floor! The last one to touch the floor with their hand when I say 'Sleep!', drinks {PUNISHMENT} sips.",
+      "template": "🛌 Everyone to the floor! The last one to touch the floor with their hand when I say 'Sleep!', drinks {PUNISHMENT} sips.",
       "endTemplate": "Wake up, the event is over.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Global",
       "minRounds": 4,

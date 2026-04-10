@@ -84,7 +84,16 @@ class TiebreakerViewModel extends ChangeNotifier {
     SystemSound.play(SystemSoundType.click);
 
     final random = Random();
-    final randomAngle = random.nextDouble() * 2 * pi;
+    
+    // 1. Elegir ganador primero en código
+    final playerCount = tiedPlayers.length;
+    final winnerIndex = random.nextInt(playerCount);
+    
+    // 2. Calcular ángulo que caiga siempre en su porción (evitando bordes)
+    final anglePerSection = (2 * pi) / playerCount;
+    final offsetWithinSlice = anglePerSection * (0.2 + 0.6 * random.nextDouble());
+    final randomAngle = (winnerIndex * anglePerSection) + offsetWithinSlice;
+
     final extraSpins = 4 + random.nextInt(4);
     _finalBottleAngle = randomAngle + (extraSpins * 2 * pi);
 

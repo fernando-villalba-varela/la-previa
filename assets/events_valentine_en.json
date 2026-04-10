@@ -4,7 +4,7 @@
       "id": "val_e1",
       "type": "global_rule",
       "title": "Blind Date",
-      "template": "EVENT: ❤️ Love is in the air! Each player must choose a 'partner' for this turn. If one drinks, the other does too.",
+      "template": "❤️ Love is in the air! Each player must choose a 'partner' for this turn. If one drinks, the other does too.",
       "endTemplate": "The date is over.",
       "categoria": "Social",
       "minRounds": 1,
@@ -15,7 +15,7 @@
       "id": "val_e2",
       "type": "multiplier",
       "title": "Unbridled Passion",
-      "template": "EVENT: 🔥 It's getting hot in here! All sips involving physical contact or 'spicy' challenges are worth double (x2).",
+      "template": "🔥 It's getting hot in here! All sips involving physical contact or 'spicy' challenges are worth double (x2).",
       "endTemplate": "Passion has cooled down a bit. Normal sips again.",
       "variables": {},
       "categoria": "Multipliers",
@@ -29,10 +29,13 @@
       "id": "val_e3",
       "type": "global_rule",
       "title": "Sweet Words",
-      "template": "EVENT: 🍭 You must call everyone by a pet name (Darling, Love, Honey...). Fail = {PUNISHMENT} sips.",
+      "template": "🍭 You must call everyone by a pet name (Darling, Love, Honey...). Fail = {PUNISHMENT} sips.",
       "endTemplate": "You can stop being so mushy now.",
       "variables": {
-        "PUNISHMENT": ["1", "2"]
+        "PUNISHMENT": [
+          "1",
+          "2"
+        ]
       },
       "categoria": "Behavior",
       "minRounds": 4,
@@ -43,10 +46,12 @@
       "id": "val_e4",
       "type": "special_condition",
       "title": "Cupid's Arrow",
-      "template": "EVENT: 🏹 The host is Cupid. They can 'aim' at two people: every time one of them drinks, the other must give them a compliment or drink {PUNISHMENT} extra sips.",
+      "template": "🏹 The host is Cupid. They can 'aim' at two people: every time one of them drinks, the other must give them a compliment or drink {PUNISHMENT} extra sips.",
       "endTemplate": "Cupid has run out of arrows.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -57,10 +62,13 @@
       "id": "val_e5",
       "type": "global_rule",
       "title": "No Heartbreak Allowed",
-      "template": "EVENT: 🚫 Forbidden to speak about exes or sad stories. Whoever does drinks {PUNISHMENT} sips for killing the mood.",
+      "template": "🚫 Forbidden to speak about exes or sad stories. Whoever does drinks {PUNISHMENT} sips for killing the mood.",
       "endTemplate": "You can vent now.",
       "variables": {
-        "PUNISHMENT": ["3", "4"]
+        "PUNISHMENT": [
+          "3",
+          "4"
+        ]
       },
       "categoria": "Rules",
       "minRounds": 4,
@@ -71,7 +79,7 @@
       "id": "val_e6",
       "type": "multiplier",
       "title": "Romantic Dinner",
-      "template": "EVENT: 🕯️ Sips for people sitting down are half, sips for people standing up are triple.",
+      "template": "🕯️ Sips for people sitting down are half, sips for people standing up are triple.",
       "endTemplate": "The dinner is over.",
       "variables": {},
       "categoria": "Multipliers",
@@ -85,10 +93,12 @@
       "id": "val_e7",
       "type": "global_rule",
       "title": "Lovers' Gaze",
-      "template": "EVENT: 😍 You cannot speak without staring directly into the other person's eyes. Fail = {PUNISHMENT} sips.",
+      "template": "😍 You cannot speak without staring directly into the other person's eyes. Fail = {PUNISHMENT} sips.",
       "endTemplate": "No need for such intensity anymore.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -99,10 +109,12 @@
       "id": "val_e8",
       "type": "special_condition",
       "title": "Poet in Love",
-      "template": "EVENT: 📜 Before drinking, you must recite a short love verse (or make one up). If it doesn't rhyme, drink {PUNISHMENT} extra sips.",
+      "template": "📜 Before drinking, you must recite a short love verse (or make one up). If it doesn't rhyme, drink {PUNISHMENT} extra sips.",
       "endTemplate": "Inspiration has run out.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Special",
       "minRounds": 3,
@@ -113,7 +125,7 @@
       "id": "val_e9",
       "type": "global_rule",
       "title": "Kiss or Drink",
-      "template": "EVENT: 💋 If the game tells you to drink, you can avoid it by giving someone a kiss (on the cheek counts). If no one accepts, drink double.",
+      "template": "💋 If the game tells you to drink, you can avoid it by giving someone a kiss (on the cheek counts). If no one accepts, drink double.",
       "endTemplate": "The kiss market is closed.",
       "variables": {},
       "categoria": "Social",
@@ -125,7 +137,7 @@
       "id": "val_e10",
       "type": "global_rule",
       "title": "Red Roses",
-      "template": "EVENT: 🌹 Those wearing red clothing drink 1 less each time; those who aren't, drink 1 more.",
+      "template": "🌹 Those wearing red clothing drink 1 less each time; those who aren't, drink 1 more.",
       "endTemplate": "The color red is no longer special.",
       "variables": {},
       "categoria": "Modifiers",
@@ -137,10 +149,12 @@
       "id": "val_e11",
       "type": "special_condition",
       "title": "Amorous Sincerity",
-      "template": "EVENT: 💬 All questions during this event must be answered with total honesty. Lying = {PUNISHMENT} punishment sips.",
+      "template": "💬 All questions during this event must be answered with total honesty. Lying = {PUNISHMENT} punishment sips.",
       "endTemplate": "You can go back to faking it now.",
       "variables": {
-        "PUNISHMENT": ["4"]
+        "PUNISHMENT": [
+          "4"
+        ]
       },
       "categoria": "Truth",
       "minRounds": 3,
@@ -151,7 +165,7 @@
       "id": "val_e12",
       "type": "global_rule",
       "title": "Domestic Partnership",
-      "template": "EVENT: 👫 Choose a partner. During this event, whatever one drinks, the other drinks too out of solidarity.",
+      "template": "👫 Choose a partner. During this event, whatever one drinks, the other drinks too out of solidarity.",
       "endTemplate": "The couple has split up (no drama).",
       "variables": {},
       "categoria": "Global",
@@ -163,10 +177,12 @@
       "id": "val_e13",
       "type": "global_rule",
       "title": "Seducer's Voice",
-      "template": "EVENT: 🎙️ You must speak with your sexiest, most whispering voice. Speaking normally = {PUNISHMENT} sips.",
+      "template": "🎙️ You must speak with your sexiest, most whispering voice. Speaking normally = {PUNISHMENT} sips.",
       "endTemplate": "Recover your normal voice.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -177,7 +193,7 @@
       "id": "val_e14",
       "type": "multiplier",
       "title": "Broken Heart",
-      "template": "EVENT: 💔 Drama! The player who has distributed the most so far drinks alone and double the normal amount.",
+      "template": "💔 Drama! The player who has distributed the most so far drinks alone and double the normal amount.",
       "endTemplate": "The heart has healed.",
       "variables": {},
       "categoria": "Multipliers",
@@ -191,10 +207,12 @@
       "id": "val_e15",
       "type": "global_rule",
       "title": "Intertwined Hands",
-      "template": "EVENT: 🤝 You must drink while holding the hand of the person next to you. If you let go, drink {PUNISHMENT} sips.",
+      "template": "🤝 You must drink while holding the hand of the person next to you. If you let go, drink {PUNISHMENT} sips.",
       "endTemplate": "You can let go now.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 3,
@@ -205,10 +223,12 @@
       "id": "val_e16",
       "type": "special_condition",
       "title": "Our Date Song",
-      "template": "EVENT: 🎼 Before drinking, you must name a romantic song. If you repeat one, drink {PUNISHMENT} extra sips.",
+      "template": "🎼 Before drinking, you must name a romantic song. If you repeat one, drink {PUNISHMENT} extra sips.",
       "endTemplate": "The love playlist is over.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 4,
@@ -219,10 +239,12 @@
       "id": "val_e17",
       "type": "global_rule",
       "title": "No Dirty Talk",
-      "template": "EVENT: 😇 Ladies and gents night. No insulting or using crude words. Fail = {PUNISHMENT} sips.",
+      "template": "😇 Ladies and gents night. No insulting or using crude words. Fail = {PUNISHMENT} sips.",
       "endTemplate": "You can be crude again.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Behavior",
       "minRounds": 5,
@@ -233,7 +255,7 @@
       "id": "val_e18",
       "type": "multiplier",
       "title": "Lovers' Day",
-      "template": "EVENT: 💘 Double or nothing! Sips given to real couples are worth x0. Sips given to singles are worth x3.",
+      "template": "💘 Double or nothing! Sips given to real couples are worth x0. Sips given to singles are worth x3.",
       "endTemplate": "Single discrimination is over.",
       "variables": {},
       "categoria": "Multipliers",
@@ -247,10 +269,12 @@
       "id": "val_e19",
       "type": "global_rule",
       "title": "Whisper in the Ear",
-      "template": "EVENT: 👂 You can only speak by whispering in the ear of the closest person. Anyone who speaks out loud drinks {PUNISHMENT} sips.",
+      "template": "👂 You can only speak by whispering in the ear of the closest person. Anyone who speaks out loud drinks {PUNISHMENT} sips.",
       "endTemplate": "You can speak out loud again.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 2,
@@ -261,10 +285,12 @@
       "id": "val_e20",
       "type": "special_condition",
       "title": "The Third Wheel",
-      "template": "EVENT: 👤 Choose a person who cannot speak or participate. If someone speaks to them, both drink {PUNISHMENT} sips.",
+      "template": "👤 Choose a person who cannot speak or participate. If someone speaks to them, both drink {PUNISHMENT} sips.",
       "endTemplate": "No more third wheels.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -275,10 +301,12 @@
       "id": "val_e21",
       "type": "global_rule",
       "title": "Santa's Caresses",
-      "template": "EVENT: 🍑 You can only drink if someone is giving you a shoulder massage. If there's no massage, drink {PUNISHMENT} extra sips.",
+      "template": "🍑 You can only drink if someone is giving you a shoulder massage. If there's no massage, drink {PUNISHMENT} extra sips.",
       "endTemplate": "The spa is over.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 3,
@@ -289,7 +317,7 @@
       "id": "val_e22",
       "type": "multiplier",
       "title": "Group Crush",
-      "template": "EVENT: 💘 Everyone's in love! When one person drinks, everyone else must drink 1 sip out of amorous solidarity.",
+      "template": "💘 Everyone's in love! When one person drinks, everyone else must drink 1 sip out of amorous solidarity.",
       "endTemplate": "Group solidarity is over.",
       "variables": {},
       "categoria": "Global",
@@ -303,10 +331,12 @@
       "id": "val_e23",
       "type": "global_rule",
       "title": "Pinky Promise",
-      "template": "EVENT: 🤙 You must drink with your pinky raised and hooked onto someone else's. Fail = {PUNISHMENT} sips.",
+      "template": "🤙 You must drink with your pinky raised and hooked onto someone else's. Fail = {PUNISHMENT} sips.",
       "endTemplate": "You can release your pinkies.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Physical",
       "minRounds": 4,
@@ -317,7 +347,7 @@
       "id": "val_e24",
       "type": "special_condition",
       "title": "Secret Admirer",
-      "template": "EVENT: 💌 Write someone's name on an imaginary paper. Every time that person drinks, you drink double for secret love.",
+      "template": "💌 Write someone's name on an imaginary paper. Every time that person drinks, you drink double for secret love.",
       "endTemplate": "The secret is out.",
       "variables": {},
       "categoria": "Social",
@@ -329,10 +359,12 @@
       "id": "val_e25",
       "type": "global_rule",
       "title": "Erogenous Zones",
-      "template": "EVENT: 🔞 Touching your face, neck, or arms is forbidden. If they itch or you touch them, drink {PUNISHMENT} sips.",
+      "template": "🔞 Touching your face, neck, or arms is forbidden. If they itch or you touch them, drink {PUNISHMENT} sips.",
       "endTemplate": "You can touch whatever you want again.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Rules",
       "minRounds": 4,
@@ -343,10 +375,12 @@
       "id": "val_e26",
       "type": "global_rule",
       "title": "Toast to Love",
-      "template": "EVENT: 🍷 Before each round of drinks, everyone must say 'Long live love!'. Whoever forgets drinks {PUNISHMENT} extra sips.",
+      "template": "🍷 Before each round of drinks, everyone must say 'Long live love!'. Whoever forgets drinks {PUNISHMENT} extra sips.",
       "endTemplate": "No more cheesy toasts.",
       "variables": {
-        "PUNISHMENT": ["1"]
+        "PUNISHMENT": [
+          "1"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -357,7 +391,7 @@
       "id": "val_e27",
       "type": "multiplier",
       "title": "Ex's Revenge",
-      "template": "EVENT: 👿 Revenge! The person who most recently ended a relationship drinks triple of everything.",
+      "template": "👿 Revenge! The person who most recently ended a relationship drinks triple of everything.",
       "endTemplate": "The revenge has passed.",
       "variables": {},
       "categoria": "Multipliers",
@@ -371,10 +405,12 @@
       "id": "val_e28",
       "type": "global_rule",
       "title": "For Couples Only",
-      "template": "EVENT: 👨‍❤️‍👨 Only those who form a couple (in-game or real) can speak. Singles can only drink and nod. Speaking = {PUNISHMENT} sips.",
+      "template": "👨‍❤️‍👨 Only those who form a couple (in-game or real) can speak. Singles can only drink and nod. Speaking = {PUNISHMENT} sips.",
       "endTemplate": "Singles recover their voice.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -385,7 +421,7 @@
       "id": "val_e29",
       "type": "special_condition",
       "title": "Valentine's Gift",
-      "template": "EVENT: 🎁 Every time it's your turn to drink, you can choose someone to drink for you, but you must give them something of yours (an object, a piece of clothing...) until the end of the event.",
+      "template": "🎁 Every time it's your turn to drink, you can choose someone to drink for you, but you must give them something of yours (an object, a piece of clothing...) until the end of the event.",
       "endTemplate": "Return the gifts.",
       "variables": {},
       "categoria": "Modifiers",
@@ -397,7 +433,7 @@
       "id": "val_e30",
       "type": "global_rule",
       "title": "Express Wedding",
-      "template": "EVENT: 💍 Two players must 'get married' (join their glasses). While married, they always drink together and double.",
+      "template": "💍 Two players must 'get married' (join their glasses). While married, they always drink together and double.",
       "endTemplate": "Express divorce granted.",
       "variables": {},
       "categoria": "Social",

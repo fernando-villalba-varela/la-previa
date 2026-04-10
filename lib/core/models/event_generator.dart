@@ -117,7 +117,7 @@ class EventGenerator {
       final fallbackEvents = [
         {
           'title': 'Tragos Dobles',
-          'description': 'EVENTO: ✖️ Todos los tragos valen x2 mientras dure este evento',
+          'description': '✖️ Todos los tragos valen x2 mientras dure este evento',
           'type': EventType.multiplier,
           'duration': 4,
           'multiplier': 2,
@@ -125,21 +125,21 @@ class EventGenerator {
         {
           'title': 'Zona Sin Teléfonos',
           'description':
-              'EVENTO: 🌐 Nadie puede usar el teléfono mientras dure este evento. Si alguien lo usa, bebe 3 tragos',
+              '🌐 Nadie puede usar el teléfono mientras dure este evento. Si alguien lo usa, bebe 3 tragos',
           'type': EventType.global_rule,
           'duration': 4,
           'multiplier': 1,
         },
         {
           'title': 'Modo Silencioso',
-          'description': 'EVENTO: 🌐 Solo comunicación por gestos mientras dure este evento. Hablar = 2 tragos',
+          'description': '🌐 Solo comunicación por gestos mientras dure este evento. Hablar = 2 tragos',
           'type': EventType.global_rule,
           'duration': 3,
           'multiplier': 1,
         },
         {
           'title': 'Pausa de Baile',
-          'description': 'EVENTO: ⭐ Cada trago requiere 15 segundos de baile mientras dure este evento',
+          'description': '⭐ Cada trago requiere 15 segundos de baile mientras dure este evento',
           'type': EventType.special_condition,
           'duration': 4,
           'multiplier': 1,

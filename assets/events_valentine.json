@@ -4,7 +4,7 @@
       "id": "val_e1",
       "type": "global_rule",
       "title": "Cita a Ciegas",
-      "template": "EVENTO: ❤️ ¡El amor está en el aire! Cada jugador debe elegir a una 'pareja' para este turno. Si uno bebe, el otro también.",
+      "template": "❤️ ¡El amor está en el aire! Cada jugador debe elegir a una 'pareja' para este turno. Si uno bebe, el otro también.",
       "endTemplate": "La cita ha terminado.",
       "categoria": "Social",
       "minRounds": 1,
@@ -15,7 +15,7 @@
       "id": "val_e2",
       "type": "multiplier",
       "title": "Pasión Desenfrenada",
-      "template": "EVENTO: 🔥 ¡Qué calor! Todos los tragos que impliquen contacto físico o retos 'picantes' valen doble (x2).",
+      "template": "🔥 ¡Qué calor! Todos los tragos que impliquen contacto físico o retos 'picantes' valen doble (x2).",
       "endTemplate": "La pasión se ha enfriado un poco. Tragos normales.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -29,10 +29,13 @@
       "id": "val_e3",
       "type": "global_rule",
       "title": "Palabras Dulces",
-      "template": "EVENTO: 🍭 Debes llamar a todos por un nombre cariñoso (Cielo, Amor, Vida...). Fallar = {PUNISHMENT} tragos.",
+      "template": "🍭 Debes llamar a todos por un nombre cariñoso (Cielo, Amor, Vida...). Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis dejar de ser tan empalagosos.",
       "variables": {
-        "PUNISHMENT": ["1", "2"]
+        "PUNISHMENT": [
+          "1",
+          "2"
+        ]
       },
       "categoria": "Comportamiento",
       "minRounds": 4,
@@ -43,10 +46,12 @@
       "id": "val_e4",
       "type": "special_condition",
       "title": "Flecha de Cupido",
-      "template": "EVENTO: 🏹 El anfitrión es Cupido. Puede 'flechar' a dos personas: cada vez que una de ellas beba, la otra debe darle un cumplido o beber {PUNISHMENT} extra.",
+      "template": "🏹 El anfitrión es Cupido. Puede 'flechar' a dos personas: cada vez que una de ellas beba, la otra debe darle un cumplido o beber {PUNISHMENT} extra.",
       "endTemplate": "Cupido se ha quedado sin flechas.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -57,10 +62,13 @@
       "id": "val_e5",
       "type": "global_rule",
       "title": "Prohibido el Desamor",
-      "template": "EVENTO: 🚫 Prohibido hablar de ex-parejas o historias tristes. Quien lo haga, bebe {PUNISHMENT} tragos por apagar la llama.",
+      "template": "🚫 Prohibido hablar de ex-parejas o historias tristes. Quien lo haga, bebe {PUNISHMENT} tragos por apagar la llama.",
       "endTemplate": "Ya podéis desahogaros.",
       "variables": {
-        "PUNISHMENT": ["3", "4"]
+        "PUNISHMENT": [
+          "3",
+          "4"
+        ]
       },
       "categoria": "Reglas",
       "minRounds": 4,
@@ -71,7 +79,7 @@
       "id": "val_e6",
       "type": "multiplier",
       "title": "Cena Romántica",
-      "template": "EVENTO: 🕯️ Los tragos de gente sentada valen la mitad, los de gente de pie valen triple.",
+      "template": "🕯️ Los tragos de gente sentada valen la mitad, los de gente de pie valen triple.",
       "endTemplate": "La cena ha terminado.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -85,10 +93,12 @@
       "id": "val_e7",
       "type": "global_rule",
       "title": "Mirada de Enamorados",
-      "template": "EVENTO: 😍 No se puede hablar sin mirar fijamente a los ojos a la otra persona. Fallar = {PUNISHMENT} tragos.",
+      "template": "😍 No se puede hablar sin mirar fijamente a los ojos a la otra persona. Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Ya no hace falta tanta intensidad.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -99,10 +109,12 @@
       "id": "val_e8",
       "type": "special_condition",
       "title": "Poeta Enamorado",
-      "template": "EVENTO: 📜 Antes de beber, debes recitar un verso corto de amor (o inventarlo). Si no rima, bebes {PUNISHMENT} extra.",
+      "template": "📜 Antes de beber, debes recitar un verso corto de amor (o inventarlo). Si no rima, bebes {PUNISHMENT} extra.",
       "endTemplate": "La inspiración se ha acabado.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Especial",
       "minRounds": 3,
@@ -113,7 +125,7 @@
       "id": "val_e9",
       "type": "global_rule",
       "title": "Beso o Trago",
-      "template": "EVENTO: 💋 Si el juego te manda beber, puedes evitarlo dándole un beso (en la mejilla vale) a alguien. Si nadie acepta, bebes el doble.",
+      "template": "💋 Si el juego te manda beber, puedes evitarlo dándole un beso (en la mejilla vale) a alguien. Si nadie acepta, bebes el doble.",
       "endTemplate": "Se acabó el mercadeo de besos.",
       "variables": {},
       "categoria": "Social",
@@ -125,7 +137,7 @@
       "id": "val_e10",
       "type": "global_rule",
       "title": "Rosas Rojas",
-      "template": "EVENTO: 🌹 Los que lleven alguna prenda roja beben 1 menos cada vez; los que no, beben 1 más.",
+      "template": "🌹 Los que lleven alguna prenda roja beben 1 menos cada vez; los que no, beben 1 más.",
       "endTemplate": "El color rojo ya no es especial.",
       "variables": {},
       "categoria": "Modificadores",
@@ -137,10 +149,12 @@
       "id": "val_e11",
       "type": "special_condition",
       "title": "Sinceridad Amorosa",
-      "template": "EVENTO: 💬 Todas las preguntas de este evento deben responderse con total honestidad. Mentir = {PUNISHMENT} tragos de castigo.",
+      "template": "💬 Todas las preguntas de este evento deben responderse con total honestidad. Mentir = {PUNISHMENT} tragos de castigo.",
       "endTemplate": "Ya podéis volver a fingir.",
       "variables": {
-        "PUNISHMENT": ["4"]
+        "PUNISHMENT": [
+          "4"
+        ]
       },
       "categoria": "Verdad",
       "minRounds": 3,
@@ -151,7 +165,7 @@
       "id": "val_e12",
       "type": "global_rule",
       "title": "Pareja de Hecho",
-      "template": "EVENTO: 👫 Eliges a un compañero. Durante este evento, todo lo que beba uno, lo bebe el otro también por solidaridad.",
+      "template": "👫 Eliges a un compañero. Durante este evento, todo lo que beba uno, lo bebe el otro también por solidaridad.",
       "endTemplate": "La pareja se ha separado (sin drama).",
       "variables": {},
       "categoria": "Global",
@@ -163,10 +177,12 @@
       "id": "val_e13",
       "type": "global_rule",
       "title": "Voz de Seductor",
-      "template": "EVENTO: 🎙️ Debes hablar con tu voz más sexy y susurrante. Hablar normal = {PUNISHMENT} tragos.",
+      "template": "🎙️ Debes hablar con tu voz más sexy y susurrante. Hablar normal = {PUNISHMENT} tragos.",
       "endTemplate": "Recuperad vuestra voz normal.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -177,7 +193,7 @@
       "id": "val_e14",
       "type": "multiplier",
       "title": "Corazón Roto",
-      "template": "EVENTO: 💔 ¡Drama! El jugador que más veces haya repartido hasta ahora bebe solo y el doble de lo normal.",
+      "template": "💔 ¡Drama! El jugador que más veces haya repartido hasta ahora bebe solo y el doble de lo normal.",
       "endTemplate": "El corazón se ha curado.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -191,10 +207,12 @@
       "id": "val_e15",
       "type": "global_rule",
       "title": "Mano Entrelazada",
-      "template": "EVENTO: 🤝 Debes beber agarrando la mano de la persona a tu lado. Si sueltas la mano, bebes {PUNISHMENT} tragos.",
+      "template": "🤝 Debes beber agarrando la mano de la persona a tu lado. Si sueltas la mano, bebes {PUNISHMENT} tragos.",
       "endTemplate": "Podéis soltaros.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Físico",
       "minRounds": 3,
@@ -205,10 +223,12 @@
       "id": "val_e16",
       "type": "special_condition",
       "title": "Canción de Nuestra Cita",
-      "template": "EVENTO: 🎼 Antes de beber, debes decir el nombre de una canción romántica. Si repites una, bebes {PUNISHMENT} extra.",
+      "template": "🎼 Antes de beber, debes decir el nombre de una canción romántica. Si repites una, bebes {PUNISHMENT} extra.",
       "endTemplate": "Se acabó la playlist de amor.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 4,
@@ -219,10 +239,12 @@
       "id": "val_e17",
       "type": "global_rule",
       "title": "Sin Palabras Sucias",
-      "template": "EVENTO: 😇 Noche de caballeros y damas. Prohibido insultar o decir groserías. Fallar = {PUNISHMENT} tragos.",
+      "template": "😇 Noche de caballeros y damas. Prohibido insultar o decir groserías. Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Podéis volver a ser groseros.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Comportamiento",
       "minRounds": 5,
@@ -233,7 +255,7 @@
       "id": "val_e18",
       "type": "multiplier",
       "title": "Día de los Enamorados",
-      "template": "EVENTO: 💘 ¡Doble o nada! Los tragos que se den a parejas reales valen x0. Los que se den a solteros valen x3.",
+      "template": "💘 ¡Doble o nada! Los tragos que se den a parejas reales valen x0. Los que se den a solteros valen x3.",
       "endTemplate": "Se acabó la discriminación a solteros.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -247,10 +269,12 @@
       "id": "val_e19",
       "type": "global_rule",
       "title": "Susurro al Oído",
-      "template": "EVENTO: 👂 Solo se puede hablar susurrando al oído de la persona más cercana. El que hable al aire, bebe {PUNISHMENT} tragos.",
+      "template": "👂 Solo se puede hablar susurrando al oído de la persona más cercana. El que hable al aire, bebe {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis hablar en voz alta.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 2,
@@ -261,10 +285,12 @@
       "id": "val_e20",
       "type": "special_condition",
       "title": "El Tercero en Discordia",
-      "template": "EVENTO: 👤 Elige a una persona para que no pueda hablar ni participar. Si alguien le habla, ambos beben {PUNISHMENT} tragos.",
+      "template": "👤 Elige a una persona para que no pueda hablar ni participar. Si alguien le habla, ambos beben {PUNISHMENT} tragos.",
       "endTemplate": "Ya no hay terceros en discordia.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -275,10 +301,12 @@
       "id": "val_e21",
       "type": "global_rule",
       "title": "Caricias de Santa",
-      "template": "EVENTO: 🍑 Solo se puede beber si alguien te está dando un masaje en los hombros. Si no hay masaje, bebes {PUNISHMENT} extra.",
+      "template": "🍑 Solo se puede beber si alguien te está dando un masaje en los hombros. Si no hay masaje, bebes {PUNISHMENT} extra.",
       "endTemplate": "Se acabó el spa.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Físico",
       "minRounds": 3,
@@ -289,7 +317,7 @@
       "id": "val_e22",
       "type": "multiplier",
       "title": "Flechazo Grupal",
-      "template": "EVENTO: 💘 ¡Todos enamorados! Cuando uno beba, todos los demás deben beber 1 trago de solidaridad amorosa.",
+      "template": "💘 ¡Todos enamorados! Cuando uno beba, todos los demás deben beber 1 trago de solidaridad amorosa.",
       "endTemplate": "Se acabó la solidaridad grupal.",
       "variables": {},
       "categoria": "Global",
@@ -303,10 +331,12 @@
       "id": "val_e23",
       "type": "global_rule",
       "title": "Dedo Enlazado",
-      "template": "EVENTO: 🤙 Debes beber con el dedo meñique levantado y enganchado al de otra persona. Fallar = {PUNISHMENT} tragos.",
+      "template": "🤙 Debes beber con el dedo meñique levantado y enganchado al de otra persona. Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Podéis soltar los meñiques.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Físico",
       "minRounds": 4,
@@ -317,7 +347,7 @@
       "id": "val_e24",
       "type": "special_condition",
       "title": "El Admirador Secreto",
-      "template": "EVENTO: 💌 Escribe el nombre de alguien en un papel imaginario. Cada vez que esa persona beba, tú bebes el doble por amor secreto.",
+      "template": "💌 Escribe el nombre de alguien en un papel imaginario. Cada vez que esa persona beba, tú bebes el doble por amor secreto.",
       "endTemplate": "Se acabó el secreto.",
       "variables": {},
       "categoria": "Social",
@@ -329,10 +359,12 @@
       "id": "val_e25",
       "type": "global_rule",
       "title": "Zonas Erogénas",
-      "template": "EVENTO: 🔞 Prohibido tocarse la cara, el cuello o los brazos. Si te pican o los tocas, bebes {PUNISHMENT} tragos.",
+      "template": "🔞 Prohibido tocarse la cara, el cuello o los brazos. Si te pican o los tocas, bebes {PUNISHMENT} tragos.",
       "endTemplate": "Podéis tocaros lo que queráis.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Reglas",
       "minRounds": 4,
@@ -343,10 +375,12 @@
       "id": "val_e26",
       "type": "global_rule",
       "title": "Brindis por el Amor",
-      "template": "EVENTO: 🍷 Antes de cada ronda de tragos, todos deben decir '¡Viva el amor!'. Quien lo olvide, bebe {PUNISHMENT} extra.",
+      "template": "🍷 Antes de cada ronda de tragos, todos deben decir '¡Viva el amor!'. Quien lo olvide, bebe {PUNISHMENT} extra.",
       "endTemplate": "Se acabaron los brindis cursis.",
       "variables": {
-        "PUNISHMENT": ["1"]
+        "PUNISHMENT": [
+          "1"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -357,7 +391,7 @@
       "id": "val_e27",
       "type": "multiplier",
       "title": "Venganza de Ex",
-      "template": "EVENTO: 👿 ¡Venganza! La persona que más recientemente haya roto una relación bebe el triple de todo.",
+      "template": "👿 ¡Venganza! La persona que más recientemente haya roto una relación bebe el triple de todo.",
       "endTemplate": "La venganza ha pasado.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -371,10 +405,12 @@
       "id": "val_e28",
       "type": "global_rule",
       "title": "Solo para Parejas",
-      "template": "EVENTO: 👨‍❤️‍👨 Solo pueden hablar los que formen una pareja (en el juego o real). Los solteros solo pueden beber y asentir. Hablar = {PUNISHMENT} tragos.",
+      "template": "👨‍❤️‍👨 Solo pueden hablar los que formen una pareja (en el juego o real). Los solteros solo pueden beber y asentir. Hablar = {PUNISHMENT} tragos.",
       "endTemplate": "Los solteros recuperan su voz.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -385,7 +421,7 @@
       "id": "val_e29",
       "type": "special_condition",
       "title": "El Regalo de San Valentín",
-      "template": "EVENTO: 🎁 Cada vez que te toque beber, puedes elegir a alguien para que beba por ti, pero debes darle algo tuyo (un objeto, una prenda...) hasta el final del evento.",
+      "template": "🎁 Cada vez que te toque beber, puedes elegir a alguien para que beba por ti, pero debes darle algo tuyo (un objeto, una prenda...) hasta el final del evento.",
       "endTemplate": "Devolved los regalos.",
       "variables": {},
       "categoria": "Modificadores",
@@ -397,7 +433,7 @@
       "id": "val_e30",
       "type": "global_rule",
       "title": "Boda Express",
-      "template": "EVENTO: 💍 Dos jugadores deben 'casarse' (unir sus vasos). Mientras duren casados, beben siempre juntos y el doble.",
+      "template": "💍 Dos jugadores deben 'casarse' (unir sus vasos). Mientras duren casados, beben siempre juntos y el doble.",
       "endTemplate": "Divorcio express concedido.",
       "variables": {},
       "categoria": "Social",

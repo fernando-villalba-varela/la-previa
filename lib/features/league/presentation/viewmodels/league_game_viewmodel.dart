@@ -245,6 +245,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     _currentCategoria = null;
     _currentPlayerIndex = players.indexOf(player1);
     _dualPlayerIndex = players.indexOf(player2);
+    _isCurrentChallengeConstant = true;
     notifyListeners();
   }
 
