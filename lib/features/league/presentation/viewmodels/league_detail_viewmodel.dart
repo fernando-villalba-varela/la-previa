@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -119,11 +119,15 @@ class LeagueDetailViewModel extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xF200C9FF), // 00C9FF with 95% opacity
-          title: Text(
-            Provider.of<LanguageService>(context, listen: false).translate('avatar_photo_title'),
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+        backgroundColor: const Color(0xFF1A1A2E), // Dark neon aesthetic
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0xFF00C9FF), width: 1.5),
+        ),
+        title: Text(
+          Provider.of<LanguageService>(context, listen: false).translate('avatar_photo_title'),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -145,8 +149,8 @@ class LeagueDetailViewModel extends ChangeNotifier {
             ),
             if (league.players.firstWhere((p) => p.playerId == playerId).avatarPath != null)
               ListTile(
-                leading: const Icon(Icons.delete_forever, color: Colors.white),
-                title: Text(Provider.of<LanguageService>(context, listen: false).translate('remove_avatar_option'), style: const TextStyle(color: Colors.white)),
+                leading: const Icon(Icons.delete_forever, color: Colors.redAccent),
+                title: Text(Provider.of<LanguageService>(context, listen: false).translate('remove_avatar_option'), style: const TextStyle(color: Colors.redAccent)),
                 onTap: () {
                   Navigator.pop(context);
                   final p = league.players.firstWhere((e) => e.playerId == playerId);
@@ -185,7 +189,11 @@ class LeagueDetailViewModel extends ChangeNotifier {
         // ignore: use_build_context_synchronously
         context: context,
         builder: (_) => AlertDialog(
-          backgroundColor: const Color(0xF200C9FF), // 00C9FF with 95% opacity
+          backgroundColor: const Color(0xFF1A1A2E), // Dark neon aesthetic
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: const BorderSide(color: Color(0xFF00C9FF), width: 1.5),
+          ),
           title: Text(
             Provider.of<LanguageService>(context, listen: false).translate('choose_avatar_dialog_title'),
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -211,12 +219,19 @@ class LeagueDetailViewModel extends ChangeNotifier {
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: current
-                            ? Colors.white
+                            ? const Color(0xFF00C9FF) // Neon cyan
                             : isUsed
                             ? Colors.redAccent
                             : Colors.white30,
                         width: current || isUsed ? 3 : 1,
                       ),
+                      boxShadow: current ? [
+                        BoxShadow(
+                          color: const Color(0xFF00C9FF).withOpacity(0.5),
+                          blurRadius: 10,
+                          spreadRadius: 2,
+                        )
+                      ] : null,
                     ),
                     child: ClipOval(
                       child: ColorFiltered(
