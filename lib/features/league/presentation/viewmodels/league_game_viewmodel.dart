@@ -479,11 +479,22 @@ class LeagueGameViewModel extends ChangeNotifier {
   // Drink application
   // -------------------------------------------------------------------------
 
+  /// Returns the active drink multiplier from multiplier-type events.
+  int get _currentDrinkMultiplier {
+    int multiplier = 1;
+    for (final event in events) {
+      if (event.isActiveAtRound(_currentRound) && event.type == EventType.multiplier) {
+        multiplier = (multiplier * event.drinkMultiplier).round();
+      }
+    }
+    return multiplier;
+  }
+
   void applyDirectDrinksForCurrentPlayer() {
     if (!isDirectDrinkForCurrentPlayer()) return;
 
     final playerId = players[_currentPlayerIndex].id;
-    final drinksAmount = extractDrinks();
+    final drinksAmount = extractDrinks() * _currentDrinkMultiplier;
 
     playerDrinks[playerId] = (playerDrinks[playerId] ?? 0) + drinksAmount;
     notifyListeners();
@@ -491,7 +502,7 @@ class LeagueGameViewModel extends ChangeNotifier {
 
   void applyMoreLikelyQuestionDrinks(List<int> selectedPlayerIds) {
     if (shouldCountDrinks()) {
-      final drinksAmount = extractDrinks();
+      final drinksAmount = extractDrinks() * _currentDrinkMultiplier;
       for (final playerId in selectedPlayerIds) {
         playerDrinks[playerId] = (playerDrinks[playerId] ?? 0) + drinksAmount;
       }
@@ -501,8 +512,9 @@ class LeagueGameViewModel extends ChangeNotifier {
   }
 
   void applyLetterCounterDrinks(Map<int, int> drinksByPlayer) {
+    final multiplier = _currentDrinkMultiplier;
     drinksByPlayer.forEach((playerId, drinks) {
-      playerDrinks[playerId] = (playerDrinks[playerId] ?? 0) + drinks;
+      playerDrinks[playerId] = (playerDrinks[playerId] ?? 0) + drinks * multiplier;
     });
     _showingLetterCounter = false;
     _selectedPlayerIdsForLetterCounter = [];

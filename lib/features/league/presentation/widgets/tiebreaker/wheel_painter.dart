@@ -26,76 +26,116 @@ class WheelPainter extends CustomPainter {
     final radius = size.width / 2;
     final anglePerSection = (2 * pi) / players.length;
 
+    // Sombra exterior de la rueda
+    final shadowPaint = Paint()
+      ..color = Colors.black.withOpacity(0.4)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
+    canvas.drawCircle(center, radius + 4, shadowPaint);
+
     for (int i = 0; i < players.length; i++) {
       final player = players[i];
       final isWinner = hasSpun && winner?.id == player.id;
-
       final startAngle = (i * anglePerSection) - (pi / 2);
       final sweepAngle = anglePerSection;
 
-      Color sectionColor = fixedColors[i % fixedColors.length];
+      final baseColor = fixedColors[i % fixedColors.length];
+
+      // Segmento con color más oscuro mezclado con negro
+      final segColor = isWinner
+          ? baseColor
+          : Color.lerp(baseColor, const Color(0xFF0D0D1A), 0.45)!;
+
+      // Glow para el ganador
+      if (isWinner) {
+        final glowPaint = Paint()
+          ..color = baseColor.withOpacity(0.5)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 18);
+        canvas.drawArc(
+          Rect.fromCircle(center: center, radius: radius),
+          startAngle,
+          sweepAngle,
+          true,
+          glowPaint,
+        );
+      }
 
       final paint = Paint()
-        ..color = sectionColor
+        ..color = segColor
         ..style = PaintingStyle.fill;
 
-      canvas.drawArc(Rect.fromCircle(center: center, radius: radius), startAngle, sweepAngle, true, paint);
+      canvas.drawArc(
+        Rect.fromCircle(center: center, radius: radius),
+        startAngle,
+        sweepAngle,
+        true,
+        paint,
+      );
 
+      // Línea divisoria sutil
       final linePaint = Paint()
-        ..color = Colors.white
-        ..strokeWidth = 2
+        ..color = Colors.white.withOpacity(0.15)
+        ..strokeWidth = 1.5
         ..style = PaintingStyle.stroke;
-
       final endX = center.dx + radius * cos(startAngle);
       final endY = center.dy + radius * sin(startAngle);
-
       canvas.drawLine(center, Offset(endX, endY), linePaint);
 
+      // Avatar y nombre
       final sectionAngle = startAngle + (sweepAngle / 2);
-      final avatarRadius = radius * 0.65;
-
+      final avatarRadius = radius * 0.62;
       final avatarX = center.dx + avatarRadius * cos(sectionAngle);
       final avatarY = center.dy + avatarRadius * sin(sectionAngle);
 
-      final textX = avatarX;
-      final textY = avatarY + 35;
+      _drawPlayerAvatar(canvas, player, avatarX, avatarY, 20, isWinner, baseColor);
 
-      _drawPlayerAvatar(canvas, player, avatarX, avatarY, 20, isWinner);
-
+      final textY = avatarY + 28;
       final textPainter = TextPainter(
         text: TextSpan(
           text: player.nombre,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 10,
-            fontWeight: isWinner ? FontWeight.bold : FontWeight.w600,
-            shadows: [Shadow(color: Colors.black.withOpacity(0.9), offset: const Offset(1, 1), blurRadius: 3)],
+            fontSize: 9,
+            fontWeight: isWinner ? FontWeight.bold : FontWeight.w500,
+            shadows: [
+              Shadow(color: Colors.black.withOpacity(0.9), offset: const Offset(1, 1), blurRadius: 3),
+            ],
           ),
         ),
         textDirection: TextDirection.ltr,
       );
-
       textPainter.layout();
-      textPainter.paint(canvas, Offset(textX - textPainter.width / 2, textY - textPainter.height / 2));
+      textPainter.paint(canvas, Offset(avatarX - textPainter.width / 2, textY - textPainter.height / 2));
     }
 
+    // Borde exterior
     final borderPaint = Paint()
-      ..color = Colors.white.withOpacity(0.8)
-      ..strokeWidth = 3
+      ..color = Colors.white.withOpacity(0.25)
+      ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
-
     canvas.drawCircle(center, radius, borderPaint);
+
+    // Aro interior brillante
+    final innerRingPaint = Paint()
+      ..color = Colors.white.withOpacity(0.08)
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+    canvas.drawCircle(center, radius * 0.35, innerRingPaint);
   }
 
-  void _drawPlayerAvatar(Canvas canvas, Player player, double x, double y, double radius, bool isWinner) {
-    final avatarPaint = Paint()
-      ..color = isWinner ? (isMVP ? const Color(0xFFFFD700) : const Color(0xFF8B4513)) : Colors.white.withOpacity(0.9)
-      ..style = PaintingStyle.fill;
+  void _drawPlayerAvatar(Canvas canvas, Player player, double x, double y, double radius, bool isWinner, Color accentColor) {
+    if (isWinner) {
+      final glowPaint = Paint()
+        ..color = accentColor.withOpacity(0.6)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8);
+      canvas.drawCircle(Offset(x, y), radius + 4, glowPaint);
+    }
 
-    canvas.drawCircle(Offset(x, y), radius, avatarPaint);
+    final bgPaint = Paint()
+      ..color = isWinner ? accentColor : const Color(0xFF1E1E2E)
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(Offset(x, y), radius, bgPaint);
 
     final ui.Image? playerImage = playerImages[player.nombre];
-
     if (playerImage != null) {
       _drawPlayerImage(canvas, playerImage, x, y, radius);
     } else {
@@ -103,34 +143,30 @@ class WheelPainter extends CustomPainter {
         text: TextSpan(
           text: player.nombre.isNotEmpty ? player.nombre[0].toUpperCase() : '?',
           style: TextStyle(
-            color: isWinner ? Colors.white : Colors.black,
-            fontSize: radius * 0.8,
+            color: Colors.white,
+            fontSize: radius * 0.85,
             fontWeight: FontWeight.bold,
           ),
         ),
         textDirection: TextDirection.ltr,
       );
-
       textPainter.layout();
       textPainter.paint(canvas, Offset(x - textPainter.width / 2, y - textPainter.height / 2));
     }
 
     final borderPaint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 2
+      ..color = isWinner ? Colors.white : Colors.white.withOpacity(0.3)
+      ..strokeWidth = isWinner ? 2 : 1
       ..style = PaintingStyle.stroke;
-
     canvas.drawCircle(Offset(x, y), radius, borderPaint);
   }
 
   void _drawPlayerImage(Canvas canvas, ui.Image image, double x, double y, double radius) {
-    final Rect rect = Rect.fromCircle(center: Offset(x, y), radius: radius);
-    final Rect srcRect = Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble());
-
+    final rect = Rect.fromCircle(center: Offset(x, y), radius: radius);
+    final src = Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble());
     canvas.save();
     canvas.clipRRect(RRect.fromRectAndRadius(rect, Radius.circular(radius)));
-
-    canvas.drawImageRect(image, srcRect, rect, Paint());
+    canvas.drawImageRect(image, src, rect, Paint());
     canvas.restore();
   }
 

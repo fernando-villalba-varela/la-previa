@@ -74,16 +74,15 @@ class GameQueryValidator {
       return false;
     }
 
-    if (lowerChallenge.contains('bebe') &&
+    if (!isConditionalQuestion(challenge) &&
+        lowerChallenge.contains('bebe') &&
         lowerChallenge.contains('tragos por') &&
         !lowerChallenge.contains('vocal')) {
       return false;
     }
 
-    // Excluir repartos simples
-    if (lowerChallenge.contains('reparte') &&
-        lowerChallenge.contains('tragos') &&
-        !lowerChallenge.contains('cualquiera')) {
+    // Excluir repartos (tanto simples como con "cualquiera que")
+    if (lowerChallenge.contains('reparte') && lowerChallenge.contains('tragos')) {
       return false;
     }
 

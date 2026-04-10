@@ -58,8 +58,10 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
 
   DateTime? _lastTapTime;
   Timer? _toastTimer;
+  Timer? _moreLikelyAutoOpenTimer;
   bool _ratingHintShown = false;
   int _challengeCount = 0;
+  bool _showTapHint = true;
 
   @override
   void initState() {
@@ -87,6 +89,10 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       await _viewModel.loadCustomQuestions(db, widget.leagueId);
       final activePackIds = packService.activePackIds.toList();
       await _viewModel.initializeFirstChallenge(lang, activePackIds);
+      if (mounted && _viewModel.isMoreLikelyQuestion()) _scheduleMoreLikelyAutoOpen();
+      Timer(const Duration(seconds: 5), () {
+        if (mounted) setState(() => _showTapHint = false);
+      });
       AnalyticsService().logGameStarted(
         mode: 'league',
         packs: activePackIds.join(','),
@@ -129,6 +135,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
     _rippleAnimationController.dispose();
     _orientationFadeController.dispose();
     _toastTimer?.cancel();
+    _moreLikelyAutoOpenTimer?.cancel();
     super.dispose();
   }
 
@@ -141,13 +148,26 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
     _nextChallenge();
   }
 
+  void _scheduleMoreLikelyAutoOpen() {
+    _moreLikelyAutoOpenTimer?.cancel();
+    _moreLikelyAutoOpenTimer = Timer(const Duration(seconds: 5), () {
+      if (!mounted) return;
+      if (_viewModel.isMoreLikelyQuestion() && !_viewModel.showingPlayerSelector) {
+        _viewModel.setShowingPlayerSelector(true);
+      }
+    });
+  }
+
   void _nextChallenge() async {
+    _moreLikelyAutoOpenTimer?.cancel();
     _tapAnimationController.forward().then((_) => _tapAnimationController.reverse());
 
     final lang = context.read<LanguageService>();
     final activePackIds = context.read<PackService>().activePackIds.toList();
     final gameEnded = await _viewModel.nextChallenge(lang, activePackIds, widget.maxRounds);
     if (gameEnded && mounted) { _endGame(); return; }
+
+    if (_viewModel.isMoreLikelyQuestion()) _scheduleMoreLikelyAutoOpen();
 
     _challengeCount++;
     if (_challengeCount == 1 && !_ratingHintShown && mounted) {
@@ -377,7 +397,8 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
             final gs = vm.createGameState(_glowAnimation);
             final isEnding = gs.isEndingConstantChallenge || gs.isEndingEvent;
             final hasActiveSelector = !isEnding &&
-                vm.isConditionalQuestion() &&
+                vm.shouldCountDrinks() &&
+                !vm.isMoreLikelyQuestion() &&
                 !vm.showingPlayerSelector &&
                 !vm.showingLetterCounter;
             final isMoreLikelyAndNotSelected = !isEnding &&
@@ -400,7 +421,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
               onTap: hasActiveSelector
                   ? _handleDoubleTapForNobody
                   : (isMoreLikelyAndNotSelected
-                      ? () => vm.setShowingPlayerSelector(true)
+                      ? () { _moreLikelyAutoOpenTimer?.cancel(); vm.setShowingPlayerSelector(true); }
                       : _handleTap),
               child: AnimatedBuilder(
                 animation: _tapAnimation,
@@ -421,6 +442,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                             GameCard(
                               gameState: vm.createGameState(_glowAnimation),
                               showPlayerSelector: hasActiveSelector,
+                              showTapHint: _showTapHint,
                               onPlayersSelected: (selectedIds) {
                                 if (vm.hasLetterMultiplier()) {
                                   final letter = vm.extractLetterToCount();

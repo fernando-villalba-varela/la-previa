@@ -41,14 +41,14 @@ class TiebreakerViewModel extends ChangeNotifier {
 
   void _initializeFixedColors() {
     _fixedColors = [
-      Colors.red.withOpacity(0.7),
-      Colors.blue.withOpacity(0.7),
-      Colors.green.withOpacity(0.7),
-      Colors.orange.withOpacity(0.7),
-      Colors.purple.withOpacity(0.7),
-      Colors.pink.withOpacity(0.7),
-      Colors.teal.withOpacity(0.7),
-      Colors.amber.withOpacity(0.7),
+      const Color(0xFFFF0055),  // magenta app
+      const Color(0xFF00C9FF),  // cyan app
+      const Color(0xFF8B5CF6),  // violeta
+      const Color(0xFFF59E0B),  // ámbar
+      const Color(0xFF10B981),  // esmeralda
+      const Color(0xFFEC4899),  // rosa
+      const Color(0xFF06B6D4),  // teal claro
+      const Color(0xFFEF4444),  // rojo suave
     ];
   }
 
