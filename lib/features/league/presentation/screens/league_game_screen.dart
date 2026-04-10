@@ -77,8 +77,12 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
       final packService = context.read<PackService>();
 
       await _orientationFadeController.forward();
-      await SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+      try {
+        await SystemChrome.setPreferredOrientations(
+            [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+      } catch (e) {
+        // Ignorar fallo de orientación para inicializar correctamente el juego
+      }
       await Future.delayed(const Duration(milliseconds: 80));
       if (!mounted) return;
       await _orientationFadeController.reverse();
@@ -177,12 +181,18 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
   }
 
   void _endGame() async {
+    final finalDrinks = _viewModel.finalDrinks;
+    final onGameEnd = widget.onGameEnd;
+
     AnalyticsService().logGameCompleted(mode: 'league', roundsPlayed: _viewModel.currentRound);
-    await SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    try {
+      await SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    } catch (e) {
+      // Ignorar fallos de orientación para asegurar que el juego termina
+    }
     await Future.delayed(const Duration(milliseconds: 300));
-    if (!mounted) return;
-    widget.onGameEnd(_viewModel.finalDrinks);
+    onGameEnd(finalDrinks);
   }
 
   // ---------------------------------------------------------------------------
