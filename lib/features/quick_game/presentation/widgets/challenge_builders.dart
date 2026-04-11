@@ -31,8 +31,12 @@ Widget buildConstantChallengeContent(GameState gameState) {
         large: 38,
       );
 
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      final contentHeight = MediaQuery.of(context).size.height * 0.65;
+      return SizedBox(
+        height: contentHeight,
+        child: Center(
+        child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Challenge type indicator with icon on the left
           Row(
@@ -134,79 +138,9 @@ Widget buildConstantChallengeContent(GameState gameState) {
             ],
           ),
         ],
+        ),
+        ),
       );
     },
   );
-}
-
-/// Construye la información del castigo
-List<Widget> _buildPunishmentInfo(GameState gameState, BuildContext context) {
-  final iconSize = getResponsiveSize(
-    context,
-    small: 25,
-    medium: 30,
-    large: 40,
-  );
-
-  final fontSize = getResponsiveSize(
-    context,
-    small: 18,
-    medium: 22,
-    large: 26,
-  );
-
-  final padding = getResponsiveSize(
-    context,
-    small: 18,
-    medium: 28,
-    large: 35,
-  );
-
-  final currentPlayerIndex = gameState.currentPlayerIndex;
-  if (currentPlayerIndex < 0 || currentPlayerIndex >= gameState.players.length) {
-    return [];
-  }
-
-  final currentPlayer = gameState.players[currentPlayerIndex];
-  final activeChallenges = gameState.constantChallenges
-      .where((c) => c.targetPlayer.id == currentPlayer.id && c.startRound == gameState.currentRound)
-      .toList();
-  final activeChallenge = activeChallenges.isEmpty ? null : activeChallenges.last;
-
-  if (activeChallenge?.punishment == null) {
-    return [];
-  }
-
-  return [
-    const SizedBox(height: 7),
-    Container(
-      padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.red.withOpacity(0.4), width: 1.5),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.warning, color: Colors.red, size: iconSize),
-              const SizedBox(width: 8),
-              Text(
-                'CASTIGO',
-                style: TextStyle(color: Colors.red, fontSize: fontSize, fontWeight: FontWeight.bold, letterSpacing: 1),
-              ),
-            ],
-          ),
-          const SizedBox(height: 2),
-          Text(
-            activeChallenge!.punishment,
-            style: TextStyle(color: Colors.white, fontSize: fontSize, fontWeight: FontWeight.w500),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    ),
-  ];
 }

@@ -45,8 +45,12 @@ Widget buildEventContent(GameState gameState) {
         large: 35,
       );
 
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      final contentHeight = MediaQuery.of(context).size.height * 0.65;
+      return SizedBox(
+        height: contentHeight,
+        child: Center(
+        child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Event type indicator
           Container(
@@ -97,23 +101,23 @@ Widget buildEventContent(GameState gameState) {
 
           const SizedBox(height: 20),
 
-          // Global indicator
-          Text(
-            'TODOS LOS JUGADORES',
-            style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.w900,
-              color: Colors.white,
-              letterSpacing: 4,
-              shadows: const [
-                Shadow(color: Colors.black38, offset: Offset(3, 3), blurRadius: 6),
-                Shadow(color: Colors.cyan, offset: Offset(-1, -1), blurRadius: 3),
-              ],
+          if (!isEndingEvent)
+            Text(
+              'TODOS LOS JUGADORES',
+              style: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+                letterSpacing: 4,
+                shadows: const [
+                  Shadow(color: Colors.black38, offset: Offset(3, 3), blurRadius: 6),
+                  Shadow(color: Colors.cyan, offset: Offset(-1, -1), blurRadius: 3),
+                ],
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
 
-          SizedBox(height: 20),
+          if (!isEndingEvent) const SizedBox(height: 20),
 
           // Event container with cosmic styling
           TweenAnimationBuilder<double>(
@@ -189,6 +193,8 @@ Widget buildEventContent(GameState gameState) {
             },
           ),
         ],
+        ),
+        ),
       );
     },
   );
