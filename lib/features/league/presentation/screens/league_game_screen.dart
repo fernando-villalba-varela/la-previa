@@ -60,6 +60,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
   Timer? _toastTimer;
   Timer? _moreLikelyAutoOpenTimer;
   bool _ratingHintShown = false;
+  bool _showRatingHint = false;
   int _challengeCount = 0;
   bool _showTapHint = true;
 
@@ -176,27 +177,10 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
     _challengeCount++;
     if (_challengeCount == 1 && !_ratingHintShown && mounted) {
       _ratingHintShown = true;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            children: [
-              const Icon(Icons.thumb_up_alt_outlined, color: Colors.white, size: 16),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  lang.translate('rating_hint'),
-                  style: const TextStyle(color: Colors.white, fontSize: 13),
-                ),
-              ),
-            ],
-          ),
-          backgroundColor: const Color(0xFF1A1A2E),
-          duration: const Duration(seconds: 3),
-          behavior: SnackBarBehavior.floating,
-          margin: const EdgeInsets.only(bottom: 80, left: 16, right: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
-      );
+      setState(() => _showRatingHint = true);
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) setState(() => _showRatingHint = false);
+      });
     }
   }
 
@@ -288,31 +272,49 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
         widget.players.where((p) => selectedPlayerIds.contains(p.id)).toList();
     final drinksAmount = _viewModel.extractDrinks();
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => TiebreakerScreen(
-          tiedPlayers: tiedPlayers,
-          tiedScore: 0,
-          type: TiebreakerType.mvp,
-          isQuestionTiebreaker: true,
-          currentQuestion: _viewModel.currentChallenge,
-          drinksAmount: drinksAmount,
-          onTiebreakerResolved: (winnerPlayer, loserPlayer) {
-            Navigator.of(context).pop();
-            SystemChrome.setPreferredOrientations(
-                [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    // Cambiar orientación ANTES del push para que TiebreakerScreen
+    // aparezca ya en portrait y no haya frames de overlap con overflow
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-            if (_viewModel.shouldCountDrinks()) {
-              _viewModel.applyMoreLikelyQuestionDrinks([winnerPlayer.id]);
-            } else {
-              _viewModel.setShowingPlayerSelector(false);
-            }
+    final nav = Navigator.of(context);
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (!mounted) return;
+      nav.push(
+        PageRouteBuilder(
+          // Sin animación de transición: elimina el overlap de frames
+          // entre landscape y portrait que causaba el overflow
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+          pageBuilder: (context, anim, secAnim) => TiebreakerScreen(
+            tiedPlayers: tiedPlayers,
+            tiedScore: 0,
+            type: TiebreakerType.mvp,
+            isQuestionTiebreaker: true,
+            currentQuestion: _viewModel.currentChallenge,
+            drinksAmount: drinksAmount,
+            onTiebreakerResolved: (winnerPlayer, loserPlayer) {
+              // Cambiar a landscape y hacer pop instantáneo
+              SystemChrome.setPreferredOrientations(
+                  [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+              final nav2 = Navigator.of(context);
+              Future.delayed(const Duration(milliseconds: 100), () {
+                if (!mounted) return;
+                nav2.pop();
 
-            Future.delayed(const Duration(milliseconds: 500), _nextChallenge);
-          },
+                if (_viewModel.shouldCountDrinks()) {
+                  _viewModel.applyMoreLikelyQuestionDrinks([winnerPlayer.id]);
+                } else {
+                  _viewModel.setShowingPlayerSelector(false);
+                }
+
+                Future.delayed(const Duration(milliseconds: 500), _nextChallenge);
+              });
+            },
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   void _openActiveChallengesModal() {
@@ -340,12 +342,19 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Mientras el sistema no haya procesado el cambio a landscape,
+    // mostrar pantalla negra para evitar el frame con layout incorrecto
+    if (MediaQuery.of(context).orientation != Orientation.landscape) {
+      return const Scaffold(backgroundColor: Colors.black, body: SizedBox.expand());
+    }
+
     return ChangeNotifierProvider.value(
       value: _viewModel,
       child: SafeArea(
         child: Scaffold(
 
-          body: NeonBackgroundLayer(
+          body: ClipRect(
+            child: NeonBackgroundLayer(
             child: Stack(
               children: [
                 SafeArea(child: _buildGameContent()),
@@ -381,6 +390,34 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                 },
               ),
 
+              // Rating hint overlay
+              if (_showRatingHint)
+                Positioned(
+                  bottom: 12,
+                  left: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF1A1A2E),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.thumb_up_alt_outlined, color: Colors.white, size: 16),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            context.read<LanguageService>().translate('rating_hint'),
+                            style: const TextStyle(color: Colors.white, fontSize: 13),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
               // Orientation fade overlay
               if (_showOrientationOverlay)
                 Positioned.fill(
@@ -393,6 +430,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                 ),
               ],
             ),
+          ),
           ),
         ),
       ),

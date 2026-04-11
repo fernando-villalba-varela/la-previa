@@ -107,31 +107,6 @@ Widget buildConstantChallengeContent(GameState gameState) {
                       ),
                 child: Column(
                   children: [
-                    // Challenge text with star icon
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          isEndingChallenge ? Icons.check_circle : Icons.star,
-                          color: Colors.white.withOpacity(0.9),
-                          size: 28,
-                        ),
-                        const SizedBox(width: 10),
-                        Flexible(
-                          child: Text(
-                            isEndingChallenge ? 'RETO FINALIZADO' : 'RETO CONSTANTE',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15),
                     Text(
                       isEndingChallenge ? gameState.currentChallengeEnd!.endDescription : gameState.currentChallenge!,
                       textAlign: TextAlign.center,

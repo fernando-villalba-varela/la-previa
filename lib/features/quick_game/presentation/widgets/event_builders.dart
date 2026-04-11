@@ -157,43 +157,6 @@ Widget buildEventContent(GameState gameState) {
                             ),
                       child: Column(
                         children: [
-                          // Event description with cosmic styling
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.15),
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: (isEndingEvent ? Colors.purple : Colors.cyan).withOpacity(0.3),
-                                      blurRadius: 15,
-                                      spreadRadius: 2,
-                                    ),
-                                  ],
-                                ),
-                                child: Icon(
-                                  isEndingEvent ? Icons.auto_awesome : Icons.rocket_launch,
-                                  color: Colors.white,
-                                  size: 32,
-                                ),
-                              ),
-                              const SizedBox(width: 15),
-                              Text(
-                                isEndingEvent ? 'EVÉNTO FINAL' : 'EVENTO GLOBAL',
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.9),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w900,
-                                  letterSpacing: 2,
-                                  shadows: [Shadow(color: (isEndingEvent ? Colors.purple : Colors.cyan), blurRadius: 10)],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 25),
                           Center(
                             child: Text(
                               isEndingEvent ? gameState.currentEventEnd!.endDescription : gameState.currentChallenge!,

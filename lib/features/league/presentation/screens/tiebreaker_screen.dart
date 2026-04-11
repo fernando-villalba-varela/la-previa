@@ -113,6 +113,12 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
 
   @override
   Widget build(BuildContext context) {
+    // Mientras el sistema no haya procesado el cambio a portrait,
+    // mostrar pantalla negra para evitar el frame con layout incorrecto
+    if (MediaQuery.of(context).orientation != Orientation.portrait) {
+      return const Scaffold(backgroundColor: Colors.black, body: SizedBox.expand());
+    }
+
     final isMVP = widget.type == TiebreakerType.mvp;
 
     return Scaffold(
@@ -296,18 +302,6 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                               variant: DrinkaholicButtonVariant.primary,
                               fullWidth: false,
                               height: 52,
-                            )
-                          else if (_viewModel.isSpinning)
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 16,
-                                horizontal: 32,
-                              ),
-                              child: const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white,
-                                ),
-                              ),
                             ),
                           const SizedBox(height: 16),
                         ],
