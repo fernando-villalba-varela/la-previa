@@ -1,4 +1,4 @@
-﻿// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:io';
@@ -36,7 +36,11 @@ class AvatarService {
     return showDialog<String>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF00C9FF).withOpacity(.95),
+        backgroundColor: const Color(0xFF0B0B1A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        ),
         title: const Text('Elegir avatar', style: TextStyle(color: Colors.white)),
         content: SizedBox(
           width: double.maxFinite,
@@ -98,7 +102,10 @@ class AvatarService {
     final res = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF00C9FF).withOpacity(.95),
+        backgroundColor: const Color(0xFF0B0B1A),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: Colors.white.withOpacity(0.1))),
         title: Text(
           title,
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

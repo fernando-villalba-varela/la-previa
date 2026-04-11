@@ -168,28 +168,26 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                             const SizedBox(height: 32),
                           ] else ...[
                             if (widget.isQuestionTiebreaker) ...[
-                              ShaderMask(
-                                shaderCallback: (bounds) => LinearGradient(
-                                  colors: [
-                                    const Color(0xFF00FF00),
-                                    const Color(0xFF00CC00),
-                                    const Color(0xFF00FF00),
-                                  ],
-                                  stops: const [0.0, 0.5, 1.0],
-                                ).createShader(bounds),
-                                child: Text(
-                                  Provider.of<LanguageService>(
-                                    context,
-                                  ).translate('elf_chooses'),
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.2,
-                                  ),
-                                  textAlign: TextAlign.center,
+                               AnimatedBuilder(
+                                  animation: _colorAnimation,
+                                  builder: (context, child) {
+                                    final color = Color.lerp(
+                                      Colors.white,
+                                      const Color(0xFF00FF00),
+                                      _colorAnimation.value,
+                                    )!;
+                                    return Text(
+                                      Provider.of<LanguageService>(context).translate('elf_chooses'),
+                                      style: TextStyle(
+                                        color: color,
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.5,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    );
+                                  },
                                 ),
-                              ),
                             ] else ...[
                               Text(
                                 isMVP
@@ -248,7 +246,14 @@ class _TiebreakerScreenState extends State<TiebreakerScreen>
                                 horizontal: 16.0,
                               ),
                               child: Text(
-                                '${Provider.of<LanguageService>(context).translate('question_tiebreaker_result_1')} ${_viewModel.extractQuestionPart()}${Provider.of<LanguageService>(context).translate('question_tiebreaker_result_2')} ${_viewModel.getDrinksFromQuestion()} ${Provider.of<LanguageService>(context).translate('drinks_count_suffix')}!',
+                                Provider.of<LanguageService>(context).translate(
+                                  'tiebreaker_result_v2',
+                                  args: {
+                                    'name': _viewModel.winner!.nombre,
+                                    'drinks': _viewModel.getDrinksFromQuestion().toString(),
+                                    'suffix': Provider.of<LanguageService>(context).translate('drinks_count_suffix'),
+                                  },
+                                ),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

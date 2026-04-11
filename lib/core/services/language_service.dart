@@ -264,11 +264,18 @@ class LanguageService extends ChangeNotifier {
       'ratita_highlight': {'es': 'sois escoria', 'en': 'you are scum'},
       'spin_hint': {'es': 'Solo el Little Boy sabe tu destino...', 'en': 'Only the Little Boy knows your fate...'},
       'spinning_text': {'es': '¡Girando...!', 'en': 'Spinning...!'},
-      'elf_chooses': {'es': '🧙 El duende elige a... 🧙', 'en': '🧙 The goblin chooses... 🧙'},
+      'elf_chooses': {
+        'es': '⚖️ EL DUENDE HA HABLADO',
+        'en': '⚖️ THE GOBLIN HAS SPOKEN',
+      },
       'mvp_winner_msg': {'es': '¡Se te ha caido esto! -> 👑', 'en': 'You dropped this! -> 👑'},
       'ratita_winner_msg': {'es': '¡Ratitaa🐭🐭 (JAJA)!', 'en': 'Party Pooper! 🐭🐭 (HAHA)!'},
       'question_tiebreaker_result_1': {'es': 'El duende sabe que', 'en': 'The goblin knows that'},
       'question_tiebreaker_result_2': {'es': '... ¡Así que bebete los', 'en': '... So drink the'},
+      'tiebreaker_result_v2': {
+        'es': 'El duende también te ha señalado a ti {name}, ¡así que bébete {drinks} {suffix}!',
+        'en': 'The goblin also pointed at you {name}, so drink {drinks} {suffix}!',
+      },
       'confirm': {'es': 'Confirmar', 'en': 'Confirm'},
       'confirm_result': {'es': 'Confirmar Resultado', 'en': 'Confirm Result'},
       

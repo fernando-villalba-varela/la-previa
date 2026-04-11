@@ -79,12 +79,9 @@ class ParticipantsViewmodel extends ChangeNotifier {
         backgroundColor: Colors.transparent,
         child: Container(
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFF1E1E2E), Color(0xFF2A2A3E)],
-            ),
+            color: const Color(0xFF1E1E2E),
             borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Colors.white12, width: 1),
             boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 20, spreadRadius: 5)],
           ),
           child: Column(
@@ -94,12 +91,12 @@ class ParticipantsViewmodel extends ChangeNotifier {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: const BoxDecoration(
-                  gradient: LinearGradient(colors: [Color(0xFF00C9FF), Color(0xFF92FE9D)]),
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+                  color: Color(0xFF0B0B1A),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(23), topRight: Radius.circular(23)),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.person, color: Colors.white, size: 24),
+                    const Icon(Icons.person, color: Colors.white70, size: 24),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
@@ -230,12 +227,12 @@ class ParticipantsViewmodel extends ChangeNotifier {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: [Color(0xFF00C9FF), Color(0xFF92FE9D)]),
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+                      color: Color(0xFF0B0B1A),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(23), topRight: Radius.circular(23)),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.face, color: Colors.white, size: 24),
+                        const Icon(Icons.face, color: Colors.white70, size: 24),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -247,8 +244,8 @@ class ParticipantsViewmodel extends ChangeNotifier {
                           onTap: () => Navigator.of(context).pop(),
                           child: Container(
                             padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
-                            child: const Icon(Icons.close, color: Colors.white, size: 18),
+                            decoration: BoxDecoration(color: Colors.white.withOpacity(0.1), shape: BoxShape.circle),
+                            child: const Icon(Icons.close, color: Colors.white70, size: 18),
                           ),
                         ),
                       ],
@@ -378,8 +375,11 @@ class ParticipantsViewmodel extends ChangeNotifier {
     showDialog(
       context: context!,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF00C9FF).withOpacity(0.95),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: const Color(0xFF0B0B1A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        ),
         title: Text(
           '${Provider.of<LanguageService>(context, listen: false).translate('confirm_delete_photo_content')} ${_players[index].nombre}?',
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -406,8 +406,11 @@ class ParticipantsViewmodel extends ChangeNotifier {
     showDialog(
       context: context!,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF00C9FF).withOpacity(0.95),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: const Color(0xFF0B0B1A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        ),
         title: Text(
           '${Provider.of<LanguageService>(context, listen: false).translate('confirm_delete_player_content')} ${_players[index].nombre}?',
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

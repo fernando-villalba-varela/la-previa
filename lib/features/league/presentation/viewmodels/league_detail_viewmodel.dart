@@ -119,10 +119,10 @@ class LeagueDetailViewModel extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1A1A2E), // Dark neon aesthetic
+        backgroundColor: const Color(0xFF0B0B1A),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Color(0xFF00C9FF), width: 1.5),
+          side: BorderSide(color: Colors.white.withOpacity(0.1)),
         ),
         title: Text(
           Provider.of<LanguageService>(context, listen: false).translate('avatar_photo_title'),
@@ -189,10 +189,10 @@ class LeagueDetailViewModel extends ChangeNotifier {
         // ignore: use_build_context_synchronously
         context: context,
         builder: (_) => AlertDialog(
-          backgroundColor: const Color(0xFF1A1A2E), // Dark neon aesthetic
+          backgroundColor: const Color(0xFF0B0B1A),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(color: Color(0xFF00C9FF), width: 1.5),
+            side: BorderSide(color: Colors.white.withOpacity(0.1)),
           ),
           title: Text(
             Provider.of<LanguageService>(context, listen: false).translate('choose_avatar_dialog_title'),
@@ -317,6 +317,11 @@ class LeagueDetailViewModel extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFF0B0B1A),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        ),
         title: Text(Provider.of<LanguageService>(context, listen: false).translate('delete_player_title')),
         content: Text(Provider.of<LanguageService>(context, listen: false).translate('confirm_delete_player_dialog_content')),
         actions: [
