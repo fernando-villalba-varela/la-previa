@@ -4,12 +4,11 @@
       "id": "multiplier_drinks",
       "type": "multiplier",
       "title": "Double Drinks",
-      "template": "EVENT: ✖️ All drinks count x{MULTIPLIER} while this event lasts",
+      "template": "✖️ All drinks count x{MULTIPLIER} while this event lasts",
       "endTemplate": "The drink multiplier has ended. All drinks return to normal value.",
       "variables": {
         "MULTIPLIER": [
-          "2",
-          "3"
+          "2"
         ]
       },
       "categoria": "Multipliers",
@@ -23,7 +22,7 @@
       "id": "no_phones",
       "type": "global_rule",
       "title": "No Phone Zone",
-      "template": "EVENT: 🌐 No one can use their phone while this event lasts. If someone uses it, they drink {PUNISHMENT}",
+      "template": "🌐 No one can use their phone while this event lasts. If someone uses it, they drink {PUNISHMENT}",
       "endTemplate": "The no phone zone has ended. You can use your devices freely.",
       "variables": {
         "PUNISHMENT": [
@@ -40,7 +39,7 @@
       "id": "group_punishment",
       "type": "global_rule",
       "title": "Group Punishment",
-      "template": "EVENT: 🌐 While this event lasts, if someone fails a challenge, EVERYONE drinks {DRINKS}",
+      "template": "🌐 While this event lasts, if someone fails a challenge, EVERYONE drinks {DRINKS}",
       "endTemplate": "Group punishment has ended. Mistakes are individual again.",
       "variables": {
         "DRINKS": [
@@ -57,7 +56,7 @@
       "id": "fast_mode",
       "type": "special_condition",
       "title": "Fast Mode",
-      "template": "EVENT: ⭐ While this event lasts, you only have {SECONDS} seconds to answer or complete each challenge. Failure = {PUNISHMENT} drinks",
+      "template": "⭐ While this event lasts, you only have {SECONDS} seconds to answer or complete each challenge. Failure = {PUNISHMENT} drinks",
       "endTemplate": "Fast mode has ended. No more time limit.",
       "variables": {
         "SECONDS": [
@@ -78,7 +77,7 @@
       "id": "compliment_mode",
       "type": "global_rule",
       "title": "Compliment Mode",
-      "template": "EVENT: 🌐 Before every drink while this event lasts, you must compliment another player. If you don't, drink {PUNISHMENT} extra sips",
+      "template": "🌐 Before every drink while this event lasts, you must compliment another player. If you don't, drink {PUNISHMENT} extra sips",
       "endTemplate": "Compliment mode has ended. You can drink without mandatory compliments.",
       "variables": {
         "PUNISHMENT": [
@@ -95,7 +94,7 @@
       "id": "silent_mode",
       "type": "global_rule",
       "title": "Silent Mode",
-      "template": "EVENT: 🌐 While this event lasts, communication is gestures only. Talking = {PUNISHMENT} drinks",
+      "template": "🌐 While this event lasts, communication is gestures only. Talking = {PUNISHMENT} drinks",
       "endTemplate": "Silent mode has ended. You can speak normally.",
       "variables": {
         "PUNISHMENT": [
@@ -112,7 +111,7 @@
       "id": "dance_break",
       "type": "special_condition",
       "title": "Dance Break",
-      "template": "EVENT: ⭐ Every time someone drinks while this event lasts, they must dance for {SECONDS} seconds. No dance = {PUNISHMENT} extra drinks",
+      "template": "⭐ Every time someone drinks while this event lasts, they must dance for {SECONDS} seconds. No dance = {PUNISHMENT} extra drinks",
       "endTemplate": "Dance break has ended. You can drink without dancing.",
       "variables": {
         "SECONDS": [
@@ -134,7 +133,7 @@
       "id": "truth_hour",
       "type": "global_rule",
       "title": "Truth Hour",
-      "template": "EVENT: 🌐 While this event lasts, all questions must be answered with total honesty. Lying = {PUNISHMENT} drinks",
+      "template": "🌐 While this event lasts, all questions must be answered with total honesty. Lying = {PUNISHMENT} drinks",
       "endTemplate": "Truth hour has ended. You can be creative with your answers again.",
       "variables": {
         "PUNISHMENT": [
@@ -151,7 +150,7 @@
       "id": "left_hand_only",
       "type": "global_rule",
       "title": "Left Hand Only",
-      "template": "EVENT: 🌐 While this event lasts, you can only use your left hand to drink. Using the right hand = {PUNISHMENT} drinks",
+      "template": "🌐 While this event lasts, you can only use your left hand to drink. Using the right hand = {PUNISHMENT} drinks",
       "endTemplate": "Left hand event has ended. You can use both hands.",
       "variables": {
         "PUNISHMENT": [
@@ -168,7 +167,7 @@
       "id": "memory_chain",
       "type": "special_condition",
       "title": "Memory Chain",
-      "template": "EVENT: ⭐ While this event lasts, you must recall and repeat all previous challenges before doing yours. If you forget, drink {PUNISHMENT}",
+      "template": "⭐ While this event lasts, you must recall and repeat all previous challenges before doing yours. If you forget, drink {PUNISHMENT}",
       "endTemplate": "Memory chain has ended. You no longer need to remember previous challenges.",
       "variables": {
         "PUNISHMENT": [
@@ -185,7 +184,7 @@
       "id": "triple_trouble",
       "type": "multiplier",
       "title": "Triple Trouble",
-      "template": "EVENT: ✖️ All punishments and drinks count x{MULTIPLIER} while this event lasts. If you complain, drink {PUNISHMENT} extra sips",
+      "template": "✖️ All punishments and drinks count x{MULTIPLIER} while this event lasts. If you complain, drink {PUNISHMENT} extra sips",
       "endTemplate": "Drink multiplier has ended. Punishments return to normal.",
       "variables": {
         "MULTIPLIER": [
@@ -207,7 +206,7 @@
       "id": "accent_challenge",
       "type": "global_rule",
       "title": "Accent Challenge",
-      "template": "EVENT: 🌐 While this event lasts, everyone must speak with a {ACCENT} accent. If you speak normally, drink {PUNISHMENT}",
+      "template": "🌐 While this event lasts, everyone must speak with a {ACCENT} accent. If you speak normally, drink {PUNISHMENT}",
       "endTemplate": "Accent challenge has ended. You can speak with your normal accent.",
       "variables": {
         "ACCENT": [
@@ -237,7 +236,7 @@
       "id": "rhyme_time",
       "type": "special_condition",
       "title": "Rhyme Time",
-      "template": "EVENT: ⭐ While this event lasts, all answers must rhyme with the word '{WORD}'. If they don't rhyme, drink {PUNISHMENT}",
+      "template": "⭐ While this event lasts, all answers must rhyme with the word '{WORD}'. If they don't rhyme, drink {PUNISHMENT}",
       "endTemplate": "Rhyme time has ended. You no longer need to rhyme your answers.",
       "variables": {
         "WORD": [
@@ -261,7 +260,7 @@
       "id": "no_pointing",
       "type": "global_rule",
       "title": "No Pointing",
-      "template": "EVENT: 🌐 While this event lasts, pointing with your finger is forbidden. If someone points, they drink {PUNISHMENT}",
+      "template": "🌐 While this event lasts, pointing with your finger is forbidden. If someone points, they drink {PUNISHMENT}",
       "endTemplate": "You can point normally again.",
       "variables": {
         "PUNISHMENT": [
@@ -278,7 +277,7 @@
       "id": "no_proper_names",
       "type": "global_rule",
       "title": "No Proper Names",
-      "template": "EVENT: 🌐 While this event lasts, saying proper names is forbidden. If someone does, they drink {PUNISHMENT}",
+      "template": "🌐 While this event lasts, saying proper names is forbidden. If someone does, they drink {PUNISHMENT}",
       "endTemplate": "No proper names event has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -296,7 +295,7 @@
       "id": "whisper_only",
       "type": "global_rule",
       "title": "Whisper Only",
-      "template": "EVENT: 🌐 While this event lasts, you can only whisper. Speaking loudly = {PUNISHMENT} drinks",
+      "template": "🌐 While this event lasts, you can only whisper. Speaking loudly = {PUNISHMENT} drinks",
       "endTemplate": "Whisper only event has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -313,7 +312,7 @@
       "id": "freeze_tag",
       "type": "global_rule",
       "title": "Freeze Tag",
-      "template": "EVENT: 🌐 When someone shouts 'Freeze!', everyone must stay still for 5 seconds. Whoever moves drinks {PUNISHMENT}",
+      "template": "🌐 When someone shouts 'Freeze!', everyone must stay still for 5 seconds. Whoever moves drinks {PUNISHMENT}",
       "endTemplate": "Freeze tag game has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -331,7 +330,7 @@
       "id": "ultra_fast_mode",
       "type": "special_condition",
       "title": "Ultra Fast Mode",
-      "template": "EVENT: ⭐ Only {SECONDS} seconds to complete or answer. Failure = {PUNISHMENT} drinks",
+      "template": "⭐ Only {SECONDS} seconds to complete or answer. Failure = {PUNISHMENT} drinks",
       "endTemplate": "Ultra fast mode has ended.",
       "variables": {
         "SECONDS": [
@@ -353,7 +352,7 @@
       "id": "burst_triple_short",
       "type": "multiplier",
       "title": "Triple Burst",
-      "template": "EVENT: ✖️ During this event, all drinks count x{MULTIPLIER}",
+      "template": "✖️ During this event, all drinks count x{MULTIPLIER}",
       "endTemplate": "Drink multiplier has ended.",
       "variables": {
         "MULTIPLIER": [
@@ -371,7 +370,7 @@
       "id": "heavy_penalties",
       "type": "global_rule",
       "title": "Heavy Penalties",
-      "template": "EVENT: 🌐 While this event lasts, each mistake is penalized with {PUNISHMENT} drinks",
+      "template": "🌐 While this event lasts, each mistake is penalized with {PUNISHMENT} drinks",
       "endTemplate": "Penalties return to normal.",
       "variables": {
         "PUNISHMENT": [
@@ -389,7 +388,7 @@
       "id": "mano_contraria",
       "type": "global_rule",
       "title": "Opposite Hand",
-      "template": "EVENT: 🌐 While this event lasts, you must drink with your opposite hand. Using the usual hand = {PUNISHMENT} drinks",
+      "template": "🌐 While this event lasts, you must drink with your opposite hand. Using the usual hand = {PUNISHMENT} drinks",
       "endTemplate": "Hand event has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -406,7 +405,7 @@
       "id": "viking_mode",
       "type": "global_rule",
       "title": "Viking Mode",
-      "template": "EVENT: 🛡️ SKOL! Everyone must shout 'SKOL!' before drinking any sip. If you forget to shout, drink {PUNISHMENT} extra sips.",
+      "template": "🛡️ SKOL! Everyone must shout 'SKOL!' before drinking any sip. If you forget to shout, drink {PUNISHMENT} extra sips.",
       "endTemplate": "Viking mode has ended. You can drink in silence again.",
       "variables": {
         "PUNISHMENT": [
@@ -423,7 +422,7 @@
       "id": "t_rex_mode",
       "type": "restriction",
       "title": "T-Rex Mode",
-      "template": "EVENT: 🦖 T-Rex Arms: You must drink with your elbows glued to your body. If you detach your elbows, drink {PUNISHMENT} sips.",
+      "template": "🦖 T-Rex Arms: You must drink with your elbows glued to your body. If you detach your elbows, drink {PUNISHMENT} sips.",
       "endTemplate": "T-Rex mode has ended. Stretch those arms.",
       "variables": {
         "PUNISHMENT": [
@@ -440,7 +439,7 @@
       "id": "pinky_up",
       "type": "global_rule",
       "title": "Pure Elegance",
-      "template": "EVENT: 🍷 Mandatory Elegance: Everyone must drink with their pinky finger up. If not, drink {PUNISHMENT} sips for lack of class.",
+      "template": "🍷 Mandatory Elegance: Everyone must drink with their pinky finger up. If not, drink {PUNISHMENT} sips for lack of class.",
       "endTemplate": "Mandatory elegance has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -457,7 +456,7 @@
       "id": "no_teeth",
       "type": "global_rule",
       "title": "No Teeth",
-      "template": "EVENT: 🦷 No teeth showing: If someone laughs or talks showing their teeth, they drink {PUNISHMENT} sips.",
+      "template": "🦷 No teeth showing: If someone laughs or talks showing their teeth, they drink {PUNISHMENT} sips.",
       "endTemplate": "You can show your teeth again.",
       "variables": {
         "PUNISHMENT": [
@@ -474,7 +473,7 @@
       "id": "forbidden_word_si",
       "type": "global_rule",
       "title": "Forbidden Word: Yes",
-      "template": "EVENT: 🚫 You cannot say the word 'Yes' (or variants like 'yep', 'yeah'). Whoever says it drinks {PUNISHMENT} sips.",
+      "template": "🚫 You cannot say the word 'Yes' (or variants like 'yep', 'yeah'). Whoever says it drinks {PUNISHMENT} sips.",
       "endTemplate": "You can say Yes again.",
       "variables": {
         "PUNISHMENT": [
@@ -491,7 +490,7 @@
       "id": "forbidden_word_no",
       "type": "global_rule",
       "title": "Forbidden Word: No",
-      "template": "EVENT: 🚫 You cannot say the word 'No' (or variants like 'nope', 'nah'). Whoever says it drinks {PUNISHMENT} sips.",
+      "template": "🚫 You cannot say the word 'No' (or variants like 'nope', 'nah'). Whoever says it drinks {PUNISHMENT} sips.",
       "endTemplate": "You can say No again.",
       "variables": {
         "PUNISHMENT": [
@@ -508,7 +507,7 @@
       "id": "nicknames_only",
       "type": "global_rule",
       "title": "Nicknames Only",
-      "template": "EVENT: 🏷️ Real names are forbidden. You must invent nicknames or use existing ones. Using a real name = {PUNISHMENT} drinks.",
+      "template": "🏷️ Real names are forbidden. You must invent nicknames or use existing ones. Using a real name = {PUNISHMENT} drinks.",
       "endTemplate": "You can use real names again.",
       "variables": {
         "PUNISHMENT": [
@@ -525,7 +524,7 @@
       "id": "questions_only",
       "type": "global_rule",
       "title": "Questions Only",
-      "template": "EVENT: ❓ Everything you say must be a question. Understood? Whoever makes a statement drinks {PUNISHMENT} sips.",
+      "template": "❓ Everything you say must be a question. Understood? Whoever makes a statement drinks {PUNISHMENT} sips.",
       "endTemplate": "Questions only mode has ended. Or has it?",
       "variables": {
         "PUNISHMENT": [
@@ -542,7 +541,7 @@
       "id": "royal_protocol",
       "type": "global_rule",
       "title": "Royal Protocol",
-      "template": "EVENT: 👑 You must refer to others as 'My Lord' or 'My Lady'. If you forget the protocol, drink {PUNISHMENT} sips.",
+      "template": "👑 You must refer to others as 'My Lord' or 'My Lady'. If you forget the protocol, drink {PUNISHMENT} sips.",
       "endTemplate": "Royal protocol has ended, peasants.",
       "variables": {
         "PUNISHMENT": [
@@ -559,7 +558,7 @@
       "id": "invisible_green_man",
       "type": "global_rule",
       "title": "The Little Green Man",
-      "template": "EVENT: 👽 You have an imaginary little green man on the rim of your glass. You must remove him before drinking and put him back after. If you squash him (forget the gesture), drink {PUNISHMENT} sips.",
+      "template": "👽 You have an imaginary little green man on the rim of your glass. You must remove him before drinking and put him back after. If you squash him (forget the gesture), drink {PUNISHMENT} sips.",
       "endTemplate": "The little green man is gone.",
       "variables": {
         "PUNISHMENT": [
@@ -576,7 +575,7 @@
       "id": "self_narration",
       "type": "global_rule",
       "title": "Omniscient Narrator",
-      "template": "EVENT: 🎙️ You must narrate your own drinking action. Example: 'And now, [Name] proceeds to drink their sip'. if you don't narrate, drink {PUNISHMENT} extra sips.",
+      "template": "🎙️ You must narrate your own drinking action. Example: 'And now, [Name] proceeds to drink their sip'. if you don't narrate, drink {PUNISHMENT} extra sips.",
       "endTemplate": "End of narration.",
       "variables": {
         "PUNISHMENT": [
@@ -593,7 +592,7 @@
       "id": "double_tap",
       "type": "global_rule",
       "title": "Double Tap",
-      "template": "EVENT: 👆 You must tap twice on the table or your glass before drinking. If you forget the double tap, drink {PUNISHMENT} extra sips.",
+      "template": "👆 You must tap twice on the table or your glass before drinking. If you forget the double tap, drink {PUNISHMENT} extra sips.",
       "endTemplate": "No need to double tap anymore.",
       "variables": {
         "PUNISHMENT": [
@@ -610,7 +609,7 @@
       "id": "hydration_hero",
       "type": "global_rule",
       "title": "Hydration Hero",
-      "template": "EVENT: 💧 For every sip of alcohol, you must drink a sip of water. It's for your own good. If not, drink {PUNISHMENT} extra sips of alcohol.",
+      "template": "💧 For every sip of alcohol, you must drink a sip of water. It's for your own good. If not, drink {PUNISHMENT} extra sips of alcohol.",
       "endTemplate": "End of mandatory hydration.",
       "variables": {
         "PUNISHMENT": [
@@ -627,7 +626,7 @@
       "id": "silent_laugh",
       "type": "global_rule",
       "title": "Silent Laugh",
-      "template": "EVENT: 🤐 If you laugh, it must be without making any sound. If your laugh is heard, drink {PUNISHMENT} sips.",
+      "template": "🤐 If you laugh, it must be without making any sound. If your laugh is heard, drink {PUNISHMENT} sips.",
       "endTemplate": "You can laugh out loud again.",
       "variables": {
         "PUNISHMENT": [
@@ -644,7 +643,7 @@
       "id": "no_first_person",
       "type": "global_rule",
       "title": "No First Person",
-      "template": "EVENT: 🚫 Forbidden to say 'I', 'Me', 'My', 'Mine'. You must speak about yourself in the third person. Failure = {PUNISHMENT} drinks.",
+      "template": "🚫 Forbidden to say 'I', 'Me', 'My', 'Mine'. You must speak about yourself in the third person. Failure = {PUNISHMENT} drinks.",
       "endTemplate": "You can be self-centered again.",
       "variables": {
         "PUNISHMENT": [
@@ -661,7 +660,7 @@
       "id": "animal_instincts",
       "type": "global_rule",
       "title": "Animal Instincts",
-      "template": "EVENT: 🐾 Before every drink, you must make an animal sound (different each time if possible). If you forget, drink {PUNISHMENT} extra sips.",
+      "template": "🐾 Before every drink, you must make an animal sound (different each time if possible). If you forget, drink {PUNISHMENT} extra sips.",
       "endTemplate": "The zoo is closed.",
       "variables": {
         "PUNISHMENT": [
@@ -677,7 +676,7 @@
       "id": "robot_mode",
       "type": "global_rule",
       "title": "Robot Mode",
-      "template": "EVENT: 🤖 Everyone must move and talk like robots. Beep boop. Whoever acts human drinks {PUNISHMENT} sips.",
+      "template": "🤖 Everyone must move and talk like robots. Beep boop. Whoever acts human drinks {PUNISHMENT} sips.",
       "endTemplate": "Human systems restored.",
       "variables": {
         "PUNISHMENT": [
@@ -694,7 +693,7 @@
       "id": "slow_motion",
       "type": "global_rule",
       "title": "Slow Motion",
-      "template": "EVENT: 🐌 drinking action must be done in exaggerated slow motion. If drank at normal speed, drink {PUNISHMENT} extra sips.",
+      "template": "🐌 drinking action must be done in exaggerated slow motion. If drank at normal speed, drink {PUNISHMENT} extra sips.",
       "endTemplate": "Normal speed restored.",
       "variables": {
         "PUNISHMENT": [
@@ -710,7 +709,7 @@
       "id": "opera_singer",
       "type": "global_rule",
       "title": "Opera Singer",
-      "template": "EVENT: 🎵 Everything you say must be sung (opera or musical style). Talking normally is forbidden. Failure = {PUNISHMENT} drinks.",
+      "template": "🎵 Everything you say must be sung (opera or musical style). Talking normally is forbidden. Failure = {PUNISHMENT} drinks.",
       "endTemplate": "The musical has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -727,7 +726,7 @@
       "id": "confession_booth",
       "type": "global_rule",
       "title": "Confession Booth",
-      "template": "EVENT: 🙏 Before speaking, you must start the sentence with 'Forgive me father...'. If you forget to confess, drink {PUNISHMENT} sips.",
+      "template": "🙏 Before speaking, you must start the sentence with 'Forgive me father...'. If you forget to confess, drink {PUNISHMENT} sips.",
       "endTemplate": "You are absolved from the event.",
       "variables": {
         "PUNISHMENT": [
@@ -744,7 +743,7 @@
       "id": "paranoid_mode",
       "type": "global_rule",
       "title": "Paranoid Mode",
-      "template": "EVENT: 👀 You must look over your shoulder (or to the sides) as if someone is chasing you before drinking. If you don't show paranoia, drink {PUNISHMENT} sips.",
+      "template": "👀 You must look over your shoulder (or to the sides) as if someone is chasing you before drinking. If you don't show paranoia, drink {PUNISHMENT} sips.",
       "endTemplate": "You are safe now.",
       "variables": {
         "PUNISHMENT": [
@@ -761,7 +760,7 @@
       "id": "salesman_mode",
       "type": "global_rule",
       "title": "The Salesman",
-      "template": "EVENT: 💼 Before drinking, you must 'sell' your drink to the group with a short advertising slogan. No sale, no drink (well, drink {PUNISHMENT} as punishment).",
+      "template": "💼 Before drinking, you must 'sell' your drink to the group with a short advertising slogan. No sale, no drink (well, drink {PUNISHMENT} as punishment).",
       "endTemplate": "Infomercial is over.",
       "variables": {
         "PUNISHMENT": [
@@ -777,7 +776,7 @@
       "id": "politician_mode",
       "type": "global_rule",
       "title": "The Politician",
-      "template": "EVENT: 🗳️ You must end every sentence with '...and that's why you should vote for me'. If you forget your slogan, drink {PUNISHMENT} sips.",
+      "template": "🗳️ You must end every sentence with '...and that's why you should vote for me'. If you forget your slogan, drink {PUNISHMENT} sips.",
       "endTemplate": "Elections are over.",
       "variables": {
         "PUNISHMENT": [
@@ -794,7 +793,7 @@
       "id": "yoga_master",
       "type": "global_rule",
       "title": "Yoga Master",
-      "template": "EVENT: 🧘 You must drink while holding a simple yoga pose (or stretch). If you drink sitting normally, drink {PUNISHMENT} extra sips.",
+      "template": "🧘 You must drink while holding a simple yoga pose (or stretch). If you drink sitting normally, drink {PUNISHMENT} extra sips.",
       "endTemplate": "Namaste. Event has ended.",
       "variables": {
         "PUNISHMENT": [
@@ -811,7 +810,7 @@
       "id": "history_buff",
       "type": "global_rule",
       "title": "The Historian",
-      "template": "EVENT: 📜 Before drinking, you must state a historical fact (real or invented, but must sound credible). If not, drink {PUNISHMENT} extra sips.",
+      "template": "📜 Before drinking, you must state a historical fact (real or invented, but must sound credible). If not, drink {PUNISHMENT} extra sips.",
       "endTemplate": "History class is dismissed.",
       "variables": {
         "PUNISHMENT": [

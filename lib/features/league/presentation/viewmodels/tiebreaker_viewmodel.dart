@@ -41,14 +41,14 @@ class TiebreakerViewModel extends ChangeNotifier {
 
   void _initializeFixedColors() {
     _fixedColors = [
-      Colors.red.withOpacity(0.7),
-      Colors.blue.withOpacity(0.7),
-      Colors.green.withOpacity(0.7),
-      Colors.orange.withOpacity(0.7),
-      Colors.purple.withOpacity(0.7),
-      Colors.pink.withOpacity(0.7),
-      Colors.teal.withOpacity(0.7),
-      Colors.amber.withOpacity(0.7),
+      const Color(0xFFFF0055),  // magenta app
+      const Color(0xFF00C9FF),  // cyan app
+      const Color(0xFF8B5CF6),  // violeta
+      const Color(0xFFF59E0B),  // ámbar
+      const Color(0xFF10B981),  // esmeralda
+      const Color(0xFFEC4899),  // rosa
+      const Color(0xFF06B6D4),  // teal claro
+      const Color(0xFFEF4444),  // rojo suave
     ];
   }
 
@@ -84,7 +84,16 @@ class TiebreakerViewModel extends ChangeNotifier {
     SystemSound.play(SystemSoundType.click);
 
     final random = Random();
-    final randomAngle = random.nextDouble() * 2 * pi;
+    
+    // 1. Elegir ganador primero en código
+    final playerCount = tiedPlayers.length;
+    final winnerIndex = random.nextInt(playerCount);
+    
+    // 2. Calcular ángulo que caiga siempre en su porción (evitando bordes)
+    final anglePerSection = (2 * pi) / playerCount;
+    final offsetWithinSlice = anglePerSection * (0.2 + 0.6 * random.nextDouble());
+    final randomAngle = (winnerIndex * anglePerSection) + offsetWithinSlice;
+
     final extraSpins = 4 + random.nextInt(4);
     _finalBottleAngle = randomAngle + (extraSpins * 2 * pi);
 

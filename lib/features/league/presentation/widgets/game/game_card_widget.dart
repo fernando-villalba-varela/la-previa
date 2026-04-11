@@ -32,8 +32,9 @@ class GameCard extends StatelessWidget {
   final GameState gameState;
   final bool showPlayerSelector;
   final Function(List<int>)? onPlayersSelected;
+  final bool showTapHint;
 
-  const GameCard({super.key, required this.gameState, this.showPlayerSelector = false, this.onPlayersSelected});
+  const GameCard({super.key, required this.gameState, this.showPlayerSelector = false, this.onPlayersSelected, this.showTapHint = true});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class GameCard extends StatelessWidget {
                   if (showPlayerSelector && onPlayersSelected != null && gameState.players.isNotEmpty)
                     _buildPlayerSelectionButtons(gameState.players, onPlayersSelected!),
                   // Tap indicator (only show at the beginning AND when NOT showing player selector)
-                  if (!gameState.gameStarted && !showPlayerSelector)
+                  if (!gameState.gameStarted && !showPlayerSelector && showTapHint)
                     AnimatedBuilder(
                       animation: gameState.glowAnimation,
                       builder: (context, child) {

@@ -32,72 +32,127 @@ class SpinWheelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 280,
-      height: 280,
+      width: 290,
+      height: 290,
       child: Stack(
         alignment: Alignment.center,
         children: [
+          // Rueda
           SizedBox(
-            width: 260,
-            height: 260,
-            child: CustomPaint(
-              painter: WheelPainter(
-                players: players,
-                winner: winner,
-                isMVP: isMVP,
-                hasSpun: hasSpun,
-                fixedColors: fixedColors,
-                playerImages: playerImages,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: (isSpinning || hasSpun) ? null : onSpinTap,
+            width: 270,
+            height: 270,
             child: AnimatedBuilder(
               animation: spinAnimation,
               builder: (context, child) {
                 final angle = hasSpun ? finalBottleAngle : spinAnimation.value;
                 return Transform.rotate(
                   angle: angle,
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.brown.withOpacity(0.8),
-                      border: Border.all(color: Colors.brown, width: 2),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        const Icon(Icons.local_drink, color: Colors.white, size: 30),
-                        Positioned(
-                          top: 8,
-                          child: Container(
-                            width: 4,
-                            height: 15,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                        ),
-                      ],
+                  child: CustomPaint(
+                    painter: WheelPainter(
+                      players: players,
+                      winner: winner,
+                      isMVP: isMVP,
+                      hasSpun: hasSpun,
+                      fixedColors: fixedColors,
+                      playerImages: playerImages,
                     ),
                   ),
                 );
               },
             ),
           ),
+
+          // Indicador fijo (triángulo apuntando hacia abajo en el centro-top)
+          Positioned(
+            top: 0,
+            child: CustomPaint(
+              size: const Size(20, 16),
+              painter: _TrianglePainter(),
+            ),
+          ),
+
+          // Botón central
+          GestureDetector(
+            onTap: (isSpinning || hasSpun) ? null : onSpinTap,
+            child: Container(
+              width: 68,
+              height: 68,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF12121E),
+                border: Border.all(
+                  color: (isSpinning || hasSpun)
+                      ? Colors.white.withOpacity(0.15)
+                      : const Color(0xFF00C9FF).withOpacity(0.8),
+                  width: 2,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: (isSpinning || hasSpun)
+                        ? Colors.black.withOpacity(0.3)
+                        : const Color(0xFF00C9FF).withOpacity(0.35),
+                    blurRadius: 16,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: isSpinning
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        ),
+                      )
+                    : hasSpun
+                        ? const Icon(Icons.check, color: Colors.white, size: 28)
+                        : Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.touch_app,
+                                color: Colors.white.withOpacity(0.9),
+                                size: 22,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'GIRAR',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontSize: 8,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ],
+                          ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+}
+
+class _TrianglePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white.withOpacity(0.9)
+      ..style = PaintingStyle.fill;
+
+    final path = Path()
+      ..moveTo(size.width / 2, size.height)
+      ..lineTo(0, 0)
+      ..lineTo(size.width, 0)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

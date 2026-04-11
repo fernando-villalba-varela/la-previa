@@ -72,41 +72,96 @@ class ParticipantsViewmodel extends ChangeNotifier {
   }
 
   void showAvatarOptions(int index) {
+    final lang = Provider.of<LanguageService>(context!, listen: false);
     showDialog(
       context: context!,
-      builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF00C9FF).withOpacity(0.95),
-        title: Text(
-          '${Provider.of<LanguageService>(context, listen: false).translate('select_avatar_title')} ${_players[index].nombre}',
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF1E1E2E), Color(0xFF2A2A3E)],
+            ),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 20, spreadRadius: 5)],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [Color(0xFF00C9FF), Color(0xFF92FE9D)]),
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.person, color: Colors.white, size: 24),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        '${lang.translate('select_avatar_title')} ${_players[index].nombre}',
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Opciones
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    _buildAvatarOption(
+                      context: context,
+                      icon: Icons.collections,
+                      label: lang.translate('choose_avatar_option'),
+                      onTap: () { Navigator.of(context).pop(); chooseAvatar(index); },
+                    ),
+                    const SizedBox(height: 8),
+                    _buildAvatarOption(
+                      context: context,
+                      icon: Icons.camera_alt,
+                      label: lang.translate('take_photo_option'),
+                      onTap: () { Navigator.of(context).pop(); pickImage(index); },
+                    ),
+                    const SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Text(lang.translate('cancel'), style: const TextStyle(color: Colors.white54, fontSize: 14)),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
+      ),
+    );
+  }
+
+  Widget _buildAvatarOption({required BuildContext context, required IconData icon, required String label, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        decoration: BoxDecoration(
+          color: const Color(0xFF3A3A4E),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
+        ),
+        child: Row(
           children: [
-            ListTile(
-              leading: const Icon(Icons.collections, color: Colors.white),
-              title: Text(Provider.of<LanguageService>(context, listen: false).translate('choose_avatar_option'), style: const TextStyle(color: Colors.white)),
-              onTap: () {
-                Navigator.of(context).pop();
-                chooseAvatar(index);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.camera_alt, color: Colors.white),
-              title: Text(Provider.of<LanguageService>(context, listen: false).translate('take_photo_option'), style: const TextStyle(color: Colors.white)),
-              onTap: () {
-                Navigator.of(context).pop();
-                pickImage(index);
-              },
-            ),
+            Icon(icon, color: const Color(0xFF00C9FF), size: 22),
+            const SizedBox(width: 14),
+            Text(label, style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500)),
+            const Spacer(),
+            Icon(Icons.arrow_forward_ios, color: Colors.white.withOpacity(0.3), size: 14),
           ],
         ),
-        actions: [
-          TextButton(
-            child: Text(Provider.of<LanguageService>(context, listen: false).translate('cancel'), style: const TextStyle(color: Colors.white70)),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ],
       ),
     );
   }
@@ -152,93 +207,139 @@ class ParticipantsViewmodel extends ChangeNotifier {
           .toSet();
 
       if (context != null) {
+        final lang = Provider.of<LanguageService>(context!, listen: false);
         showDialog(
           context: context!,
-          builder: (context) => AlertDialog(
-            backgroundColor: const Color(0xFF00C9FF).withOpacity(0.95),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            title: Text(
-              '${Provider.of<LanguageService>(context, listen: false).translate('select_avatar_grid_title')} ${_players[index].nombre}',
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            content: SizedBox(
-              width: double.maxFinite,
-              height: 300,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
+          builder: (context) => Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 480),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFF1E1E2E), Color(0xFF2A2A3E)],
                 ),
-                itemCount: avatarPaths.length,
-                itemBuilder: (context, avatarIndex) {
-                  final avatarPath = avatarPaths[avatarIndex];
-                  final isUsed = usedAvatars.contains(avatarPath);
-                  final isCurrentlySelected = _players[index].avatar == avatarPath;
-
-                  return GestureDetector(
-                    onTap: isUsed && !isCurrentlySelected
-                        ? null
-                        : () {
-                            _players[index] = Player(
-                              id: _players[index].id,
-                              nombre: _players[index].nombre,
-                              avatar: avatarPath,
-                            );
-                            notifyListeners(); // Notifica a la UI el cambio
-                            Navigator.of(context).pop();
-                          },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: isCurrentlySelected
-                              ? Colors.white
-                              : isUsed
-                              ? Colors.red.shade300
-                              : Colors.white.withOpacity(0.3),
-                          width: isCurrentlySelected || isUsed ? 3 : 1,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 20, spreadRadius: 5)],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Header
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: [Color(0xFF00C9FF), Color(0xFF92FE9D)]),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.face, color: Colors.white, size: 24),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            '${lang.translate('select_avatar_grid_title')} ${_players[index].nombre}',
+                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
                         ),
-                        boxShadow: isCurrentlySelected
-                            ? [BoxShadow(color: Colors.white.withOpacity(0.5), blurRadius: 10, spreadRadius: 2)]
-                            : null,
-                      ),
-                      child: Stack(
-                        children: [
-                          ClipOval(
-                            child: ColorFiltered(
-                              colorFilter: isUsed && !isCurrentlySelected
-                                  ? ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.darken)
-                                  : const ColorFilter.mode(Colors.transparent, BlendMode.multiply),
-                              child: Image.asset(
-                                avatarPath,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).pop(),
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                            child: const Icon(Icons.close, color: Colors.white, size: 18),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Grid
+                  SizedBox(
+                    height: 300,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: GridView.builder(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        itemCount: avatarPaths.length,
+                        itemBuilder: (context, avatarIndex) {
+                          final avatarPath = avatarPaths[avatarIndex];
+                          final isUsed = usedAvatars.contains(avatarPath);
+                          final isCurrentlySelected = _players[index].avatar == avatarPath;
+
+                          return GestureDetector(
+                            onTap: isUsed && !isCurrentlySelected
+                                ? null
+                                : () {
+                                    _players[index] = Player(
+                                      id: _players[index].id,
+                                      nombre: _players[index].nombre,
+                                      avatar: avatarPath,
+                                    );
+                                    notifyListeners();
+                                    Navigator.of(context).pop();
+                                  },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isCurrentlySelected
+                                      ? const Color(0xFF00C9FF)
+                                      : isUsed
+                                      ? Colors.red.shade400
+                                      : Colors.white.withOpacity(0.2),
+                                  width: isCurrentlySelected || isUsed ? 3 : 1,
+                                ),
+                                boxShadow: isCurrentlySelected
+                                    ? [BoxShadow(color: const Color(0xFF00C9FF).withOpacity(0.5), blurRadius: 10, spreadRadius: 2)]
+                                    : null,
+                              ),
+                              child: Stack(
+                                children: [
+                                  ClipOval(
+                                    child: ColorFiltered(
+                                      colorFilter: isUsed && !isCurrentlySelected
+                                          ? ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.darken)
+                                          : const ColorFilter.mode(Colors.transparent, BlendMode.multiply),
+                                      child: Image.asset(
+                                        avatarPath,
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                      ),
+                                    ),
+                                  ),
+                                  if (isUsed && !isCurrentlySelected)
+                                    const Center(child: Icon(Icons.block, color: Colors.redAccent, size: 32)),
+                                  if (isCurrentlySelected)
+                                    const Positioned(
+                                      top: 4,
+                                      right: 4,
+                                      child: Icon(Icons.check_circle, color: Color(0xFF92FE9D), size: 20),
+                                    ),
+                                ],
                               ),
                             ),
-                          ),
-                          if (isUsed && !isCurrentlySelected)
-                            const Center(child: Icon(Icons.block, color: Colors.redAccent, size: 32)),
-                          if (isCurrentlySelected)
-                            const Positioned(
-                              top: 4,
-                              right: 4,
-                              child: Icon(Icons.check_circle, color: Colors.greenAccent, size: 20),
-                            ),
-                        ],
+                          );
+                        },
                       ),
                     ),
-                  );
-                },
+                  ),
+                  // Cancelar
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Text(lang.translate('cancel'), style: const TextStyle(color: Colors.white54, fontSize: 14)),
+                    ),
+                  ),
+                ],
               ),
             ),
-            actions: [
-              TextButton(
-                child: Text(Provider.of<LanguageService>(context, listen: false).translate('cancel'), style: const TextStyle(color: Colors.white70)),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
           ),
         );
       }

@@ -4,7 +4,7 @@
       "id": "bar_e1",
       "type": "global_rule",
       "title": "Ronda de la Casa",
-      "template": "EVENTO: 🍻 El bar invita! (Ojalá). Todos los jugadores deben elegir a alguien para que beba 2 tragos.",
+      "template": "🍻 El bar invita! (Ojalá). Todos los jugadores deben elegir a alguien para que beba 2 tragos.",
       "endTemplate": "La ronda de la casa ha terminado.",
       "categoria": "Global",
       "minRounds": 1,
@@ -15,7 +15,7 @@
       "id": "bar_e2",
       "type": "multiplier",
       "title": "Happy Hour",
-      "template": "EVENTO: 🍹 ¡Es la Happy Hour! Todos los tragos que se repartan valen el doble (x2).",
+      "template": "🍹 ¡Es la Happy Hour! Todos los tragos que se repartan valen el doble (x2).",
       "endTemplate": "La Happy Hour ha terminado. Precios normales de nuevo.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -29,10 +29,13 @@
       "id": "bar_e3",
       "type": "global_rule",
       "title": "Música Demasiado Alta",
-      "template": "EVENTO: 📢 ¡No se oye nada! Solo se puede hablar gritando. El que hable normal bebe {PUNISHMENT} tragos.",
+      "template": "📢 ¡No se oye nada! Solo se puede hablar gritando. El que hable normal bebe {PUNISHMENT} tragos.",
       "endTemplate": "Han bajado la música. Ya podéis hablar normal.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Comportamiento",
       "minRounds": 3,
@@ -43,10 +46,13 @@
       "id": "bar_e4",
       "type": "special_condition",
       "title": "El Barman Observa",
-      "template": "EVENTO: 👨‍🍳 Mirola al 'Barman' (el dueño del juego). Si te pilla mirando tu móvil, bebes {PUNISHMENT} tragos.",
+      "template": "👨‍🍳 Mirola al 'Barman' (el dueño del juego). Si te pilla mirando tu móvil, bebes {PUNISHMENT} tragos.",
       "endTemplate": "El Barman se ha ido a la cocina.",
       "variables": {
-        "PUNISHMENT": ["3", "4"]
+        "PUNISHMENT": [
+          "3",
+          "4"
+        ]
       },
       "categoria": "Reglas",
       "minRounds": 4,
@@ -57,10 +63,12 @@
       "id": "bar_e5",
       "type": "global_rule",
       "title": "Prohibido Apoyarse",
-      "template": "EVENTO: 🚫 ¡La barra está pegajosa! Nadie puede apoyar los codos en la mesa. Fallar = {PUNISHMENT} tragos.",
+      "template": "🚫 ¡La barra está pegajosa! Nadie puede apoyar los codos en la mesa. Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis apoyar los codos.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Físico",
       "minRounds": 4,
@@ -71,7 +79,7 @@
       "id": "bar_e6",
       "type": "multiplier",
       "title": "Cierre del Bar",
-      "template": "EVENTO: 🕒 ¡Última llamada! Todos los tragos valen triple (x3) para terminar rápido.",
+      "template": "🕒 ¡Última llamada! Todos los tragos valen triple (x3) para terminar rápido.",
       "endTemplate": "El bar ha cerrado. Ah no, seguimos.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -85,10 +93,12 @@
       "id": "bar_e7",
       "type": "global_rule",
       "title": "Modo Elegante",
-      "template": "EVENTO: 🍷 Estamos en un bar de lujo. Antes de beber, debes hacer un brindis sofisticado. Fallar = {PUNISHMENT} tragos.",
+      "template": "🍷 Estamos en un bar de lujo. Antes de beber, debes hacer un brindis sofisticado. Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Volvemos al bar de siempre.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -99,10 +109,13 @@
       "id": "bar_e8",
       "type": "special_condition",
       "title": "Pelea de Bar",
-      "template": "EVENTO: 🥊 ¡Duelo! Cada vez que alguien beba, debe retar a un 'Piedra, Papel o Tijera' a otro jugador. El que pierda bebe {PUNISHMENT} extra.",
+      "template": "🥊 ¡Duelo! Cada vez que alguien beba, debe retar a un 'Piedra, Papel o Tijera' a otro jugador. El que pierda bebe {PUNISHMENT} extra.",
       "endTemplate": "La pelea ha terminado. Todos amigos.",
       "variables": {
-        "PUNISHMENT": ["1", "2"]
+        "PUNISHMENT": [
+          "1",
+          "2"
+        ]
       },
       "categoria": "Duelos",
       "minRounds": 3,
@@ -113,10 +126,13 @@
       "id": "bar_e9",
       "type": "global_rule",
       "title": "Sin Nombres Reales",
-      "template": "EVENTO: 🏷️ Estás con desconocidos. Debes llamar a todos por un apodo inventado. Usar nombre real = {PUNISHMENT} tragos.",
+      "template": "🏷️ Estás con desconocidos. Debes llamar a todos por un apodo inventado. Usar nombre real = {PUNISHMENT} tragos.",
       "endTemplate": "Ya os conocéis todos.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Comportamiento",
       "minRounds": 5,
@@ -127,7 +143,7 @@
       "id": "bar_e10",
       "type": "global_rule",
       "title": "Cerveza Caliente",
-      "template": "EVENTO: 🍺 ¡Qué asco! Los que estén bebiendo cerveza (o similar) beben el doble por no quejarse.",
+      "template": "🍺 ¡Qué asco! Los que estén bebiendo cerveza (o similar) beben el doble por no quejarse.",
       "endTemplate": "La cerveza vuelve a estar fría.",
       "variables": {},
       "categoria": "Modificadores",
@@ -139,10 +155,12 @@
       "id": "bar_e11",
       "type": "special_condition",
       "title": "Jukebox Loco",
-      "template": "EVENTO: 📻 Tienes que tararear una canción famosa antes de hablar. Si nadie la adivina, bebes {PUNISHMENT} tragos.",
+      "template": "📻 Tienes que tararear una canción famosa antes de hablar. Si nadie la adivina, bebes {PUNISHMENT} tragos.",
       "endTemplate": "El Jukebox se ha arreglado.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 2,
@@ -153,7 +171,7 @@
       "id": "bar_e12",
       "type": "global_rule",
       "title": "El Gordo del Bar",
-      "template": "EVENTO: 🕺 El jugador con más peso (o el más grande) decide quién bebe cada vez que el juego diga 'PLAYER'.",
+      "template": "🕺 El jugador con más peso (o el más grande) decide quién bebe cada vez que el juego diga 'PLAYER'.",
       "endTemplate": "El poder del Gordo ha terminado.",
       "variables": {},
       "categoria": "Modificadores",
@@ -165,10 +183,12 @@
       "id": "bar_e13",
       "type": "global_rule",
       "title": "Prohibido Señalar",
-      "template": "EVENTO: ☝️ Es de mala educación señalar en público. El que señale con el dedo bebe {PUNISHMENT} tragos.",
+      "template": "☝️ Es de mala educación señalar en público. El que señale con el dedo bebe {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis señalar.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Comportamiento",
       "minRounds": 5,
@@ -179,7 +199,7 @@
       "id": "bar_e14",
       "type": "multiplier",
       "title": "Día del Amigo",
-      "template": "EVENTO: 🫂 Por cada trago que bebas, un amigo de tu elección debe beber otro. Solidaridad!",
+      "template": "🫂 Por cada trago que bebas, un amigo de tu elección debe beber otro. Solidaridad!",
       "endTemplate": "Se acabó la solidaridad.",
       "variables": {},
       "categoria": "Global",
@@ -191,10 +211,12 @@
       "id": "bar_e15",
       "type": "global_rule",
       "title": "Acento Extranjero",
-      "template": "EVENTO: 🌍 Eres un turista en este bar. Debes hablar con acento de otro país. Fallar = {PUNISHMENT} tragos.",
+      "template": "🌍 Eres un turista en este bar. Debes hablar con acento de otro país. Fallar = {PUNISHMENT} tragos.",
       "endTemplate": "Vuelves a casa.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 3,
@@ -205,10 +227,12 @@
       "id": "bar_e16",
       "type": "special_condition",
       "title": "El Baño está Ocupado",
-      "template": "EVENTO: 🚽 Nadie puede ir al baño mientras dure este evento. El que no aguante, bebe {PUNISHMENT} tragos de castigo.",
+      "template": "🚽 Nadie puede ir al baño mientras dure este evento. El que no aguante, bebe {PUNISHMENT} tragos de castigo.",
       "endTemplate": "El baño está libre.",
       "variables": {
-        "PUNISHMENT": ["5"]
+        "PUNISHMENT": [
+          "5"
+        ]
       },
       "categoria": "Reglas",
       "minRounds": 4,
@@ -219,10 +243,13 @@
       "id": "bar_e17",
       "type": "global_rule",
       "title": "Solo Mano Izquierda",
-      "template": "EVENTO: ✋ Solo puedes usar la mano izquierda para tocar tu vaso. Usar la derecha = {PUNISHMENT} tragos.",
+      "template": "✋ Solo puedes usar la mano izquierda para tocar tu vaso. Usar la derecha = {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis usar ambas manos.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Físico",
       "minRounds": 4,
@@ -233,7 +260,7 @@
       "id": "bar_e18",
       "type": "multiplier",
       "title": "Noche de Chupitos",
-      "template": "EVENTO: 🥃 Todos los tragos individuales se convierten en 'chupitos imaginarios' (bebe el doble).",
+      "template": "🥃 Todos los tragos individuales se convierten en 'chupitos imaginarios' (bebe el doble).",
       "endTemplate": "Se acabaron los chupitos.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -247,10 +274,12 @@
       "id": "bar_e19",
       "type": "global_rule",
       "title": "Sin Palabras Sucias",
-      "template": "EVENTO: 🤐 Este es un bar familiar (mentira). Prohibido decir palabrotas. Cada una = {PUNISHMENT} tragos.",
+      "template": "🤐 Este es un bar familiar (mentira). Prohibido decir palabrotas. Cada una = {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis ser maleducados.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Comportamiento",
       "minRounds": 5,
@@ -261,10 +290,12 @@
       "id": "bar_e20",
       "type": "special_condition",
       "title": "El Camarero Tímido",
-      "template": "EVENTO: 😶 Solo se puede comunicar por gestos, nada de hablar. Quien hable bebe {PUNISHMENT} tragos.",
+      "template": "😶 Solo se puede comunicar por gestos, nada de hablar. Quien hable bebe {PUNISHMENT} tragos.",
       "endTemplate": "Ya podéis hablar.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Social",
       "minRounds": 2,
@@ -275,7 +306,7 @@
       "id": "bar_e21",
       "type": "global_rule",
       "title": "Propina Obligatoria",
-      "template": "EVENTO: 💸 Cada vez que repartas tragos, debes beber 1 tú también como 'propina' por el servicio.",
+      "template": "💸 Cada vez que repartas tragos, debes beber 1 tú también como 'propina' por el servicio.",
       "endTemplate": "Ya no hay propinas.",
       "variables": {},
       "categoria": "Modificadores",
@@ -287,7 +318,7 @@
       "id": "bar_e22",
       "type": "multiplier",
       "title": "Alcohol Sin Alcohol",
-      "template": "EVENTO: 🥤 El que esté bebiendo algo sin alcohol bebe el triple (o invita a 3 tragos si no quiere beber).",
+      "template": "🥤 El que esté bebiendo algo sin alcohol bebe el triple (o invita a 3 tragos si no quiere beber).",
       "endTemplate": "Se acabó la discriminación al refresco.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -301,10 +332,13 @@
       "id": "bar_e23",
       "type": "global_rule",
       "title": "Dedo Arriba",
-      "template": "EVENTO: ☝️ El último en poner el dedo en la mesa cuando el Barman lo haga, bebe {PUNISHMENT} tragos.",
+      "template": "☝️ El último en poner el dedo en la mesa cuando el Barman lo haga, bebe {PUNISHMENT} tragos.",
       "endTemplate": "Fin del juego del dedo.",
       "variables": {
-        "PUNISHMENT": ["2", "3"]
+        "PUNISHMENT": [
+          "2",
+          "3"
+        ]
       },
       "categoria": "Global",
       "minRounds": 4,
@@ -315,7 +349,7 @@
       "id": "bar_e24",
       "type": "special_condition",
       "title": "Cuenta del Bar",
-      "template": "EVENTO: 🧾 Al final de este evento, el que menos haya bebido deberá beber la suma de los tragos de los dos que más han bebido.",
+      "template": "🧾 Al final de este evento, el que menos haya bebido deberá beber la suma de los tragos de los dos que más han bebido.",
       "endTemplate": "A pagar la cuenta! (Bebe ya).",
       "variables": {},
       "categoria": "Reglas",
@@ -327,10 +361,12 @@
       "id": "bar_e25",
       "type": "global_rule",
       "title": "Modo Karaoke",
-      "template": "EVENTO: 🎤 Todo lo que digas debe ser cantado. Hablar normal = {PUNISHMENT} tragos.",
+      "template": "🎤 Todo lo que digas debe ser cantado. Hablar normal = {PUNISHMENT} tragos.",
       "endTemplate": "Se acabó el Karaoke.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Social",
       "minRounds": 2,
@@ -341,10 +377,12 @@
       "id": "bar_e26",
       "type": "global_rule",
       "title": "Hielo en la Espalda",
-      "template": "EVENTO: 🧊 Si fallas un reto, alguien puede elegir meterte un hielo imaginario (bebe {PUNISHMENT} tragos extra) o uno real.",
+      "template": "🧊 Si fallas un reto, alguien puede elegir meterte un hielo imaginario (bebe {PUNISHMENT} tragos extra) o uno real.",
       "endTemplate": "Ya no hay hielos.",
       "variables": {
-        "PUNISHMENT": ["2"]
+        "PUNISHMENT": [
+          "2"
+        ]
       },
       "categoria": "Modificadores",
       "minRounds": 3,
@@ -355,7 +393,7 @@
       "id": "bar_e27",
       "type": "multiplier",
       "title": "Noche de Damas/Caballeros",
-      "template": "EVENTO: 💃 Los hombres beben doble; 🕺 Las mujeres beben doble (El Barman elige el género al azar cada turno).",
+      "template": "💃 Los hombres beben doble; 🕺 Las mujeres beben doble (El Barman elige el género al azar cada turno).",
       "endTemplate": "Igualdad para todos.",
       "variables": {},
       "categoria": "Multiplicadores",
@@ -369,10 +407,12 @@
       "id": "bar_e28",
       "type": "global_rule",
       "title": "Seguridad del Bar",
-      "template": "EVENTO: 👮 Nadie puede levantarse de su sitio. El que se levante, bebe {PUNISHMENT} tragos y vuelve a sentarse.",
+      "template": "👮 Nadie puede levantarse de su sitio. El que se levante, bebe {PUNISHMENT} tragos y vuelve a sentarse.",
       "endTemplate": "Podéis circular.",
       "variables": {
-        "PUNISHMENT": ["3"]
+        "PUNISHMENT": [
+          "3"
+        ]
       },
       "categoria": "Físico",
       "minRounds": 4,
@@ -383,7 +423,7 @@
       "id": "bar_e29",
       "type": "special_condition",
       "title": "Mezcla Loca",
-      "template": "EVENTO: 🧪 Si bebes, debes mezclar un poco de otra bebida en tu vaso (si es posible/seguro) o beber el doble.",
+      "template": "🧪 Si bebes, debes mezclar un poco de otra bebida en tu vaso (si es posible/seguro) o beber el doble.",
       "endTemplate": "Se acabaron las mezclas.",
       "variables": {},
       "categoria": "Reglas",
@@ -395,7 +435,7 @@
       "id": "bar_e30",
       "type": "global_rule",
       "title": "El Último Mohicano",
-      "template": "EVENTO: 🏹 El último en terminar su bebida real antes de que acabe este evento, invita a una ronda general de 3 tragos.",
+      "template": "🏹 El último en terminar su bebida real antes de que acabe este evento, invita a una ronda general de 3 tragos.",
       "endTemplate": "Evento terminado.",
       "variables": {},
       "categoria": "Global",

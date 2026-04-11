@@ -304,6 +304,8 @@ class ConstantChallengeGenerator {
       }
     });
 
+    description = "$description\n\nCastigo: $punishment";
+
     return ConstantChallenge(
       id: '${template.id}_${targetPlayer.id}_$currentRound',
       targetPlayer: targetPlayer,
@@ -331,13 +333,7 @@ class ConstantChallengeGenerator {
       'dualPlayer2Id': player2.id,
     };
 
-    // Replace PLAYER1 and PLAYER2 first
-    description = description.replaceAll('{PLAYER1}', player1.nombre);
-    description = description.replaceAll('{PLAYER2}', player2.nombre);
-    punishment = punishment.replaceAll('{PLAYER1}', player1.nombre);
-    punishment = punishment.replaceAll('{PLAYER2}', player2.nombre);
-
-    // Replace other variables with random values
+    // Replace other variables with random values first
     template.variables.forEach((variableName, possibleValues) {
       if (variableName != 'PLAYER1' && variableName != 'PLAYER2' && possibleValues.isNotEmpty) {
         final selectedValue = possibleValues[_random.nextInt(possibleValues.length)];
@@ -346,6 +342,14 @@ class ConstantChallengeGenerator {
         metadata[variableName] = selectedValue;
       }
     });
+
+    // Replace PLAYER1 and PLAYER2 afterwards to cover nested variables
+    description = description.replaceAll('{PLAYER1}', player1.nombre);
+    description = description.replaceAll('{PLAYER2}', player2.nombre);
+    punishment = punishment.replaceAll('{PLAYER1}', player1.nombre);
+    punishment = punishment.replaceAll('{PLAYER2}', player2.nombre);
+
+    description = "$description\n\nCastigo: $punishment";
 
     return ConstantChallenge(
       id: '${template.id}_${player1.id}_${player2.id}_$currentRound',

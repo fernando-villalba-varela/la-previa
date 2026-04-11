@@ -374,6 +374,7 @@ class QuickGameViewModel extends ChangeNotifier {
     _currentTemplateId = constantChallenge.metadata['templateId'] as String?;
     _currentPlayerIndex = _players.indexOf(player1);
     _dualPlayerIndex = _players.indexOf(player2);
+    _isCurrentChallengeConstant = true;
     notifyListeners();
   }
 
