@@ -53,6 +53,8 @@
 	<string>Necesitamos acceso a tu galería para que puedas elegir fotos de perfil.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Necesitamos acceso al micrófono para funciones de video.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Este identificador se utilizará para ofrecerte anuncios personalizados.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
