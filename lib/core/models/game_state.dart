@@ -24,6 +24,7 @@ class GameState {
   final bool isCurrentChallengeConstant; // Flag para marcar si el reto actual es constante
   final String? currentTemplateId; // <-- ANADIR
   final String? currentCategoria; // Categoría de la pregunta actual
+  final int? timerSeconds; // Segundos del temporizador, null si no aplica
 
   const GameState({
     required this.players,
@@ -45,6 +46,7 @@ class GameState {
     this.isCurrentChallengeConstant = false,
     this.currentTemplateId, // <-- ANADIR
     this.currentCategoria,
+    this.timerSeconds,
   });
 
   /// Creates a copy of this GameState with the given fields replaced with new values
@@ -68,6 +70,7 @@ class GameState {
     bool? isCurrentChallengeConstant,
     String? currentTemplateId, // <-- ANADIR
     String? currentCategoria,
+    int? timerSeconds,
   }) {
     return GameState(
       players: players ?? this.players,
@@ -89,6 +92,7 @@ class GameState {
       isCurrentChallengeConstant: isCurrentChallengeConstant ?? this.isCurrentChallengeConstant,
       currentTemplateId: currentTemplateId ?? this.currentTemplateId, // <-- ANADIR
       currentCategoria: currentCategoria ?? this.currentCategoria,
+      timerSeconds: timerSeconds ?? this.timerSeconds,
     );
   }
 

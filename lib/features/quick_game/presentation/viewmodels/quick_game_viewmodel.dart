@@ -30,6 +30,7 @@ class QuickGameViewModel extends ChangeNotifier {
   String _currentChallenge = '';
   String? _currentAnswer;
   String? _currentTemplateId;
+  int? _currentTimerSeconds;
   bool _gameStarted = false;
   int _currentRound = 1;
   bool _isCurrentChallengeConstant = false;
@@ -142,6 +143,7 @@ class QuickGameViewModel extends ChangeNotifier {
       dualPlayer2Name: dualPlayer2Name,
       isCurrentChallengeConstant: _isCurrentChallengeConstant,
       currentTemplateId: _currentTemplateId,
+      timerSeconds: _currentTimerSeconds,
     );
   }
 

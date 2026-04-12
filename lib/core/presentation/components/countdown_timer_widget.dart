@@ -1,28 +1,21 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-/// Widget de cuenta atrás para retos con temporizador.
-/// Añade el campo opcional "timer_seconds" al modelo de pregunta/reto
-/// y pasa el valor a este widget cuando sea distinto de null.
-///
-/// Uso:
-///   if (question.timerSeconds != null)
-///     CountdownTimerWidget(seconds: question.timerSeconds!)
 class CountdownTimerWidget extends StatefulWidget {
   final int seconds;
   final VoidCallback? onFinished;
-  final Color? activeColor;
-  final Color? warningColor;  // < 30% tiempo restante
-  final Color? dangerColor;   // < 10% tiempo restante
+  final double size;
+  /// Si false, muestra "TOCA PARA EMPEZAR" y espera a que started cambie a true.
+  final bool started;
 
   const CountdownTimerWidget({
     super.key,
     required this.seconds,
     this.onFinished,
-    this.activeColor,
-    this.warningColor,
-    this.dangerColor,
+    this.size = 80,
+    this.started = false,
   });
 
   @override
@@ -30,29 +23,70 @@ class CountdownTimerWidget extends StatefulWidget {
 }
 
 class _CountdownTimerWidgetState extends State<CountdownTimerWidget>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late int _remaining;
-  late AnimationController _animController;
+  late AnimationController _progressController;
+  late AnimationController _pulseController;
+  late AnimationController _finishedController;
+  late Animation<double> _pulseScale;
+  late Animation<double> _pulseGlow;
+  late Animation<double> _finishedScale;
   Timer? _timer;
   bool _finished = false;
+  bool _running = false;
+
+  static const _cyan = Color(0xFF00FFFF);
+  static const _crimson = Color(0xFFFF0055);
+  static const _orange = Color(0xFFFF8C00);
 
   @override
   void initState() {
     super.initState();
     _remaining = widget.seconds;
 
-    _animController = AnimationController(
+    _progressController = AnimationController(
       vsync: this,
       duration: Duration(seconds: widget.seconds),
-    )..forward();
+    );
 
-    _startTimer();
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    )..repeat(reverse: true);
+
+    _finishedController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
+    _pulseScale = Tween<double>(begin: 1.0, end: 1.12).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
+    _pulseGlow = Tween<double>(begin: 0.3, end: 1.0).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
+    _finishedScale = Tween<double>(begin: 0.5, end: 1.0).animate(
+      CurvedAnimation(parent: _finishedController, curve: Curves.elasticOut),
+    );
+
+    if (widget.started) _start();
   }
 
-  void _startTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  @override
+  void didUpdateWidget(CountdownTimerWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!oldWidget.started && widget.started && !_running) {
+      _start();
+    }
+  }
+
+  void _start() {
+    _running = true;
+    _pulseController.stop();
+    _progressController.forward();
+    _timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (_remaining <= 1) {
-        timer.cancel();
+        t.cancel();
         setState(() {
           _remaining = 0;
           _finished = true;
@@ -60,23 +94,34 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget>
         _onFinished();
       } else {
         setState(() => _remaining--);
+        if (_remaining <= 5) {
+          _pulseController
+            ..stop()
+            ..duration = const Duration(milliseconds: 600)
+            ..repeat(reverse: true);
+        }
       }
     });
   }
 
   void _onFinished() {
-    // Vibración al terminar
     HapticFeedback.heavyImpact();
-    Future.delayed(const Duration(milliseconds: 300), () {
-      HapticFeedback.heavyImpact();
-    });
+    Future.delayed(const Duration(milliseconds: 200), () => HapticFeedback.heavyImpact());
+    Future.delayed(const Duration(milliseconds: 400), () => HapticFeedback.heavyImpact());
+    _pulseController.repeat(reverse: true);
+    _finishedController.forward();
     widget.onFinished?.call();
   }
 
-  Color _currentColor() {
-    if (_remaining <= 3) return const Color(0xFFFF0055); // Crimson Fiesta
-    // Linear transition to cyan
-    return Color.lerp(const Color(0xFFFF0055), const Color(0xFF00FFFF), _remaining / widget.seconds) ?? const Color(0xFF00FFFF);
+  Color get _currentColor {
+    if (!_running) return _cyan;
+    if (_remaining <= 3) return _crimson;
+    if (_remaining <= 10) {
+      final t = (_remaining - 3) / 7.0;
+      return Color.lerp(_crimson, _orange, t)!;
+    }
+    final t = ((_remaining - 10) / max(1, widget.seconds - 10)).clamp(0.0, 1.0);
+    return Color.lerp(_orange, _cyan, t)!;
   }
 
   String _formatTime() {
@@ -91,170 +136,269 @@ class _CountdownTimerWidgetState extends State<CountdownTimerWidget>
   @override
   void dispose() {
     _timer?.cancel();
-    _animController.dispose();
+    _progressController.dispose();
+    _pulseController.dispose();
+    _finishedController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final color = _currentColor();
+    if (_finished) return _buildFinished();
+    if (!_running) return _buildWaiting();
+    return _buildTimer();
+  }
+
+  // Estado: esperando primer tap
+  Widget _buildWaiting() {
+    final size = widget.size;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.timer_rounded, color: _cyan, size: 13),
+            const SizedBox(width: 5),
+            Text(
+              'TEMPORIZADOR · ${_formatTime()}s',
+              style: const TextStyle(
+                color: _cyan,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.8,
+                shadows: [Shadow(color: _cyan, blurRadius: 6)],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        AnimatedBuilder(
+          animation: _pulseController,
+          builder: (_, _) => Transform.scale(
+            scale: _pulseScale.value,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Glow exterior
+                Container(
+                  width: size + 16,
+                  height: size + 16,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: _cyan.withOpacity(_pulseGlow.value * 0.4),
+                        blurRadius: 24,
+                        spreadRadius: 3,
+                      ),
+                    ],
+                  ),
+                ),
+                // Fondo oscuro
+                Container(
+                  width: size,
+                  height: size,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color(0xFF0B0B1A),
+                    border: Border.all(
+                      color: _cyan.withOpacity(_pulseGlow.value),
+                      width: 2,
+                    ),
+                  ),
+                ),
+                // Arco completo (sin contar aún)
+                SizedBox(
+                  width: size,
+                  height: size,
+                  child: CircularProgressIndicator(
+                    value: 1.0,
+                    strokeWidth: 5,
+                    backgroundColor: Colors.transparent,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      _cyan.withOpacity(_pulseGlow.value),
+                    ),
+                    strokeCap: StrokeCap.round,
+                  ),
+                ),
+                // Icono de tap
+                Icon(
+                  Icons.touch_app_rounded,
+                  color: Colors.white.withOpacity(_pulseGlow.value),
+                  size: size * 0.38,
+                  shadows: [Shadow(color: _cyan, blurRadius: 10)],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        AnimatedBuilder(
+          animation: _pulseController,
+          builder: (_, _) => Text(
+            'TOCA PARA EMPEZAR',
+            style: TextStyle(
+              color: _cyan.withOpacity(_pulseGlow.value),
+              fontSize: 10,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 2,
+              shadows: [Shadow(color: _cyan.withOpacity(0.5), blurRadius: 6)],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Estado: contando
+  Widget _buildTimer() {
+    final color = _currentColor;
     final progress = _remaining / widget.seconds;
-    final isHeartbeat = _remaining <= 3 && _remaining > 0;
-    
-    // Scale animation that pulses every second
-    final scale = isHeartbeat ? 1.0 + 0.15 * (0.5 - (_animController.value * widget.seconds % 1).abs()).abs() : 1.0;
+    final isWarning = _remaining <= 5;
+    final size = widget.size;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Transform.scale(
-          scale: scale,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-            SizedBox(
-              width: 80,
-              height: 80,
-              child: AnimatedBuilder(
-                animation: _animController,
-                builder: (_, __) => CircularProgressIndicator(
-                  value: 1.0 - _animController.value,
-                  strokeWidth: 6,
-                  backgroundColor: Colors.grey.shade200,
-                  valueColor: AlwaysStoppedAnimation<Color>(color),
-                ),
-              ),
-            ),
-            AnimatedDefaultTextStyle(
-              duration: const Duration(milliseconds: 300),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.timer_rounded, color: color, size: 13),
+            const SizedBox(width: 5),
+            Text(
+              'TIEMPO RESTANTE',
               style: TextStyle(
-                fontSize: _remaining < 10 ? 28 : 22,
+                color: color,
+                fontSize: 11,
                 fontWeight: FontWeight.bold,
-                color: _finished ? Colors.red.shade600 : color,
+                letterSpacing: 1.8,
+                shadows: [Shadow(color: color.withOpacity(0.6), blurRadius: 6)],
               ),
-              child: Text(_finished ? '¡Ya!' : _formatTime()),
             ),
           ],
         ),
-      ),
-        if (_finished) ...[
-          const SizedBox(height: 8),
-          Text(
-            '¡Tiempo agotado!',
-            style: TextStyle(
-              color: Colors.red.shade600,
-              fontWeight: FontWeight.w600,
-              fontSize: 13,
-            ),
-          ),
-        ],
+        const SizedBox(height: 10),
+        AnimatedBuilder(
+          animation: Listenable.merge([_progressController, _pulseController]),
+          builder: (_, _) {
+            final scale = isWarning ? _pulseScale.value : 1.0;
+            final glowOpacity = isWarning
+                ? 0.5 + 0.5 * _pulseGlow.value
+                : 0.25 + 0.25 * (1 - progress);
+            final glowRadius = isWarning
+                ? 18.0 + 14.0 * _pulseGlow.value
+                : 10.0 + 8.0 * (1 - progress);
+
+            return Transform.scale(
+              scale: scale,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: size + 16,
+                    height: size + 16,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: color.withOpacity(glowOpacity * 0.5),
+                          blurRadius: glowRadius * 1.5,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: size,
+                    height: size,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFF0B0B1A),
+                      boxShadow: [
+                        BoxShadow(
+                          color: color.withOpacity(glowOpacity),
+                          blurRadius: glowRadius,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: size,
+                    height: size,
+                    child: CircularProgressIndicator(
+                      value: progress,
+                      strokeWidth: 5,
+                      backgroundColor: Colors.white.withOpacity(0.08),
+                      valueColor: AlwaysStoppedAnimation<Color>(color),
+                      strokeCap: StrokeCap.round,
+                    ),
+                  ),
+                  AnimatedDefaultTextStyle(
+                    duration: const Duration(milliseconds: 150),
+                    style: TextStyle(
+                      fontSize: _remaining < 10 ? 32 : 24,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      height: 1,
+                      shadows: [
+                        Shadow(color: color, blurRadius: 14),
+                        Shadow(color: color.withOpacity(0.4), blurRadius: 28),
+                      ],
+                    ),
+                    child: Text(_formatTime()),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ],
     );
   }
-}
 
-// ---------------------------------------------------------------------------
-// MODELO — añadir campo timerSeconds al modelo de pregunta existente
-// ---------------------------------------------------------------------------
-
-/// Ejemplo de cómo extender el modelo de pregunta para soportar el temporizador.
-/// Adapta esto a tu clase de modelo actual.
-class Question {
-  final String id;
-  final String type;      // "pregunta", "reto", "evento"
-  final String category;
-  final String text;
-  final int drinks;
-  final int? timerSeconds; // null = sin temporizador
-
-  const Question({
-    required this.id,
-    required this.type,
-    required this.category,
-    required this.text,
-    required this.drinks,
-    this.timerSeconds,
-  });
-
-  factory Question.fromJson(Map<String, dynamic> json) => Question(
-    id:           json['id'] as String,
-    type:         json['type'] as String,
-    category:     json['category'] as String,
-    text:         json['text'] as String,
-    drinks:       json['drinks'] as int,
-    timerSeconds: json['timer_seconds'] as int?,
-  );
-
-  Map<String, dynamic> toJson() => {
-    'id':       id,
-    'type':     type,
-    'category': category,
-    'text':     text,
-    'drinks':   drinks,
-    if (timerSeconds != null) 'timer_seconds': timerSeconds,
-  };
-}
-
-// ---------------------------------------------------------------------------
-// EJEMPLO DE USO en la pantalla de juego
-// ---------------------------------------------------------------------------
-
-/// Muestra cómo integrar el temporizador en la carta de pregunta/reto.
-class QuestionCard extends StatelessWidget {
-  final Question question;
-
-  const QuestionCard({super.key, required this.question});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              question.text,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
+  // Estado: tiempo agotado
+  Widget _buildFinished() {
+    return AnimatedBuilder(
+      animation: Listenable.merge([_finishedController, _pulseController]),
+      builder: (_, _) {
+        final glow = 15.0 + 20.0 * _pulseGlow.value;
+        return Transform.scale(
+          scale: _finishedScale.value,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+            decoration: BoxDecoration(
+              color: _crimson.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(22),
+              border: Border.all(color: _crimson, width: 2),
+              boxShadow: [
+                BoxShadow(
+                  color: _crimson.withOpacity(0.7 * _pulseGlow.value),
+                  blurRadius: glow,
+                  spreadRadius: 4,
+                ),
+              ],
             ),
-            if (question.timerSeconds != null) ...[
-              const SizedBox(height: 24),
-              const Divider(),
-              const SizedBox(height: 16),
-              const Text(
-                'Tiempo para completar el reto:',
-                style: TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-              const SizedBox(height: 12),
-              CountdownTimerWidget(
-                seconds: question.timerSeconds!,
-                onFinished: () {
-                  // Aquí puedes disparar una lógica adicional:
-                  // vibración extra, mostrar dialog de penalización, etc.
-                },
-              ),
-            ],
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.local_bar, size: 16, color: Colors.amber),
-                const SizedBox(width: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.timer_off_rounded, color: Colors.white, size: 22),
+                SizedBox(width: 8),
                 Text(
-                  '${question.drinks} ${question.drinks == 1 ? "trago" : "tragos"}',
-                  style: const TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
+                  '¡TIEMPO!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 2.5,
                   ),
                 ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

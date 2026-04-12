@@ -53,6 +53,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
   late Animation<double> _orientationFade;
 
   bool _showOrientationOverlay = true;
+  bool _timerStarted = false;
   final List<Offset> _ripplePositions = [];
   final List<double> _rippleOpacities = [];
 
@@ -149,6 +150,11 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
   // ---------------------------------------------------------------------------
 
   void _handleTap() {
+    // Si hay temporizador y aún no ha arrancado, el primer tap lo inicia
+    if (_viewModel.createGameState(_glowAnimation).timerSeconds != null && !_timerStarted) {
+      setState(() => _timerStarted = true);
+      return;
+    }
     _viewModel.applyDirectDrinksForCurrentPlayer();
     _nextChallenge();
   }
@@ -165,6 +171,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
 
   void _nextChallenge() async {
     _moreLikelyAutoOpenTimer?.cancel();
+    setState(() => _timerStarted = false);
     _tapAnimationController.forward().then((_) => _tapAnimationController.reverse());
 
     final lang = context.read<LanguageService>();
@@ -491,6 +498,7 @@ class _LeagueGameScreenState extends State<LeagueGameScreen>
                               gameState: vm.createGameState(_glowAnimation),
                               showPlayerSelector: hasActiveSelector,
                               showTapHint: _showTapHint,
+                              timerStarted: _timerStarted,
                               onPlayersSelected: (selectedIds) {
                                 if (vm.hasLetterMultiplier()) {
                                   final letter = vm.extractLetterToCount();

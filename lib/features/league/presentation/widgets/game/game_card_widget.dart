@@ -33,8 +33,9 @@ class GameCard extends StatelessWidget {
   final bool showPlayerSelector;
   final Function(List<int>)? onPlayersSelected;
   final bool showTapHint;
+  final bool timerStarted;
 
-  const GameCard({super.key, required this.gameState, this.showPlayerSelector = false, this.onPlayersSelected, this.showTapHint = true});
+  const GameCard({super.key, required this.gameState, this.showPlayerSelector = false, this.onPlayersSelected, this.showTapHint = true, this.timerStarted = false});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class GameCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Flexible(child: _buildChallengeContent(gameState, showPlayerSelector, context)),
+                  Flexible(child: _buildChallengeContent(gameState, showPlayerSelector, context, timerStarted)),
                   SizedBox(height: 20),
                   // Player selection buttons (for conditional questions)
                   if (showPlayerSelector && onPlayersSelected != null && gameState.players.isNotEmpty)
@@ -325,7 +326,7 @@ class GameCard extends StatelessWidget {
   }
 
   /// Builds challenge content, hiding "TODOS" icon and text when showPlayerSelector is true
-  Widget _buildChallengeContent(GameState gameState, bool hideForAllIndicator, BuildContext context) {
+  Widget _buildChallengeContent(GameState gameState, bool hideForAllIndicator, BuildContext context, bool timerStarted) {
     if (hideForAllIndicator && gameState.isChallengeForAll) {
       // Para preguntas condicionales, solo mostrar el texto del reto sin icono ni "TODOS"
       return LayoutBuilder(
@@ -449,7 +450,7 @@ class GameCard extends StatelessWidget {
     }
 
     // Para el resto de casos, usar el buildCenterContent normal
-    return buildCenterContent(gameState);
+    return buildCenterContent(gameState, timerStarted: timerStarted);
   }
 }
 

@@ -54,6 +54,7 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
 
   final List<Offset> _ripplePositions = [];
   final List<double> _rippleOpacities = [];
+  bool _timerStarted = false;
 
   @override
   void initState() {
@@ -157,11 +158,17 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
   }
 
   Future<void> _handleNextChallenge() async {
+    final viewModel = context.read<QuickGameViewModel>();
+
+    // Si hay temporizador y aún no ha arrancado, el primer tap lo inicia
+    if (viewModel.createGameState().timerSeconds != null && !_timerStarted) {
+      setState(() => _timerStarted = true);
+      return;
+    }
+
     _tapAnimationController.forward().then((_) {
       _tapAnimationController.reverse();
     });
-
-    final viewModel = context.read<QuickGameViewModel>();
     
     // Verificar checkpoint de endless mode
     if (await viewModel.checkEndlessModeCheckpoint()) {
@@ -184,6 +191,7 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
       }
     }
 
+    setState(() => _timerStarted = false);
     final adShown = await viewModel.nextChallenge();
     
     if (adShown && mounted) {
@@ -298,6 +306,7 @@ class _QuickGameScreenContentState extends State<_QuickGameScreenContent>
                                                 children: [
                                                   buildCenterContent(
                                                     viewModel.createGameState(),
+                                                    timerStarted: _timerStarted,
                                                   ),
                                                   if (!viewModel.gameStarted)
                                                     AnimatedBuilder(

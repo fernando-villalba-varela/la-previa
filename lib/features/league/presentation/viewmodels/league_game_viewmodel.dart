@@ -24,6 +24,7 @@ class LeagueGameViewModel extends ChangeNotifier {
   bool _gameStarted = false;
   int _currentRound = 1;
   bool _isCurrentChallengeConstant = false;
+  int? _currentTimerSeconds;
   bool _showingPlayerSelector = false;
   bool _showingLetterCounter = false;
   List<int> _selectedPlayerIdsForLetterCounter = [];
@@ -114,6 +115,7 @@ class LeagueGameViewModel extends ChangeNotifier {
         _currentAnswer = null;
         _currentTemplateId = cq.id;
         _currentCategoria = null;
+        _currentTimerSeconds = cq.timerSeconds;
         _currentPlayerIndex = -1;
         notifyListeners();
         return;
@@ -310,6 +312,7 @@ class LeagueGameViewModel extends ChangeNotifier {
     _dualPlayerIndex = null;
     _currentAnswer = null;
     _currentCategoria = null;
+    _currentTimerSeconds = null;
     _isCurrentChallengeConstant = false;
     notifyListeners();
 
@@ -577,6 +580,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       isCurrentChallengeConstant: _isCurrentChallengeConstant,
       currentTemplateId: _currentTemplateId,
       currentCategoria: _currentCategoria,
+      timerSeconds: _currentTimerSeconds,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import '../../../../core/models/game_state.dart';
+import '../../../../core/presentation/components/countdown_timer_widget.dart';
 import 'avatar_builders.dart';
 import 'challenge_builders.dart';
 import 'event_builders.dart';
@@ -9,7 +10,7 @@ import 'package:drinkaholic/features/shared/presentation/widgets/answer_info_but
 import 'package:drinkaholic/features/quick_game/presentation/utils/pack_theme_extension.dart';
 
 /// Construye el contenido central del juego
-Widget buildCenterContent(GameState gameState) {
+Widget buildCenterContent(GameState gameState, {bool timerStarted = false}) {
   if (gameState.currentChallenge != null) {
     // Verificar si es un evento
     if (gameState.isEvent) {
@@ -179,6 +180,17 @@ Widget buildCenterContent(GameState gameState) {
                                   AnswerInfoButton(answer: gameState.currentAnswer),
                                 ],
                               ),
+                              if (gameState.timerSeconds != null) ...[
+                                SizedBox(height: isSmallScreen ? 14 : 20),
+                                Divider(color: Colors.white.withOpacity(0.15), thickness: 1),
+                                SizedBox(height: isSmallScreen ? 10 : 14),
+                                CountdownTimerWidget(
+                                  key: ValueKey('timer_${gameState.currentChallenge}'),
+                                  seconds: gameState.timerSeconds!,
+                                  size: isSmallScreen ? 70 : 80,
+                                  started: timerStarted,
+                                ),
+                              ],
                             ],
                           ),
                         ),
