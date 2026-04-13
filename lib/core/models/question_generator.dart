@@ -9,8 +9,9 @@ class QuestionTemplate {
   final String template;
   final Map<String, List<String>> variables;
   final String categoria;
+  final int? timerSeconds;
 
-  QuestionTemplate({required this.id, required this.template, required this.variables, required this.categoria});
+  QuestionTemplate({required this.id, required this.template, required this.variables, required this.categoria, this.timerSeconds});
 
   factory QuestionTemplate.fromJson(Map<String, dynamic> json) {
     return QuestionTemplate(
@@ -20,6 +21,7 @@ class QuestionTemplate {
         json['variables'].map((key, value) => MapEntry(key, List<String>.from(value))),
       ),
       categoria: json['categoria'],
+      timerSeconds: json['timer_seconds'] as int?,
     );
   }
 }
@@ -30,6 +32,7 @@ class GeneratedQuestion {
   final Map<String, String> usedVariables;
   final String? answer; // Respuesta extraída de paréntesis si existe
   final String? templateId; // <-- ANADIR
+  final int? timerSeconds;
 
   GeneratedQuestion({
     required this.question,
@@ -37,6 +40,7 @@ class GeneratedQuestion {
     required this.usedVariables,
     this.answer,
     this.templateId, // <-- ANADIR
+    this.timerSeconds,
   });
 
   // Getters
@@ -413,6 +417,7 @@ class QuestionGenerator {
       usedVariables: usedVariables,
       answer: answer,
       templateId: template.id,
+      timerSeconds: template.timerSeconds,
     );
   }
 

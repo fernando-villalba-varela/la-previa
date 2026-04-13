@@ -136,6 +136,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       _currentAnswer = question.answer;
       _currentTemplateId = question.templateId;
       _currentCategoria = question.categoria;
+      _currentTimerSeconds = question.timerSeconds;
       _currentPlayerIndex = selectedPlayerIndex;
       notifyListeners();
     } else {
@@ -148,6 +149,7 @@ class LeagueGameViewModel extends ChangeNotifier {
       _currentAnswer = question.answer;
       _currentTemplateId = question.templateId;
       _currentCategoria = question.categoria;
+      _currentTimerSeconds = question.timerSeconds;
       _currentPlayerIndex = -1;
       notifyListeners();
     }

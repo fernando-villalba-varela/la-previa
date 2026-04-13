@@ -189,6 +189,7 @@ class QuickGameViewModel extends ChangeNotifier {
       _currentChallenge = appendModifierText(question.question);
       _currentAnswer = question.answer;
       _currentTemplateId = question.templateId;
+      _currentTimerSeconds = question.timerSeconds;
       _currentPlayerIndex = selectedPlayerIndex;
     } else {
       // Pregunta normal
@@ -201,6 +202,7 @@ class QuickGameViewModel extends ChangeNotifier {
       _currentChallenge = appendModifierText(question.question);
       _currentAnswer = question.answer;
       _currentTemplateId = question.templateId;
+      _currentTimerSeconds = question.timerSeconds;
       _currentPlayerIndex = -1;
     }
     notifyListeners();
@@ -299,6 +301,7 @@ class QuickGameViewModel extends ChangeNotifier {
     _currentChallenge = appendModifierText(question.question);
     _currentAnswer = question.answer;
     _currentTemplateId = question.templateId;
+    _currentTimerSeconds = question.timerSeconds;
     _currentPlayerIndex = player1Index;
     _dualPlayerIndex = player2Index;
 
@@ -492,6 +495,7 @@ class QuickGameViewModel extends ChangeNotifier {
     _dualPlayerIndex = null;
     _currentAnswer = null;
     _currentTemplateId = null;
+    _currentTimerSeconds = null;
     _isCurrentChallengeConstant = false;
     notifyListeners();
 
