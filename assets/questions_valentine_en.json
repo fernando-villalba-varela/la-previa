@@ -76,6 +76,7 @@
     {
       "id": "val_q10",
       "template": "{X} must name 3 famous love songs in 5 seconds or drink {Y} sips",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -192,6 +193,7 @@
     {
       "id": "val_q24",
       "template": "{X} must name 3 typical pet names in 5 seconds or drink {Y} sips",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -258,6 +260,7 @@
     {
       "id": "val_q32",
       "template": "{X} must name 3 ideal first date locations in 10 seconds or drink {Y} sips",
+      "timer_seconds": 10,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]

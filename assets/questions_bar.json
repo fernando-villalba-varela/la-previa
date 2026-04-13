@@ -175,6 +175,7 @@
     {
       "id": "bar_q22",
       "template": "{X} debe nombrar 5 ingredientes del Mojito en 10 segundos o bebe {Y} tragos",
+      "timer_seconds": 10,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -257,6 +258,7 @@
     {
       "id": "bar_q32",
       "template": "{X} debe nombrar 3 marcas de ginebra en 5 segundos o bebe {Y} tragos",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -382,6 +384,7 @@
     {
       "id": "bar_q47",
       "template": "{X} debe nombrar 3 canciones típicas de fiesta en 10 segundos o bebe {Y} tragos",
+      "timer_seconds": 10,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]

@@ -76,6 +76,7 @@
     {
       "id": "home_q10",
       "template": "{X} must name 3 kitchen appliances in 5 seconds or drink {Y} sips",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -257,6 +258,7 @@
     {
       "id": "home_q32",
       "template": "{X} must name 3 things always in their pantry in 5 seconds or drink {Y} sips",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]

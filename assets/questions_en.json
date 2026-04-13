@@ -459,6 +459,7 @@
     {
       "id": "generico_matematicas_fallo",
       "template": "{X} drinks {Y} drinks if they don't solve: {Z} in 10 seconds",
+      "timer_seconds": 10,
       "variables": {
         "X": [
           "PLAYER"
@@ -725,6 +726,7 @@
     {
       "id": "generico_equilibrio_20s",
       "template": "{X} gives {AMOUNT} drinks if they balance on one foot for 20 seconds",
+      "timer_seconds": 20,
       "variables": {
         "X": [
           "PLAYER"
@@ -740,6 +742,7 @@
     {
       "id": "generico_plancha_30s",
       "template": "{X} drinks {AMOUNT} drinks if they can't hold a plank for 30 seconds",
+      "timer_seconds": 30,
       "variables": {
         "X": [
           "PLAYER"
@@ -781,6 +784,7 @@
     {
       "id": "generico_rap_10s",
       "template": "{X} gives {AMOUNT} drinks if they rap for 10 seconds on the topic: {TOPIC}",
+      "timer_seconds": 10,
       "variables": {
         "X": [
           "PLAYER"
@@ -803,6 +807,7 @@
     {
       "id": "generico_lista_rapida",
       "template": "{X} gives {AMOUNT} drinks if they name {COUNT} {THING} in 15 seconds",
+      "timer_seconds": 15,
       "variables": {
         "X": [
           "PLAYER"
@@ -922,6 +927,7 @@
     {
       "id": "generico_dificil_raro",
       "template": "{X} drinks {AMOUNT} drinks if they cannot say 10 words that rhyme with {RHYME} in 30 seconds",
+      "timer_seconds": 30,
       "variables": {
         "X": [
           "PLAYER"

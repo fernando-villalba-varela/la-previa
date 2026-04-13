@@ -76,6 +76,7 @@
     {
       "id": "val_q10",
       "template": "{X} debe nombrar 3 canciones de amor famosas en 5 segundos o bebe {Y} tragos",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -192,6 +193,7 @@
     {
       "id": "val_q24",
       "template": "{X} debe nombrar 3 motes cariñosos típicos en 5 segundos o beber {Y} tragos",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -258,6 +260,7 @@
     {
       "id": "val_q32",
       "template": "{X} debe nombrar 3 lugares ideales para una primera cita en 10 segundos o beber {Y} tragos",
+      "timer_seconds": 10,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]

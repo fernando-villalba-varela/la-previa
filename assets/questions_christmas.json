@@ -92,6 +92,7 @@
     {
       "id": "xmas_q12",
       "template": "{X} debe nombrar 3 renos de Papá Noel en 5 segundos o bebe {Y} tragos",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -207,6 +208,7 @@
     {
       "id": "xmas_q26",
       "template": "{X} debe nombrar 3 platos típicos de Navidad en 5 segundos o bebe {Y} tragos",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -265,6 +267,7 @@
     {
       "id": "xmas_q33",
       "template": "El que sea capaz de nombrar los 3 Reyes Magos en menos de 2 segundos reparte {Y} tragos",
+      "timer_seconds": 2,
       "variables": {
         "Y": ["3", "4"]
       },
@@ -380,6 +383,7 @@
     {
       "id": "xmas_q47",
       "template": "{X} debe nombrar 5 cosas que se suelen regalar en Navidad en 10 segundos o bebe {Y} tragos",
+      "timer_seconds": 10,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]

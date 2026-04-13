@@ -92,6 +92,7 @@
     {
       "id": "xmas_q12",
       "template": "{X} must name 3 of Santa's reindeer in 5 seconds or drink {Y} sips",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -207,6 +208,7 @@
     {
       "id": "xmas_q26",
       "template": "{X} must name 3 typical Christmas dishes in 5 seconds or drink {Y} sips",
+      "timer_seconds": 5,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]
@@ -265,6 +267,7 @@
     {
       "id": "xmas_q33",
       "template": "The person who can name the 3 Wise Men in less than 2 seconds deals {Y} sips",
+      "timer_seconds": 2,
       "variables": {
         "Y": ["3", "4"]
       },
@@ -380,6 +383,7 @@
     {
       "id": "xmas_q47",
       "template": "{X} must name 5 things commonly given as Christmas gifts in 10 seconds or drink {Y} sips",
+      "timer_seconds": 10,
       "variables": {
         "X": ["PLAYER"],
         "Y": ["3", "4"]

@@ -459,6 +459,7 @@
     {
       "id": "generico_matematicas_fallo",
       "template": "{X} bebe {Y} tragos si no resuelve: {Z} en 10 segundos",
+      "timer_seconds": 10,
       "variables": {
         "X": [
           "PLAYER"
@@ -725,6 +726,7 @@
     {
       "id": "generico_equilibrio_20s",
       "template": "{X} reparte {AMOUNT} tragos si mantiene el equilibrio sobre un pie durante 20 segundos",
+      "timer_seconds": 20,
       "variables": {
         "X": [
           "PLAYER"
@@ -740,6 +742,7 @@
     {
       "id": "generico_plancha_30s",
       "template": "{X} bebe {AMOUNT} tragos si no aguanta la plancha 30 segundos",
+      "timer_seconds": 30,
       "variables": {
         "X": [
           "PLAYER"
@@ -781,6 +784,7 @@
     {
       "id": "generico_rap_10s",
       "template": "{X} reparte {AMOUNT} tragos si rapea 10 segundos sobre el tema: {TOPIC}",
+      "timer_seconds": 10,
       "variables": {
         "X": [
           "PLAYER"
@@ -803,6 +807,7 @@
     {
       "id": "generico_lista_rapida",
       "template": "{X} reparte {AMOUNT} tragos si nombra {COUNT} {THING} en 15 segundos",
+      "timer_seconds": 15,
       "variables": {
         "X": [
           "PLAYER"
@@ -912,6 +917,7 @@
     {
       "id": "generico_dificil_raro",
       "template": "{X} bebe {AMOUNT} tragos si no puede decir 10 palabras que rimen con {RIMA} en 30 segundos",
+      "timer_seconds": 30,
       "variables": {
         "X": [
           "PLAYER"
